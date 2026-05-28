@@ -6,9 +6,9 @@ The agent reads the invoice, looks up the relevant PO and goods receipt and vend
 
 **This is a working build, not a production-deployed product.** The action executor runs in mock mode; the real SAP/Ariba/ServiceNow connectors are stubs gated on credentials. The architecture is production-shaped — open-source models via OpenRouter, structured logging, evaluation harness, HITL queue — but the codebase is a learning artifact and reference, not a live service.
 
-> **Live demo:** `https://invoice-exception-agent.up.railway.app/demo` *(coming soon — pending Phase E deployment)*
-> 
-> **Documentation:** Browse the live demo and click "Docs" — or open `agent_overview.html` / `detailed_workflow.html` / `status.html` locally for a richer walkthrough.
+> **Live demo:** [https://web-production-45a73.up.railway.app/demo](https://web-production-45a73.up.railway.app/demo) — try it now (first request takes ~30s while the agent warms up; subsequent runs ~60s end-to-end)
+>
+> **Documentation:** [https://web-production-45a73.up.railway.app/docs](https://web-production-45a73.up.railway.app/docs) — landing page with the agent overview, detailed technical workflow, and engineering status
 
 ---
 
