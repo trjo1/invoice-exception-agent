@@ -74,6 +74,19 @@ test_corpus/bpi_data/*
 !test_corpus/bpi_data/.gitkeep
 test_corpus/synthetic/invoices/*
 !test_corpus/synthetic/invoices/.gitkeep
+# EXCEPT: the 10 curated sample PDFs that drive the /demo dropdown.
+# These ship with the repo so the hosted demo on Railway has runnable samples.
+# See src/p2p_agent/hitl/webapp/samples.py for the canonical list.
+!test_corpus/synthetic/invoices/P001_idx0000.pdf
+!test_corpus/synthetic/invoices/P001_idx0002.pdf
+!test_corpus/synthetic/invoices/P001_idx0003.pdf
+!test_corpus/synthetic/invoices/P002_idx0016.pdf
+!test_corpus/synthetic/invoices/P002_idx0021.pdf
+!test_corpus/synthetic/invoices/P003_idx0020.pdf
+!test_corpus/synthetic/invoices/P003_idx0089.pdf
+!test_corpus/synthetic/invoices/P004_idx0006.pdf
+!test_corpus/synthetic/invoices/P004_idx0060.pdf
+!test_corpus/synthetic/invoices/P005_idx0008.pdf
 test_corpus/synthetic/emails/*
 !test_corpus/synthetic/emails/.gitkeep
 test_corpus/synthetic/master_data/*
