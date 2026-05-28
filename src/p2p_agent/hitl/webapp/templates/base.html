@@ -39,10 +39,25 @@
     color: #fff;
     text-decoration: none;
     margin-left: 18px;
-    opacity: 0.85;
+    opacity: 0.70;
     font-size: 13px;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+    transition: opacity 0.12s, border-color 0.12s;
   }
-  header.brand nav a:hover { opacity: 1; text-decoration: underline; }
+  header.brand nav a:hover { opacity: 1; text-decoration: none; }
+  header.brand nav a.active {
+    opacity: 1;
+    border-bottom-color: #fff;
+    font-weight: 600;
+  }
+  header.brand nav .nav-section {
+    display: inline-block;
+    margin-left: 18px;
+    padding-left: 14px;
+    border-left: 1px solid rgba(255,255,255,0.2);
+  }
+  header.brand nav .nav-section a:first-child { margin-left: 0; }
 
   main { padding: 24px; max-width: 1200px; margin: 0 auto; }
   h2 { color: var(--navy); margin-top: 0; font-weight: 600; }
@@ -139,19 +154,25 @@
 </style>
 </head>
 <body>
+{% set _path = request.url.path if request is defined else '' %}
 <header class="brand">
-  <h1>P2P Agent · Demo Console</h1>
+  <h1>P2P Exception Orchestrator</h1>
   <nav>
-    <a href="/demo">Run an invoice</a>
-    <a href="/demo/runs">Past runs</a>
-    <a href="/queue">Approval queue</a>
-    <a href="/stage9">Stage 9 metrics</a>
-    <a href="/docs">API docs</a>
+    <a href="/demo" class="{% if _path == '/demo' or _path.startswith('/demo/') %}active{% endif %}">Demo</a>
+    <a href="/demo/runs" class="{% if _path == '/demo/runs' %}active{% endif %}">Past runs</a>
+    <a href="/queue" class="{% if _path.startswith('/queue') or _path.startswith('/item') %}active{% endif %}">Queue</a>
+    <a href="/stage9" class="{% if _path.startswith('/stage9') %}active{% endif %}">Stage 9</a>
+    <span class="nav-section">
+      <a href="/docs" class="{% if _path == '/docs' %}active{% endif %}">Docs</a>
+      <a href="/docs/agent_overview" class="{% if _path == '/docs/agent_overview' %}active{% endif %}">Overview</a>
+      <a href="/docs/detailed_workflow" class="{% if _path == '/docs/detailed_workflow' %}active{% endif %}">Workflow</a>
+      <a href="/docs/status" class="{% if _path == '/docs/status' %}active{% endif %}">Status</a>
+    </span>
   </nav>
 </header>
 <main>
   {% block content %}{% endblock %}
 </main>
-<footer>TruVs P2P Agent · demo build · routing tier ≥ 2 cases auto-enqueue from the pipeline.</footer>
+<footer>P2P Exception Orchestrator · live demo · open source on <a href="https://github.com/trjo1/invoice-exception-agent">GitHub</a></footer>
 </body>
 </html>

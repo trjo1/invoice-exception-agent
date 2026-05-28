@@ -121,5 +121,6 @@ def test_api_stage9_tail(client: TestClient) -> None:
 def test_stage9_link_in_base_nav(client: TestClient) -> None:
     r = client.get("/demo")
     assert r.status_code == 200
-    assert "Stage 9 metrics" in r.text
+    # Nav label was shortened to "Stage 9" in the gallery redesign (2026-05-28)
+    assert "Stage 9" in r.text
     assert 'href="/stage9"' in r.text

@@ -127,8 +127,14 @@ def test_demo_landing_renders(client_factory) -> None:
     client, _, _ = client_factory()
     r = client.get("/demo")
     assert r.status_code == 200
-    assert "Upload an invoice PDF" in r.text
+    # New gallery-based UX (replaced upload form in 2026-05-28)
+    assert "Pick an invoice to run through the pipeline" in r.text
     assert "Run pipeline" in r.text
+    # Gallery should render the curated samples
+    assert "Clean US invoice" in r.text
+    # Top nav strip with docs links
+    assert "/docs/agent_overview" in r.text
+    assert "/docs/detailed_workflow" in r.text
 
 
 def test_upload_rejects_non_pdf(client_factory) -> None:
