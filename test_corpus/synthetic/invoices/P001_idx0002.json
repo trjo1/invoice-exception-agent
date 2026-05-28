@@ -1,0 +1,42 @@
+{
+  "invoice_id": "P001_INV_20260105_002",
+  "persona_id": "P001",
+  "po_reference": "PO-2026-01-54321",
+  "invoice_date": "2026-01-05",
+  "currency": "USD",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "Global Tech Components Inc.",
+    "vendor_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+    "vendor_tax_id": "US-EIN: 12-3456789",
+    "buyer_name": "Acme Manufacturing Corp.",
+    "buyer_address": "123 Industrial Blvd, Detroit, MI 48201, USA",
+    "buyer_po_contact": "John Smith, j.smith@acmemanufacturing.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "GTC-2001",
+      "description": "High-Performance FPGA",
+      "quantity": 10,
+      "unit_price": 1500.0,
+      "line_total": 15000.0
+    }
+  ],
+  "subtotal": 15000.0,
+  "tax": [
+    {
+      "jurisdiction": "US-CA",
+      "rate": 0.0875,
+      "amount": 1312.5
+    },
+    {
+      "jurisdiction": "US-TX",
+      "rate": 0.0825,
+      "amount": 1237.5
+    }
+  ],
+  "total": 17550.0,
+  "error_injected": null,
+  "ground_truth_note": "Single line item invoice. No errors; extract all fields as shown."
+}

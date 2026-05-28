@@ -1,0 +1,37 @@
+{
+  "invoice_id": "P004_INV_20260128_001",
+  "persona_id": "P004",
+  "po_reference": "PO-2026-01-00123",
+  "invoice_date": "2026-01-28",
+  "currency": "INR",
+  "payment_terms": "NET-60",
+  "header_fields": {
+    "vendor_name": "Mumbai Materials Co.",
+    "vendor_address": "Plot 17, MIDC Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+    "vendor_tax_id": "GSTIN: 27AABCM1234C1Z5, PAN: AABCM1234C",
+    "buyer_name": "TechBuy Inc.",
+    "buyer_address": "123 Corporate Drive, San Francisco, CA 94105, USA",
+    "buyer_po_contact": "John Smith, john.smith@techbuy.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "HSN 8471.30",
+      "description": "Electronic Circuit Board - Model MC-1000",
+      "quantity": 50,
+      "unit_price": 1250.0,
+      "line_total": 62500.0
+    }
+  ],
+  "subtotal": 62500.0,
+  "tax": [
+    {
+      "jurisdiction": "IN-IGST",
+      "rate": 0.18,
+      "amount": 11250.0
+    }
+  ],
+  "total": 73750.0,
+  "error_injected": "GST percentage occasionally misrouted between IGST and CGST/SGST",
+  "ground_truth_note": "GST error: IGST (18%) used instead of CGST (9%) + SGST (9%) for domestic transaction. Should be two separate tax lines at 9% each."
+}

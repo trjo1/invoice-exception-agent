@@ -1,0 +1,53 @@
+{
+  "invoice_id": "P002_INV_20260127_001",
+  "persona_id": "P002",
+  "po_reference": "PO-2026-01-00089",
+  "invoice_date": "2026-01-27",
+  "currency": "USD",
+  "payment_terms": "NET-45",
+  "header_fields": {
+    "vendor_name": "Maple Logistics SMB",
+    "vendor_address": "789 Maple Street, Portland, OR 97201, USA",
+    "vendor_tax_id": "EIN: 12-3456789",
+    "buyer_name": "RetailCo LLC",
+    "buyer_address": "321 Main Street, Suite 200, Portland, OR 97204, USA",
+    "buyer_po_contact": "John Doe, john.doe@retailco.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "MLS-001",
+      "description": "Warehouse Storage Racks (Set of 4)",
+      "quantity": 3,
+      "unit_price": 350.0,
+      "line_total": 1050.0
+    },
+    {
+      "line_no": 2,
+      "sku": "MLS-002",
+      "description": "Pallet Jack (Manual)",
+      "quantity": 2,
+      "unit_price": 275.0,
+      "line_total": 550.0
+    },
+    {
+      "line_no": 3,
+      "sku": "MLS-003",
+      "description": "Shipping Labels (Roll of 500)",
+      "quantity": 10,
+      "unit_price": 25.0,
+      "line_total": 250.0
+    }
+  ],
+  "subtotal": 1850.0,
+  "tax": [
+    {
+      "jurisdiction": "US-OR",
+      "rate": 0.0,
+      "amount": 0.0
+    }
+  ],
+  "total": 1850.0,
+  "error_injected": null,
+  "ground_truth_note": "Clean invoice. Extractor should capture line items, note zero tax for Oregon, and round totals up to nearest dollar (here 1850.00 already integer)."
+}

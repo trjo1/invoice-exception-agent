@@ -1,0 +1,58 @@
+{
+  "invoice_id": "P001_INV_20260215_001",
+  "persona_id": "P001",
+  "po_reference": "PO-2026-02-97865",
+  "invoice_date": "2026-02-15",
+  "currency": "USD",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "Global Tech Components Inc.",
+    "vendor_address": "1234 Innovation Drive\nSan Jose, CA 95134\nUSA",
+    "vendor_tax_id": "95-1234567",
+    "buyer_name": "Acme Global Procurement Inc.",
+    "buyer_address": "1 World Trade Center\nNew York, NY 10007\nUSA",
+    "buyer_po_contact": "Bob Johnson, bob.johnson@acmeglobal.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "GTC-001",
+      "description": "Microchips",
+      "quantity": 1000,
+      "unit_price": 0.5,
+      "line_total": 500.0
+    },
+    {
+      "line_no": 2,
+      "sku": "GTC-002",
+      "description": "Resistors",
+      "quantity": 5000,
+      "unit_price": 0.1,
+      "line_total": 500.0
+    },
+    {
+      "line_no": 3,
+      "sku": "GTC-003",
+      "description": "Capacitors",
+      "quantity": 2000,
+      "unit_price": 0.2,
+      "line_total": 400.0
+    }
+  ],
+  "subtotal": 1400.0,
+  "tax": [
+    {
+      "jurisdiction": "US-CA",
+      "rate": 0.0825,
+      "amount": 115.5
+    },
+    {
+      "jurisdiction": "US-CA-SantaClara",
+      "rate": 0.01,
+      "amount": 14.0
+    }
+  ],
+  "total": 1529.5,
+  "error_injected": "Occasional PO reference typo (one digit transposed)",
+  "ground_truth_note": "PO reference has a transposed digit: correct PO is PO-2026-02-98765, but invoice shows PO-2026-02-97865. Multi-currency invoicing capability noted. Tax itemized by jurisdiction. All totals rounded to two decimals."
+}

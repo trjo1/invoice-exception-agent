@@ -1,0 +1,69 @@
+{
+  "invoice_id": "P003_INV_20260220_001",
+  "persona_id": "P003",
+  "po_reference": "PO-2026-02-12345",
+  "invoice_date": "2026-02-20",
+  "currency": "EUR",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "Frankfurt Industriebedarf GmbH",
+    "vendor_address": "Frankfurter Strasse 10, 60329 Frankfurt, Germany\nIBAN: DE89370400440532013000\nBIC: COBADEFFXXX",
+    "vendor_tax_id": "DE123456789",
+    "buyer_name": "GlobalTech Solutions Inc.",
+    "buyer_address": "123 Innovation Drive, New York, NY 10001, USA",
+    "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "FIB-1001",
+      "description": "Hydraulikzylinder / Hydraulic Cylinder",
+      "quantity": 4,
+      "unit_price": 125.5,
+      "line_total": 502.0
+    },
+    {
+      "line_no": 2,
+      "sku": "FIB-1002",
+      "description": "Dichtungssatz / Seal Kit",
+      "quantity": 10,
+      "unit_price": 34.8,
+      "line_total": 348.0
+    },
+    {
+      "line_no": 3,
+      "sku": "FIB-1003",
+      "description": "Steuerventil / Control Valve",
+      "quantity": 2,
+      "unit_price": 489.9,
+      "line_total": 979.8
+    },
+    {
+      "line_no": 4,
+      "sku": "FIB-1004",
+      "description": "Filterelement / Filter Element",
+      "quantity": 6,
+      "unit_price": 22.45,
+      "line_total": 134.7
+    },
+    {
+      "line_no": 5,
+      "sku": "FIB-1005",
+      "description": "Druckminderer / Pressure Regulator",
+      "quantity": 3,
+      "unit_price": 87.3,
+      "line_total": 261.9
+    }
+  ],
+  "subtotal": 2226.4,
+  "tax": [
+    {
+      "jurisdiction": "EU-DE-VAT",
+      "rate": 0.19,
+      "amount": 423.02
+    }
+  ],
+  "total": 2649.42,
+  "error_injected": "Cross-currency edge when buyer is in USD",
+  "ground_truth_note": "Invoice is issued in EUR while buyer operates in USD. The extractor should flag the currency mismatch for conversion. All other fields are correct. VAT is correctly calculated at 19%."
+}

@@ -1,0 +1,50 @@
+{
+  "invoice_id": "P001_INV_20260201_001",
+  "persona_id": "P001",
+  "po_reference": "PO-2026-02-12345",
+  "invoice_date": "2026-02-01",
+  "currency": "USD",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "Global Tech Components Inc.",
+    "vendor_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+    "vendor_tax_id": "US-EIN: 12-3456789",
+    "buyer_name": "Acme Manufacturing Corp.",
+    "buyer_address": "123 Industrial Blvd, Detroit, MI 48201, USA",
+    "buyer_po_contact": "John Smith, j.smith@acmemanufacturing.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "GTC-1001",
+      "description": "Microcontroller Unit MCU-32",
+      "quantity": 500,
+      "unit_price": 12.5,
+      "line_total": 6250.0
+    },
+    {
+      "line_no": 2,
+      "sku": "GTC-1002",
+      "description": "Resistor Kit 10K",
+      "quantity": 1000,
+      "unit_price": 0.15,
+      "line_total": 150.0
+    }
+  ],
+  "subtotal": 6400.0,
+  "tax": [
+    {
+      "jurisdiction": "US-CA",
+      "rate": 0.0875,
+      "amount": 560.0
+    },
+    {
+      "jurisdiction": "US-TX",
+      "rate": 0.0825,
+      "amount": 528.0
+    }
+  ],
+  "total": 7488.0,
+  "error_injected": "Multi-page invoices where line-items continue across pages",
+  "ground_truth_note": "Invoice spans two pages; line items 1 and 2 appear on separate pages. Extractor must combine line items across pages to compute subtotal correctly."
+}

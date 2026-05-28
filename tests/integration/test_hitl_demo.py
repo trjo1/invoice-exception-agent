@@ -127,13 +127,14 @@ def test_demo_landing_renders(client_factory) -> None:
     client, _, _ = client_factory()
     r = client.get("/demo")
     assert r.status_code == 200
-    # New "two views" gallery layout (rebuild 2026-05-28).
+    # Two-view layout: "Browse" button + curated-scenario dropdown.
     assert "Run an invoice through the agent" in r.text
-    assert "Browse invoices" in r.text          # Option 1 button
-    assert "Run a pre-configured scenario" in r.text  # Option 2 header
-    assert "Scenarios" in r.text                # scrolled-to grid header
-    # First curated scenario card renders.
+    assert "Browse invoices" in r.text                  # Option 1 button
+    assert "Run a pre-configured scenario" in r.text    # Option 2 heading
+    # Curated scenario dropdown is rendered with the first label.
     assert "Clean US invoice" in r.text
+    assert '<select name="sample_id"' in r.text
+    assert 'value="clean_us"' in r.text
 
 
 def test_upload_rejects_non_pdf(client_factory) -> None:
@@ -267,18 +268,31 @@ def test_run_detail_404(client_factory) -> None:
 
 
 def test_browse_page_renders(client_factory) -> None:
-    """The new /demo/browse page lists every curated sample as a clickable card."""
+    """The /demo/browse page lists every sample as a minimal clickable card.
+
+    Cards should show only invoice_id / vendor — NO expected-outcome hints,
+    NO tier badges, NO region chips. The browse picker is supposed to feel
+    like a real ops user picking an unknown invoice.
+    """
     client, _, _ = client_factory()
     r = client.get("/demo/browse")
     assert r.status_code == 200
     body = r.text
-    assert "Browse the invoice library" in body
+    assert "Pick an invoice" in body
     assert "Select this invoice" in body
-    # The first curated sample's label must appear.
-    assert "Clean US invoice" in body
-    # The iframe + the PDF-preview endpoint URLs are wired into each card.
+    # The iframe + sample-PDF URLs are wired into each card.
     assert 'id="pdf-preview"' in body
     assert "/demo/sample/clean_us/pdf" in body
+    # All 20 samples appear (we check 4 sample_ids across personas).
+    for sid in ["clean_us", "us_p2_001", "eu_p3_005", "br_p5_009"]:
+        assert f'data-sample-id="{sid}"' in body
+    # NO expected-outcome hints leak into the browse list (strings from
+    # expected_signal or region chips must not appear on this page).
+    assert "auto-pass expected" not in body
+    assert "Should classify" not in body
+    assert "Tier 1 auto-pass" not in body
+    assert "tier-1" not in body
+    assert "tier-2" not in body
 
 
 def test_sample_pdf_inline_serves_bytes(client_factory) -> None:

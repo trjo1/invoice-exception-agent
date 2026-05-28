@@ -1,0 +1,31 @@
+{
+  "invoice_id": "P003_INV_20260327_001",
+  "persona_id": "P003",
+  "po_reference": "PO-2026-03-45678",
+  "invoice_date": "2026-03-27",
+  "currency": "EUR",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "Frankfurt Industriebedarf GmbH",
+    "vendor_address": "Industriestr. 42\n60327 Frankfurt am Main\nGermany\nSEPA: DE89 3704 0044 0532 0130 00",
+    "vendor_tax_id": "DE123456789",
+    "buyer_name": "Global Procurement Inc.",
+    "buyer_address": "Rue de la Paix 5\n75002 Paris\nFrance",
+    "buyer_po_contact": "Jean Dupont, jean.dupont@globalproc.fr"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "IND-002",
+      "description": "Pneumatikzylinder (pneumatic cylinder)",
+      "quantity": 1,
+      "unit_price": 3000.0,
+      "line_total": 3000.0
+    }
+  ],
+  "subtotal": 3000.0,
+  "tax": [],
+  "total": 3000.0,
+  "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers",
+  "ground_truth_note": "Intra-EU shipment to non-German buyer (France); VAT is reverse-charged and thus not included in invoice. The extractor should not expect a VAT line. SEPA bank details provided."
+}

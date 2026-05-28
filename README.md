@@ -93,6 +93,21 @@ make test-unit           # 80 unit + integration tests, no LLM calls
 make test-golden         # 24 golden cases against real LLMs (costs ~$0.50 per full run)
 ```
 
+### Deploying to Railway (or any container host)
+
+Containers are ephemeral — without persistent storage, the SQLite DB,
+uploaded PDFs, and LLM cost ledger are wiped on every redeploy. To keep
+state across deploys, mount a persistent volume and point `DATA_DIR` at it:
+
+1. In the Railway dashboard, add a volume to your service. Mount path: `/data`.
+2. In **Variables**, set `DATA_DIR=/data`.
+3. Redeploy. The DB now lives at `/data/hitl_queue.db`, uploads at
+   `/data/demo_uploads/`, and the cost ledger at `/data/llm_calls.jsonl`.
+
+Past runs, queue items, and Stage 9 metrics will now survive redeploys.
+For finer control, the individual env vars `HITL_DB_URL`, `UPLOADS_DIR`,
+and `LLM_CALL_LOG_PATH` still override the `DATA_DIR`-derived defaults.
+
 ---
 
 ## Documentation

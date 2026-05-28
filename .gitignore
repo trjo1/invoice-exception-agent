@@ -74,19 +74,50 @@ test_corpus/bpi_data/*
 !test_corpus/bpi_data/.gitkeep
 test_corpus/synthetic/invoices/*
 !test_corpus/synthetic/invoices/.gitkeep
-# EXCEPT: the 10 curated sample PDFs that drive the /demo dropdown.
-# These ship with the repo so the hosted demo on Railway has runnable samples.
+# EXCEPT: the 20 curated sample invoices (PDF + JSON sidecar) that drive the
+# /demo browse list and curated-scenarios dropdown. These ship with the repo
+# so the hosted demo on Railway has runnable samples and rich metadata.
 # See src/p2p_agent/hitl/webapp/samples.py for the canonical list.
 !test_corpus/synthetic/invoices/P001_idx0000.pdf
+!test_corpus/synthetic/invoices/P001_idx0000.json
 !test_corpus/synthetic/invoices/P001_idx0002.pdf
+!test_corpus/synthetic/invoices/P001_idx0002.json
 !test_corpus/synthetic/invoices/P001_idx0003.pdf
+!test_corpus/synthetic/invoices/P001_idx0003.json
+!test_corpus/synthetic/invoices/P001_idx0007.pdf
+!test_corpus/synthetic/invoices/P001_idx0007.json
+!test_corpus/synthetic/invoices/P001_idx0013.pdf
+!test_corpus/synthetic/invoices/P001_idx0013.json
+!test_corpus/synthetic/invoices/P002_idx0001.pdf
+!test_corpus/synthetic/invoices/P002_idx0001.json
+!test_corpus/synthetic/invoices/P002_idx0014.pdf
+!test_corpus/synthetic/invoices/P002_idx0014.json
 !test_corpus/synthetic/invoices/P002_idx0016.pdf
+!test_corpus/synthetic/invoices/P002_idx0016.json
 !test_corpus/synthetic/invoices/P002_idx0021.pdf
+!test_corpus/synthetic/invoices/P002_idx0021.json
+!test_corpus/synthetic/invoices/P003_idx0005.pdf
+!test_corpus/synthetic/invoices/P003_idx0005.json
 !test_corpus/synthetic/invoices/P003_idx0020.pdf
+!test_corpus/synthetic/invoices/P003_idx0020.json
+!test_corpus/synthetic/invoices/P003_idx0030.pdf
+!test_corpus/synthetic/invoices/P003_idx0030.json
 !test_corpus/synthetic/invoices/P003_idx0089.pdf
+!test_corpus/synthetic/invoices/P003_idx0089.json
 !test_corpus/synthetic/invoices/P004_idx0006.pdf
+!test_corpus/synthetic/invoices/P004_idx0006.json
+!test_corpus/synthetic/invoices/P004_idx0019.pdf
+!test_corpus/synthetic/invoices/P004_idx0019.json
+!test_corpus/synthetic/invoices/P004_idx0023.pdf
+!test_corpus/synthetic/invoices/P004_idx0023.json
 !test_corpus/synthetic/invoices/P004_idx0060.pdf
+!test_corpus/synthetic/invoices/P004_idx0060.json
+!test_corpus/synthetic/invoices/P005_idx0004.pdf
+!test_corpus/synthetic/invoices/P005_idx0004.json
 !test_corpus/synthetic/invoices/P005_idx0008.pdf
+!test_corpus/synthetic/invoices/P005_idx0008.json
+!test_corpus/synthetic/invoices/P005_idx0009.pdf
+!test_corpus/synthetic/invoices/P005_idx0009.json
 test_corpus/synthetic/emails/*
 !test_corpus/synthetic/emails/.gitkeep
 test_corpus/synthetic/master_data/*

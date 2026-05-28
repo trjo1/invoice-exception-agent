@@ -1,0 +1,50 @@
+{
+  "invoice_id": "P001_INV_20260313_003",
+  "persona_id": "P001",
+  "po_reference": "PO-2026-03-13245",
+  "invoice_date": "2026-03-13",
+  "currency": "USD",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "Global Tech Components Inc.",
+    "vendor_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+    "vendor_tax_id": "US-EIN: 12-3456789",
+    "buyer_name": "Acme Manufacturing Corp.",
+    "buyer_address": "123 Industrial Blvd, Detroit, MI 48201, USA",
+    "buyer_po_contact": "John Smith, j.smith@acmemanufacturing.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "GTC-3001",
+      "description": "Memory Module 16GB",
+      "quantity": 100,
+      "unit_price": 85.0,
+      "line_total": 8500.0
+    },
+    {
+      "line_no": 2,
+      "sku": "GTC-3002",
+      "description": "Solid State Drive 1TB",
+      "quantity": 50,
+      "unit_price": 120.0,
+      "line_total": 6000.0
+    }
+  ],
+  "subtotal": 14500.0,
+  "tax": [
+    {
+      "jurisdiction": "US-CA",
+      "rate": 0.0875,
+      "amount": 1268.75
+    },
+    {
+      "jurisdiction": "US-TX",
+      "rate": 0.0825,
+      "amount": 1196.25
+    }
+  ],
+  "total": 16965.0,
+  "error_injected": "Occasional PO reference typo (one digit transposed)",
+  "ground_truth_note": "PO reference has a transposed digit (13245 instead of 12345). Extractor should flag discrepancy with actual PO."
+}

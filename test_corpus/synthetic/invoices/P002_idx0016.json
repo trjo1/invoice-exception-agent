@@ -1,0 +1,87 @@
+{
+  "invoice_id": "P002_INV_20260204_001",
+  "persona_id": "P002",
+  "po_reference": "PO-2026-02-00456",
+  "invoice_date": "2026-02-04",
+  "currency": "USD",
+  "payment_terms": "NET-45",
+  "header_fields": {
+    "vendor_name": "Maple Logistics SMB",
+    "vendor_address": "456 Freight Lane, Suite 200, Portland, OR 97201, USA",
+    "vendor_tax_id": "EIN 94-9876543",
+    "buyer_name": "Acme Corp",
+    "buyer_address": "1000 Industrial Blvd, Chicago, IL 60601, USA",
+    "buyer_po_contact": "Bob Johnson, bob.johnson@acmecorp.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "MLS-FLAT-001",
+      "description": "Flatbed Trucking - Portland to Chicago",
+      "quantity": 1,
+      "unit_price": 3500.0,
+      "line_total": 3500.0
+    },
+    {
+      "line_no": 2,
+      "sku": "MLS-WH-002",
+      "description": "Warehousing - 100 pallets (30 days)",
+      "quantity": 30,
+      "unit_price": 25.0,
+      "line_total": 750.0
+    },
+    {
+      "line_no": 3,
+      "sku": "MLS-LTL-003",
+      "description": "LTL Freight - Small Package",
+      "quantity": 5,
+      "unit_price": 45.0,
+      "line_total": 225.0
+    },
+    {
+      "line_no": 4,
+      "sku": "MLS-INS-004",
+      "description": "Cargo Insurance - Value up to $50k",
+      "quantity": 1,
+      "unit_price": 200.0,
+      "line_total": 200.0
+    },
+    {
+      "line_no": 5,
+      "sku": "MLS-DOC-005",
+      "description": "Documentation Fee",
+      "quantity": 1,
+      "unit_price": 50.0,
+      "line_total": 50.0
+    },
+    {
+      "line_no": 6,
+      "sku": "MLS-FUEL-006",
+      "description": "Fuel Surcharge (12%)",
+      "quantity": 1,
+      "unit_price": 420.0,
+      "line_total": 420.0
+    },
+    {
+      "line_no": 7,
+      "sku": "MLS-LAB-007",
+      "description": "Loading/Unloading Labor (4 hours)",
+      "quantity": 4,
+      "unit_price": 75.0,
+      "line_total": 300.0
+    },
+    {
+      "line_no": 8,
+      "sku": "MLS-EX-008",
+      "description": "Expedited Handling",
+      "quantity": 1,
+      "unit_price": 150.0,
+      "line_total": 150.0
+    }
+  ],
+  "subtotal": 5595.0,
+  "tax": [],
+  "total": 5595.0,
+  "error_injected": "Tax line sometimes absent for in-state shipments",
+  "ground_truth_note": "Invoice from Maple Logistics SMB. Tax line is absent because this is an in-state shipment (Oregon to Oregon? Actually buyer in IL, but error mode says in-state shipments may lack tax. The extractor should note missing tax. Totals are rounded up to nearest dollar (subtotal already integer). A hand-written note 'Please process urgently' appears in the scanned image."
+}

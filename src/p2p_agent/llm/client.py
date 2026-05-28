@@ -110,7 +110,11 @@ class ModelClient:
         log_path: Path | None = None,
     ) -> None:
         self._config_path = config_path or (REPO_ROOT / "config" / "models.yaml")
-        default_log = REPO_ROOT / "logs" / "llm_calls.jsonl"
+        # Default log path honors DATA_DIR so on Railway (volume mounted at
+        # /data, DATA_DIR=/data) the cost ledger persists across redeploys.
+        # An explicit LLM_CALL_LOG_PATH still wins over both.
+        data_dir = Path(os.environ.get("DATA_DIR") or (REPO_ROOT / "logs"))
+        default_log = data_dir / "llm_calls.jsonl"
         log_env = os.environ.get("LLM_CALL_LOG_PATH")
         self._log_path = log_path or (Path(log_env) if log_env else default_log)
         self._soft_ceiling_usd = float(os.environ.get("LLM_CALL_SOFT_CEILING_USD", "0.10"))

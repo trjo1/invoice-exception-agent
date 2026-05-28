@@ -1,0 +1,53 @@
+{
+  "invoice_id": "P001_INV_20260228_001",
+  "persona_id": "P001",
+  "po_reference": "PO-2026-02-00034",
+  "invoice_date": "2026-02-28",
+  "currency": "USD",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "Global Tech Components Inc.",
+    "vendor_address": "123 Innovation Drive, Sunnyvale, CA 94089, USA",
+    "vendor_tax_id": "EIN: 98-7654321",
+    "buyer_name": "AeroSpace Corp.",
+    "buyer_address": "456 Aviation Blvd, Seattle, WA 98101, USA",
+    "buyer_po_contact": "Sarah Johnson, sarah.johnson@aerospacecorp.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "GTC-1001",
+      "description": "Titanium Alloy Sheet (Grade 5)",
+      "quantity": 10,
+      "unit_price": 250.0,
+      "line_total": 2500.0
+    },
+    {
+      "line_no": 2,
+      "sku": "GTC-2003",
+      "description": "Precision Ball Bearings (Set of 10)",
+      "quantity": 5,
+      "unit_price": 180.0,
+      "line_total": 900.0
+    },
+    {
+      "line_no": 3,
+      "sku": "GTC-3015",
+      "description": "Hydraulic Actuator",
+      "quantity": 2,
+      "unit_price": 750.0,
+      "line_total": 1500.0
+    }
+  ],
+  "subtotal": 4900.0,
+  "tax": [
+    {
+      "jurisdiction": "US-CA",
+      "rate": 0.0875,
+      "amount": 428.75
+    }
+  ],
+  "total": 5328.75,
+  "error_injected": null,
+  "ground_truth_note": "Clean invoice. Extractor should capture line items, apply CA sales tax, and round totals to 2 decimals."
+}

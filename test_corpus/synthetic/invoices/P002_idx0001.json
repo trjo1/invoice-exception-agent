@@ -1,0 +1,93 @@
+{
+  "invoice_id": "P002_INV_20260328_001",
+  "persona_id": "P002",
+  "po_reference": "PO-2026-03-67890",
+  "invoice_date": "2026-03-28",
+  "currency": "USD",
+  "payment_terms": "NET-45",
+  "header_fields": {
+    "vendor_name": "Maple Logistics SMB",
+    "vendor_address": "45 Maple Street, Portland, OR 97201, USA",
+    "vendor_tax_id": "US-EIN: 98-7654321",
+    "buyer_name": "Acme Manufacturing Corp.",
+    "buyer_address": "123 Industrial Blvd, Detroit, MI 48201, USA",
+    "buyer_po_contact": "John Smith, j.smith@acmemanufacturing.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "MLS-FRT-001",
+      "description": "Freight - LTL shipment",
+      "quantity": 1,
+      "unit_price": 2500.0,
+      "line_total": 2500.0
+    },
+    {
+      "line_no": 2,
+      "sku": "MLS-WH-001",
+      "description": "Warehousing - per pallet",
+      "quantity": 10,
+      "unit_price": 75.0,
+      "line_total": 750.0
+    },
+    {
+      "line_no": 3,
+      "sku": "MLS-PK-001",
+      "description": "Packing service",
+      "quantity": 5,
+      "unit_price": 50.0,
+      "line_total": 250.0
+    },
+    {
+      "line_no": 4,
+      "sku": "MLS-CB-001",
+      "description": "Customs brokerage",
+      "quantity": 1,
+      "unit_price": 400.0,
+      "line_total": 400.0
+    },
+    {
+      "line_no": 5,
+      "sku": "MLS-INS-001",
+      "description": "Insurance - cargo",
+      "quantity": 1,
+      "unit_price": 120.0,
+      "line_total": 120.0
+    },
+    {
+      "line_no": 6,
+      "sku": "MLS-FSC-001",
+      "description": "Fuel surcharge",
+      "quantity": 1,
+      "unit_price": 200.0,
+      "line_total": 200.0
+    },
+    {
+      "line_no": 7,
+      "sku": "MLS-DOC-001",
+      "description": "Documentation fee",
+      "quantity": 1,
+      "unit_price": 50.0,
+      "line_total": 50.0
+    },
+    {
+      "line_no": 8,
+      "sku": "MLS-HDL-001",
+      "description": "Handling fee",
+      "quantity": 1,
+      "unit_price": 100.0,
+      "line_total": 100.0
+    }
+  ],
+  "subtotal": 4370.0,
+  "tax": [
+    {
+      "jurisdiction": "US-OR",
+      "rate": 0.0,
+      "amount": 0.0
+    }
+  ],
+  "total": 4370.0,
+  "error_injected": null,
+  "ground_truth_note": "Clean invoice. Hand-written note 'Thanks!' appears in margin. Header placement slightly offset. Extractor should ignore hand-writing and extract all fields accurately."
+}

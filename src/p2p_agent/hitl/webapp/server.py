@@ -54,6 +54,7 @@ from p2p_agent.hitl import HITLQueue, HITLQueueError, PipelineRunStore
 from p2p_agent.hitl.models import HITLItem, PipelineRun
 from p2p_agent.hitl.webapp.samples import (
     SAMPLES,
+    curated_samples,
     find_sample,
     load_sample_metadata,
     resolve_pdf,
@@ -64,9 +65,21 @@ from p2p_agent.retrieval import PolicyRetriever, get_default_retriever
 from p2p_agent.stage9 import WINDOWS, Stage9Aggregator, Stage9Reader
 
 TEMPLATES_DIR = Path(__file__).parent / "templates"
-# Configurable upload dir — on Railway this points at a persistent volume
-# (e.g., /data/uploads). Default keeps local-dev behavior unchanged.
-DEFAULT_UPLOADS_DIR = Path(os.environ.get("UPLOADS_DIR") or "./logs/demo_uploads")
+
+# ─── Persistent storage paths ───────────────────────────────────────────────
+# `DATA_DIR` is the single source of truth for all on-disk state we want to
+# survive container restarts (SQLite DB, uploaded PDFs, LLM call log). On
+# Railway, mount a persistent volume at `/data` and set `DATA_DIR=/data` —
+# everything below then writes inside the volume. Locally it defaults to
+# ./logs/ so dev behavior is unchanged.
+#
+# The individual env vars (HITL_DB_URL, UPLOADS_DIR, LLM_CALL_LOG_PATH) still
+# override the derived defaults if you need to point pieces elsewhere.
+DATA_DIR = Path(os.environ.get("DATA_DIR") or "./logs")
+
+DEFAULT_DB_URL = os.environ.get("HITL_DB_URL") or f"sqlite:///{DATA_DIR}/hitl_queue.db"
+DEFAULT_UPLOADS_DIR = Path(os.environ.get("UPLOADS_DIR") or str(DATA_DIR / "demo_uploads"))
+DEFAULT_LLM_LOG_PATH = Path(os.environ.get("LLM_CALL_LOG_PATH") or str(DATA_DIR / "llm_calls.jsonl"))
 # Repo root, used for serving documentation HTML files (status.html, etc.)
 # Path: <repo>/src/p2p_agent/hitl/webapp/server.py → parents[4] is <repo>
 _REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -136,13 +149,16 @@ def create_app(
     real `run_invoice_pipeline`. `llm_log_path` overrides the Stage 9 jsonl source.
     `executor` defaults to the mock `ActionExecutor`; pass a stub in tests.
     """
-    db_url = os.environ.get("HITL_DB_URL", "sqlite:///./logs/hitl_queue.db")
+    # Persistent state goes under DATA_DIR (or its explicit overrides). The
+    # parent directory must exist for SQLite to create the DB file on first run.
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    db_url = DEFAULT_DB_URL
     queue = queue or HITLQueue(db_url=db_url)
     runs = runs or PipelineRunStore(db_url=db_url)
     uploads_dir = uploads_dir or DEFAULT_UPLOADS_DIR
     uploads_dir.mkdir(parents=True, exist_ok=True)
     pipeline_runner = pipeline_runner or run_invoice_pipeline
-    stage9_reader = Stage9Reader(llm_log_path or Path("./logs/llm_calls.jsonl"))
+    stage9_reader = Stage9Reader(llm_log_path or DEFAULT_LLM_LOG_PATH)
     stage9_agg = Stage9Aggregator(queue=queue, runs=runs)
     executor = executor or ActionExecutor(mode="mock")
 
@@ -221,12 +237,9 @@ def create_app(
             {
                 "status": "ok",
                 "retriever_warm": retriever_warm,
+                "data_dir": str(DATA_DIR),
                 "uploads_dir": str(DEFAULT_UPLOADS_DIR),
-                "db_url_kind": (
-                    "sqlite"
-                    if os.environ.get("HITL_DB_URL", "sqlite").startswith("sqlite")
-                    else "other"
-                ),
+                "db_url_kind": "sqlite" if DEFAULT_DB_URL.startswith("sqlite") else "other",
             },
         )
 
@@ -283,6 +296,7 @@ def create_app(
                 "recent_runs": recent,
                 "queue_stats": queue.stats(),
                 "samples": SAMPLES,
+                "curated": curated_samples(),
                 "gallery": gallery,
                 "selected_row": selected_row,
                 "cost_estimate": stage9_reader.per_run_cost(last_n_runs=20),

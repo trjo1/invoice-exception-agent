@@ -1,0 +1,101 @@
+{
+  "invoice_id": "P004_INV_20260427_001",
+  "persona_id": "P004",
+  "po_reference": "PO-2026-04-00987",
+  "invoice_date": "2026-04-27",
+  "currency": "INR",
+  "payment_terms": "NET-60",
+  "header_fields": {
+    "vendor_name": "Mumbai Materials Co.",
+    "vendor_address": "Plot 42, MIDC Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+    "vendor_tax_id": "GSTIN 27AABCM1234C1Z1",
+    "buyer_name": "Acme Corp",
+    "buyer_address": "1000 Industrial Blvd, Chicago, IL 60601, USA",
+    "buyer_po_contact": "Raj Patel, raj.patel@acmecorp.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "MMC-001",
+      "description": "Steel Rods 12mm dia (per kg)",
+      "quantity": 500,
+      "unit_price": 85.0,
+      "line_total": 42500.0,
+      "hsn_code": "7214.20.10"
+    },
+    {
+      "line_no": 2,
+      "sku": "MMC-002",
+      "description": "Aluminium Sheets 2mm (per sq. ft)",
+      "quantity": 200,
+      "unit_price": 120.0,
+      "line_total": 24000.0,
+      "hsn_code": "76061200"
+    },
+    {
+      "line_no": 3,
+      "sku": "MMC-003",
+      "description": "Copper Wire 1.5mm (per coil)",
+      "quantity": 100,
+      "unit_price": 450.0,
+      "line_total": 45000.0,
+      "hsn_code": "7408.11.00"
+    },
+    {
+      "line_no": 4,
+      "sku": "MMC-004",
+      "description": "Brass Fittings Set (10 pcs)",
+      "quantity": 50,
+      "unit_price": 320.0,
+      "line_total": 16000.0,
+      "hsn_code": "74122019"
+    },
+    {
+      "line_no": 5,
+      "sku": "MMC-005",
+      "description": "PVC Pipes 4 inch (per meter)",
+      "quantity": 300,
+      "unit_price": 55.0,
+      "line_total": 16500.0,
+      "hsn_code": "3917.23.10"
+    },
+    {
+      "line_no": 6,
+      "sku": "MMC-006",
+      "description": "Fasteners Kit (1000 pcs)",
+      "quantity": 20,
+      "unit_price": 200.0,
+      "line_total": 4000.0,
+      "hsn_code": "73181500"
+    },
+    {
+      "line_no": 7,
+      "sku": "MMC-007",
+      "description": "Rubber Gaskets (per box)",
+      "quantity": 40,
+      "unit_price": 150.0,
+      "line_total": 6000.0,
+      "hsn_code": "4016.93.00"
+    },
+    {
+      "line_no": 8,
+      "sku": "MMC-008",
+      "description": "Industrial Lubricant (5L can)",
+      "quantity": 25,
+      "unit_price": 780.0,
+      "line_total": 19500.0,
+      "hsn_code": "27101980"
+    }
+  ],
+  "subtotal": 173500.0,
+  "tax": [
+    {
+      "jurisdiction": "IN-IGST",
+      "rate": 0.18,
+      "amount": 31230.0
+    }
+  ],
+  "total": 204730.0,
+  "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+  "ground_truth_note": "Invoice from Mumbai Materials Co. HSN codes are inconsistently formatted: some include dashes (e.g., 7214.20.10) and some do not (e.g., 76061200). The extractor should detect this inconsistency. GST is itemized as IGST. PAN and GSTIN are provided in header. Cross-currency to USD is common; the equivalent in USD would be approximately $2,450 at 83.5 INR/USD."
+}

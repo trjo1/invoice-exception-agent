@@ -1,0 +1,84 @@
+{
+  "invoice_id": "P005_INV_20260404_001",
+  "persona_id": "P005",
+  "po_reference": "PO-2026-03-11111",
+  "invoice_date": "2026-04-04",
+  "currency": "BRL",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "S\u00e3o Paulo Componentes Ltda.",
+    "vendor_address": "Av. Paulista, 1000\nS\u00e3o Paulo, SP 01310-100\nBrazil",
+    "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+    "buyer_name": "Acme Global Procurement Inc.",
+    "buyer_address": "1 World Trade Center\nNew York, NY 10007\nUSA",
+    "buyer_po_contact": "Maria Silva, maria.silva@acmeglobal.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "SP-001",
+      "description": "Parafuso M6",
+      "quantity": 100,
+      "unit_price": 0.5,
+      "line_total": 50.0
+    },
+    {
+      "line_no": 2,
+      "sku": "SP-002",
+      "description": "Porca M6",
+      "quantity": 100,
+      "unit_price": 0.3,
+      "line_total": 30.0
+    },
+    {
+      "line_no": 3,
+      "sku": "SP-003",
+      "description": "Arruela",
+      "quantity": 200,
+      "unit_price": 0.1,
+      "line_total": 20.0
+    },
+    {
+      "line_no": 4,
+      "sku": "SP-004",
+      "description": "Mola",
+      "quantity": 50,
+      "unit_price": 2.0,
+      "line_total": 100.0
+    },
+    {
+      "line_no": 5,
+      "sku": "SP-005",
+      "description": "Engrenagem",
+      "quantity": 10,
+      "unit_price": 15.0,
+      "line_total": 150.0
+    }
+  ],
+  "subtotal": 350.0,
+  "tax": [
+    {
+      "jurisdiction": "BR-ICMS",
+      "rate": 0.18,
+      "amount": 63.0
+    },
+    {
+      "jurisdiction": "BR-IPI",
+      "rate": 0.1,
+      "amount": 35.0
+    },
+    {
+      "jurisdiction": "BR-PIS",
+      "rate": 0.0165,
+      "amount": 5.78
+    },
+    {
+      "jurisdiction": "BR-COFINS",
+      "rate": 0.076,
+      "amount": 26.6
+    }
+  ],
+  "total": 480.38,
+  "error_injected": "Multiple tax types confuse extraction",
+  "ground_truth_note": "NF-e structure with multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) itemized. Boleto banc\u00e1rio reference number 12345678901 included. Extractor must correctly parse all four tax lines and sum to total tax."
+}

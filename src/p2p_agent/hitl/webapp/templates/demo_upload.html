@@ -42,14 +42,10 @@
         Invoice selected — ready to run
       </div>
       <div style="font-size:15px; font-weight:600; color:var(--navy);">
-        {{ selected_row.meta.vendor_name or selected_row.sample.label }}
+        {{ selected_row.meta.invoice_id or selected_row.sample.case_id }}
       </div>
       <div style="font-size:12px; color:var(--muted); margin-top:2px;">
-        {% if selected_row.sample.region %}<span class="chip">{{ selected_row.sample.region }}</span>{% endif %}
-        {% if selected_row.meta.invoice_id %}<span style="margin-right:10px;">{{ selected_row.meta.invoice_id }}</span>{% endif %}
-        {% if selected_row.meta.total %}
-          <strong>{{ selected_row.meta.currency or "" }} {{ "{:,.2f}".format(selected_row.meta.total) }}</strong>
-        {% endif %}
+        {{ selected_row.meta.vendor_name or "" }}
       </div>
     </div>
     <form method="post" action="/demo/run-sample-streaming" style="margin:0;">
@@ -61,82 +57,49 @@
 </div>
 {% endif %}
 
-{# ─── Two views: browse vs. curated scenarios ─── #}
-<h3 style="color:var(--navy); margin-top:24px;">{% if selected_row %}Or pick something else:{% else %}How do you want to start?{% endif %}</h3>
+{# ─── Two views ─── #}
+<h3 style="color:var(--navy); margin-top:24px;">{% if selected_row %}Or pick something else:{% else %}Two ways to run an invoice{% endif %}</h3>
 
 <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px;" class="two-views">
 
-  {# View 1: Browse the library #}
+  {# View 1: Browse the invoice library #}
   <div class="card" style="background:var(--soft); border-color:#c4d3e6; padding:20px;">
     <div style="font-size:13px; color:var(--navy); font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">
       Option 1 · Browse
     </div>
-    <h3 style="margin:0 0 10px; font-size:17px; color:var(--navy);">Pick from the invoice library</h3>
+    <h3 style="margin:0 0 10px; font-size:17px; color:var(--navy);">Pick an invoice from the library</h3>
     <p style="font-size:13.5px; color:var(--text); margin:0 0 14px; line-height:1.55;">
-      Open the gallery, preview any of the 10 sample PDFs side-by-side, then
-      select one to run. Useful when you want to <em>see</em> the document
-      before the agent does.
-    </p>
-    <p style="font-size:12px; color:var(--muted); margin:0 0 14px;">
-      Covers US, EU, India, and Brazil — single invoice per persona-error pattern.
+      Open the gallery, preview any of the 20 invoices, then select one to run.
+      No hints about expected outcome — this is what a real ops user would see.
     </p>
     <a href="/demo/browse" style="display:inline-block; padding:8px 18px; background:var(--navy); color:#fff; border-radius:4px; font-weight:500; font-size:13.5px;">Browse invoices →</a>
   </div>
 
-  {# View 2: Run a curated scenario directly #}
-  <div class="card" style="border-color:#c4d3e6; padding:20px;">
+  {# View 2: Run a curated scenario (dropdown) #}
+  <form id="sample-form" method="post" action="/demo/run-sample-streaming"
+        class="card" style="border-color:#c4d3e6; padding:20px; display:flex; flex-direction:column;">
     <div style="font-size:13px; color:var(--navy); font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">
-      Option 2 · Quick-run
+      Option 2 · Curated scenario
     </div>
     <h3 style="margin:0 0 10px; font-size:17px; color:var(--navy);">Run a pre-configured scenario</h3>
-    <p style="font-size:13.5px; color:var(--text); margin:0 0 14px; line-height:1.55;">
-      Each card below corresponds to a real exception pattern with a known
-      expected outcome — auto-pass, tax mismatch, missing PO, FX escalation,
-      and more. One click runs the pipeline.
+    <p style="font-size:13px; color:var(--muted); margin:0 0 12px; line-height:1.5;">
+      Each scenario triggers a specific exception pattern with a known expected outcome.
     </p>
-    <p style="font-size:12px; color:var(--muted); margin:0 0 14px;">
-      Scroll down ↓ to the "Scenarios" grid.
+    <select name="sample_id" id="sample-select"
+            style="width:100%; padding:8px; font:inherit; border:1px solid var(--line); border-radius:4px; margin-bottom:10px;">
+      {% for s in curated %}
+      <option value="{{ s.sample_id }}">{{ s.label }}</option>
+      {% endfor %}
+    </select>
+    <p id="sample-desc" style="font-size:12px; color:var(--muted); margin:0 0 14px; min-height:32px; line-height:1.5;">
+      {% if curated %}{{ curated[0].expected_signal }}{% endif %}
     </p>
-    <a href="#scenarios" style="display:inline-block; padding:8px 18px; background:#fff; color:var(--navy); border:1px solid var(--navy); border-radius:4px; font-weight:500; font-size:13.5px;">See scenarios ↓</a>
-  </div>
+    <div>
+      <button type="submit" id="sample-btn">▶ Run scenario</button>
+      <span id="spinner-sample" style="display:none; margin-left:14px; color:var(--muted)">Loading…</span>
+    </div>
+  </form>
 
-</div>
-
-{# ─── Scenarios grid (View 2 content) ─── #}
-<h3 id="scenarios" style="color:var(--navy); margin-top:32px; scroll-margin-top:80px;">Scenarios</h3>
-<p style="color:var(--muted); font-size:13px; margin:0 0 14px;">
-  Hand-picked one invoice per persona-error pattern. The "expected" line is what we think
-  the agent should do — actual behavior may vary; that's the point of the demo.
-</p>
-
-<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
-  {% for row in gallery %}
-  {% set s = row.sample %}
-  {% set m = row.meta %}
-  <div class="card" style="padding:14px; margin:0; display:flex; flex-direction:column;">
-    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:6px;">
-      {% if s.region %}<span class="chip">{{ s.region }}</span>{% endif %}
-      {% if s.expected_tier == "tier-1" %}<span class="chip t1">auto-pass</span>
-      {% elif s.expected_tier == "tier-2" %}<span class="chip t2">approver review</span>
-      {% elif s.expected_tier == "tier-3" %}<span class="chip t3">supervisor</span>{% endif %}
-    </div>
-    <div style="font-size:13.5px; font-weight:600; color:var(--navy); line-height:1.35; margin-bottom:4px;">
-      {{ s.label }}
-    </div>
-    {% if m.vendor_name %}
-    <div style="font-size:12px; color:var(--muted); margin-bottom:4px;">
-      {{ m.vendor_name }}{% if m.total %} · {{ m.currency or "" }} {{ "{:,.0f}".format(m.total) }}{% endif %}
-    </div>
-    {% endif %}
-    <div style="font-size:12px; color:var(--text); margin:6px 0 12px; line-height:1.45; flex:1;">
-      {{ s.expected_signal }}
-    </div>
-    <form method="post" action="/demo/run-sample-streaming" style="margin:0;">
-      <input type="hidden" name="sample_id" value="{{ s.sample_id }}">
-      <button type="submit" style="font-size:12.5px; padding:6px 12px;">▶ Run scenario</button>
-    </form>
-  </div>
-  {% endfor %}
 </div>
 
 <p style="font-size:12px; color:var(--muted); margin-top:14px;">
@@ -204,5 +167,31 @@
     .two-views { grid-template-columns: 1fr !important; }
   }
 </style>
+
+<script>
+  // Spinner + double-submit guard for the curated scenario form.
+  const form = document.getElementById('sample-form');
+  if (form) {
+    form.addEventListener('submit', function() {
+      const btn = document.getElementById('sample-btn');
+      btn.disabled = true;
+      btn.textContent = 'Running…';
+      document.getElementById('spinner-sample').style.display = 'inline';
+    });
+  }
+
+  // Update the expected-signal description when the dropdown changes.
+  const SAMPLE_DESCRIPTIONS = {
+    {% for s in curated %}{{ s.sample_id|tojson }}: {{ s.expected_signal|tojson }}{% if not loop.last %},{% endif %}
+    {% endfor %}
+  };
+  const select = document.getElementById('sample-select');
+  const desc = document.getElementById('sample-desc');
+  if (select && desc) {
+    select.addEventListener('change', function() {
+      desc.textContent = SAMPLE_DESCRIPTIONS[select.value] || '';
+    });
+  }
+</script>
 
 {% endblock %}

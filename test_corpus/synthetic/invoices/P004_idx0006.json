@@ -1,0 +1,53 @@
+{
+  "invoice_id": "P004_INV_20260128_001",
+  "persona_id": "P004",
+  "po_reference": "PO-2026-01-54321",
+  "invoice_date": "2026-01-28",
+  "currency": "INR",
+  "payment_terms": "NET-60",
+  "header_fields": {
+    "vendor_name": "Mumbai Materials Co.",
+    "vendor_address": "42 Industrial Estate\nAndheri East\nMumbai - 400093\nIndia",
+    "vendor_tax_id": "27AABCS1234B1Z2",
+    "buyer_name": "Acme Global Procurement Inc.",
+    "buyer_address": "1 World Trade Center\nNew York, NY 10007\nUSA",
+    "buyer_po_contact": "Jane Doe, jane.doe@acmeglobal.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "MC-101",
+      "description": "Computer parts (HSN 8471.30)",
+      "quantity": 100,
+      "unit_price": 150.0,
+      "line_total": 15000.0
+    },
+    {
+      "line_no": 2,
+      "sku": "MC-102",
+      "description": "Plastic components (HSN 847130)",
+      "quantity": 200,
+      "unit_price": 25.0,
+      "line_total": 5000.0
+    },
+    {
+      "line_no": 3,
+      "sku": "MC-103",
+      "description": "Rubber seals (HSN 3926.90)",
+      "quantity": 50,
+      "unit_price": 80.0,
+      "line_total": 4000.0
+    }
+  ],
+  "subtotal": 24000.0,
+  "tax": [
+    {
+      "jurisdiction": "IN-IGST",
+      "rate": 0.18,
+      "amount": 4320.0
+    }
+  ],
+  "total": 28320.0,
+  "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+  "ground_truth_note": "HSN codes per line: first with dash (8471.30), second without (847130), third with dash (3926.90). PAN: AABCS1234B. GSTIN: 27AABCS1234B1Z2. Cross-currency (USD) commonly used but invoice in INR."
+}

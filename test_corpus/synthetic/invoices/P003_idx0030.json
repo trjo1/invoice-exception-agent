@@ -1,0 +1,45 @@
+{
+  "invoice_id": "P003_INV_20260408_001",
+  "persona_id": "P003",
+  "po_reference": "PO-2026-04-12345",
+  "invoice_date": "2026-04-08",
+  "currency": "EUR",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "Frankfurt Industriebedarf GmbH",
+    "vendor_address": "Industriestra\u00dfe 25\n60327 Frankfurt am Main\nGermany",
+    "vendor_tax_id": "DE123456789",
+    "buyer_name": "AutoParts AG",
+    "buyer_address": "Hauptstra\u00dfe 100\n10115 Berlin\nGermany",
+    "buyer_po_contact": "Klaus M\u00fcller / klaus.mueller@autoparts.de"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "FIB-2026-001",
+      "description": "Hydraulikzylinder / Hydraulic Cylinder, Typ HZ-200",
+      "quantity": 5,
+      "unit_price": 340.0,
+      "line_total": 1700.0
+    },
+    {
+      "line_no": 2,
+      "sku": "FIB-2026-002",
+      "description": "Dichtungssatz / Seal Kit, f\u00fcr HZ-200",
+      "quantity": 10,
+      "unit_price": 85.0,
+      "line_total": 850.0
+    }
+  ],
+  "subtotal": 2550.0,
+  "tax": [
+    {
+      "jurisdiction": "EU-DE-VAT",
+      "rate": 0.19,
+      "amount": 484.5
+    }
+  ],
+  "total": 3034.5,
+  "error_injected": null,
+  "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. Extractor should capture bilingual descriptions, DE VAT at 19%, SEPA bank details (not shown in schema but typical), and reverse-charge note if applicable."
+}

@@ -1,0 +1,93 @@
+{
+  "invoice_id": "P004_INV_20260118_001",
+  "persona_id": "P004",
+  "po_reference": "PO-2026-01-98765",
+  "invoice_date": "2026-01-18",
+  "currency": "INR",
+  "payment_terms": "NET-60",
+  "header_fields": {
+    "vendor_name": "Mumbai Materials Co.",
+    "vendor_address": "123 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+    "vendor_tax_id": "GSTIN: 27AABCU9603R1ZX, PAN: AABCU9603R",
+    "buyer_name": "GlobalTech Solutions Inc.",
+    "buyer_address": "123 Innovation Drive, New York, NY 10001, USA",
+    "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "MMC-001",
+      "description": "Laptop Motherboard (HSN: 84713000)",
+      "quantity": 2,
+      "unit_price": 12500.0,
+      "line_total": 25000.0
+    },
+    {
+      "line_no": 2,
+      "sku": "MMC-002",
+      "description": "Power Supply Unit 500W (HSN: 85044030)",
+      "quantity": 5,
+      "unit_price": 3200.0,
+      "line_total": 16000.0
+    },
+    {
+      "line_no": 3,
+      "sku": "MMC-003",
+      "description": "RAM 16GB DDR4 (HSN: 84733030)",
+      "quantity": 10,
+      "unit_price": 4500.0,
+      "line_total": 45000.0
+    },
+    {
+      "line_no": 4,
+      "sku": "MMC-004",
+      "description": "Solid State Drive 512GB (HSN: 84717020)",
+      "quantity": 8,
+      "unit_price": 6200.0,
+      "line_total": 49600.0
+    },
+    {
+      "line_no": 5,
+      "sku": "MMC-005",
+      "description": "Graphics Card (HSN: 84733099)",
+      "quantity": 3,
+      "unit_price": 18500.0,
+      "line_total": 55500.0
+    },
+    {
+      "line_no": 6,
+      "sku": "MMC-006",
+      "description": "Cooling Fan (HSN: 84145990)",
+      "quantity": 15,
+      "unit_price": 850.0,
+      "line_total": 12750.0
+    },
+    {
+      "line_no": 7,
+      "sku": "MMC-007",
+      "description": "Cable Assembly SATA (HSN: 85444220)",
+      "quantity": 25,
+      "unit_price": 180.0,
+      "line_total": 4500.0
+    },
+    {
+      "line_no": 8,
+      "sku": "MMC-008",
+      "description": "Thermal Paste (HSN: 38249900)",
+      "quantity": 20,
+      "unit_price": 250.0,
+      "line_total": 5000.0
+    }
+  ],
+  "subtotal": 213350.0,
+  "tax": [
+    {
+      "jurisdiction": "IN-IGST",
+      "rate": 0.0,
+      "amount": 0.0
+    }
+  ],
+  "total": 213350.0,
+  "error_injected": null,
+  "ground_truth_note": "Clean invoice with all fields correct. GST is zero-rated for export. HSN codes are included per line (8-digit format). PAN and GSTIN are present in header. Cross-currency to USD is common but invoice is in INR."
+}

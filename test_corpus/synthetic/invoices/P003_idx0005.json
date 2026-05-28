@@ -1,0 +1,45 @@
+{
+  "invoice_id": "P003_INV_20260101_001",
+  "persona_id": "P003",
+  "po_reference": "PO-2025-12-12345",
+  "invoice_date": "2026-01-01",
+  "currency": "EUR",
+  "payment_terms": "NET-30",
+  "header_fields": {
+    "vendor_name": "Frankfurt Industriebedarf GmbH",
+    "vendor_address": "Industriestr. 12\n60327 Frankfurt\nGermany",
+    "vendor_tax_id": "DE123456789",
+    "buyer_name": "Acme Global Procurement Inc.",
+    "buyer_address": "1 World Trade Center\nNew York, NY 10007\nUSA",
+    "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+  },
+  "line_items": [
+    {
+      "line_no": 1,
+      "sku": "FB-1001",
+      "description": "Kugellager / Ball bearing",
+      "quantity": 10,
+      "unit_price": 45.0,
+      "line_total": 450.0
+    },
+    {
+      "line_no": 2,
+      "sku": "FB-1002",
+      "description": "Schmierfett / Grease",
+      "quantity": 5,
+      "unit_price": 12.5,
+      "line_total": 62.5
+    }
+  ],
+  "subtotal": 512.5,
+  "tax": [
+    {
+      "jurisdiction": "EU-DE-VAT",
+      "rate": 0.19,
+      "amount": 97.38
+    }
+  ],
+  "total": 609.88,
+  "error_injected": null,
+  "ground_truth_note": "Clean invoice with DE VAT at 19%, bilingual labels (German primary, English secondary), SEPA bank details (IBAN DE89 3704 0044 0532 0130 00) present on invoice."
+}
