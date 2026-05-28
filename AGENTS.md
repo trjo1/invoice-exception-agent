@@ -237,6 +237,40 @@ For a new AI session on this project, after this AGENTS.md, read in order:
 
 ---
 
+## Portfolio integration (live demo deployment)
+
+This agent ships to **Railway** as a public live demo. It integrates with the personal portfolio
+at `https://tj-joshi-portfolio.vercel.app` via path-based routing — visitors hit
+`tj-joshi-portfolio.vercel.app/demos/p2p` and land on this agent's `/demo` page.
+
+**Canonical integration plan:** `/Users/ankitadwivedi/Job Search/Prep and Search/portfolio/DEMO_ARCHITECTURE.html`. Read this first when working on deployment, public URL conventions, or demo-behavior contracts. Every cross-component decision is documented there.
+
+**What this agent must expose for the portfolio:**
+- A stable public Railway URL (set after first deploy)
+- `/healthz` endpoint returning 200 OK (already wired in `server.py`)
+- Cold-start under 30s on wake (depends on Railway sleep behavior + bge model load)
+- Demo-safe defaults (see contract below)
+
+**Demo behavior contracts (non-negotiable for the live demo):**
+
+- **No auto-submit.** The action executor must stay in `mode="mock"`. Real-mode raises on construction — don't change that.
+- **No real customer data.** Pre-seeded knowledge only — the 75 mock policies, the 24 golden cases, the curated sample picker. Visitors cannot inject identifying data.
+- **Read-only on real assets.** Nothing the demo does should modify production-shaped state outside the per-run SQLite + jsonl logs.
+- **Daily LLM budget cap.** Hard cap via `DAILY_BUDGET_CAP_USD` env var (recommended: $2/day). The `ModelClient` raises `CostCeilingExceeded` before each call when the cap is hit; the FastAPI handler surfaces a friendly "demo budget reached" message.
+- **Visitor isolation (known gap).** The HITL queue + run history are shared across visitors. For synthetic data this is acceptable; if it becomes a UX issue, add a banner or per-IP filtering.
+
+**Vercel rewrite vs redirect — open decision:**
+- Path-based rewrites (`/demos/p2p/*` → `railway/*`) require FastAPI to know its mount path. Either set `uvicorn --root-path /demos/p2p` OR every template's absolute link (`/queue`, `/stage9`, `/docs/...`) breaks. Multi-page FastAPI behind a rewrite is fiddly.
+- Redirects are simpler: visitor clicks "View demo" → browser navigates to the Railway URL directly. URL bar shows Railway. Every link works.
+- Default to redirects unless the rewrites approach gets explicitly proven out.
+
+**Workflow when the Railway URL lands:**
+1. Deploy to Railway, copy the assigned `*.up.railway.app` URL.
+2. Share the URL back to the portfolio session (paste at the file path above).
+3. Portfolio session updates its `vercel.json` rewrites + uncomments the "View live demo" button.
+
+---
+
 ## When you finish a session
 
 1. Run `make test-unit` and confirm pass rate didn't regress

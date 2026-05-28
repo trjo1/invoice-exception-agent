@@ -204,6 +204,27 @@ def create_app(
             raise HTTPException(status_code=404, detail=f"Doc not found: {doc_name}")
         return FileResponse(path, media_type="text/html")
 
+    # ------------------------------ Health check ------------------------
+    # Lightweight liveness probe for Railway + the portfolio's Vercel
+    # rewrite sanity check. Returns 200 once the app is up; reports
+    # retriever-warm status so monitoring can distinguish "app up but
+    # still loading the embedding model" from "fully ready."
+    @app.get("/healthz", include_in_schema=False)
+    def healthz() -> JSONResponse:
+        retriever_warm = "retriever" in _state
+        return JSONResponse(
+            {
+                "status": "ok",
+                "retriever_warm": retriever_warm,
+                "uploads_dir": str(DEFAULT_UPLOADS_DIR),
+                "db_url_kind": (
+                    "sqlite"
+                    if os.environ.get("HITL_DB_URL", "sqlite").startswith("sqlite")
+                    else "other"
+                ),
+            },
+        )
+
     # Lazy singletons for retriever + context builder — the retriever loads
     # the embedding model on first init, ~1.5s. Don't pay it per request.
     _state: dict[str, Any] = {}
