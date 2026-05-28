@@ -59,7 +59,7 @@ tasks:
     fallback: anthropic/claude-haiku-4
 
   embedding:
-    model: BAAI/bge-large-en-v1.5
+    model: sentence-transformers/all-MiniLM-L6-v2
     fallback: openai/text-embedding-3-small
     notes: Self-hosted via sentence-transformers; ~0 marginal cost.
 
