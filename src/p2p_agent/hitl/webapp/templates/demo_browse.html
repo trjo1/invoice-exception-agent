@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}Browse invoices{% endblock %}
+{% block content %}
+
+<div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+  <h2 style="margin:0;">Browse the invoice library</h2>
+  <a href="/demo" style="font-size:13px;">← Back to demo home</a>
+</div>
+<p style="color:var(--muted); margin-top:6px; font-size:13.5px; max-width:840px;">
+  Ten hand-picked synthetic invoices across US, EU, India, and Brazil — one per
+  persona-error pattern. <strong>Click an invoice on the left</strong> to preview the
+  PDF on the right. When you've found one you want to run, click
+  <strong>"Select this invoice →"</strong>; you'll return to the demo home with
+  the selection loaded.
+</p>
+
+<div class="browse-grid" style="display:grid; grid-template-columns: minmax(320px, 380px) 1fr; gap:18px; margin-top:16px; align-items:start;">
+
+  {# ─── Left: list of invoice cards ─── #}
+  <div style="display:flex; flex-direction:column; gap:10px; max-height: calc(100vh - 220px); overflow-y:auto; padding-right:4px;">
+    {% for row in gallery %}
+    {% set s = row.sample %}
+    {% set m = row.meta %}
+    <div class="invoice-card card" data-sample-id="{{ s.sample_id }}"
+         data-pdf-url="/demo/sample/{{ s.sample_id }}/pdf"
+         data-vendor="{{ m.vendor_name or s.label }}"
+         data-invoice-id="{{ m.invoice_id or '' }}"
+         data-currency="{{ m.currency or '' }}"
+         data-total="{{ m.total or '' }}"
+         data-region="{{ s.region or '' }}"
+         data-tier="{{ s.expected_tier or '' }}"
+         data-expected="{{ s.expected_signal }}"
+         style="cursor:pointer; padding:12px 14px; margin:0; transition:background 0.12s, border-color 0.12s;">
+      <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
+        {% if s.region %}<span class="chip">{{ s.region }}</span>{% endif %}
+        {% if s.expected_tier == "tier-1" %}<span class="chip t1">auto-pass</span>
+        {% elif s.expected_tier == "tier-2" %}<span class="chip t2">approver</span>
+        {% elif s.expected_tier == "tier-3" %}<span class="chip t3">supervisor</span>{% endif %}
+      </div>
+      <div style="font-size:13px; font-weight:600; color:var(--navy); line-height:1.35; margin-bottom:3px;">
+        {{ s.label }}
+      </div>
+      {% if m.vendor_name %}
+      <div style="font-size:12px; color:var(--muted);">
+        {{ m.vendor_name }}{% if m.total %} · {{ m.currency or "" }} {{ "{:,.0f}".format(m.total) }}{% endif %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  {# ─── Right: PDF preview + select action ─── #}
+  <div style="position:sticky; top:16px;">
+    <div id="preview-meta" class="card" style="background:var(--soft); border-color:#c4d3e6; padding:14px 18px; margin:0 0 12px; min-height:78px;">
+      <div id="preview-meta-empty" style="color:var(--muted); font-size:13.5px;">
+        ← Click an invoice on the left to preview the PDF here, then select it for the run.
+      </div>
+      <div id="preview-meta-loaded" style="display:none;">
+        <div style="display:flex; align-items:flex-start; gap:14px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:220px;">
+            <div id="preview-vendor" style="font-size:15px; font-weight:600; color:var(--navy);"></div>
+            <div id="preview-line" style="font-size:12px; color:var(--muted); margin-top:2px;"></div>
+            <div id="preview-expected" style="font-size:12px; color:var(--text); margin-top:6px; line-height:1.45;"></div>
+          </div>
+          <form id="select-form" method="get" action="/demo" style="margin:0;">
+            <input type="hidden" name="selected" id="selected-sample-id" value="">
+            <button type="submit" style="font-size:13.5px; padding:9px 18px;">Select this invoice →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:1px solid var(--line); border-radius:6px; overflow:hidden; background:#fafbfc;">
+      <iframe id="pdf-preview" src="about:blank"
+              style="width:100%; height:78vh; min-height:560px; border:0; display:block;"
+              title="Invoice PDF preview"></iframe>
+    </div>
+    <p style="font-size:11.5px; color:var(--muted); margin-top:6px;">
+      If the preview doesn't render in your browser,
+      <a id="pdf-open-link" href="#" target="_blank" rel="noopener">open the PDF in a new tab</a>.
+    </p>
+  </div>
+</div>
+
+<style>
+  .invoice-card:hover { background:#f5f8fc; border-color:#b3c4dd; }
+  .invoice-card.selected { background:#fff7e6; border-color:#f3e1a8; box-shadow: 0 0 0 1px #f3e1a8 inset; }
+  @media (max-width: 900px) {
+    .browse-grid { grid-template-columns: 1fr !important; }
+    .browse-grid > div:first-child { max-height: none !important; }
+  }
+</style>
+
+<script>
+(function() {
+  const cards = document.querySelectorAll('.invoice-card');
+  const iframe = document.getElementById('pdf-preview');
+  const openLink = document.getElementById('pdf-open-link');
+  const metaEmpty = document.getElementById('preview-meta-empty');
+  const metaLoaded = document.getElementById('preview-meta-loaded');
+  const vendorEl = document.getElementById('preview-vendor');
+  const lineEl = document.getElementById('preview-line');
+  const expectedEl = document.getElementById('preview-expected');
+  const sampleInput = document.getElementById('selected-sample-id');
+
+  cards.forEach(card => {
+    card.addEventListener('click', function() {
+      // Deselect any previously-selected card.
+      cards.forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+
+      const pdfUrl = card.dataset.pdfUrl;
+      const sampleId = card.dataset.sampleId;
+      const vendor = card.dataset.vendor;
+      const invId = card.dataset.invoiceId;
+      const currency = card.dataset.currency;
+      const total = card.dataset.total;
+      const region = card.dataset.region;
+      const expected = card.dataset.expected;
+
+      iframe.src = pdfUrl;
+      openLink.href = pdfUrl;
+
+      vendorEl.textContent = vendor;
+      const lineParts = [];
+      if (region) lineParts.push(region);
+      if (invId) lineParts.push(invId);
+      if (total) {
+        const fmt = parseFloat(total).toLocaleString(undefined, {
+          minimumFractionDigits: 2, maximumFractionDigits: 2,
+        });
+        lineParts.push(`${currency || ''} ${fmt}`.trim());
+      }
+      lineEl.textContent = lineParts.join(' · ');
+      expectedEl.textContent = expected ? `Expected: ${expected}` : '';
+      sampleInput.value = sampleId;
+
+      metaEmpty.style.display = 'none';
+      metaLoaded.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+{% endblock %}

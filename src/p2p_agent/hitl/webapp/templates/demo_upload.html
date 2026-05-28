@@ -2,11 +2,11 @@
 {% block title %}Run an invoice{% endblock %}
 {% block content %}
 
-<h2>Upload an invoice PDF</h2>
-<p style="color:var(--muted); margin-top:4px">
-  The agent will extract fields, classify any exception, retrieve relevant policies,
-  recommend an action with rationale and counterfactual, route to the right human tier,
-  and draft outbound communication if needed. You'll see each step land live on the next page.
+<h2>Run an invoice through the agent</h2>
+<p style="color:var(--muted); margin-top:4px; max-width:760px;">
+  The agent extracts fields, classifies any exception, retrieves relevant policies,
+  recommends an action with rationale and counterfactual, routes to the right human tier,
+  and drafts outbound communication if needed. You'll see each step land live on the next page.
 </p>
 
 {% if cost_estimate and cost_estimate.sample_size > 0 %}
@@ -23,7 +23,7 @@
   </div>
   <div style="color:var(--muted); font-size:11px; border-left:1px solid #c4e6cd; padding-left:14px;">
     Open-source models (DeepSeek V4-Flash + R1) via OpenRouter.
-    Local embeddings (bge-large-en) are free at runtime.
+    Local embeddings (MiniLM) are free at runtime.
   </div>
 </div>
 {% elif cost_estimate and cost_estimate.total_runs_seen == 0 %}
@@ -33,46 +33,117 @@
 </div>
 {% endif %}
 
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+{# ─── Banner shown only when an invoice has been selected via /demo/browse ─── #}
+{% if selected_row %}
+<div class="card" style="background:#fff7e6; border:2px solid #f3e1a8; padding:14px 18px; margin:16px 0;">
+  <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:240px;">
+      <div style="font-size:11px; color:#9a6c00; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">
+        Invoice selected — ready to run
+      </div>
+      <div style="font-size:15px; font-weight:600; color:var(--navy);">
+        {{ selected_row.meta.vendor_name or selected_row.sample.label }}
+      </div>
+      <div style="font-size:12px; color:var(--muted); margin-top:2px;">
+        {% if selected_row.sample.region %}<span class="chip">{{ selected_row.sample.region }}</span>{% endif %}
+        {% if selected_row.meta.invoice_id %}<span style="margin-right:10px;">{{ selected_row.meta.invoice_id }}</span>{% endif %}
+        {% if selected_row.meta.total %}
+          <strong>{{ selected_row.meta.currency or "" }} {{ "{:,.2f}".format(selected_row.meta.total) }}</strong>
+        {% endif %}
+      </div>
+    </div>
+    <form method="post" action="/demo/run-sample-streaming" style="margin:0;">
+      <input type="hidden" name="sample_id" value="{{ selected_row.sample.sample_id }}">
+      <button type="submit" style="font-size:14px; padding:10px 22px;">▶ Run pipeline</button>
+    </form>
+    <a href="/demo/browse" style="font-size:13px;">Change selection →</a>
+  </div>
+</div>
+{% endif %}
 
-  <form id="upload-form" method="post" action="/demo/run-streaming" enctype="multipart/form-data"
-        class="card" style="background:var(--soft); border-color:#c4d3e6;">
-    <p><strong>Upload your own PDF</strong> (max 10 MB)</p>
-    <p><input type="file" name="file" accept="application/pdf" required></p>
-    <p style="margin-top:14px">
-      <button type="submit" id="run-btn">Run pipeline</button>
-      <span id="spinner-upload" style="display:none; margin-left:14px; color:var(--muted)">Uploading…</span>
-    </p>
-  </form>
+{# ─── Two views: browse vs. curated scenarios ─── #}
+<h3 style="color:var(--navy); margin-top:24px;">{% if selected_row %}Or pick something else:{% else %}How do you want to start?{% endif %}</h3>
 
-  <form id="sample-form" method="post" action="/demo/run-sample-streaming"
-        class="card" style="border-color:#c4d3e6;">
-    <p><strong>Or run a curated sample</strong></p>
-    <p>
-      <select name="sample_id" id="sample-select" style="width:100%; padding:6px 8px; font:inherit; border:1px solid var(--line); border-radius:4px;">
-        {% for s in samples %}
-        <option value="{{ s.sample_id }}">{{ s.label }}</option>
-        {% endfor %}
-      </select>
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px;" class="two-views">
+
+  {# View 1: Browse the library #}
+  <div class="card" style="background:var(--soft); border-color:#c4d3e6; padding:20px;">
+    <div style="font-size:13px; color:var(--navy); font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">
+      Option 1 · Browse
+    </div>
+    <h3 style="margin:0 0 10px; font-size:17px; color:var(--navy);">Pick from the invoice library</h3>
+    <p style="font-size:13.5px; color:var(--text); margin:0 0 14px; line-height:1.55;">
+      Open the gallery, preview any of the 10 sample PDFs side-by-side, then
+      select one to run. Useful when you want to <em>see</em> the document
+      before the agent does.
     </p>
-    <p id="sample-desc" style="font-size:12px; color:var(--muted); margin-top:6px; min-height:32px;">
-      {% if samples %}{{ samples[0].expected_signal }}{% endif %}
+    <p style="font-size:12px; color:var(--muted); margin:0 0 14px;">
+      Covers US, EU, India, and Brazil — single invoice per persona-error pattern.
     </p>
-    <p style="margin-top:14px">
-      <button type="submit" id="sample-btn" class="secondary">Run sample</button>
-      <span id="spinner-sample" style="display:none; margin-left:14px; color:var(--muted)">Loading…</span>
+    <a href="/demo/browse" style="display:inline-block; padding:8px 18px; background:var(--navy); color:#fff; border-radius:4px; font-weight:500; font-size:13.5px;">Browse invoices →</a>
+  </div>
+
+  {# View 2: Run a curated scenario directly #}
+  <div class="card" style="border-color:#c4d3e6; padding:20px;">
+    <div style="font-size:13px; color:var(--navy); font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px;">
+      Option 2 · Quick-run
+    </div>
+    <h3 style="margin:0 0 10px; font-size:17px; color:var(--navy);">Run a pre-configured scenario</h3>
+    <p style="font-size:13.5px; color:var(--text); margin:0 0 14px; line-height:1.55;">
+      Each card below corresponds to a real exception pattern with a known
+      expected outcome — auto-pass, tax mismatch, missing PO, FX escalation,
+      and more. One click runs the pipeline.
     </p>
-  </form>
+    <p style="font-size:12px; color:var(--muted); margin:0 0 14px;">
+      Scroll down ↓ to the "Scenarios" grid.
+    </p>
+    <a href="#scenarios" style="display:inline-block; padding:8px 18px; background:#fff; color:var(--navy); border:1px solid var(--navy); border-radius:4px; font-weight:500; font-size:13.5px;">See scenarios ↓</a>
+  </div>
 
 </div>
 
-<p style="font-size:12px; color:var(--muted); margin-top:8px;">
-  Pipeline runs extract → classify → retrieve → decide → route → draft. Typically 30s–2 min end-to-end —
-  the next page streams each node as it lands, so you'll see progress immediately.
-  Curated samples cover the most common error patterns plus a clean baseline.
+{# ─── Scenarios grid (View 2 content) ─── #}
+<h3 id="scenarios" style="color:var(--navy); margin-top:32px; scroll-margin-top:80px;">Scenarios</h3>
+<p style="color:var(--muted); font-size:13px; margin:0 0 14px;">
+  Hand-picked one invoice per persona-error pattern. The "expected" line is what we think
+  the agent should do — actual behavior may vary; that's the point of the demo.
 </p>
 
-<div class="summary-row">
+<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px;">
+  {% for row in gallery %}
+  {% set s = row.sample %}
+  {% set m = row.meta %}
+  <div class="card" style="padding:14px; margin:0; display:flex; flex-direction:column;">
+    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:6px;">
+      {% if s.region %}<span class="chip">{{ s.region }}</span>{% endif %}
+      {% if s.expected_tier == "tier-1" %}<span class="chip t1">auto-pass</span>
+      {% elif s.expected_tier == "tier-2" %}<span class="chip t2">approver review</span>
+      {% elif s.expected_tier == "tier-3" %}<span class="chip t3">supervisor</span>{% endif %}
+    </div>
+    <div style="font-size:13.5px; font-weight:600; color:var(--navy); line-height:1.35; margin-bottom:4px;">
+      {{ s.label }}
+    </div>
+    {% if m.vendor_name %}
+    <div style="font-size:12px; color:var(--muted); margin-bottom:4px;">
+      {{ m.vendor_name }}{% if m.total %} · {{ m.currency or "" }} {{ "{:,.0f}".format(m.total) }}{% endif %}
+    </div>
+    {% endif %}
+    <div style="font-size:12px; color:var(--text); margin:6px 0 12px; line-height:1.45; flex:1;">
+      {{ s.expected_signal }}
+    </div>
+    <form method="post" action="/demo/run-sample-streaming" style="margin:0;">
+      <input type="hidden" name="sample_id" value="{{ s.sample_id }}">
+      <button type="submit" style="font-size:12.5px; padding:6px 12px;">▶ Run scenario</button>
+    </form>
+  </div>
+  {% endfor %}
+</div>
+
+<p style="font-size:12px; color:var(--muted); margin-top:14px;">
+  Pipeline typically takes 30s–2 min end-to-end. The next page streams each node as it lands.
+</p>
+
+<div class="summary-row" style="margin-top:24px;">
   <div class="summary-tile">
     <div class="label">Past runs</div>
     <div class="value">{{ recent_runs|length }}{% if recent_runs|length >= 10 %}+{% endif %}</div>
@@ -125,34 +196,13 @@
 </table>
 <p style="margin-top:8px"><a href="/demo/runs">See all runs →</a></p>
 {% else %}
-<p style="color:var(--muted)">No runs yet. Upload your first invoice above.</p>
+<p style="color:var(--muted)">No runs yet. Pick an invoice or a scenario above.</p>
 {% endif %}
 
-<script>
-  // Shared spinner-on-submit + double-submit guard.
-  function arm(formId, btnId, spinnerId, runningLabel) {
-    document.getElementById(formId).addEventListener('submit', function() {
-      const btn = document.getElementById(btnId);
-      btn.disabled = true;
-      btn.textContent = runningLabel;
-      document.getElementById(spinnerId).style.display = 'inline';
-    });
+<style>
+  @media (max-width: 800px) {
+    .two-views { grid-template-columns: 1fr !important; }
   }
-  arm('upload-form', 'run-btn', 'spinner-upload', 'Running…');
-  arm('sample-form', 'sample-btn', 'spinner-sample', 'Running…');
-
-  // Update the sample description when the dropdown changes.
-  const SAMPLE_DESCRIPTIONS = {
-    {% for s in samples %}{{ s.sample_id|tojson }}: {{ s.expected_signal|tojson }}{% if not loop.last %},{% endif %}
-    {% endfor %}
-  };
-  const select = document.getElementById('sample-select');
-  const desc = document.getElementById('sample-desc');
-  if (select && desc) {
-    select.addEventListener('change', function() {
-      desc.textContent = SAMPLE_DESCRIPTIONS[select.value] || '';
-    });
-  }
-</script>
+</style>
 
 {% endblock %}

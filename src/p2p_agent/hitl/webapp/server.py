@@ -52,7 +52,12 @@ from p2p_agent.context import CaseContextBuilder
 from p2p_agent.executor import ActionExecutor
 from p2p_agent.hitl import HITLQueue, HITLQueueError, PipelineRunStore
 from p2p_agent.hitl.models import HITLItem, PipelineRun
-from p2p_agent.hitl.webapp.samples import SAMPLES, find_sample, resolve_pdf
+from p2p_agent.hitl.webapp.samples import (
+    SAMPLES,
+    find_sample,
+    load_sample_metadata,
+    resolve_pdf,
+)
 from p2p_agent.llm.client import CostCeilingExceeded, ModelClient
 from p2p_agent.orchestrator import run_invoice_pipeline
 from p2p_agent.retrieval import PolicyRetriever, get_default_retriever
@@ -255,8 +260,22 @@ def create_app(
     # ---- /demo upload + run flow ----
 
     @app.get("/demo", response_class=HTMLResponse)
-    def demo_home(request: Request) -> HTMLResponse:
+    def demo_home(
+        request: Request,
+        selected: str | None = Query(default=None),
+    ) -> HTMLResponse:
         recent = runs.list(limit=10)
+        # Build gallery rows: each row = static SamplePdf + per-invoice metadata
+        # (vendor, total, currency, line count) lifted from the JSON sidecar.
+        gallery = [
+            {"sample": s, "meta": load_sample_metadata(s)} for s in SAMPLES
+        ]
+        selected_row = None
+        if selected:
+            for row in gallery:
+                if row["sample"].sample_id == selected:
+                    selected_row = row
+                    break
         return templates.TemplateResponse(
             request,
             "demo_upload.html",
@@ -264,9 +283,39 @@ def create_app(
                 "recent_runs": recent,
                 "queue_stats": queue.stats(),
                 "samples": SAMPLES,
+                "gallery": gallery,
+                "selected_row": selected_row,
                 "cost_estimate": stage9_reader.per_run_cost(last_n_runs=20),
             },
         )
+
+    @app.get("/demo/browse", response_class=HTMLResponse)
+    def demo_browse(request: Request) -> HTMLResponse:
+        """Browse the curated invoice library. Click to preview, click again
+        to select — selection redirects back to /demo?selected=<sample_id>
+        where the user can launch the pipeline."""
+        gallery = [
+            {"sample": s, "meta": load_sample_metadata(s)} for s in SAMPLES
+        ]
+        return templates.TemplateResponse(
+            request,
+            "demo_browse.html",
+            {"gallery": gallery},
+        )
+
+    @app.get("/demo/sample/{sample_id}/pdf", include_in_schema=False)
+    def demo_sample_pdf(sample_id: str) -> FileResponse:
+        """Serve a curated sample PDF inline for iframe preview on /demo/browse."""
+        sample = find_sample(sample_id)
+        if sample is None:
+            raise HTTPException(
+                status_code=404, detail=f"Unknown sample_id: {sample_id!r}",
+            )
+        try:
+            path = resolve_pdf(sample)
+        except FileNotFoundError as e:
+            raise HTTPException(status_code=404, detail=str(e)) from e
+        return FileResponse(path, media_type="application/pdf")
 
     # Per-run asyncio.Lock so concurrent SSE openers don't double-run the same
     # pipeline. Keyed by run_id. Pruned only on process restart — fine for the

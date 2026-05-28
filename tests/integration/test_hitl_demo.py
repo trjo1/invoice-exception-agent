@@ -127,8 +127,13 @@ def test_demo_landing_renders(client_factory) -> None:
     client, _, _ = client_factory()
     r = client.get("/demo")
     assert r.status_code == 200
-    assert "Upload an invoice PDF" in r.text
-    assert "Run pipeline" in r.text
+    # New "two views" gallery layout (rebuild 2026-05-28).
+    assert "Run an invoice through the agent" in r.text
+    assert "Browse invoices" in r.text          # Option 1 button
+    assert "Run a pre-configured scenario" in r.text  # Option 2 header
+    assert "Scenarios" in r.text                # scrolled-to grid header
+    # First curated scenario card renders.
+    assert "Clean US invoice" in r.text
 
 
 def test_upload_rejects_non_pdf(client_factory) -> None:
@@ -259,3 +264,62 @@ def test_run_detail_404(client_factory) -> None:
     client, _, _ = client_factory()
     r = client.get("/demo/run/missing-id")
     assert r.status_code == 404
+
+
+def test_browse_page_renders(client_factory) -> None:
+    """The new /demo/browse page lists every curated sample as a clickable card."""
+    client, _, _ = client_factory()
+    r = client.get("/demo/browse")
+    assert r.status_code == 200
+    body = r.text
+    assert "Browse the invoice library" in body
+    assert "Select this invoice" in body
+    # The first curated sample's label must appear.
+    assert "Clean US invoice" in body
+    # The iframe + the PDF-preview endpoint URLs are wired into each card.
+    assert 'id="pdf-preview"' in body
+    assert "/demo/sample/clean_us/pdf" in body
+
+
+def test_sample_pdf_inline_serves_bytes(client_factory) -> None:
+    """The /demo/sample/{id}/pdf endpoint returns the curated PDF inline.
+
+    The route resolves into the real test_corpus directory, so we just check
+    status and that the response *looks* like a PDF (the corpus PDFs always do).
+    """
+    client, _, _ = client_factory()
+    r = client.get("/demo/sample/clean_us/pdf")
+    # If the corpus PDF is missing in this checkout, skip — the route is
+    # still valid; smoke-tested via the integration env at deploy time.
+    if r.status_code == 404:
+        pytest.skip("corpus PDF not present in this checkout")
+    assert r.status_code == 200
+    assert r.headers["content-type"].startswith("application/pdf")
+    assert r.content.startswith(b"%PDF")
+
+
+def test_sample_pdf_unknown_id_404(client_factory) -> None:
+    client, _, _ = client_factory()
+    r = client.get("/demo/sample/does-not-exist/pdf")
+    assert r.status_code == 404
+
+
+def test_demo_home_with_selected_shows_run_banner(client_factory) -> None:
+    """?selected=<sample_id> on /demo surfaces a 'ready to run' banner."""
+    client, _, _ = client_factory()
+    r = client.get("/demo?selected=clean_us")
+    assert r.status_code == 200
+    body = r.text
+    assert "Invoice selected" in body
+    # The pre-filled form posts to the same run-sample-streaming route.
+    assert 'name="sample_id" value="clean_us"' in body
+    assert "Change selection" in body
+
+
+def test_demo_home_with_unknown_selected_renders_without_banner(client_factory) -> None:
+    """An unknown ?selected value is ignored — page still renders fine."""
+    client, _, _ = client_factory()
+    r = client.get("/demo?selected=nonexistent")
+    assert r.status_code == 200
+    # No "selected" banner when the id doesn't match anything.
+    assert "Invoice selected" not in r.text
