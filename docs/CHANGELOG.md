@@ -4,6 +4,44 @@ Append-only. Most recent at top. One entry per session that ships code or docs.
 
 ---
 
+## 2026-05-28 — Framing reset, /demo UX rebuild, persistent storage
+
+**Framing reset.** Locked in that this project is no longer a TruVs
+deliverable. It's a personal portfolio + learning artifact for landing
+roles in the agents space. Added `CLAUDE.md` (framing rules) and
+`ROADMAP.md` (current state + open questions for the next phase) at the
+repo root. Added a pointer at the top of `AGENTS.md` so anyone reading
+the engineering context goes through the framing first. Future Claude
+sessions should NOT drift back to TruVs go-to-market framing (Stage 9 as
+"recurring revenue moat," P2A Method, $200K floor, etc.) — those belong
+to a different project entirely and aren't relevant here.
+
+**Next phase declared but not scoped:** learning + evals layer (close
+the HITL feedback loop, aggregate eval metrics on top of golden cases,
+A/B prompt evaluation, drift monitoring on Stage 9, self-consistency for
+high-stakes routes). Specifics intentionally open — `ROADMAP.md` lists
+the questions TJ needs to answer before any of this gets scoped.
+
+**/demo UX rebuild.** Replaced the single upload form with two views:
+(1) `/demo/browse` — a hint-free invoice picker (20 invoices, no expected-
+outcome leakage, click to preview PDF, click to select, return to home
+with the run queued up); (2) curated-scenario dropdown on the home page
+with labeled patterns for one-click runs (10 scenarios with expected
+behavior shown). Expanded the bundled sample library from 10 → 20
+invoices (4 per persona) and added JSON sidecars to the gitignore
+allowlist so vendor/total metadata is available on Railway.
+
+**Persistent storage on Railway.** Past runs were getting wiped on every
+redeploy because the SQLite DB, uploaded PDFs, and `llm_calls.jsonl`
+cost ledger all lived in the ephemeral container filesystem. Unified all
+three paths under a single `DATA_DIR` env var; on Railway, mount a volume
+at `/data` and set `DATA_DIR=/data`. `ModelClient` also now honors
+`DATA_DIR` for its log path. README documents the steps.
+
+85/85 tests pass.
+
+---
+
 ## 2026-05-14 (Phase 10) — Latency cuts + SSE streaming UI
 
 A live demo run was clocking **196 seconds** on a single invoice (extract 73s + classify 46s + retrieve 19s + decide 34s + draft 24s + glue). With the CEO + practice-leads meeting coming up, three minutes of blank screen would sink the demo regardless of how good the agent's decisions are. This session diagnosed the root causes and shipped both real-latency cuts and a streaming UI so the demo never goes silent.

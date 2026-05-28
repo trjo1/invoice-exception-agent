@@ -1,8 +1,14 @@
 # P2P Exception Orchestrator — Engineering Context
 
-A reference implementation of a Coordination + Routing + Decision-Support agent that handles procure-to-pay exceptions end-to-end across SAP / Ariba / ServiceNow.
+> **Before reading this file:** read `CLAUDE.md` for project framing rules
+> and `ROADMAP.md` for current phase + what's open. This file is the
+> engineering context (architecture, locked decisions, model strategy) —
+> useful when you'll touch code. It is NOT the framing context, and on
+> its own it can mislead you about the project's current purpose.
 
-Originally built at TruVs in 2026 while the author was AI Practice Lead. Now maintained as a personal learning artifact. This file is the always-on engineering context for AI coding sessions on the repo — read it first.
+A Coordination + Routing + Decision-Support agent that handles procure-to-pay exceptions end-to-end across SAP / Ariba / ServiceNow.
+
+The codebase originated as a reference implementation built while the author was AI Practice Lead at TruVs in 2026. **It is no longer a TruVs project** — it is now a personal portfolio + learning artifact (see `CLAUDE.md` for the framing). The technical architecture below continues; the framing of the work does not.
 
 ---
 
