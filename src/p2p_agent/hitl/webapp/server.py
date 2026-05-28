@@ -52,12 +52,7 @@ from p2p_agent.context import CaseContextBuilder
 from p2p_agent.executor import ActionExecutor
 from p2p_agent.hitl import HITLQueue, HITLQueueError, PipelineRunStore
 from p2p_agent.hitl.models import HITLItem, PipelineRun
-from p2p_agent.hitl.webapp.samples import (
-    SAMPLES,
-    find_sample,
-    load_sample_metadata,
-    resolve_pdf,
-)
+from p2p_agent.hitl.webapp.samples import SAMPLES, find_sample, resolve_pdf
 from p2p_agent.llm.client import CostCeilingExceeded, ModelClient
 from p2p_agent.orchestrator import run_invoice_pipeline
 from p2p_agent.retrieval import PolicyRetriever, get_default_retriever
@@ -262,41 +257,16 @@ def create_app(
     @app.get("/demo", response_class=HTMLResponse)
     def demo_home(request: Request) -> HTMLResponse:
         recent = runs.list(limit=10)
-        # Enrich each sample with sidecar metadata (vendor, total, currency).
-        # Cheap — 10 small JSON files; ~5ms total. Falls back to empty dict on
-        # any read error so the template stays robust if a sidecar is missing.
-        gallery = [
-            {"sample": s, "meta": load_sample_metadata(s)}
-            for s in SAMPLES
-        ]
         return templates.TemplateResponse(
             request,
             "demo_upload.html",
             {
                 "recent_runs": recent,
                 "queue_stats": queue.stats(),
-                "samples": SAMPLES,            # kept for backward compat
-                "gallery": gallery,            # new: samples + sidecar metadata
+                "samples": SAMPLES,
                 "cost_estimate": stage9_reader.per_run_cost(last_n_runs=20),
             },
         )
-
-    @app.get("/demo/sample/{sample_id}/pdf", include_in_schema=False)
-    def demo_sample_pdf(sample_id: str) -> FileResponse:
-        """Serve a curated sample PDF inline for browser preview.
-
-        Mirrors `/demo/run/{run_id}/pdf` but for the bundled samples instead
-        of past uploads. No `filename` parameter → browser renders inline
-        (in an iframe on the gallery page) instead of triggering a download.
-        """
-        sample = find_sample(sample_id)
-        if sample is None:
-            raise HTTPException(status_code=404, detail=f"Unknown sample_id: {sample_id!r}")
-        try:
-            path = resolve_pdf(sample)
-        except FileNotFoundError as e:
-            raise HTTPException(status_code=404, detail=str(e)) from e
-        return FileResponse(path, media_type="application/pdf")
 
     # Per-run asyncio.Lock so concurrent SSE openers don't double-run the same
     # pipeline. Keyed by run_id. Pruned only on process restart — fine for the
