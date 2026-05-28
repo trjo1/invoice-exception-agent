@@ -1,0 +1,229 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260201_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-01",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive, Suite 200, San Jose, CA 95110, United States",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "5678 Industrial Parkway, Detroit, MI 48201, United States",
+      "buyer_po_contact": "John Smith, john.smith@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-001",
+        "description": "Microcontroller Board, ARM Cortex-M4, 100 units",
+        "quantity": 100,
+        "unit_price": 12.50,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SN-002",
+        "description": "Temperature Sensor, digital output, 500 units",
+        "quantity": 500,
+        "unit_price": 1.85,
+        "line_total": 925.00
+      }
+    ],
+    "subtotal": 2175.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 190.31
+      }
+    ],
+    "total": 2365.31,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. with two line items, subtotal $2175.00, CA sales tax 8.75%, total $2365.31. All fields valid."
+  },
+  {
+    "invoice_id": "P001_INV_20260131_002",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-31",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive, Suite 200, San Jose, CA 95110, United States",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "5678 Industrial Parkway, Detroit, MI 48201, United States",
+      "buyer_po_contact": "Jane Doe, jane.doe@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-CAP-003",
+        "description": "Ceramic Capacitor, 100nF, 1000 units",
+        "quantity": 1000,
+        "unit_price": 0.12,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-RES-004",
+        "description": "Resistor, 10kOhm, 2000 units",
+        "quantity": 2000,
+        "unit_price": 0.05,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 220.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 19.25
+      }
+    ],
+    "total": 239.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. with two line items, subtotal $220.00, CA sales tax 8.75%, total $239.25. All fields valid."
+  },
+  {
+    "invoice_id": "P004_INV_20260314_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-14",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "45 Trade Centre, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234A1Z5",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "5678 Industrial Parkway, Detroit, MI 48201, United States",
+      "buyer_po_contact": "Ravi Kumar, ravi.kumar@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-STL-001",
+        "description": "Stainless Steel Sheet, 2mm thick, 50 sheets (HSN 7219)",
+        "quantity": 50,
+        "unit_price": 1500.00,
+        "line_total": 75000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-BOL-002",
+        "description": "Hex Bolt M12, 500 pcs (HSN 7318)",
+        "quantity": 500,
+        "unit_price": 25.00,
+        "line_total": 12500.00
+      }
+    ],
+    "subtotal": 87500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 15750.00
+      }
+    ],
+    "total": 103250.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. with two line items, subtotal INR 87,500.00, IGST 18%, total INR 103,250.00. Includes GSTIN and HSN codes. All fields valid."
+  },
+  {
+    "invoice_id": "P004_INV_20260409_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-45678",
+    "invoice_date": "2026-04-09",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "45 Trade Centre, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234A1Z5",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "5678 Industrial Parkway, Detroit, MI 48201, United States",
+      "buyer_po_contact": "Priya Sharma, priya.sharma@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-PIP-003",
+        "description": "PVC Pipe, 4 inch diameter, 20 meters (HSN 3917)",
+        "quantity": 20,
+        "unit_price": 800.00,
+        "line_total": 16000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-VAL-004",
+        "description": "Brass Valve, 2 inch, 10 pcs (HSN 8481)",
+        "quantity": 10,
+        "unit_price": 2500.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-GAS-005",
+        "description": "Gasket Set, rubber, 100 pcs (HSN 4016)",
+        "quantity": 100,
+        "unit_price": 150.00,
+        "line_total": 15000.00
+      }
+    ],
+    "subtotal": 56000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 10080.00
+      }
+    ],
+    "total": 66080.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. with three line items, subtotal INR 56,000.00, IGST 18%, total INR 66,080.00. Includes GSTIN and HSN codes. All fields valid."
+  },
+  {
+    "invoice_id": "P002_INV_20260406_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-11223",
+    "invoice_date": "2026-04-06",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "78 Freight Lane, Unit 3, Buffalo, NY 14201, United States",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "5678 Industrial Parkway, Detroit, MI 48201, United States",
+      "buyer_po_contact": "Tom Wilson, tom.wilson@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRT-001",
+        "description": "Freight service, Detroit to Buffalo, palletized goods, 1 shipment",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 450.00,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08,
+        "amount": 36.00
+      }
+    ],
+    "total": 486.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB with one line item, subtotal $450.00, NY sales tax 8%, total $486.00. All fields valid."
+  }
+]
+```

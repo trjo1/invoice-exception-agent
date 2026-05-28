@@ -1,0 +1,114 @@
+# Golden test case GTC-006
+# Scenario: Invoice quantity > goods received (supplier over-delivered).
+# Expected: HITL Tier 2; draft credit-memo request for the overage.
+
+id: GTC-006
+title: Quantity invoiced exceeds quantity received (over-delivery)
+exception_category: three_way_match_quantity_variance
+difficulty: medium
+created: 2026-05-10
+notes: |
+  Quantity-variance anchor (over-delivery direction). Vendor delivered
+  AND invoiced for more than the PO authorized. Goods receipt confirms
+  the actual delivery quantity. Agent must reconcile and request credit.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-02T10:00:00Z
+      payload:
+        po_id: PO-2026-04-00342
+        vendor_id: P003
+        line_items:
+          - sku: SKU-D778
+            description: Hydraulic cylinder assembly
+            quantity: 25
+            unit_price_eur: 412.00
+            line_total_eur: 10300.00
+        currency: EUR
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-04-19T14:00:00Z
+      payload:
+        po_id: PO-2026-04-00342
+        gr_id: GR-2026-04-00922
+        line_items:
+          - sku: SKU-D778
+            quantity_received: 28   # vendor shipped 3 extra units
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-04-22T09:00:00Z
+      payload:
+        from: ap@frankfurt-industriebedarf.example.de
+        invoice_attachment: P003_INV_2026-04-22_001.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P003_INV_2026-04-22_001.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-04-22-FFM-001
+        po_reference: PO-2026-04-00342
+        vendor_id: P003
+        line_items:
+          - sku: SKU-D778
+            quantity: 28           # billed for 28 (matches what was shipped)
+            unit_price_eur: 412.00
+            line_total_eur: 11536.00
+        total_eur: 11536.00
+        currency: EUR
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: three_way_match_quantity_variance
+    min_confidence: 0.85
+    must_contain_evidence:
+      - po_quantity_25
+      - invoice_quantity_28
+      - gr_quantity_28
+      - over_delivery_of_3_units
+
+  recommendation:
+    action: request_supplier_credit_memo
+    rationale_must_mention:
+      - 3 units over PO
+      - PO authorized 25
+      - shipped/billed 28
+      - credit memo for 3 × €412
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - the_recommendation
+      - the_draft_supplier_comm
+      - the_counterfactual
+
+  drafting:
+    must_produce_draft: true
+    draft_type: supplier_credit_memo_request
+    draft_recipient: ap@frankfurt-industriebedarf.example.de
+    draft_content_must_mention:
+      - PO-2026-04-00342
+      - 25 units authorized
+      - 28 units shipped/billed
+      - credit for 3 units (€1,236.00)
+
+  execution:
+    must_not_post_invoice_before_approval: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.50
+
+pass_criteria:
+  - classification.class_label == three_way_match_quantity_variance
+  - recommendation.action == request_supplier_credit_memo
+  - hitl.tier == 2
+  - drafting.draft_produced == true
+  - execution.invoice_posted == false

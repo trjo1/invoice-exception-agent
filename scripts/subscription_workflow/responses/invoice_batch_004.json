@@ -1,0 +1,375 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260122_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-00123",
+    "invoice_date": "2026-01-22",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Innovation Drive, Suite 400, San Jose, CA 95110, USA",
+      "vendor_tax_id": "EIN 95-1234567",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1000 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Jane Smith, jane.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Resistor 10kΩ ±1% 0805 SMD",
+        "quantity": 5000,
+        "unit_price": 0.02,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "description": "Capacitor 100nF 50V X7R 0603",
+        "quantity": 3000,
+        "unit_price": 0.05,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1003",
+        "description": "Connector USB-C Receptacle",
+        "quantity": 200,
+        "unit_price": 0.85,
+        "line_total": 170.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-1004",
+        "description": "Microcontroller ATmega328P",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-1005",
+        "description": "LED 5mm Red (100 pack)",
+        "quantity": 10,
+        "unit_price": 3.00,
+        "line_total": 30.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-1006",
+        "description": "PCB Prototyping Board 10x10cm",
+        "quantity": 50,
+        "unit_price": 4.50,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-1007",
+        "description": "Voltage Regulator LM7805",
+        "quantity": 200,
+        "unit_price": 0.60,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-1008",
+        "description": "Heat Sink TO-220 (10 pack)",
+        "quantity": 15,
+        "unit_price": 1.20,
+        "line_total": 18.00
+      }
+    ],
+    "subtotal": 1063.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 93.01
+      }
+    ],
+    "total": 1156.01,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components. Tax is itemized for California jurisdiction. Totals rounded to two decimals. No errors."
+  },
+  {
+    "invoice_id": "P002_INV_20260204_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-00456",
+    "invoice_date": "2026-02-04",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Freight Lane, Suite 200, Portland, OR 97201, USA",
+      "vendor_tax_id": "EIN 94-9876543",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1000 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Bob Johnson, bob.johnson@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FLAT-001",
+        "description": "Flatbed Trucking - Portland to Chicago",
+        "quantity": 1,
+        "unit_price": 3500.00,
+        "line_total": 3500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WH-002",
+        "description": "Warehousing - 100 pallets (30 days)",
+        "quantity": 30,
+        "unit_price": 25.00,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-LTL-003",
+        "description": "LTL Freight - Small Package",
+        "quantity": 5,
+        "unit_price": 45.00,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-INS-004",
+        "description": "Cargo Insurance - Value up to $50k",
+        "quantity": 1,
+        "unit_price": 200.00,
+        "line_total": 200.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-DOC-005",
+        "description": "Documentation Fee",
+        "quantity": 1,
+        "unit_price": 50.00,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-FUEL-006",
+        "description": "Fuel Surcharge (12%)",
+        "quantity": 1,
+        "unit_price": 420.00,
+        "line_total": 420.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-LAB-007",
+        "description": "Loading/Unloading Labor (4 hours)",
+        "quantity": 4,
+        "unit_price": 75.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-EX-008",
+        "description": "Expedited Handling",
+        "quantity": 1,
+        "unit_price": 150.00,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 5595.00,
+    "tax": [],
+    "total": 5595.00,
+    "error_injected": "MISSING_TAX_LINE",
+    "ground_truth_note": "Invoice from Maple Logistics SMB. Tax line is absent because this is an in-state shipment (Oregon to Oregon? Actually buyer in IL, but error mode says in-state shipments may lack tax. The extractor should note missing tax. Totals are rounded up to nearest dollar (subtotal already integer). A hand-written note 'Please process urgently' appears in the scanned image."
+  },
+  {
+    "invoice_id": "P002_INV_20260418_002",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-00789",
+    "invoice_date": "2026-04-18",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Freight Lane, Suite 200, Portland, OR 97201, USA",
+      "vendor_tax_id": "EIN 94-9876543",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1000 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Bob Johnson, bob.johnson@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FLAT-001",
+        "description": "Flatbed Trucking - Portland to Chicago",
+        "quantity": 1,
+        "unit_price": 3500.00,
+        "line_total": 3500.00
+      }
+    ],
+    "subtotal": 3500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.00,
+        "amount": 0.00
+      }
+    ],
+    "total": 3500.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB with a single line item. Tax is 0% for Oregon. Totals rounded up to nearest dollar (already integer). No errors."
+  },
+  {
+    "invoice_id": "P002_INV_20260414_003",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-00345",
+    "invoice_date": "2026-04-14",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Freight Lane, Suite 200, Portland, OR 97201, USA",
+      "vendor_tax_id": "EIN 94-9876543",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1000 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Bob Johnson, bob.johnson@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-WH-002",
+        "description": "Warehousing - 50 pallets (15 days)",
+        "quantity": 15,
+        "unit_price": 25.00,
+        "line_total": 375.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-LTL-003",
+        "description": "LTL Freight - 2 shipments",
+        "quantity": 2,
+        "unit_price": 45.00,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-INS-004",
+        "description": "Cargo Insurance",
+        "quantity": 1,
+        "unit_price": 100.00,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 565.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 35.31
+      }
+    ],
+    "total": 601.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB with 3 line items. Tax applied for Illinois. Totals rounded up to nearest dollar (600.31 rounds to 601). No errors."
+  },
+  {
+    "invoice_id": "P004_INV_20260427_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-00987",
+    "invoice_date": "2026-04-27",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 42, MIDC Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN 27AABCM1234C1Z1",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1000 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Raj Patel, raj.patel@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Steel Rods 12mm dia (per kg)",
+        "quantity": 500,
+        "unit_price": 85.00,
+        "line_total": 42500.00,
+        "hsn_code": "7214.20.10"
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Aluminium Sheets 2mm (per sq. ft)",
+        "quantity": 200,
+        "unit_price": 120.00,
+        "line_total": 24000.00,
+        "hsn_code": "76061200"
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "Copper Wire 1.5mm (per coil)",
+        "quantity": 100,
+        "unit_price": 450.00,
+        "line_total": 45000.00,
+        "hsn_code": "7408.11.00"
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "Brass Fittings Set (10 pcs)",
+        "quantity": 50,
+        "unit_price": 320.00,
+        "line_total": 16000.00,
+        "hsn_code": "74122019"
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "PVC Pipes 4 inch (per meter)",
+        "quantity": 300,
+        "unit_price": 55.00,
+        "line_total": 16500.00,
+        "hsn_code": "3917.23.10"
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-006",
+        "description": "Fasteners Kit (1000 pcs)",
+        "quantity": 20,
+        "unit_price": 200.00,
+        "line_total": 4000.00,
+        "hsn_code": "73181500"
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-007",
+        "description": "Rubber Gaskets (per box)",
+        "quantity": 40,
+        "unit_price": 150.00,
+        "line_total": 6000.00,
+        "hsn_code": "4016.93.00"
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-008",
+        "description": "Industrial Lubricant (5L can)",
+        "quantity": 25,
+        "unit_price": 780.00,
+        "line_total": 19500.00,
+        "hsn_code": "27101980"
+      }
+    ],
+    "subtotal": 173500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 31230.00
+      }
+    ],
+    "total": 204730.00,
+    "error_injected": "HSN_CODE_FORMAT_INCONSISTENT",
+    "ground_truth_note": "Invoice from Mumbai Materials Co. HSN codes are inconsistently formatted: some include dashes (e.g., 7214.20.10) and some do not (e.g., 76061200). The extractor should detect this inconsistency. GST is itemized as IGST. PAN and GSTIN are provided in header. Cross-currency to USD is common; the equivalent in USD would be approximately $2,450 at 83.5 INR/USD."
+  }
+]
+```

@@ -1,0 +1,274 @@
+{% extends "base.html" %}
+{% block title %}Running pipeline · {{ run.uploaded_filename }}{% endblock %}
+{% block content %}
+
+<h2 style="margin-bottom:6px">Running pipeline</h2>
+<p style="color:var(--muted); margin:0 0 14px">
+  {{ run.uploaded_filename }} · case <code>{{ run.id[:8] }}</code>
+</p>
+
+<div class="card" style="background:var(--soft); border-color:#c4d3e6; padding:12px 16px; margin-bottom:18px;">
+  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+    <div>
+      <strong id="stream-status">Connecting…</strong>
+      <span id="stream-substatus" style="color:var(--muted); margin-left:8px;"></span>
+    </div>
+    <div style="font-variant-numeric:tabular-nums;">
+      Elapsed <strong id="elapsed">00:00</strong>
+      <span style="color:var(--muted); margin-left:14px;">est. 30s–2 min</span>
+    </div>
+  </div>
+</div>
+
+<table class="timeline">
+  <thead>
+    <tr>
+      <th style="width:32px"></th>
+      <th style="width:24px">#</th>
+      <th>Step</th>
+      <th style="width:90px; text-align:right;">Time</th>
+      <th>What happened</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set step_names = [
+      ('extract',  '1', 'Extract',  'PDF → structured fields'),
+      ('context',  '2', 'Context',  'vendor master · PO · GR · history'),
+      ('classify', '3', 'Classify', '13 exception categories'),
+      ('retrieve', '4', 'Retrieve', 'RAG over policy library'),
+      ('decide',   '5', 'Decide',   'action + rationale + counterfactual'),
+      ('route',    '6', 'Route',    'Tier 1 / 2 / 3 assignment'),
+      ('draft',    '7', 'Draft',    'supplier email or internal note'),
+      ('enqueue',  '8', 'Enqueue',  'HITL queue (Tier ≥ 2)'),
+    ] %}
+    {% for name, num, label, hint in step_names %}
+    <tr id="row-{{ name }}" class="step-row" data-step="{{ name }}">
+      <td><span class="state-icon">○</span></td>
+      <td style="color:var(--muted);">{{ num }}</td>
+      <td><strong>{{ label }}</strong></td>
+      <td class="duration" style="text-align:right; color:var(--muted); font-variant-numeric:tabular-nums;">—</td>
+      <td class="detail" style="color:var(--muted);">{{ hint }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p style="margin-top:18px; font-size:12px; color:var(--muted)">
+  When the run finishes you'll be redirected to the full trace — including the policy snippets,
+  the model's rationale, and the routing decision.
+  <a href="{{ detail_url }}" id="manual-link" style="display:none; margin-left:8px;">Open full trace →</a>
+</p>
+
+<style>
+  table.timeline tr.step-row td { vertical-align: middle; }
+  table.timeline .state-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  tr.step-running .state-icon {
+    color: var(--navy);
+    animation: spin 1.2s linear infinite;
+  }
+  tr.step-running td.detail { color: var(--navy); }
+  tr.step-running td.duration { color: var(--navy); font-weight: 600; }
+  tr.step-done .state-icon { color: var(--green); }
+  tr.step-done td.detail { color: var(--text); }
+  tr.step-done td.duration { color: var(--text); }
+  tr.step-skipped .state-icon { color: var(--muted); }
+  tr.step-skipped td.detail { color: var(--muted); font-style: italic; }
+  tr.step-error .state-icon { color: var(--red); }
+  tr.step-error td.detail { color: var(--red); }
+  @keyframes spin {
+    0%   { transform: rotate(0deg);   }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+<script>
+(function() {
+  const STREAM_URL = {{ stream_url|tojson }};
+  const DETAIL_URL = {{ detail_url|tojson }};
+  const T_START = Date.now();
+  const RUNNING_TIMERS = {};  // step_name → setInterval id
+
+  function fmtElapsed(ms) {
+    const s = Math.floor(ms / 1000);
+    const mm = String(Math.floor(s / 60)).padStart(2, '0');
+    const ss = String(s % 60).padStart(2, '0');
+    return mm + ':' + ss;
+  }
+
+  // Top-of-page elapsed timer.
+  setInterval(() => {
+    document.getElementById('elapsed').textContent = fmtElapsed(Date.now() - T_START);
+  }, 250);
+
+  function setRowState(stepName, state) {
+    const row = document.getElementById('row-' + stepName);
+    if (!row) return;
+    row.classList.remove('step-running', 'step-done', 'step-skipped', 'step-error');
+    row.classList.add('step-' + state);
+    const icon = row.querySelector('.state-icon');
+    if (icon) {
+      icon.textContent = ({running: '⟳', done: '✓', skipped: '−', error: '✗'})[state] || '○';
+    }
+  }
+
+  function setDuration(stepName, ms) {
+    const row = document.getElementById('row-' + stepName);
+    if (!row) return;
+    const cell = row.querySelector('.duration');
+    if (cell) cell.textContent = (ms / 1000).toFixed(1) + 's';
+  }
+
+  function setDetail(stepName, html) {
+    const row = document.getElementById('row-' + stepName);
+    if (!row) return;
+    const cell = row.querySelector('.detail');
+    if (cell) cell.innerHTML = html;
+  }
+
+  function startStepTimer(stepName, startedAt) {
+    if (RUNNING_TIMERS[stepName]) clearInterval(RUNNING_TIMERS[stepName]);
+    RUNNING_TIMERS[stepName] = setInterval(() => {
+      setDuration(stepName, Date.now() - startedAt);
+    }, 250);
+  }
+
+  function stopStepTimer(stepName) {
+    if (RUNNING_TIMERS[stepName]) {
+      clearInterval(RUNNING_TIMERS[stepName]);
+      delete RUNNING_TIMERS[stepName];
+    }
+  }
+
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function renderSummary(stepName, summary) {
+    if (!summary) return '';
+    switch (stepName) {
+      case 'extract':
+        return [
+          summary.vendor_name ? escapeHtml(summary.vendor_name) : null,
+          summary.total ? escapeHtml(summary.currency || '') + ' ' + escapeHtml(summary.total) : null,
+          summary.line_items != null ? escapeHtml(summary.line_items) + ' line items' : null,
+        ].filter(x => x).join(' · ');
+      case 'context': {
+        const chips = [];
+        if (summary.vendor_found) chips.push('vendor ✓');
+        if (summary.po_found) chips.push('PO ✓');
+        if (summary.gr_found) chips.push('GR ✓');
+        if (summary.signals && summary.signals.length) {
+          chips.push('<em>' + summary.signals.map(escapeHtml).join(', ') + '</em>');
+        }
+        return chips.join(' · ');
+      }
+      case 'classify':
+        return '<strong>' + escapeHtml(summary.category) + '</strong> · conf ' + escapeHtml(summary.confidence);
+      case 'retrieve':
+        if (!summary.top_policies || !summary.top_policies.length) return 'no matches';
+        return summary.top_policies.map(p =>
+          escapeHtml(p.title) + ' <span style="color:var(--muted)">(' + escapeHtml(p.score) + ')</span>'
+        ).join(' · ');
+      case 'decide':
+        return '<strong>' + escapeHtml(summary.action) + '</strong>' +
+          (summary.rationale_snippet ? ' · ' + escapeHtml(summary.rationale_snippet) + '…' : '');
+      case 'route':
+        return 'Tier ' + escapeHtml(summary.tier) + ' → ' + escapeHtml(summary.routed_to);
+      case 'draft':
+        return escapeHtml(summary.draft_type || '') +
+          (summary.subject ? ' · "' + escapeHtml(summary.subject) + '"' : '');
+      case 'enqueue':
+        return summary.hitl_item_id
+          ? 'queued as <code>' + escapeHtml(summary.hitl_item_id.slice(0, 8)) + '…</code>'
+          : 'queued';
+      default:
+        return '';
+    }
+  }
+
+  function setTopStatus(text, sub) {
+    document.getElementById('stream-status').textContent = text;
+    document.getElementById('stream-substatus').textContent = sub || '';
+  }
+
+  function redirectTo(url) {
+    document.getElementById('manual-link').style.display = '';
+    setTimeout(() => { window.location = url; }, 600);
+  }
+
+  const evt = new EventSource(STREAM_URL);
+
+  evt.onopen = () => setTopStatus('Streaming live · waiting for first node', '');
+
+  evt.onmessage = (e) => {
+    let data;
+    try { data = JSON.parse(e.data); }
+    catch (err) { return; }
+
+    switch (data.type) {
+      case 'run.start':
+        setTopStatus('Pipeline started', 'extract → context → classify → retrieve → decide → route → draft → enqueue');
+        break;
+      case 'step.start':
+        setRowState(data.name, 'running');
+        startStepTimer(data.name, Date.now());
+        setTopStatus('Running ' + data.name + '…', '');
+        break;
+      case 'step.end':
+        stopStepTimer(data.name);
+        setRowState(data.name, 'done');
+        setDuration(data.name, data.latency_ms);
+        setDetail(data.name, renderSummary(data.name, data.summary));
+        break;
+      case 'step.skipped':
+        stopStepTimer(data.name);
+        setRowState(data.name, 'skipped');
+        setDuration(data.name, 0);
+        setDetail(data.name, 'skipped — ' + escapeHtml(data.reason || ''));
+        break;
+      case 'run.done':
+        setTopStatus('Done', data.already_done ? 'reusing previous run' : 'redirecting to full trace…');
+        evt.close();
+        redirectTo(data.redirect_url || DETAIL_URL);
+        break;
+      case 'run.finalized':
+        setTopStatus('Done', 'redirecting to full trace…');
+        evt.close();
+        redirectTo(data.redirect_url || DETAIL_URL);
+        break;
+      case 'run.error':
+        setTopStatus('Pipeline failed', data.error || '');
+        evt.close();
+        // Mark any running rows as errored
+        document.querySelectorAll('tr.step-running').forEach(r => {
+          const name = r.getAttribute('data-step');
+          stopStepTimer(name);
+          setRowState(name, 'error');
+        });
+        document.getElementById('manual-link').textContent = 'View run details →';
+        document.getElementById('manual-link').style.display = '';
+        break;
+    }
+  };
+
+  evt.onerror = () => {
+    // EventSource auto-retries, but if the server already sent a terminal
+    // event we don't want to spin. Show a soft warning.
+    setTopStatus('Stream interrupted', 'retrying…');
+  };
+})();
+</script>
+
+{% endblock %}

@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Agent 1 — P2P Exception Orchestrator — Build Status</title>
+<style>
+  :root {
+    --navy: #1F3A68;
+    --red: #C0392B;
+    --green: #1A6D3F;
+    --soft: #E8EEF5;
+    --gray: #555;
+    --light-gray: #999;
+    --white: #fff;
+    --amber: #B8860B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #FAFBFD;
+    color: #222;
+    line-height: 1.5;
+  }
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 28px 40px 22px;
+    border-bottom: 4px solid var(--red);
+  }
+  header .kicker {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 12px;
+    color: var(--soft);
+    margin-bottom: 6px;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  header .subtitle {
+    margin-top: 8px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+  }
+  header .meta {
+    margin-top: 16px;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+  }
+  header .meta span strong { color: var(--white); font-weight: 600; }
+
+  main { max-width: 1280px; margin: 0 auto; padding: 32px 40px 80px; }
+
+  section { margin-top: 40px; }
+  section h2 {
+    color: var(--navy);
+    font-size: 20px;
+    border-bottom: 2px solid var(--soft);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  section h3 {
+    color: var(--navy);
+    font-size: 15px;
+    margin: 24px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  p { margin: 8px 0 14px; }
+
+  /* Metric cards */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .metric {
+    background: var(--white);
+    border-left: 4px solid var(--navy);
+    padding: 14px 16px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .metric .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+  }
+  .metric .value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .metric.green { border-left-color: var(--green); }
+  .metric.green .value { color: var(--green); }
+  .metric.red { border-left-color: var(--red); }
+  .metric.red .value { color: var(--red); }
+
+  /* ====================================================================
+     Workflow diagram — presentation-quality
+     ==================================================================== */
+  .workflow {
+    background: linear-gradient(180deg, #ffffff 0%, #F7F9FD 100%);
+    border: 1px solid #d8e0ec;
+    border-radius: 8px;
+    padding: 32px 28px;
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(31, 58, 104, 0.06);
+    overflow-x: auto;
+  }
+  .workflow-phases {
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 2fr;
+    gap: 0;
+    margin-bottom: 8px;
+    min-width: 1100px;
+  }
+  .phase-label {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    color: var(--light-gray);
+    font-weight: 700;
+    padding: 0 4px 8px;
+    border-bottom: 2px solid #e7ebf2;
+    text-align: center;
+  }
+  .phase-label.ingest    { color: #6B7E9C; border-bottom-color: #6B7E9C; }
+  .phase-label.analyze   { color: var(--navy); border-bottom-color: var(--navy); }
+  .phase-label.decide    { color: var(--green); border-bottom-color: var(--green); }
+  .phase-label.execute   { color: var(--red); border-bottom-color: var(--red); }
+
+  .workflow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    flex-wrap: nowrap;
+    min-width: 1100px;
+    padding-top: 18px;
+  }
+  .node {
+    flex: 1;
+    min-width: 110px;
+    background: var(--white);
+    border: 1px solid #d8e0ec;
+    border-radius: 8px;
+    padding: 14px 12px 12px;
+    text-align: center;
+    position: relative;
+    border-top: 4px solid var(--navy);
+    box-shadow: 0 1px 2px rgba(31, 58, 104, 0.06);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .node:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(31, 58, 104, 0.12);
+  }
+  .node.llm   { border-top-color: var(--navy); }
+  .node.tool  { border-top-color: var(--green); }
+  .node.rules { border-top-color: var(--light-gray); }
+  .node.hitl  { border-top-color: var(--red); }
+  .node.exec  { border-top-color: var(--red); background: #FFFBFB; }
+
+  .node .num {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--white);
+    border: 2px solid var(--navy);
+    color: var(--navy);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+  }
+  .node.tool .num  { border-color: var(--green); color: var(--green); }
+  .node.rules .num { border-color: var(--light-gray); color: var(--gray); }
+  .node.hitl .num,
+  .node.exec .num  { border-color: var(--red); color: var(--red); }
+
+  .node .tag {
+    font-size: 9.5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .node .name {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 8px 0 6px;
+    line-height: 1.25;
+  }
+  .node .desc {
+    font-size: 11px;
+    color: var(--gray);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .node .latency {
+    display: inline-block;
+    font-size: 10px;
+    background: #F2F4F8;
+    border-radius: 10px;
+    padding: 2px 8px;
+    color: var(--gray);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+  .node.llm .latency { background: #ECF1F8; color: var(--navy); }
+  .node.tool .latency { background: #ECF6EF; color: var(--green); }
+
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    color: #b6c0d4;
+    font-weight: 700;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  /* Tier-1 short-circuit branch — drawn below the row */
+  .workflow-branch {
+    margin-top: 14px;
+    padding: 10px 16px;
+    background: #ECF6EF;
+    border: 1px dashed var(--green);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 900px;
+  }
+  .workflow-branch strong { font-weight: 700; }
+
+  .workflow-legend {
+    margin-top: 18px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--gray);
+    padding-top: 14px;
+    border-top: 1px solid #e7ebf2;
+  }
+  .legend-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* ====================================================================
+     13 exception scenarios — card grid
+     ==================================================================== */
+  .scenarios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .scenario {
+    background: var(--white);
+    border: 1px solid #d8e0ec;
+    border-radius: 8px;
+    padding: 14px 16px 12px;
+    box-shadow: 0 1px 2px rgba(31, 58, 104, 0.05);
+    position: relative;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .scenario:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(31, 58, 104, 0.10);
+  }
+  .scenario .stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    border-radius: 8px 8px 0 0;
+  }
+  .scenario.t1 .stripe { background: var(--green); }
+  .scenario.t2 .stripe { background: #B8860B; }
+  .scenario.t3 .stripe { background: var(--red); }
+
+  .scenario .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .scenario .title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+  }
+  .scenario .enum-tag {
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 10px;
+    color: var(--gray);
+    background: #F2F4F8;
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .scenario .what {
+    font-size: 12.5px;
+    color: #3a3a3a;
+    margin: 8px 0;
+    line-height: 1.45;
+  }
+  .scenario .meta-row {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #eef1f6;
+    flex-wrap: wrap;
+  }
+  .scenario .meta-chip {
+    background: #F2F4F8;
+    color: var(--gray);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .scenario .meta-chip.tier-1 { background:#eef9f0; color: var(--green); }
+  .scenario .meta-chip.tier-2 { background:#fff7e6; color: #9a6c00; }
+  .scenario .meta-chip.tier-3 { background:#fde8e6; color: var(--red); }
+  .scenario .meta-chip.action { background:#ECF1F8; color: var(--navy); }
+  .scenarios-summary {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--gray);
+    flex-wrap: wrap;
+  }
+  .scenarios-summary .pill {
+    background: var(--soft);
+    color: var(--navy);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .scenarios-summary .pill.t1 { background: #eef9f0; color: var(--green); }
+  .scenarios-summary .pill.t2 { background: #fff7e6; color: #9a6c00; }
+  .scenarios-summary .pill.t3 { background: #fde8e6; color: var(--red); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 8px;
+    background: var(--white);
+    font-size: 13px;
+  }
+  th {
+    background: var(--soft);
+    color: var(--navy);
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border: 1px solid #d8e0ec;
+  }
+  td {
+    padding: 10px 12px;
+    border: 1px solid #e7ebf2;
+    vertical-align: top;
+    color: #2a2a2a;
+  }
+  tr:nth-child(even) td { background: #FBFBFD; }
+  td code, td .mono {
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    background: #F2F4F8;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  td.center { text-align: center; }
+
+  /* Status badges */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge.done { background: var(--green); color: var(--white); }
+  .badge.partial { background: var(--amber); color: var(--white); }
+  .badge.todo { background: #C9CFD8; color: #444; }
+  .badge.blocked { background: var(--red); color: var(--white); }
+  .badge.skeleton { background: #6B7E9C; color: var(--white); }
+
+  /* Build progress */
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 6px 0;
+  }
+  .progress-bar {
+    height: 16px;
+    background: var(--soft);
+    border-radius: 8px;
+    overflow: hidden;
+    flex: 1;
+    min-width: 200px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green) 0%, #2A8F55 100%);
+  }
+  .progress-fill.amber { background: linear-gradient(90deg, var(--amber) 0%, #C9991A 100%); }
+  .progress-fill.red { background: linear-gradient(90deg, var(--red) 0%, #D44A3B 100%); }
+  .progress-label {
+    font-size: 12px;
+    color: var(--gray);
+    width: 60px;
+  }
+  .progress-text {
+    font-size: 13px;
+    color: var(--navy);
+    font-weight: 600;
+    flex-basis: 220px;
+    min-width: 180px;
+  }
+
+  /* HITL block */
+  .hitl-tier {
+    background: var(--white);
+    border: 1px solid var(--soft);
+    border-left: 5px solid var(--red);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 10px 0;
+  }
+  .hitl-tier .tier-name {
+    color: var(--red);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .hitl-tier h4 { margin: 4px 0 8px; color: var(--navy); font-size: 15px; }
+  .hitl-tier .who { font-size: 12px; color: var(--gray); }
+  .hitl-tier ul { margin: 8px 0 0; padding-left: 20px; font-size: 13px; }
+
+  /* Callout */
+  .callout {
+    background: var(--soft);
+    border-left: 4px solid var(--navy);
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  .callout .label {
+    color: var(--navy);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+  }
+  .callout.green { border-left-color: var(--green); }
+  .callout.green .label { color: var(--green); }
+  .callout.red { border-left-color: var(--red); }
+  .callout.red .label { color: var(--red); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--soft);
+    font-size: 12px;
+    color: var(--light-gray);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Personal Learning Project · Engineering Status</div>
+  <h1>Agent 1 — P2P Exception Orchestrator</h1>
+  <div class="subtitle">Multi-System Process Agent (Pattern 2) — Coordination + Routing + Decision-Support, with Drafting sub-component</div>
+  <div class="meta">
+    <span><strong>Status:</strong> Phase 10 shipped — latency cuts + SSE streaming UI + PDF extraction cache + per-run cost display</span>
+    <span><strong>Last updated:</strong> 2026-05-14 (Phase 10 — perf + UX polish; 80/80 tests passing)</span>
+    <span><strong>Owner:</strong> Tribhuvan Joshi</span>
+    <span><strong>Build mode:</strong> Solo (lead + AI pair programmer)</span>
+    <span><strong>Folder:</strong> ipbuilds/agent1/</span>
+  </div>
+</header>
+
+<main>
+
+<!-- =================================================================== -->
+<section style="background:#E8EEF5; border-left:4px solid #1F3A68; padding:14px 18px; border-radius:4px; margin-bottom:24px;">
+  <strong style="color:#1F3A68">Try it yourself:</strong>
+  Run <code>make hitl-serve</code> and open
+  <a href="http://localhost:8080/demo" style="color:#1F3A68; font-weight:600;">http://localhost:8080/demo</a>.
+  Pick a curated sample (or upload your own PDF). In ~15 s you'll see every node's output side-by-side.
+  Tier ≥ 2 cases land in the approval queue at
+  <a href="http://localhost:8080/queue" style="color:#1F3A68; font-weight:600;">/queue</a> — click Approve and the
+  <strong>mock action executor</strong> simulates the downstream calls (SAP POST, email the supplier, halt the pay run, etc.) on the case detail page.
+  Cost / latency / auto-pass-rate metrics live at
+  <a href="http://localhost:8080/stage9" style="color:#1F3A68; font-weight:600;">/stage9</a>.
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>1. At a glance</h2>
+  <div class="metrics">
+    <div class="metric green"><div class="label">Build phase</div><div class="value">Engineering in progress</div></div>
+    <div class="metric"><div class="label">Pattern</div><div class="value">Multi-System Process Agent</div></div>
+    <div class="metric"><div class="label">Archetypes</div><div class="value">3 + 1 sub</div></div>
+    <div class="metric"><div class="label">$$ band</div><div class="value">$600K – $2.5M+</div></div>
+    <div class="metric"><div class="label">Build effort</div><div class="value">~12–16 weeks</div></div>
+    <div class="metric"><div class="label">Golden cases</div><div class="value">24 of 40</div></div>
+    <div class="metric"><div class="label">Cost mode (corpus)</div><div class="value">API · DeepSeek V4-Flash</div></div>
+    <div class="metric"><div class="label">Cost mode (runtime)</div><div class="value">Open-source models</div></div>
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>2. What this agent does — in one paragraph</h2>
+  <p>
+    The agent watches the buyer's procure-to-pay process across SAP, Ariba, and ServiceNow. When an
+    exception event arises — invoice doesn't match the PO, quantity variance, missing approval, duplicate
+    invoice, fraud signal, vendor master gap, cross-currency mismatch, tax field problem — the agent
+    classifies it into one of 12 named categories, retrieves the relevant policy + history + master
+    data, produces a recommended action with rationale and counterfactual, drafts the supplier or internal
+    communication needed to resolve it, routes to the right human at the right HITL tier, and executes
+    the cross-system write-back actions only after human approval. Every step is instrumented for Stage 9
+    measurement: auto-pass rate, HITL accuracy, cost per task, cross-system error rate, audit-finding count.
+  </p>
+  <div class="callout green">
+    <div class="label">Why build this rather than use an accelerator</div>
+    Cross-system orchestration with bespoke business rules defaults to BUILD per our framework. No single
+    accelerator (SynOps, Gemini Enterprise, Agentforce) covers SAP + Ariba + ServiceNow cleanly without
+    locking the buyer to MS or Google. The orchestration logic IS the moat.
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>3. The workflow — node by node</h2>
+  <p style="font-size:13px;color:var(--gray);margin-top:-4px;margin-bottom:8px;">
+    Ten steps, grouped in four phases. Steps 2–7 run automatically;
+    step 8 pauses for a human if the routing tier is ≥ 2; step 9 executes only after approval.
+    Typical end-to-end latency is shown per node (median across recent runs on DeepSeek V4-Flash + R1).
+  </p>
+
+  <div class="workflow">
+    <!-- Phase headers -->
+    <div class="workflow-phases">
+      <div class="phase-label ingest">Ingest</div>
+      <div class="phase-label analyze">Analyze</div>
+      <div class="phase-label decide">Decide &amp; Route</div>
+      <div class="phase-label execute">Execute</div>
+    </div>
+
+    <!-- 9 nodes -->
+    <div class="workflow-row">
+      <div class="node tool">
+        <span class="num">1</span>
+        <div class="tag">Tool · Pending creds</div>
+        <div class="name">Event<br>Ingestion</div>
+        <div class="desc">Normalize SAP / Ariba / ServiceNow / email events into a typed ExceptionEvent.</div>
+        <span class="latency">~50ms</span>
+      </div>
+      <div class="arrow">▶</div>
+
+      <div class="node llm">
+        <span class="num">2</span>
+        <div class="tag">LLM</div>
+        <div class="name">Extract</div>
+        <div class="desc">Invoice PDF → structured JSON. Vendor, PO ref, line items, totals, tax.</div>
+        <span class="latency">8–15s</span>
+      </div>
+      <div class="arrow">▶</div>
+
+      <div class="node tool">
+        <span class="num">3</span>
+        <div class="tag">Tool</div>
+        <div class="name">Cross-case<br>Context</div>
+        <div class="desc">Vendor master, PO master, GR, history, payment status. Smart signals fired.</div>
+        <span class="latency">&lt;100ms</span>
+      </div>
+      <div class="arrow">▶</div>
+
+      <div class="node llm">
+        <span class="num">4</span>
+        <div class="tag">LLM</div>
+        <div class="name">Classify</div>
+        <div class="desc">13 named exception categories. Returns class, confidence, evidence.</div>
+        <span class="latency">5–10s</span>
+      </div>
+      <div class="arrow">▶</div>
+
+      <div class="node tool">
+        <span class="num">5</span>
+        <div class="tag">Tool · Local</div>
+        <div class="name">Retrieve</div>
+        <div class="desc">RAG over 75 mock policies (bge-large-en + cosine). Singleton warm.</div>
+        <span class="latency">&lt;500ms</span>
+      </div>
+      <div class="arrow">▶</div>
+
+      <div class="node llm">
+        <span class="num">6</span>
+        <div class="tag">LLM · R1</div>
+        <div class="name">Decide</div>
+        <div class="desc">Action + rationale + counterfactual. Reasoning model with cited grounding.</div>
+        <span class="latency">5–30s</span>
+      </div>
+      <div class="arrow">▶</div>
+
+      <div class="node rules">
+        <span class="num">7</span>
+        <div class="tag">Rules</div>
+        <div class="name">Route</div>
+        <div class="desc">Map action → Tier 1 / 2 / 3 + named role. Deterministic, auditable.</div>
+        <span class="latency">&lt;1ms</span>
+      </div>
+      <div class="arrow">▶</div>
+
+      <div class="node llm">
+        <span class="num">8</span>
+        <div class="tag">LLM · Conditional</div>
+        <div class="name">Draft</div>
+        <div class="desc">Supplier email or internal note. Skipped on Tier 1 auto-pass.</div>
+        <span class="latency">5–15s</span>
+      </div>
+      <div class="arrow">▶</div>
+
+      <div class="node hitl">
+        <span class="num">9</span>
+        <div class="tag">HITL</div>
+        <div class="name">Approve<br>or Edit</div>
+        <div class="desc">Tier ≥ 2 cases wait. Reviewer can approve / edit-and-approve / reject.</div>
+        <span class="latency">Human-paced</span>
+      </div>
+      <div class="arrow">▶</div>
+
+      <div class="node exec">
+        <span class="num">10</span>
+        <div class="tag">Exec · Mock today</div>
+        <div class="name">Execute</div>
+        <div class="desc">Write-back to SAP / Ariba / ServiceNow + audit log. 16-action recipe map.</div>
+        <span class="latency">~100ms</span>
+      </div>
+    </div>
+
+    <!-- Tier-1 short-circuit branch -->
+    <div class="workflow-branch">
+      <strong>Tier 1 auto-pass shortcut:</strong>
+      Clean cases at confidence ≥ 0.85 skip nodes 8 (Draft) and 9 (Approve) and go straight from Route → Execute.
+      Saves ~10-25s per invoice on the most common path.
+    </div>
+
+    <!-- Legend -->
+    <div class="workflow-legend">
+      <div><span class="legend-swatch" style="background:#ECF1F8;border-top:3px solid var(--navy);"></span>LLM-driven step (DeepSeek V4-Flash / R1)</div>
+      <div><span class="legend-swatch" style="background:#ECF6EF;border-top:3px solid var(--green);"></span>Tool / system call (incl. local embeddings)</div>
+      <div><span class="legend-swatch" style="background:#F4F4F4;border-top:3px solid var(--light-gray);"></span>Rules-based step</div>
+      <div><span class="legend-swatch" style="background:#FBEDEC;border-top:3px solid var(--red);"></span>Human-in-the-loop / write-back</div>
+    </div>
+  </div>
+
+  <p style="font-size:12px;color:var(--gray);margin-top:10px;">
+    Stage 9 instrumentation runs in parallel under every node: per-step cost, latency, model used, outcome.
+    Pipeline state is persisted to SQLite after every run (Postgres swap is a connection-string change).
+  </p>
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>4. The 13 exception scenarios the classifier handles</h2>
+  <p style="font-size:13px;color:var(--gray);margin-top:-4px;margin-bottom:8px;">
+    Every invoice the agent sees gets one of these 13 labels. The classifier is anchored on the invoice itself,
+    with cross-case context (vendor master, PO, GR, history) as supplementary evidence — not the other way around.
+    Each label has a typical recommended action and routing tier; the per-case tier can still escalate based on
+    confidence and dollar exposure.
+  </p>
+
+  <div class="scenarios-summary">
+    <span class="pill t1">1 auto-pass class</span>
+    <span class="pill t2">10 buyer / team review</span>
+    <span class="pill t3">2 supervisor / fraud / treasury</span>
+    <span class="pill">All routing is rules-based, not LLM-decided</span>
+  </div>
+
+  <div class="scenarios-grid">
+
+    <!-- Tier 1 — auto-pass -->
+    <div class="scenario t1">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Clean — no exception</div>
+        <div class="enum-tag">none</div>
+      </div>
+      <div class="what">Invoice matches its PO + GR cleanly. No smart cross-case signal fired. Vendor in good standing, currency/payment-terms aligned, totals within tolerance.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-1">Tier 1 · auto-pass</span>
+        <span class="meta-chip action">auto_resolve</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — three-way match price -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Price variance vs. PO</div>
+        <div class="enum-tag">three_way_match_price_variance</div>
+      </div>
+      <div class="what">Invoiced unit price differs from the PO-authorized price beyond the tolerance band. Either a supplier overcharge or a missed PO amendment.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · buyer</span>
+        <span class="meta-chip action">request_supplier_credit_memo</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — quantity variance -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Quantity variance vs. GR</div>
+        <div class="enum-tag">three_way_match_quantity_variance</div>
+      </div>
+      <div class="what">Invoice claims a quantity that doesn't match the goods receipt (short or over-delivery). Distinct from price — same unit price, wrong count.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · buyer</span>
+        <span class="meta-chip action">escalate_for_short_delivery</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — missing PO -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">PO reference missing</div>
+        <div class="enum-tag">missing_po</div>
+      </div>
+      <div class="what">Invoice has no PO number, or references a PO that doesn't exist in the master. Common with emergency / retroactive PO scenarios.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · buyer</span>
+        <span class="meta-chip action">escalate_for_retroactive_po</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — missing GR -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Goods receipt not yet posted</div>
+        <div class="enum-tag">missing_goods_receipt</div>
+      </div>
+      <div class="what">Invoice arrived but the warehouse hasn't confirmed receipt. Hold and re-check on the next polling cycle — don't pay against an unreceived shipment.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · buyer</span>
+        <span class="meta-chip action">hold_for_goods_receipt</span>
+      </div>
+    </div>
+
+    <!-- Tier 3 — missing approval (capex) -->
+    <div class="scenario t3">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Authorization gap</div>
+        <div class="enum-tag">missing_approval</div>
+      </div>
+      <div class="what">Spend exceeds the PO's authorized total, or capex routed to an opex approver. Needs a higher signing tier before posting.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-3">Tier 3 · VP finance</span>
+        <span class="meta-chip action">route_to_vp_finance_approval</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — duplicate -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Duplicate invoice</div>
+        <div class="enum-tag">duplicate_invoice</div>
+      </div>
+      <div class="what">Same supplier invoice number already booked, or the PO is already paid in full. Smart signal looks for "DUPLICATE:" / "PO ALREADY FULLY PAID."</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · buyer</span>
+        <span class="meta-chip action">request_supplier_correction</span>
+      </div>
+    </div>
+
+    <!-- Tier 3 — fraud -->
+    <div class="scenario t3">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Fraud signal</div>
+        <div class="enum-tag">fraud_signal</div>
+      </div>
+      <div class="what">Vendor bank account just changed and invoice is high-value, split-invoicing pattern detected, or sanctions hit (OFAC SDN). Halts pay run, escalates to fraud team.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-3">Tier 3 · fraud team</span>
+        <span class="meta-chip action">escalate_to_fraud</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — vendor master gap -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Vendor not in master</div>
+        <div class="enum-tag">vendor_master_gap</div>
+      </div>
+      <div class="what">Supplier's tax ID / name not found in the vendor master file. Could be onboarding lag or a fictitious supplier — needs vendor master team review.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · vendor master team</span>
+        <span class="meta-chip action">route_to_vendor_master_onboarding</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — cross currency -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Currency mismatch</div>
+        <div class="enum-tag">cross_currency_mismatch</div>
+      </div>
+      <div class="what">PO authorized in one currency, invoice billed in another. Could be legitimate per FX clause, or an FX-rate dispute requiring treasury sign-off.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · buyer / treasury</span>
+        <span class="meta-chip action">escalate_for_fx_review</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — tax field -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Tax field anomaly</div>
+        <div class="enum-tag">tax_field_mismatch</div>
+      </div>
+      <div class="what">Tax rate, jurisdiction, or amount on the invoice doesn't match what the buyer's tax rules expect (e.g. EU VAT on a US-only supplier; missing IGST on Indian invoice).</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · buyer</span>
+        <span class="meta-chip action">request_supplier_correction</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — payment terms -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Payment terms mismatch</div>
+        <div class="enum-tag">payment_term_mismatch</div>
+      </div>
+      <div class="what">Invoice asserts NET-15 when the PO/MSA specifies NET-30 (or vice versa). Catches suppliers trying to accelerate payment terms without contract change.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · buyer</span>
+        <span class="meta-chip action">request_supplier_correction</span>
+      </div>
+    </div>
+
+    <!-- Tier 2 — other -->
+    <div class="scenario t2">
+      <div class="stripe"></div>
+      <div class="head">
+        <div class="title">Other / non-standard</div>
+        <div class="enum-tag">other</div>
+      </div>
+      <div class="what">Catch-all for exceptions that don't fit the 12 named categories. Defaults to buyer review with the agent's rationale + suggested next action.</div>
+      <div class="meta-row">
+        <span class="meta-chip tier-2">Tier 2 · buyer</span>
+        <span class="meta-chip action">other</span>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:12px;color:var(--gray);margin-top:14px;">
+    Each scenario maps to 1–2 of the 16 <code>RecommendedAction</code> values. The recommendation is the "what to do,"
+    the routing tier is the "who decides." Decoupling them is what lets the same exception escalate to fraud / treasury / VP
+    when the dollar exposure or confidence warrants it, without rewriting the classifier.
+  </p>
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>5. Per-node detail</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:11%;">Node</th>
+        <th style="width:15%;">What it does</th>
+        <th style="width:18%;">Input</th>
+        <th style="width:18%;">Output</th>
+        <th style="width:13%;">Tools / APIs</th>
+        <th style="width:11%;">Model</th>
+        <th style="width:7%;">HITL</th>
+        <th style="width:7%;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Event Ingestion</strong></td>
+        <td>Normalize incoming events from any source system into a common ExceptionEvent</td>
+        <td>Webhooks / polled events from SAP, Ariba, ServiceNow, Email</td>
+        <td>ExceptionEvent (pydantic) with stable case_id</td>
+        <td><code>connectors/*</code>, httpx, MS Graph, Gmail API</td>
+        <td>—</td>
+        <td>No</td>
+        <td><span class="badge todo">TODO</span></td>
+      </tr>
+      <tr>
+        <td><strong>2. Document Extraction</strong></td>
+        <td>Read PDFs and emails; pull typed fields with per-field confidence</td>
+        <td>PDF bytes, email body, persona master data</td>
+        <td>InvoiceExtraction or EmailParse pydantic object</td>
+        <td><code>pypdf</code>, OCR (when needed)</td>
+        <td>DeepSeek V4-Flash</td>
+        <td>No</td>
+        <td><span class="badge partial">IN PROGRESS</span></td>
+      </tr>
+      <tr>
+        <td><strong>3. Exception Classification</strong></td>
+        <td>Pick one of 13 exception categories with confidence + supporting evidence</td>
+        <td>ExceptionEvent + InvoiceExtraction</td>
+        <td>Classification pydantic — class_label, confidence, evidence list</td>
+        <td>—</td>
+        <td>DeepSeek V4-Flash</td>
+        <td>No</td>
+        <td><span class="badge partial">IN PROGRESS</span></td>
+      </tr>
+      <tr>
+        <td><strong>4. RAG Retrieval</strong></td>
+        <td>Fetch policy + similar past exceptions + master data + PO context for the case</td>
+        <td>Classification + ExceptionEvent</td>
+        <td>RetrievedContext (top-k chunks, re-ranked)</td>
+        <td>numpy cosine (in-memory) → pgvector later; sentence-transformers</td>
+        <td>bge-large-en (embed); bge-reranker-v2-m3</td>
+        <td>No</td>
+        <td><span class="badge partial">IN PROGRESS (mock content)</span></td>
+      </tr>
+      <tr>
+        <td><strong>5. Decision-Support</strong></td>
+        <td>Recommend an action with rationale and counterfactual</td>
+        <td>Classification + RetrievedContext</td>
+        <td>Recommendation — action + rationale + counterfactual + cited_policy_ids</td>
+        <td>—</td>
+        <td>DeepSeek R1 (via OpenRouter)</td>
+        <td>No</td>
+        <td><span class="badge partial">IN PROGRESS</span></td>
+      </tr>
+      <tr>
+        <td><strong>6. HITL Tier Router</strong></td>
+        <td>Decide which HITL tier (1 / 2 / 3) and which named role to route to</td>
+        <td>Recommendation</td>
+        <td>RoutingDecision — tier + reviewer pool</td>
+        <td>—</td>
+        <td>— (rules-based, class-aware thresholds)</td>
+        <td>No</td>
+        <td><span class="badge partial">IN PROGRESS</span></td>
+      </tr>
+      <tr>
+        <td><strong>7. Drafting (conditional)</strong></td>
+        <td>Generate supplier comm or internal note. Fires only when recommendation requires it.</td>
+        <td>Recommendation + RetrievedContext + persona tone-guide</td>
+        <td>Draft (subject, recipient, body)</td>
+        <td>—</td>
+        <td>DeepSeek V4-Flash (Claude Haiku 4 fallback)</td>
+        <td>No</td>
+        <td><span class="badge partial">IN PROGRESS</span></td>
+      </tr>
+      <tr>
+        <td><strong>8. HITL Approval Gate</strong></td>
+        <td>Tier 1 auto-passes. Tier 2 + 3 enqueue to <code>logs/hitl_queue.db</code>; reviewer acts via FastAPI UI at <code>:8080</code>.</td>
+        <td>Recommendation + Draft + audit context</td>
+        <td>ApprovalResult — approved / rejected / edited_approved</td>
+        <td><code>hitl/queue.py</code> + <code>hitl/webapp/server.py</code> — SQLAlchemy queue + FastAPI demo UI</td>
+        <td>—</td>
+        <td>Yes</td>
+        <td><span class="badge partial">IN PROGRESS</span></td>
+      </tr>
+      <tr>
+        <td><strong>9. Action Execution</strong></td>
+        <td>Mock today: every approved HITL item gets a simulated step list (SAP POST / email / ticket / halt-pay-run). Real backend swaps in once SAP credentials arrive.</td>
+        <td>Approved HITL item + edited draft (when present)</td>
+        <td>ExecutionResult with 1-3 simulated downstream steps + audit record</td>
+        <td><code>executor/action_executor.py</code> — mock recipe per <code>RecommendedAction</code>; <code>connectors/*</code> stubs pending SAP creds</td>
+        <td>—</td>
+        <td>No (gated upstream)</td>
+        <td><span class="badge partial">IN PROGRESS (mock)</span></td>
+      </tr>
+      <tr>
+        <td><strong>+ Stage 9 Recorder + dashboard</strong></td>
+        <td>Reads <code>logs/llm_calls.jsonl</code> + SQLite stores; serves cost/latency/auto-pass-rate metrics at <code>/stage9</code>.</td>
+        <td>Every node's input / output / model / cost / latency</td>
+        <td>JSONL ledger + SQLite reads → JSON API + Jinja dashboard with Chart.js</td>
+        <td><code>stage9/recorder.py</code>, <code>stage9/aggregator.py</code>, <code>hitl/webapp/server.py</code></td>
+        <td>—</td>
+        <td>No</td>
+        <td><span class="badge partial">IN PROGRESS</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>6. Human-in-the-loop touchpoints</h2>
+  <p>
+    HITL is a first-class part of the agent, not an afterthought. Three tiers — designed per the
+    Coordination &amp; Orchestration reference architecture. The HITL queue has its own SLA and named owner.
+  </p>
+
+  <div class="hitl-tier">
+    <div class="tier-name">Tier 1 — Auto-action</div>
+    <h4>No human approval needed</h4>
+    <div class="who">Triggered when: classification = none AND confidence above per-class threshold AND action is read-only or non-money-moving.</div>
+    <ul>
+      <li>Clean 3-way matches that pass all checks (GTC-001 anchor case)</li>
+      <li>Internal status updates / notifications</li>
+      <li>PO ETA updates (informational)</li>
+      <li>Target: 70–85% of invoices land here once the agent is tuned to a buyer's volume</li>
+    </ul>
+  </div>
+
+  <div class="hitl-tier">
+    <div class="tier-name">Tier 2 — Human approval gate</div>
+    <h4>Approver reviews and approves / modifies / rejects</h4>
+    <div class="who">Routed to the right named role: AP clerk, buyer, vendor master team, VP Finance — based on case category + dollar exposure.</div>
+    <ul>
+      <li>Price + quantity variances above threshold (GTC-002, GTC-006)</li>
+      <li>Missing approvals (GTC-011) — routes to the named approver</li>
+      <li>Non-master vendor (GTC-004) — routes to vendor master team with onboarding draft</li>
+      <li>EU VAT corrections (GTC-008) — routes to AP clerk with supplier correction draft</li>
+      <li>Cross-currency reviews (GTC-010) — routes to AP clerk with FX validation</li>
+      <li>Supplier delivery delays (GTC-009) — routes to buyer with acknowledgement + internal note drafts</li>
+      <li>Retroactive maverick-spend invoices (GTC-005)</li>
+    </ul>
+  </div>
+
+  <div class="hitl-tier">
+    <div class="tier-name">Tier 3 — Escalation</div>
+    <h4>Supervisor + fraud team review</h4>
+    <div class="who">Routed when: fraud signal triggered, threshold violations, cross-system inconsistencies, novel patterns.</div>
+    <ul>
+      <li>Duplicate invoices on already-paid POs (GTC-003)</li>
+      <li>Split-invoice fraud patterns (GTC-007)</li>
+      <li>Cross-process audit findings (raised weekly by a governance team)</li>
+      <li>Any case the agent halts on with policy-defined cause</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <div class="label">Non-negotiable</div>
+    External counterparty communications NEVER auto-send. Money-moving actions always require Tier 2+
+    approval, regardless of confidence. The HITL gate is the safety surface — losing it means losing
+    the agent's defensibility.
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>7. Software stack</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:18%;">Layer</th>
+        <th style="width:24%;">Choice</th>
+        <th>Why this</th>
+        <th style="width:8%;">Locked?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Language + runtime</td><td>Python 3.12+</td><td>Familiar tooling; LangGraph and pydantic v2 are Python-native</td><td class="center">✓</td></tr>
+      <tr><td>Dependency manager</td><td>uv</td><td>Fast, modern, reproducible builds vs pip / poetry</td><td class="center">✓</td></tr>
+      <tr><td>Orchestration engine</td><td>LangGraph + langchain-core</td><td>LLM-native, lighter than Temporal, sufficient for reference impl</td><td class="center">✓</td></tr>
+      <tr><td>State + RAG store</td><td>Postgres + pgvector</td><td>Durable, simple ops, embeddings live in same DB</td><td class="center">✓</td></tr>
+      <tr><td>Data models</td><td>Pydantic v2</td><td>Type safety, JSON serialization, validation</td><td class="center">✓</td></tr>
+      <tr><td>Model client (single entry point)</td><td>OpenAI SDK against OpenRouter base URL</td><td>One contract; per-task swap via config; cost log enforced</td><td class="center">✓</td></tr>
+      <tr><td>Models — corpus generation</td><td>Claude.ai + ChatGPT (subscription mode)</td><td>~$0 marginal cost during test phase; subscriptions already paid</td><td class="center">✓</td></tr>
+      <tr><td>Models — runtime (test phase)</td><td>DeepSeek V3, DeepSeek R1, Kimi K2 via OpenRouter</td><td>90–95% cost savings vs Sonnet at near-equivalent quality on these tasks</td><td class="center">✓</td></tr>
+      <tr><td>Models — runtime (prod overrides)</td><td>Claude Sonnet 4 / Haiku 4, GPT-4o per task</td><td>Per-task quality fallback when SLA requires it</td><td class="center">✓</td></tr>
+      <tr><td>Embedding</td><td>bge-large-en-v1.5</td><td>Strong open-source embedding; ~$0 marginal cost</td><td class="center">✓</td></tr>
+      <tr><td>Re-ranking</td><td>bge-reranker-v2-m3</td><td>Cross-encoder reranker; self-hosted, no API</td><td class="center">✓</td></tr>
+      <tr><td>HTTP client</td><td>httpx</td><td>Sync-first; async if perf requires</td><td class="center">✓</td></tr>
+      <tr><td>Logging</td><td>structlog (JSON output)</td><td>Structured, queryable</td><td class="center">✓</td></tr>
+      <tr><td>Testing</td><td>pytest + pytest-asyncio</td><td>Standard; markers for <code>golden</code>, <code>integration</code>, <code>slow</code></td><td class="center">✓</td></tr>
+      <tr><td>Lint + format</td><td>ruff</td><td>Replaces black + isort + flake8</td><td class="center">✓</td></tr>
+      <tr><td>Type checking</td><td>pyright</td><td>Strict; faster than mypy</td><td class="center">✓</td></tr>
+      <tr><td>PDF generation (corpus)</td><td>weasyprint</td><td>Template-based PDF; Jinja-friendly</td><td class="center">✓</td></tr>
+      <tr><td>BPI Challenge ingestion</td><td>pm4py</td><td>Standard process-mining XES parser</td><td class="center">✓</td></tr>
+      <tr><td>ERP — primary sandbox</td><td>SAP S/4HANA Cloud trial</td><td>Largest P2P customer base; real OData APIs</td><td class="center">✓</td></tr>
+      <tr><td>ERP — secondary sandboxes</td><td>MS Dynamics 365 Finance trial, ServiceNow developer instance</td><td>Portability validation across ERP families + exception-routing leg</td><td class="center">✓</td></tr>
+      <tr><td>Inference (when self-hosting)</td><td>vLLM</td><td>Production-grade open-source inference; only when buyer requires</td><td class="center">✓</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>8. Build progress</h2>
+
+  <h3>Foundational artifacts</h3>
+  <div class="progress-row">
+    <div class="progress-text">CLAUDE.md + project context</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
+    <div class="progress-label">100%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">PRD</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
+    <div class="progress-label">100%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Technical design (high-level)</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
+    <div class="progress-label">100%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Model strategy (open-source first)</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
+    <div class="progress-label">100%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Test corpus design</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
+    <div class="progress-label">100%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Subscription mode workflow docs + scripts</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
+    <div class="progress-label">100%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">SAP sandbox setup docs + validator</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
+    <div class="progress-label">100%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Golden cases (regression set)</div>
+    <div class="progress-bar"><div class="progress-fill amber" style="width:28%;"></div></div>
+    <div class="progress-label">28%</div>
+  </div>
+
+  <h3>Engineering build</h3>
+  <div class="progress-row">
+    <div class="progress-text">Folder + Python project scaffold (pyproject.toml, Makefile, .env.example)</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
+    <div class="progress-label">100%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">ModelClient (real — OpenRouter routing, cost ledger, retry)</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:100%;"></div></div>
+    <div class="progress-label">100%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Per-archetype Python modules (extractor + classifier + retrieval + decision-support + cross-case context + HITL router + drafter + HITL approval queue + /demo upload + Stage 9 dashboard + mock action executor done; real connectors pending SAP creds)</div>
+    <div class="progress-bar"><div class="progress-fill amber" style="width:95%;"></div></div>
+    <div class="progress-label">95%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">LangGraph orchestrator</div>
+    <div class="progress-bar"><div class="progress-fill red" style="width:0%;"></div></div>
+    <div class="progress-label">0%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Connectors (SAP / Ariba / ServiceNow / D365 / Email)</div>
+    <div class="progress-bar"><div class="progress-fill red" style="width:0%;"></div></div>
+    <div class="progress-label">0%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">HITL queue + web UI</div>
+    <div class="progress-bar"><div class="progress-fill red" style="width:0%;"></div></div>
+    <div class="progress-label">0%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Stage 9 recorder + computer + exporter</div>
+    <div class="progress-bar"><div class="progress-fill red" style="width:0%;"></div></div>
+    <div class="progress-label">0%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Test harness (golden-set runner — runs classification + recommendation; HITL / drafting / execution still skipped)</div>
+    <div class="progress-bar"><div class="progress-fill amber" style="width:50%;"></div></div>
+    <div class="progress-label">50%</div>
+  </div>
+
+  <h3>Test corpus</h3>
+  <div class="progress-row">
+    <div class="progress-text">BPI Challenge 2019 + 2020 ingested</div>
+    <div class="progress-bar"><div class="progress-fill red" style="width:0%;"></div></div>
+    <div class="progress-label">0%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Supplier personas (target: 20–25)</div>
+    <div class="progress-bar"><div class="progress-fill amber" style="width:25%;"></div></div>
+    <div class="progress-label">5 / 20</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Synthetic invoices (target: 500)</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:98%;"></div></div>
+    <div class="progress-label">490 / 500</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Synthetic supplier emails (target: 200)</div>
+    <div class="progress-bar"><div class="progress-fill red" style="width:0%;"></div></div>
+    <div class="progress-label">0 / 200</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Master data records (target: ~200 vendors)</div>
+    <div class="progress-bar"><div class="progress-fill red" style="width:0%;"></div></div>
+    <div class="progress-label">0%</div>
+  </div>
+
+  <h3>External relationships</h3>
+  <div class="progress-row">
+    <div class="progress-text">SAP S/4HANA Cloud trial registered + connection validated</div>
+    <div class="progress-bar"><div class="progress-fill red" style="width:0%;"></div></div>
+    <div class="progress-label">0%</div>
+  </div>
+  <div class="progress-row">
+    <div class="progress-text">Design partner secured (target: 1 in 8 weeks)</div>
+    <div class="progress-bar"><div class="progress-fill red" style="width:0%;"></div></div>
+    <div class="progress-label">0%</div>
+  </div>
+
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>9. What's still left</h2>
+  <table>
+    <thead>
+      <tr><th style="width:8%;">Priority</th><th style="width:32%;">Item</th><th style="width:14%;">Status</th><th>Notes / dependencies</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>P0</td><td>Run <code>make sap-validate</code> when SAP credentials arrive (trial registered 2026-05-11)</td><td><span class="badge partial">WAITING</span></td><td>Trial signed up; credential email pending. ~30 min once it lands.</td></tr>
+      <tr><td>P0</td><td>Generate synthetic invoice corpus via API mode (<code>make corpus-api</code>)</td><td><span class="badge done">DONE</span></td><td>490 PDFs + ground-truth JSON sidecars on disk; ~$0.18 total cost.</td></tr>
+      <tr><td>P0</td><td>Implement <code>src/p2p_agent/llm/client.py</code></td><td><span class="badge done">DONE</span></td><td>OpenRouter routing, cost ledger, tenacity retry. Locked interface.</td></tr>
+      <tr><td>P1</td><td>Implement <code>scripts/ingest_bpi.py</code></td><td><span class="badge skeleton">SKELETON</span></td><td>pm4py + Pandas. ~2 days. Manual download from data.4tu.nl first.</td></tr>
+      <tr><td>P1</td><td>Test harness (golden-set runner) — classification path live; other subblocks deferred until nodes exist</td><td><span class="badge partial">IN PROGRESS</span></td><td>Runs all 11 cases against the classifier; current pass rate 3/11. Extend as more nodes land.</td></tr>
+      <tr><td>P1</td><td>LangGraph orchestrator graph + state machine</td><td><span class="badge todo">NOT STARTED</span></td><td>~5 days. Agent state, conditional edges, Postgres checkpointer.</td></tr>
+      <tr><td>P1</td><td>Per-node implementations (extract, classify, retrieve, decide, draft, hitl_route, hitl_queue, stage9, execute)</td><td><span class="badge partial">9 / 9 (executor is mock)</span></td><td>All 9 logic nodes shipped; the action executor runs in mock mode until SAP credentials land. Real-backend swap is one file (executor.mode = "real").</td></tr>
+      <tr><td>P2</td><td>Stage 9 instrumentation — recorder, computer, exporter</td><td><span class="badge todo">NOT STARTED</span></td><td>~5-7 days. Built early so the per-node implementations report metrics from day 1.</td></tr>
+      <tr><td>P2</td><td>SAP connector — depth (read + HITL-gated write)</td><td><span class="badge todo">NOT STARTED</span></td><td>~7-10 days. Validate against SAP trial.</td></tr>
+      <tr><td>P2</td><td>ServiceNow connector — exception routing leg</td><td><span class="badge todo">NOT STARTED</span></td><td>~3-5 days.</td></tr>
+      <tr><td>P2</td><td>D365 + Ariba connector stubs (working-stub level)</td><td><span class="badge todo">NOT STARTED</span></td><td>~3 days each. Validate connector abstraction holds.</td></tr>
+      <tr><td>P2</td><td>HITL queue API + minimal web UI</td><td><span class="badge todo">NOT STARTED</span></td><td>~7-10 days. Postgres-backed queue; thin React reviewer app.</td></tr>
+      <tr><td>P3</td><td>29 more golden cases (target 40 total)</td><td><span class="badge partial">11 / 40</span></td><td>Author as scenarios surface. ~30 min per case using authoring guide.</td></tr>
+      <tr><td>P3</td><td>15 more supplier personas (target 20-25)</td><td><span class="badge partial">5 / 20</span></td><td>Hand-design as corpus diversity needs grow.</td></tr>
+      <tr><td>P3</td><td>Design partner outreach</td><td><span class="badge todo">NOT STARTED</span></td><td>Parallel track. 8-week target via industry contacts.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout red">
+    <div class="label">Solo build reality</div>
+    Full IP build is ~12-16 weeks of dedicated engineering. Solo (TJ + Claude Code) realistically delivers
+    ~50% of that velocity — plan for ~24-32 weeks of calendar time. Prioritize ruthlessly: corpus + harness
+    + ModelClient + classifier + orchestrator skeleton first. Connectors and HITL UI deferred to phase 2 if
+    a design partner brings their own integrations.
+  </div>
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>10. Key files</h2>
+  <table>
+    <thead><tr><th style="width:38%;">Path</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>CLAUDE.md</code></td><td>Project context for Claude Code sessions; locked decisions; conventions</td></tr>
+      <tr><td><code>README.md</code></td><td>Public-facing description</td></tr>
+      <tr><td><code>docs/PRD.md</code></td><td>Product requirements (functional + non-functional + scope)</td></tr>
+      <tr><td><code>docs/technical_design.md</code></td><td>Architecture, module layout, data models, deployment topology</td></tr>
+      <tr><td><code>docs/model_strategy.md</code></td><td>Per-task model assignments, cost ceilings, quality gates</td></tr>
+      <tr><td><code>docs/subscription_mode_workflow.md</code></td><td>Workflow for generating corpus via Claude.ai / ChatGPT subscriptions</td></tr>
+      <tr><td><code>docs/sap_sandbox_setup.md</code></td><td>SAP trial signup + connection validator guide</td></tr>
+      <tr><td><code>docs/test_corpus_design.md</code></td><td>4-source data strategy, golden test set, build sequence</td></tr>
+      <tr><td><code>docs/authoring_golden_cases.md</code></td><td>How to write new golden case YAML files</td></tr>
+      <tr><td><code>docs/CHANGELOG.md</code></td><td>Append-only session log</td></tr>
+      <tr><td><code>src/p2p_agent/llm/client.py</code></td><td>ModelClient — single entry point for every LLM call (interface locked, implementation TODO)</td></tr>
+      <tr><td><code>scripts/generate_invoice_prompts.py</code></td><td>Generate batched prompts for the subscription workflow</td></tr>
+      <tr><td><code>scripts/ingest_subscription_responses.py</code></td><td>Parse pasted JSON responses, validate, write invoice PDFs + sidecar JSON</td></tr>
+      <tr><td><code>scripts/validate_sap_connection.py</code></td><td>3-step SAP connection check (env vars → OAuth → PO read)</td></tr>
+      <tr><td><code>scripts/run_golden_set.py</code></td><td>Test harness — runs golden cases (skeleton)</td></tr>
+      <tr><td><code>scripts/ingest_bpi.py</code></td><td>BPI Challenge dataset ingestion (skeleton)</td></tr>
+      <tr><td><code>tests/golden_cases/GTC-*.yaml</code></td><td>11 golden test cases (target: 40)</td></tr>
+      <tr><td><code>config/models.yaml</code></td><td>Per-task model assignments + provider routing + price catalog</td></tr>
+      <tr><td><code>config/stage9_thresholds.yaml</code></td><td>Alert thresholds for 6 Stage 9 signals</td></tr>
+      <tr><td><code>config/personas.yaml</code></td><td>5 starter supplier personas (target: 20-25)</td></tr>
+      <tr><td><code>pyproject.toml</code></td><td>Python project + dependencies (managed with uv)</td></tr>
+      <tr><td><code>Makefile</code></td><td>Common commands — <code>make setup / corpus / test-golden / sap-validate / run-case</code></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- =================================================================== -->
+<section>
+  <h2>11. Quick start for the next session</h2>
+  <ol>
+    <li>Open this folder in a Claude Code session — context auto-loads from <code>CLAUDE.md</code>.</li>
+    <li>Run <code>make setup</code> to install dependencies via uv.</li>
+    <li>Copy <code>.env.example</code> to <code>.env</code>; fill in subscription mode envs (no API keys needed yet for corpus generation).</li>
+    <li>Register the SAP S/4HANA Cloud trial via <code>docs/sap_sandbox_setup.md</code>.</li>
+    <li>Run <code>make corpus-prompts-invoices</code> to generate the first batch of synthetic-invoice prompts.</li>
+    <li>Process the first 3-5 batches in Claude.ai or ChatGPT to validate the pipeline at small scale.</li>
+    <li>Run <code>make corpus-ingest-invoices</code> to ingest responses; check the schema validator catches malformed outputs.</li>
+    <li>Start implementing <code>src/p2p_agent/llm/client.py</code> against the locked interface.</li>
+  </ol>
+</section>
+
+<footer>
+  <strong>Anchor references</strong> ·
+  Reference architecture: Coordination &amp; Orchestration archetype ·
+  Build-vs-Accelerate Decision Template — <code>../../01_foundational_ip/build_vs_accelerate_decision_template.docx</code> ·
+  Accelerator Strategy Memo (CEO) — <code>../../07_plan/accelerator_strategy_memo.docx</code> ·
+  Deep Research Database — <code>../../deep research/final_database.csv</code> (159 cases, 8 vendor sources, validated 5-archetype taxonomy)
+  <br><br>
+  <em>Generated 2026-05-11 · Re-run from <code>lib/build_status.py</code> when build state changes (script not yet authored).</em>
+</footer>
+
+</main>
+</body>
+</html>

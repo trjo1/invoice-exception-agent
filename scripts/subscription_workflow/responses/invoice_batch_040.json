@@ -1,0 +1,312 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260226_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-26",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234H1Z1 | PAN: AABCM1234H",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Rajesh Kumar / rajesh.kumar@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Steel pipes, 6-inch diameter, Grade 304",
+        "quantity": 100,
+        "unit_price": 250.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Brass valves, 2-inch, flanged",
+        "quantity": 50,
+        "unit_price": 1200.00,
+        "line_total": 60000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "Rubber gaskets, 6-inch, EPDM",
+        "quantity": 200,
+        "unit_price": 45.00,
+        "line_total": 9000.00
+      }
+    ],
+    "subtotal": 94000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-MH-CGST",
+        "rate": 0.09,
+        "amount": 8460.00
+      },
+      {
+        "jurisdiction": "IN-MH-SGST",
+        "rate": 0.09,
+        "amount": 8460.00
+      }
+    ],
+    "total": 110920.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with GST itemized per line; HSN codes present; PAN and GSTIN in header; cross-currency to USD common."
+  },
+  {
+    "invoice_id": "P005_INV_20260209_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-09",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Avenida Paulista, 1234, Bela Vista, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-99 | IE: 123.456.789.110",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Maria Silva / maria.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Motor elétrico trifásico 5HP",
+        "quantity": 10,
+        "unit_price": 850.00,
+        "line_total": 8500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Sensor de temperatura PT100",
+        "quantity": 50,
+        "unit_price": 120.00,
+        "line_total": 6000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Válvula solenoide 24V DC",
+        "quantity": 30,
+        "unit_price": 200.00,
+        "line_total": 6000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "Fonte chaveada 12V 5A",
+        "quantity": 20,
+        "unit_price": 95.00,
+        "line_total": 1900.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "Relé de proteção térmica",
+        "quantity": 25,
+        "unit_price": 180.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-006",
+        "description": "Disjuntor 63A 3P",
+        "quantity": 15,
+        "unit_price": 350.00,
+        "line_total": 5250.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-007",
+        "description": "Contator 50A 220V",
+        "quantity": 12,
+        "unit_price": 280.00,
+        "line_total": 3360.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-008",
+        "description": "Cabo elétrico 4mm² (rolo 100m)",
+        "quantity": 5,
+        "unit_price": 450.00,
+        "line_total": 2250.00
+      }
+    ],
+    "subtotal": 37760.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 6796.80
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 1888.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 623.04
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 2869.76
+      }
+    ],
+    "total": 49937.60,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice with ICMS, IPI, PIS, COFINS taxes; Boleto bancário reference for payment."
+  },
+  {
+    "invoice_id": "P005_INV_20260408_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-08",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Avenida Paulista, 1234, Bela Vista, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-99 | IE: 123.456.789.110",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Maria Silva / maria.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-009",
+        "description": "Bomba hidráulica 20L/min",
+        "quantity": 5,
+        "unit_price": 3200.00,
+        "line_total": 16000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-010",
+        "description": "Filtro de óleo hidráulico",
+        "quantity": 10,
+        "unit_price": 450.00,
+        "line_total": 4500.00
+      }
+    ],
+    "subtotal": 20500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 3690.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 1025.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 338.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 1558.00
+      }
+    ],
+    "total": 27111.25,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Deliberate error: multiple tax types (ICMS, IPI, PIS, COFINS) may cause extraction confusion; invoice is otherwise clean."
+  },
+  {
+    "invoice_id": "P002_INV_20260121_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-98765",
+    "invoice_date": "2026-01-21",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1500 Maple Avenue, Suite 200, Burlington, VT 05401, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "John Smith / john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Warehouse storage rack, 8ft x 4ft",
+        "quantity": 10,
+        "unit_price": 450.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Forklift safety cage",
+        "quantity": 2,
+        "unit_price": 1200.00,
+        "line_total": 2400.00
+      }
+    ],
+    "subtotal": 6900.00,
+    "tax": [
+      {
+        "jurisdiction": "US-VT",
+        "rate": 0.06,
+        "amount": 414.00
+      }
+    ],
+    "total": 7314.00,
+    "error_injected": "Missing PO reference (must be inferred from delivery note)",
+    "ground_truth_note": "Deliberate error: PO reference is missing from invoice header; must be inferred from a referenced delivery note number included in a hand-written note on the scanned document."
+  },
+  {
+    "invoice_id": "P002_INV_20260121_002",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-45678",
+    "invoice_date": "2026-01-21",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1500 Maple Avenue, Suite 200, Burlington, VT 05401, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "John Smith / john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-003",
+        "description": "Pallet jack, manual, 5000lb capacity",
+        "quantity": 3,
+        "unit_price": 850.00,
+        "line_total": 2550.00
+      }
+    ],
+    "subtotal": 2550.00,
+    "tax": [
+      {
+        "jurisdiction": "US-VT",
+        "rate": 0.06,
+        "amount": 153.00
+      }
+    ],
+    "total": 2703.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with hand-written note indicating delivery date; total rounded up to nearest dollar; inconsistent header placement on scanned image."
+  }
+]
+```

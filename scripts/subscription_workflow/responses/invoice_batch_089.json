@@ -1,0 +1,330 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260328_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-28",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista\n01310-100 São Paulo, SP\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Auto Parts do Brasil S.A.",
+      "buyer_address": "Rua das Industrias, 500\nCentro\n01000-000 São Paulo, SP\nBrazil",
+      "buyer_po_contact": "João Silva / joao.silva@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001-P",
+        "description": "Parafuso de aço inox M8 x 30mm",
+        "quantity": 5000,
+        "unit_price": 1.35,
+        "line_total": 6750.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002-E",
+        "description": "Engrenagem helicoidal 20 dentes",
+        "quantity": 150,
+        "unit_price": 48.90,
+        "line_total": 7335.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003-M",
+        "description": "Mancal de bronze 40mm",
+        "quantity": 200,
+        "unit_price": 22.30,
+        "line_total": 4460.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004-R",
+        "description": "Rolamento axial 6205zz",
+        "quantity": 300,
+        "unit_price": 15.75,
+        "line_total": 4725.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005-T",
+        "description": "Tubo de cobre 1/2\"x2m",
+        "quantity": 80,
+        "unit_price": 85.00,
+        "line_total": 6800.00
+      }
+    ],
+    "subtotal": 30070.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 5412.60
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 1503.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 496.16
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 2285.32
+      }
+    ],
+    "total": 39767.58,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Invoice contains four Brazilian tax types (ICMS, IPI, PIS, COFINS). Extractor must capture each one individually."
+  },
+  {
+    "invoice_id": "P003_INV_20260408_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-08",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45\n60327 Frankfurt am Main\nGermany",
+      "vendor_tax_id": "DE 123456789",
+      "buyer_name": "Auto Parts do Brasil S.A.",
+      "buyer_address": "Rua das Industrias, 500\nCentro\n01000-000 São Paulo, SP\nBrazil",
+      "buyer_po_contact": "Juan Martínez / juan.martinez@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIG-100",
+        "description": "Industriekugellager 6205 / Industrial ball bearing 6205",
+        "quantity": 1000,
+        "unit_price": 4.75,
+        "line_total": 4750.00
+      }
+    ],
+    "subtotal": 4750.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 902.50
+      }
+    ],
+    "total": 5652.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean German invoice with 19% VAT. Bilingual descriptions. SEPA bank details appear in footer (not captured in schema)."
+  },
+  {
+    "invoice_id": "P005_INV_20260220_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "20/02/2026",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista\n01310-100 São Paulo, SP\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Auto Parts do Brasil S.A.",
+      "buyer_address": "Rua das Industrias, 500\nCentro\n01000-000 São Paulo, SP\nBrazil",
+      "buyer_po_contact": "João Silva / joao.silva@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-006-C",
+        "description": "Correia dentada 100 dentes",
+        "quantity": 50,
+        "unit_price": 120.00,
+        "line_total": 6000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-007-V",
+        "description": "Válvula solenóide 24V",
+        "quantity": 25,
+        "unit_price": 340.00,
+        "line_total": 8500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-008-F",
+        "description": "Filtro de óleo 1\" NPT",
+        "quantity": 100,
+        "unit_price": 55.00,
+        "line_total": 5500.00
+      }
+    ],
+    "subtotal": 20000.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 3600.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 1000.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 330.00
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 1520.00
+      }
+    ],
+    "total": 26450.00,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "Invoice date is given in Brazilian dd/mm/yyyy format (20/02/2026) instead of ISO 8601. Extractor should detect and convert or flag as error."
+  },
+  {
+    "invoice_id": "P003_INV_20260104_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-13579",
+    "invoice_date": "2026-01-04",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45\n60327 Frankfurt am Main\nGermany",
+      "vendor_tax_id": "DE 123456789",
+      "buyer_name": "Auto Parts do Brasil S.A.",
+      "buyer_address": "Rua das Industrias, 500\nCentro\n01000-000 São Paulo, SP\nBrazil",
+      "buyer_po_contact": "Juan Martínez / juan.martinez@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIG-200",
+        "description": "Hydraulikzylinder 50mm Hub / Hydraulic cylinder 50mm stroke",
+        "quantity": 20,
+        "unit_price": 145.00,
+        "line_total": 2900.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIG-201",
+        "description": "Dichtungssatz / Seal kit for cylinder 50mm",
+        "quantity": 20,
+        "unit_price": 38.50,
+        "line_total": 770.00
+      }
+    ],
+    "subtotal": 3670.00,
+    "tax": [],
+    "total": 3670.00,
+    "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers",
+    "ground_truth_note": "This is an intra-EU supply to a buyer outside Germany (Brazil), reverse charge applies. No VAT line is included. Extractor should not expect VAT and should note the absence."
+  },
+  {
+    "invoice_id": "P004_INV_20260427_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-97531",
+    "invoice_date": "2026-04-27",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate\nAndheri East\nMumbai, Maharashtra 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234D1Z5\nPAN: ABCDM1234E",
+      "buyer_name": "Auto Parts do Brasil S.A.",
+      "buyer_address": "Rua das Industrias, 500\nCentro\n01000-000 São Paulo, SP\nBrazil",
+      "buyer_po_contact": "Carlos Lima / carlos.lima@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001-B",
+        "description": "Brass adaptor 1/2\" BSP (HSN 741220)",
+        "quantity": 500,
+        "unit_price": 42.00,
+        "line_total": 21000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002-S",
+        "description": "Stainless steel hex bolt M12x60 (HSN 731815)",
+        "quantity": 2000,
+        "unit_price": 8.75,
+        "line_total": 17500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003-N",
+        "description": "Nitrile rubber gasket 2\" (HSN 401693)",
+        "quantity": 300,
+        "unit_price": 65.00,
+        "line_total": 19500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004-P",
+        "description": "Pneumatic cylinder 40mm bore (HSN 841231)",
+        "quantity": 50,
+        "unit_price": 1250.00,
+        "line_total": 62500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005-V",
+        "description": "V-ring seal 25mm (HSN 401693)",
+        "quantity": 1000,
+        "unit_price": 12.50,
+        "line_total": 12500.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-006-Q",
+        "description": "Quick coupling 3/8\" (HSN 730799)",
+        "quantity": 400,
+        "unit_price": 95.00,
+        "line_total": 38000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-007-T",
+        "description": "Teflon tape 1\" x 10m (HSN 391910)",
+        "quantity": 200,
+        "unit_price": 28.00,
+        "line_total": 5600.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-008-F",
+        "description": "Flow control valve 1/2\" (HSN 848120)",
+        "quantity": 150,
+        "unit_price": 480.00,
+        "line_total": 72000.00
+      }
+    ],
+    "subtotal": 248600.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 22374.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 22374.00
+      }
+    ],
+    "total": 293348.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean Indian invoice with HSN codes per line, GSTIN/PAN in header, CGST and SGST at 9% each."
+  }
+]
+```

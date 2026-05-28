@@ -1,0 +1,4540 @@
+{
+  "PO-2026-02-12345": {
+    "id": "GR-12345",
+    "po_id": "PO-2026-02-12345",
+    "receipt_date": "2026-01-29",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "quantity_received": 1000.0
+      }
+    ]
+  },
+  "PO-2026-01-54321": {
+    "id": "GR-54321",
+    "po_id": "PO-2026-01-54321",
+    "receipt_date": "2026-01-02",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2001",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-03-13254": {
+    "id": "GR-13254",
+    "po_id": "PO-2026-03-13254",
+    "receipt_date": "2026-03-10",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-3001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-3002",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-02-97856": {
+    "id": "GR-97856",
+    "po_id": "PO-2026-02-97856",
+    "receipt_date": "2026-02-12",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-001",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-002",
+        "quantity_received": 5000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-003",
+        "quantity_received": 2000.0
+      }
+    ]
+  },
+  "PO-2026-02-00034": {
+    "id": "GR-00034",
+    "po_id": "PO-2026-02-00034",
+    "receipt_date": "2026-02-25",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2003",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3015",
+        "quantity_received": 2.0
+      }
+    ]
+  },
+  "PO-2026-01-00123": {
+    "id": "GR-00123",
+    "po_id": "PO-2026-01-00123",
+    "receipt_date": "2026-01-19",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 5000.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "quantity_received": 3000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1003",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-1004",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-1005",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-1006",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-1007",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-1008",
+        "quantity_received": 15.0
+      }
+    ]
+  },
+  "PO-2026-03-33333": {
+    "id": "GR-33333",
+    "po_id": "PO-2026-03-33333",
+    "receipt_date": "2026-03-01",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2026-001",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-2026-04-12345": {
+    "id": "GR-12345",
+    "po_id": "PO-2026-04-12345",
+    "receipt_date": "2026-04-20",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "TC-1000",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "TC-2000",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "TC-3000",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-03-54321": {
+    "id": "GR-54321",
+    "po_id": "PO-2026-03-54321",
+    "receipt_date": "2026-03-07",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "TC-4000",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "TC-5000",
+        "quantity_received": 25.0
+      }
+    ]
+  },
+  "PO-2026-02-07891": {
+    "id": "GR-07891",
+    "po_id": "PO-2026-02-07891",
+    "receipt_date": "2026-02-02",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-4007",
+        "quantity_received": 400.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-5112",
+        "quantity_received": 600.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-6218",
+        "quantity_received": 250.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-7345",
+        "quantity_received": 2000.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-8021",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-2026-04-00456": {
+    "id": "GR-00456",
+    "po_id": "PO-2026-04-00456",
+    "receipt_date": "2026-04-10",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-EL-2026",
+        "quantity_received": 2.0
+      }
+    ]
+  },
+  "PO-2026-01-12364": {
+    "id": "GR-12364",
+    "po_id": "PO-2026-01-12364",
+    "receipt_date": "2026-01-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-1001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-CN-2003",
+        "quantity_received": 200.0
+      }
+    ]
+  },
+  "PO-2026-02-00234": {
+    "id": "GR-00234",
+    "po_id": "PO-2026-02-00234",
+    "receipt_date": "2026-01-31",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-PS-3001",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SE-4002",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-CB-5003",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-EN-6004",
+        "quantity_received": 80.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-LC-7005",
+        "quantity_received": 60.0
+      }
+    ]
+  },
+  "PO-2026-03-00789": {
+    "id": "GR-00789",
+    "po_id": "PO-2026-03-00789",
+    "receipt_date": "2026-03-03",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "RES-100K",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "CAP-10uF",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MCU-ATMEGA328",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 4,
+        "sku": "LED-RED",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 5,
+        "sku": "CONN-USB",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 6,
+        "sku": "TRANS-2N2222",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 7,
+        "sku": "DIODE-1N4007",
+        "quantity_received": 250.0
+      },
+      {
+        "line_no": 8,
+        "sku": "PCB-CUSTOM",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-03-00555": {
+    "id": "GR-00555",
+    "po_id": "PO-2026-03-00555",
+    "receipt_date": "2026-03-25",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "CPU-A5000",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FAN-80MM",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-02-67890": {
+    "id": "GR-67890",
+    "po_id": "PO-2026-02-67890",
+    "receipt_date": "2026-02-20",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "quantity_received": 5000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1003",
+        "quantity_received": 10000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-1004",
+        "quantity_received": 2000.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-1005",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-1006",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-1007",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-1008",
+        "quantity_received": 200.0
+      }
+    ]
+  },
+  "PO-2026-02-00004": {
+    "id": "GR-00004",
+    "po_id": "PO-2026-02-00004",
+    "receipt_date": "2026-02-14",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "CPU-100",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "RAM-200",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SSD-300",
+        "quantity_received": 15.0
+      }
+    ]
+  },
+  "PO-2026-03-00456": {
+    "id": "GR-00456",
+    "po_id": "PO-2026-03-00456",
+    "receipt_date": "2026-03-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1003",
+        "quantity_received": 25.0
+      }
+    ]
+  },
+  "PO-2026-01-00789": {
+    "id": "GR-00789",
+    "po_id": "PO-2026-01-00789",
+    "receipt_date": "2026-01-15",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2001",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-2003",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-04-00234": {
+    "id": "GR-00234",
+    "po_id": "PO-2026-04-00234",
+    "receipt_date": "2026-04-03",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-3001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-3002",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-3004",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-3005",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-3006",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-3007",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-3008",
+        "quantity_received": 30.0
+      }
+    ]
+  },
+  "PO-2026-04-54321": {
+    "id": "GR-54321",
+    "po_id": "PO-2026-04-54321",
+    "receipt_date": "2026-04-14",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MCU-328P",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "RES-10K",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "LED-RED",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-03-98765": {
+    "id": "GR-98765",
+    "po_id": "PO-2026-03-98765",
+    "receipt_date": "2026-03-20",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "IC-555",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "TRANS-2N2222",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "CAP-100",
+        "quantity_received": 1000.0
+      }
+    ]
+  },
+  "PO-2026-01-33333": {
+    "id": "GR-33333",
+    "po_id": "PO-2026-01-33333",
+    "receipt_date": "2025-12-29",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MCU-001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SEN-002",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-LED-003",
+        "quantity_received": 2000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-TRA-004",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-CON-005",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-BAT-006",
+        "quantity_received": 400.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-PCB-007",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-CBL-008",
+        "quantity_received": 1000.0
+      }
+    ]
+  },
+  "PO-2026-02-13254": {
+    "id": "GR-13254",
+    "po_id": "PO-2026-02-13254",
+    "receipt_date": "2026-02-22",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1003",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-1004",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-1005",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-1006",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-1007",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-1008",
+        "quantity_received": 20.0
+      }
+    ]
+  },
+  "PO-2026-03-00125": {
+    "id": "GR-00125",
+    "po_id": "PO-2026-03-00125",
+    "receipt_date": "2026-03-17",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-002",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-02-55678": {
+    "id": "GR-55678",
+    "po_id": "PO-2026-02-55678",
+    "receipt_date": "2026-02-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "CPU-INTEL-12700",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "RAM-DDR4-32GB",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SSD-2TB-NVME",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GPU-NVIDIA-A4000",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 5,
+        "sku": "PSU-750W",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MBD-ATX-Z690",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 7,
+        "sku": "CASE-MID-TOWER",
+        "quantity_received": 80.0
+      },
+      {
+        "line_no": 8,
+        "sku": "FAN-120MM",
+        "quantity_received": 200.0
+      }
+    ]
+  },
+  "PO-2026-03-67890": {
+    "id": "GR-67890",
+    "po_id": "PO-2026-03-67890",
+    "receipt_date": "2026-03-12",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-4004",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-5005",
+        "quantity_received": 30.0
+      }
+    ]
+  },
+  "PO-2026-02-45678": {
+    "id": "GR-45678",
+    "po_id": "PO-2026-02-45678",
+    "receipt_date": "2026-02-05",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-4004",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-5005",
+        "quantity_received": 80.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-6006",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-7007",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-8008",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-2026-03-12345": {
+    "id": "GR-12345",
+    "po_id": "PO-2026-03-12345",
+    "receipt_date": "2026-03-11",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-001",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-02-54321": {
+    "id": "GR-54321",
+    "po_id": "PO-2026-02-54321",
+    "receipt_date": "2026-02-10",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-CPU-002",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-2026-01-22222": {
+    "id": "GR-22222",
+    "po_id": "PO-2026-01-22222",
+    "receipt_date": "2026-01-22",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-SRV-001",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-03-00004": {
+    "id": "GR-00004",
+    "po_id": "PO-2026-03-00004",
+    "receipt_date": "2026-03-12",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-100",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-101",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-102",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-01-00001": {
+    "id": "GR-00001",
+    "po_id": "PO-2026-01-00001",
+    "receipt_date": "2026-01-12",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-02-00001": {
+    "id": "GR-00001",
+    "po_id": "PO-2026-02-00001",
+    "receipt_date": "2026-02-20",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-2003",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-2004",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-2005",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-2006",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-2007",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-2008",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-04-12453": {
+    "id": "GR-12453",
+    "po_id": "PO-2026-04-12453",
+    "receipt_date": "2026-04-05",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SEN-022",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-PWR-105",
+        "quantity_received": 80.0
+      }
+    ]
+  },
+  "PO-2026-03-78901": {
+    "id": "GR-78901",
+    "po_id": "PO-2026-03-78901",
+    "receipt_date": "2026-03-08",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-001",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-002",
+        "quantity_received": 5000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-003",
+        "quantity_received": 10000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-004",
+        "quantity_received": 2000.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-005",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-03-12344": {
+    "id": "GR-12344",
+    "po_id": "PO-2026-03-12344",
+    "receipt_date": "2026-02-26",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-2026",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-04-11111": {
+    "id": "GR-11111",
+    "po_id": "PO-2026-04-11111",
+    "receipt_date": "2026-03-29",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2026-001",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2026-002",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-2026-003",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-2026-004",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-2026-005",
+        "quantity_received": 300.0
+      }
+    ]
+  },
+  "PO-2026-02-98765": {
+    "id": "GR-98765",
+    "po_id": "PO-2026-02-98765",
+    "receipt_date": "2026-01-31",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-100",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-200",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-300",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-02-11111": {
+    "id": "GR-11111",
+    "po_id": "PO-2026-02-11111",
+    "receipt_date": "2026-01-29",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-SRV-001",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-RAID-001",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-01-12345": {
+    "id": "GR-12345",
+    "po_id": "PO-2026-01-12345",
+    "receipt_date": "2026-01-14",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-4004",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-5005",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-6006",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-7007",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-8008",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-67890": {
+    "id": "GR-67890",
+    "po_id": "PO-2026-01-67890",
+    "receipt_date": "2026-01-14",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-9009",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1010",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1111",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-1212",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-1313",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-12453": {
+    "id": "GR-12453",
+    "po_id": "PO-2026-01-12453",
+    "receipt_date": "2026-01-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-A100",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-B200",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-C300",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-D400",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-E500",
+        "quantity_received": 300.0
+      }
+    ]
+  },
+  "PO-2026-04-67890": {
+    "id": "GR-67890",
+    "po_id": "PO-2026-04-67890",
+    "receipt_date": "2026-04-25",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GT-100",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GT-101",
+        "quantity_received": 8.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GT-102",
+        "quantity_received": 5.0
+      }
+    ]
+  },
+  "PO-2026-01-97856": {
+    "id": "GR-97856",
+    "po_id": "PO-2026-01-97856",
+    "receipt_date": "2026-01-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GT-103",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GT-104",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GT-105",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GT-106",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GT-107",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GT-108",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GT-109",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GT-110",
+        "quantity_received": 30.0
+      }
+    ]
+  },
+  "PO-2025-11-11112": {
+    "id": "GR-11112",
+    "po_id": "PO-2025-11-11112",
+    "receipt_date": "2025-12-29",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "quantity_received": 3.0
+      }
+    ]
+  },
+  "PO-2026-04-00789": {
+    "id": "GR-00789",
+    "po_id": "PO-2026-04-00789",
+    "receipt_date": "2026-04-02",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-SERV-001",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-11111": {
+    "id": "GR-11111",
+    "po_id": "PO-2026-01-11111",
+    "receipt_date": "2026-01-11",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "quantity_received": 1000.0
+      }
+    ]
+  },
+  "PO-2026-04-00567": {
+    "id": "GR-00567",
+    "po_id": "PO-2026-04-00567",
+    "receipt_date": "2026-04-11",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-00999": {
+    "id": "GR-00999",
+    "po_id": "PO-2026-01-00999",
+    "receipt_date": "2026-01-20",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-4004",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-02-00789": {
+    "id": "GR-00789",
+    "po_id": "PO-2026-02-00789",
+    "receipt_date": "2026-02-16",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-100",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-200",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-300",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-2026-02-13579": {
+    "id": "GR-13579",
+    "po_id": "PO-2026-02-13579",
+    "receipt_date": "2026-02-21",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-CPU-002",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-RAM-003",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-SSD-004",
+        "quantity_received": 15.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-PSU-005",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-CBL-006",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-FAN-007",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-THM-008",
+        "quantity_received": 5.0
+      }
+    ]
+  },
+  "PO-2026-02-12453": {
+    "id": "GR-12453",
+    "po_id": "PO-2026-02-12453",
+    "receipt_date": "2026-02-01",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SEN-002",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-LCD-003",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-PWR-004",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-CON-005",
+        "quantity_received": 80.0
+      }
+    ]
+  },
+  "PO-2026-03-24680": {
+    "id": "GR-24680",
+    "po_id": "PO-2026-03-24680",
+    "receipt_date": "2026-03-22",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-400",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-500",
+        "quantity_received": 600.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-600",
+        "quantity_received": 400.0
+      }
+    ]
+  },
+  "PO-2026-03-13579": {
+    "id": "GR-13579",
+    "po_id": "PO-2026-03-13579",
+    "receipt_date": "2026-03-08",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2001",
+        "quantity_received": 15.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-2003",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-2004",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-2005",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-2006",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-2007",
+        "quantity_received": 8.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-2008",
+        "quantity_received": 3.0
+      }
+    ]
+  },
+  "PO-2026-02-23456": {
+    "id": "GR-23456",
+    "po_id": "PO-2026-02-23456",
+    "receipt_date": "2026-02-14",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MC-001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "RS-002",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "CP-003",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-01-34567": {
+    "id": "GR-34567",
+    "po_id": "PO-2026-01-34567",
+    "receipt_date": "2026-01-06",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MC-004",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "RS-005",
+        "quantity_received": 2000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "CP-006",
+        "quantity_received": 1000.0
+      }
+    ]
+  },
+  "PO-2026-02-22222": {
+    "id": "GR-22222",
+    "po_id": "PO-2026-02-22222",
+    "receipt_date": "2026-02-13",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GT-3001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GT-3002",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GT-3003",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GT-3004",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GT-3005",
+        "quantity_received": 15.0
+      }
+    ]
+  },
+  "PO-2026-04-00123": {
+    "id": "GR-00123",
+    "po_id": "PO-2026-04-00123",
+    "receipt_date": "2026-04-18",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-SKU-5001",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SKU-5002",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-SKU-5003",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-SKU-5004",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-SKU-5005",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-SKU-5006",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-SKU-5007",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-SKU-5008",
+        "quantity_received": 30.0
+      }
+    ]
+  },
+  "PO-2026-01-00089": {
+    "id": "GR-00089",
+    "po_id": "PO-2026-01-00089",
+    "receipt_date": "2026-01-24",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-02-00456": {
+    "id": "GR-00456",
+    "po_id": "PO-2026-02-00456",
+    "receipt_date": "2026-02-01",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FLAT-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WH-002",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-LTL-003",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-INS-004",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-DOC-005",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-FUEL-006",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-LAB-007",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-EX-008",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-04-00345": {
+    "id": "GR-00345",
+    "po_id": "PO-2026-04-00345",
+    "receipt_date": "2026-04-11",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-WH-002",
+        "quantity_received": 15.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-LTL-003",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-INS-004",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "See Delivery Note DN-2026-04-001": {
+    "id": "GR-001",
+    "po_id": "See Delivery Note DN-2026-04-001",
+    "receipt_date": "2026-04-03",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-004",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-005",
+        "quantity_received": 12.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-006",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-007",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-008",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-04-22222": {
+    "id": "GR-22222",
+    "po_id": "PO-2026-04-22222",
+    "receipt_date": "2026-04-07",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-001",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-002",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-003",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-004",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-005",
+        "quantity_received": 12.0
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-006",
+        "quantity_received": 40.0
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-007",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-008",
+        "quantity_received": 25.0
+      }
+    ]
+  },
+  "PO-INFERRED-P002-57819": {
+    "id": "GR-57819",
+    "po_id": "PO-INFERRED-P002-57819",
+    "receipt_date": "2026-01-08",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "LTL-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FCL-002",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 3,
+        "sku": "WH-001",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "INSP-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 5,
+        "sku": "DOC-001",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-00100": {
+    "id": "GR-00100",
+    "po_id": "PO-2026-01-00100",
+    "receipt_date": "2025-12-31",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "WH-001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "TR-022",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 3,
+        "sku": "PKG-100",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 4,
+        "sku": "PKG-110",
+        "quantity_received": 15.0
+      },
+      {
+        "line_no": 5,
+        "sku": "EQ-300",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 6,
+        "sku": "EQ-400",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 7,
+        "sku": "SUP-050",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 8,
+        "sku": "SUP-060",
+        "quantity_received": 20.0
+      }
+    ]
+  },
+  "PO-2026-04-00432": {
+    "id": "GR-00432",
+    "po_id": "PO-2026-04-00432",
+    "receipt_date": "2026-03-31",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-PK-001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-PK-002",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-PK-003",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-SH-001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-SH-002",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-PK-004",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-PK-005",
+        "quantity_received": 15.0
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-AD-001",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-04-00999": {
+    "id": "GR-00999",
+    "po_id": "PO-2026-04-00999",
+    "receipt_date": "2026-04-19",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRE-003",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-03-00012": {
+    "id": "GR-00012",
+    "po_id": "PO-2026-03-00012",
+    "receipt_date": "2026-02-28",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHP-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-PAC-002",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "See delivery note DN-2026-04-12345": {
+    "id": "GR-12345",
+    "po_id": "See delivery note DN-2026-04-12345",
+    "receipt_date": "2026-04-16",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "WH-STOR-01",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FRT-HDL-01",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-03-00005": {
+    "id": "GR-00005",
+    "po_id": "PO-2026-03-00005",
+    "receipt_date": "2026-03-08",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "TRK-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-002",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 3,
+        "sku": "PKG-003",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-INFERRED-P002-32486": {
+    "id": "GR-32486",
+    "po_id": "PO-INFERRED-P002-32486",
+    "receipt_date": "2026-03-30",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MAP-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MAP-002",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MAP-003",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-03-11111": {
+    "id": "GR-11111",
+    "po_id": "PO-2026-03-11111",
+    "receipt_date": "2026-03-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FRT-002",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-003",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 3,
+        "sku": "PKG-004",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 4,
+        "sku": "LAB-001",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 5,
+        "sku": "INS-001",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-02-33333": {
+    "id": "GR-33333",
+    "po_id": "PO-2026-02-33333",
+    "receipt_date": "2026-02-15",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-4003",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "N/A": {
+    "id": "GR-N/A",
+    "po_id": "N/A",
+    "receipt_date": "2026-02-18",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-101",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-202",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-303",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-02-00123": {
+    "id": "GR-00123",
+    "po_id": "PO-2026-02-00123",
+    "receipt_date": "2026-02-03",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FREIGHT-STD",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "PKG-MAT",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 3,
+        "sku": "WH-MONTH",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 4,
+        "sku": "LABEL-PRT",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 5,
+        "sku": "CUST-BRK",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 6,
+        "sku": "INSURANCE",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 7,
+        "sku": "FUEL-SUR",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 8,
+        "sku": "DOC-FEE",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-00122": {
+    "id": "GR-00122",
+    "po_id": "PO-2026-01-00122",
+    "receipt_date": "2026-01-16",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FREIGHT-STD",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-98765": {
+    "id": "GR-98765",
+    "po_id": "PO-2026-01-98765",
+    "receipt_date": "2026-01-13",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-PL-001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-DL-002",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-ET-003",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-ST-004",
+        "quantity_received": 12.0
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-LB-005",
+        "quantity_received": 3.0
+      }
+    ]
+  },
+  "PO-2026-03-45678": {
+    "id": "GR-45678",
+    "po_id": "PO-2026-03-45678",
+    "receipt_date": "2026-03-24",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-CR-001",
+        "quantity_received": 6.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-TP-002",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-BU-003",
+        "quantity_received": 8.0
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-LA-004",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-BX-005",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-PA-006",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-SH-007",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-TK-008",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-01-33445": {
+    "id": "GR-33445",
+    "po_id": "PO-2026-01-33445",
+    "receipt_date": "2026-01-17",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "WHS-STOR-001",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FORK-3T",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-04-11223": {
+    "id": "GR-11223",
+    "po_id": "PO-2026-04-11223",
+    "receipt_date": "2026-04-03",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRT-001",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-04-00001": {
+    "id": "GR-00001",
+    "po_id": "PO-2026-04-00001",
+    "receipt_date": "2026-04-01",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHP-001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-SHP-002",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-WRH-001",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-PCK-001",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-LOG-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-INS-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-DIS-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-ADM-001",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-03-12346": {
+    "id": "GR-12346",
+    "po_id": "PO-2026-03-12346",
+    "receipt_date": "2026-03-21",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FR-010",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-005",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 3,
+        "sku": "PK-012",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 4,
+        "sku": "LD-003",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 5,
+        "sku": "IN-010",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-02-12348": {
+    "id": "GR-12348",
+    "po_id": "PO-2026-02-12348",
+    "receipt_date": "2026-01-29",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FR-020",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-008",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 3,
+        "sku": "IN-012",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-00002": {
+    "id": "GR-00002",
+    "po_id": "PO-2026-01-00002",
+    "receipt_date": "2026-01-08",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-002",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-45678": {
+    "id": "GR-45678",
+    "po_id": "PO-2026-01-45678",
+    "receipt_date": "2026-01-18",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-003",
+        "quantity_received": 3.0
+      }
+    ]
+  },
+  "PO-2026-04-78901": {
+    "id": "GR-78901",
+    "po_id": "PO-2026-04-78901",
+    "receipt_date": "2026-03-30",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLG-WD-001",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLG-PL-022",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLG-SG-104",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "DN-2026-04-12345": {
+    "id": "GR-12345",
+    "po_id": "DN-2026-04-12345",
+    "receipt_date": "2026-04-08",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-001",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-002",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-003",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-004",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-005",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-006",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-007",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-008",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "DN-2026-03-54321": {
+    "id": "GR-54321",
+    "po_id": "DN-2026-03-54321",
+    "receipt_date": "2026-03-14",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-010",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-011",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-012",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-02-11223": {
+    "id": "GR-11223",
+    "po_id": "PO-2026-02-11223",
+    "receipt_date": "2026-02-25",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-002",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-003",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-INFERRED-P002-18693": {
+    "id": "GR-18693",
+    "po_id": "PO-INFERRED-P002-18693",
+    "receipt_date": "2026-03-25",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHIP-001",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-INFERRED-P002-64657": {
+    "id": "GR-64657",
+    "po_id": "PO-INFERRED-P002-64657",
+    "receipt_date": "2026-01-07",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRT-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-PAL-002",
+        "quantity_received": 40.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-LAB-003",
+        "quantity_received": 8.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-WHS-004",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-INS-005",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-DOC-006",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-FUE-007",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-ENV-008",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-02-00444": {
+    "id": "GR-00444",
+    "po_id": "PO-2026-02-00444",
+    "receipt_date": "2026-02-23",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FRT-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "STO-002",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 3,
+        "sku": "HDL-003",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 4,
+        "sku": "PKG-004",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 5,
+        "sku": "DOC-005",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 6,
+        "sku": "INS-006",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 7,
+        "sku": "TRK-007",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 8,
+        "sku": "ADM-008",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-INFERRED-P002-64847": {
+    "id": "GR-64847",
+    "po_id": "PO-INFERRED-P002-64847",
+    "receipt_date": "2026-04-25",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "quantity_received": 20.0
+      }
+    ]
+  },
+  "PO-2026-05-67890": {
+    "id": "GR-67890",
+    "po_id": "PO-2026-05-67890",
+    "receipt_date": "2026-04-28",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FR-001",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-04-24680": {
+    "id": "GR-24680",
+    "po_id": "PO-2026-04-24680",
+    "receipt_date": "2026-04-14",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-WH-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WH-002",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-WH-003",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-WH-004",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-WH-005",
+        "quantity_received": 150.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-WH-006",
+        "quantity_received": 40.0
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-WH-007",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-WH-008",
+        "quantity_received": 2.0
+      }
+    ]
+  },
+  "PO-2026-04-98765": {
+    "id": "GR-98765",
+    "po_id": "PO-2026-04-98765",
+    "receipt_date": "2026-04-06",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FREIGHT-002",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WARE-002",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-PACK-001",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-LABEL-001",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-DIST-001",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-RET-001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-INS-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-ADMIN-001",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-01-11223": {
+    "id": "GR-11223",
+    "po_id": "PO-2026-01-11223",
+    "receipt_date": "2026-01-03",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FREIGHT-003",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WARE-003",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-PACK-002",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-LABEL-002",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-ADMIN-002",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-04-13579": {
+    "id": "GR-13579",
+    "po_id": "PO-2026-04-13579",
+    "receipt_date": "2026-04-25",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-004",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-005",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-03-97531": {
+    "id": "GR-97531",
+    "po_id": "PO-2026-03-97531",
+    "receipt_date": "2026-02-27",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-010",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-011",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-012",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-013",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-014",
+        "quantity_received": 1.0
+      }
+    ]
+  },
+  "PO-2026-03-56789": {
+    "id": "GR-56789",
+    "po_id": "PO-2026-03-56789",
+    "receipt_date": "2026-03-02",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "PLT-001",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "BOX-002",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "TAPE-001",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-INFERRED-P002-88479": {
+    "id": "GR-88479",
+    "po_id": "PO-INFERRED-P002-88479",
+    "receipt_date": "2026-02-24",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-010",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-011",
+        "quantity_received": 5.0
+      }
+    ]
+  },
+  "PO-2026-01-00234": {
+    "id": "GR-00234",
+    "po_id": "PO-2026-01-00234",
+    "receipt_date": "2026-01-01",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHP-003",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-WHS-004",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-LAB-001",
+        "quantity_received": 4.0
+      }
+    ]
+  },
+  "PO-2026-03-34567": {
+    "id": "GR-34567",
+    "po_id": "PO-2026-03-34567",
+    "receipt_date": "2026-02-28",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRT-001",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-ARM-002",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-SEG-003",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-DOC-004",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-MAN-005",
+        "quantity_received": 2.0
+      }
+    ]
+  },
+  "DN-2026-02-10-001": {
+    "id": "GR-001",
+    "po_id": "DN-2026-02-10-001",
+    "receipt_date": "2026-02-07",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SKU-1001",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-SKU-1002",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-SKU-1003",
+        "quantity_received": 2.0
+      }
+    ]
+  },
+  "PO-2025-12-12345": {
+    "id": "GR-12345",
+    "po_id": "PO-2025-12-12345",
+    "receipt_date": "2025-12-29",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FB-1001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FB-1002",
+        "quantity_received": 5.0
+      }
+    ]
+  },
+  "PO-2026-04-00067": {
+    "id": "GR-00067",
+    "po_id": "PO-2026-04-00067",
+    "receipt_date": "2026-04-17",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-4015",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-5021",
+        "quantity_received": 3.0
+      }
+    ]
+  },
+  "PO-2026-03-00123": {
+    "id": "GR-00123",
+    "po_id": "PO-2026-03-00123",
+    "receipt_date": "2026-02-26",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-IND-001",
+        "quantity_received": 5.0
+      }
+    ]
+  },
+  "PO-2026-04-00005": {
+    "id": "GR-00005",
+    "po_id": "PO-2026-04-00005",
+    "receipt_date": "2026-04-15",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-01-00003": {
+    "id": "GR-00003",
+    "po_id": "PO-2026-01-00003",
+    "receipt_date": "2026-01-14",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-010",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-011",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-012",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-013",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-014",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-2026-04-45678": {
+    "id": "GR-45678",
+    "po_id": "PO-2026-04-45678",
+    "receipt_date": "2026-04-18",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-004",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-005",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-006",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-007",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-008",
+        "quantity_received": 20.0
+      }
+    ]
+  },
+  "PO-2026-03-10112": {
+    "id": "GR-10112",
+    "po_id": "PO-2026-03-10112",
+    "receipt_date": "2026-03-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-004",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-005",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-01-24680": {
+    "id": "GR-24680",
+    "po_id": "PO-2026-01-24680",
+    "receipt_date": "2026-01-20",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-REGLER-1200",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-SENSOR-1300",
+        "quantity_received": 5.0
+      }
+    ]
+  },
+  "PO-2026-05-11111": {
+    "id": "GR-11111",
+    "po_id": "PO-2026-05-11111",
+    "receipt_date": "2026-04-28",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SCR-M10",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 2,
+        "sku": "NUT-M10",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "WAS-10",
+        "quantity_received": 400.0
+      },
+      {
+        "line_no": 4,
+        "sku": "SEA-10",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 5,
+        "sku": "OIL-F1",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-01-23456": {
+    "id": "GR-23456",
+    "po_id": "PO-2026-01-23456",
+    "receipt_date": "2026-01-11",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "DE-BRG-6205",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "DE-SEAL-001",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "DE-BELT-100",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "DE-GEAR-200",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 5,
+        "sku": "DE-SCREW-50",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-2026-03-12347": {
+    "id": "GR-12347",
+    "po_id": "PO-2026-03-12347",
+    "receipt_date": "2026-03-16",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-017",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-018",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-019",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-020",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-021",
+        "quantity_received": 40.0
+      }
+    ]
+  },
+  "PO-2026-03-22222": {
+    "id": "GR-22222",
+    "po_id": "PO-2026-03-22222",
+    "receipt_date": "2026-04-06",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-4701",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-4702",
+        "quantity_received": 4.0
+      }
+    ]
+  },
+  "PO-2025-10-33333": {
+    "id": "GR-33333",
+    "po_id": "PO-2025-10-33333",
+    "receipt_date": "2025-12-29",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-5101",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-5102",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-5103",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-5104",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-5105",
+        "quantity_received": 2.0
+      }
+    ]
+  },
+  "PO-2026-02-24680": {
+    "id": "GR-24680",
+    "po_id": "PO-2026-02-24680",
+    "receipt_date": "2026-02-12",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-AL-001",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-SC-002",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-BE-003",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-GE-004",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-PU-005",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-SE-006",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-HY-007",
+        "quantity_received": 80.0
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-CO-008",
+        "quantity_received": 300.0
+      }
+    ]
+  },
+  "PO-2026-03-00234": {
+    "id": "GR-00234",
+    "po_id": "PO-2026-03-00234",
+    "receipt_date": "2026-03-23",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-004",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-005",
+        "quantity_received": 15.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-006",
+        "quantity_received": 8.0
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-007",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-008",
+        "quantity_received": 12.0
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-009",
+        "quantity_received": 6.0
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-010",
+        "quantity_received": 40.0
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-011",
+        "quantity_received": 25.0
+      }
+    ]
+  },
+  "PO-2026-04-23456": {
+    "id": "GR-23456",
+    "po_id": "PO-2026-04-23456",
+    "receipt_date": "2026-04-07",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SCHR-001",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-02-34567": {
+    "id": "GR-34567",
+    "po_id": "PO-2026-02-34567",
+    "receipt_date": "2026-02-22",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MUTT-001",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 2,
+        "sku": "UNTER-001",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SCHR-002",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MUTT-002",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FED-001",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-01-13579": {
+    "id": "GR-13579",
+    "po_id": "PO-2026-01-13579",
+    "receipt_date": "2026-01-01",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIG-200",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIG-201",
+        "quantity_received": 20.0
+      }
+    ]
+  },
+  "PO-2026-04-00002": {
+    "id": "GR-00002",
+    "po_id": "PO-2026-04-00002",
+    "receipt_date": "2026-03-30",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-09234",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-18765",
+        "quantity_received": 25.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-54321",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-67890",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-11122",
+        "quantity_received": 20.0
+      }
+    ]
+  },
+  "PO-2026-04-00987": {
+    "id": "GR-00987",
+    "po_id": "PO-2026-04-00987",
+    "receipt_date": "2026-04-24",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-006",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-007",
+        "quantity_received": 40.0
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-008",
+        "quantity_received": 25.0
+      }
+    ]
+  },
+  "PO-2026-04-00555": {
+    "id": "GR-00555",
+    "po_id": "PO-2026-04-00555",
+    "receipt_date": "2026-04-17",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-BOLT-001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-NUT-002",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-WASH-003",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-GEAR-004",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-BEAR-005",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-SEAL-006",
+        "quantity_received": 150.0
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-SPR-007",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-CAB-008",
+        "quantity_received": 250.0
+      }
+    ]
+  },
+  "PO-2026-01-00987": {
+    "id": "GR-00987",
+    "po_id": "PO-2026-01-00987",
+    "receipt_date": "2026-01-19",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-RS-101",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-CP-202",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-DI-303",
+        "quantity_received": 2000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-TR-404",
+        "quantity_received": 1500.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-IC-505",
+        "quantity_received": 300.0
+      }
+    ]
+  },
+  "PO-2026-03-00126": {
+    "id": "GR-00126",
+    "po_id": "PO-2026-03-00126",
+    "receipt_date": "2026-03-19",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MS-2MM",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SS-ROD-12",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 3,
+        "sku": "BR-NUT-M10",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "CU-WIRE-1.5",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 5,
+        "sku": "AL-ANG-50",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 6,
+        "sku": "PVC-PIPE-1",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 7,
+        "sku": "RUB-GASKET",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 8,
+        "sku": "PAINT-COAT",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-03-00003": {
+    "id": "GR-00003",
+    "po_id": "PO-2026-03-00003",
+    "receipt_date": "2026-03-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "quantity_received": 2000.0
+      }
+    ]
+  },
+  "PO-2026-01-12347": {
+    "id": "GR-12347",
+    "po_id": "PO-2026-01-12347",
+    "receipt_date": "2026-01-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HSN 7208",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "HSN 7310",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 3,
+        "sku": "HSN 3926",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-02-00005": {
+    "id": "GR-00005",
+    "po_id": "PO-2026-02-00005",
+    "receipt_date": "2026-02-10",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "quantity_received": 25.0
+      }
+    ]
+  },
+  "PO-2026-03-00001": {
+    "id": "GR-00001",
+    "po_id": "PO-2026-03-00001",
+    "receipt_date": "2026-03-12",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-202",
+        "quantity_received": 1000.0
+      }
+    ]
+  },
+  "PO-2026-01-00456": {
+    "id": "GR-00456",
+    "po_id": "PO-2026-01-00456",
+    "receipt_date": "2026-01-24",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-006",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-007",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-008",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-02-56789": {
+    "id": "GR-56789",
+    "po_id": "PO-2026-02-56789",
+    "receipt_date": "2026-02-21",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SS-SHEET-3MM",
+        "quantity_received": 50.0
+      }
+    ]
+  },
+  "PO-2026-04-01234": {
+    "id": "GR-01234",
+    "po_id": "PO-2026-04-01234",
+    "receipt_date": "2026-04-18",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MUM-ELEC-102",
+        "quantity_received": 1.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MUM-CABL-203",
+        "quantity_received": 3.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MUM-INST-301",
+        "quantity_received": 5.0
+      }
+    ]
+  },
+  "PO-2026-04-33333": {
+    "id": "GR-33333",
+    "po_id": "PO-2026-04-33333",
+    "receipt_date": "2026-04-03",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-010",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-011",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-012",
+        "quantity_received": 30.0
+      }
+    ]
+  },
+  "PO-2026-04-97531": {
+    "id": "GR-97531",
+    "po_id": "PO-2026-04-97531",
+    "receipt_date": "2026-04-24",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001-B",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002-S",
+        "quantity_received": 2000.0
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003-N",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004-P",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005-V",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-006-Q",
+        "quantity_received": 400.0
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-007-T",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-008-F",
+        "quantity_received": 150.0
+      }
+    ]
+  },
+  "PO-2025-12-22222": {
+    "id": "GR-22222",
+    "po_id": "PO-2025-12-22222",
+    "receipt_date": "2026-01-08",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-006",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-007",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-008",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 4,
+        "sku": "SP-009",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 5,
+        "sku": "SP-010",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 6,
+        "sku": "SP-011",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 7,
+        "sku": "SP-012",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 8,
+        "sku": "SP-013",
+        "quantity_received": 100.0
+      }
+    ]
+  },
+  "PO-2026-01-00045": {
+    "id": "GR-00045",
+    "po_id": "PO-2026-01-00045",
+    "receipt_date": "2026-01-03",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-0101",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-0202",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-01-00111": {
+    "id": "GR-00111",
+    "po_id": "PO-2026-01-00111",
+    "receipt_date": "2025-12-29",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MC-001",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-05-12345": {
+    "id": "GR-12345",
+    "po_id": "PO-2026-05-12345",
+    "receipt_date": "2026-04-28",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "COMP-001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "COMP-002",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-03-00124": {
+    "id": "GR-00124",
+    "po_id": "PO-2026-03-00124",
+    "receipt_date": "2026-03-25",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "PAR-M8-30",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "POR-M8",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "ARR-M8",
+        "quantity_received": 500.0
+      }
+    ]
+  },
+  "PO-2026-01-05678": {
+    "id": "GR-05678",
+    "po_id": "PO-2026-01-05678",
+    "receipt_date": "2026-01-01",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-006",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-03-12349": {
+    "id": "GR-12349",
+    "po_id": "PO-2026-03-12349",
+    "receipt_date": "2026-03-09",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "RES-1001",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 2,
+        "sku": "CAP-2200",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 3,
+        "sku": "DIO-4004",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 4,
+        "sku": "TRANS-2N2222",
+        "quantity_received": 40.0
+      },
+      {
+        "line_no": 5,
+        "sku": "CONN-USB",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 6,
+        "sku": "LED-RED",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 7,
+        "sku": "IC-555",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 8,
+        "sku": "PCB-PROTO",
+        "quantity_received": 25.0
+      }
+    ]
+  },
+  "PO-2026-04-34567": {
+    "id": "GR-34567",
+    "po_id": "PO-2026-04-34567",
+    "receipt_date": "2026-04-27",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-2026-001",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-2026-002",
+        "quantity_received": 20.0
+      }
+    ]
+  },
+  "PO-2026-05-98765": {
+    "id": "GR-98765",
+    "po_id": "PO-2026-05-98765",
+    "receipt_date": "2026-01-01",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "quantity_received": 5.0
+      }
+    ]
+  },
+  "PO-2026-03-00002": {
+    "id": "GR-00002",
+    "po_id": "PO-2026-03-00002",
+    "receipt_date": "2026-03-20",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MOT-001",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 2,
+        "sku": "CAB-010",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SEN-002",
+        "quantity_received": 30.0
+      },
+      {
+        "line_no": 4,
+        "sku": "CON-001",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FON-001",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-02-01567": {
+    "id": "GR-01567",
+    "po_id": "PO-2026-02-01567",
+    "receipt_date": "2026-02-18",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-HYD-601",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-PNEU-702",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-SENS-803",
+        "quantity_received": 15.0
+      },
+      {
+        "line_no": 4,
+        "sku": "SP-FAST-904",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 5,
+        "sku": "SP-TOOL-105",
+        "quantity_received": 2.0
+      }
+    ]
+  },
+  "PO-2026-02-00777": {
+    "id": "GR-00777",
+    "po_id": "PO-2026-02-00777",
+    "receipt_date": "2026-02-13",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "quantity_received": 1000.0
+      }
+    ]
+  },
+  "PO-2026-03-00567": {
+    "id": "GR-00567",
+    "po_id": "PO-2026-03-00567",
+    "receipt_date": "2026-02-26",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-RES-001",
+        "quantity_received": 10.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-CAP-002",
+        "quantity_received": 20.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-DIO-003",
+        "quantity_received": 5.0
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-TRA-004",
+        "quantity_received": 8.0
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-CON-005",
+        "quantity_received": 15.0
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-LED-006",
+        "quantity_received": 2.0
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-IND-007",
+        "quantity_received": 12.0
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-CIR-008",
+        "quantity_received": 6.0
+      }
+    ]
+  },
+  "PO-2026-02-00003": {
+    "id": "GR-00003",
+    "po_id": "PO-2026-02-00003",
+    "receipt_date": "2026-02-19",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "quantity_received": 500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "quantity_received": 1000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "quantity_received": 200.0
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "quantity_received": 50.0
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-006",
+        "quantity_received": 100.0
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-007",
+        "quantity_received": 300.0
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-008",
+        "quantity_received": 10.0
+      }
+    ]
+  },
+  "PO-2026-03-23456": {
+    "id": "GR-23456",
+    "po_id": "PO-2026-03-23456",
+    "receipt_date": "2026-03-31",
+    "warehouse": "WH-01",
+    "receiver": "G. Sato",
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-PEC-009",
+        "quantity_received": 4.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-PEC-010",
+        "quantity_received": 8.0
+      }
+    ]
+  }
+}

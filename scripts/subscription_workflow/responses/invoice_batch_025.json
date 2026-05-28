@@ -1,0 +1,378 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260219_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-19",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1500 Industrial Blvd, Suite 200\nDetroit, MI 48201\nUSA",
+      "vendor_tax_id": "EIN 38-1234567",
+      "buyer_name": "NexGen Retail Inc.",
+      "buyer_address": "123 Commerce Drive, Suite 400\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "Sarah Johnson, sarah.johnson@nexgenretail.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-CB-001",
+        "description": "Corrugated Boxes (12x12x12) - Pallet of 500",
+        "quantity": 2.0,
+        "unit_price": 45.50,
+        "line_total": 91.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-TP-002",
+        "description": "Shipping Tape 2\" x 110 yards - Case of 48",
+        "quantity": 3.0,
+        "unit_price": 12.75,
+        "line_total": 38.25
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-BL-003",
+        "description": "Bubble Wrap Roll 12\" x 175 ft",
+        "quantity": 5.0,
+        "unit_price": 8.20,
+        "line_total": 41.00
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-LB-004",
+        "description": "Label Maker Replacement Cartridge",
+        "quantity": 10.0,
+        "unit_price": 15.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-SD-005",
+        "description": "Stretch Wrap 500mm x 300m - 4 rolls",
+        "quantity": 2.0,
+        "unit_price": 22.30,
+        "line_total": 44.60
+      }
+    ],
+    "subtotal": 364.85,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0825,
+        "amount": 30.10
+      }
+    ],
+    "total": 395.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Total rounded up to nearest dollar (394.95 → 395). Hand-written note 'Please expedite' appears at bottom. Scanned PDF layout with inconsistent header placement."
+  },
+  {
+    "invoice_id": "P004_INV_20260425_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-67890",
+    "invoice_date": "2026-04-25",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Unit 12, Industrial Estate, Andheri East\nMumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1\nPAN: AABCM1234C",
+      "buyer_name": "Apex Electronics Pvt Ltd",
+      "buyer_address": "45 MG Road\nBangalore 560001\nIndia",
+      "buyer_po_contact": "Ravi Sharma, ravi.sharma@apexelectronics.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-EL-001",
+        "description": "Electronic Component Resistor 10k Ohm (HSN: 8533.21)",
+        "quantity": 1000.0,
+        "unit_price": 1.50,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-EL-002",
+        "description": "Capacitor 100uF (HSN 8532.22)",
+        "quantity": 500.0,
+        "unit_price": 3.20,
+        "line_total": 1600.00
+      }
+    ],
+    "subtotal": 3100.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 558.00
+      }
+    ],
+    "total": 3658.00,
+    "error_injected": "HSN_CODE_FORMATTING_INCONSISTENT",
+    "ground_truth_note": "Two line items: first HSN includes dash (8533.21), second omits dash (8532.22). Extractor should normalize or flag inconsistency. Tax correctly IGST 18% for inter-state supply. Cross-currency to USD may be common."
+  },
+  {
+    "invoice_id": "P004_INV_20260107_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-07",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Unit 12, Industrial Estate, Andheri East\nMumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1\nPAN: AABCM1234C",
+      "buyer_name": "Apex Electronics Pvt Ltd",
+      "buyer_address": "45 MG Road\nBangalore 560001\nIndia",
+      "buyer_po_contact": "Ravi Sharma, ravi.sharma@apexelectronics.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-ST-001",
+        "description": "Steel Rods 12mm (HSN 7214.20)",
+        "quantity": 100.0,
+        "unit_price": 250.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-AL-002",
+        "description": "Aluminium Sheets 2mm (HSN 7606.12)",
+        "quantity": 50.0,
+        "unit_price": 800.00,
+        "line_total": 40000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-CW-003",
+        "description": "Copper Wire 1.5mm (HSN 7408.11)",
+        "quantity": 200.0,
+        "unit_price": 120.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-PV-004",
+        "description": "PVC Pipes 2 inch (HSN 3917.21)",
+        "quantity": 300.0,
+        "unit_price": 45.00,
+        "line_total": 13500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-BR-005",
+        "description": "Brass Fittings (HSN 7412.20)",
+        "quantity": 150.0,
+        "unit_price": 60.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-RG-006",
+        "description": "Rubber Gaskets (HSN 4016.93)",
+        "quantity": 500.0,
+        "unit_price": 12.00,
+        "line_total": 6000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-NB-007",
+        "description": "Nuts and Bolts M10 (HSN 7318.15)",
+        "quantity": 1000.0,
+        "unit_price": 5.00,
+        "line_total": 5000.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-LO-008",
+        "description": "Lubricant Oil (HSN 2710.19)",
+        "quantity": 20.0,
+        "unit_price": 350.00,
+        "line_total": 7000.00
+      }
+    ],
+    "subtotal": 129500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 11655.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 11655.00
+      }
+    ],
+    "total": 152810.00,
+    "error_injected": "GST_MISROUTED",
+    "ground_truth_note": "Invoice shows CGST and SGST (9% each) for an inter-state supply; should be IGST 18%. Extractor should flag misrouting. HSN codes appear with and without dashes as a quirk."
+  },
+  {
+    "invoice_id": "P002_INV_20260116_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-98765",
+    "invoice_date": "2026-01-16",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1500 Industrial Blvd, Suite 200\nDetroit, MI 48201\nUSA",
+      "vendor_tax_id": "EIN 38-1234567",
+      "buyer_name": "NexGen Retail Inc.",
+      "buyer_address": "123 Commerce Drive, Suite 400\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "Sarah Johnson, sarah.johnson@nexgenretail.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-PL-001",
+        "description": "Plastic Pallets 48x40 - Heavy Duty",
+        "quantity": 10.0,
+        "unit_price": 35.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-DL-002",
+        "description": "Dunnage Bags 48x48",
+        "quantity": 25.0,
+        "unit_price": 8.50,
+        "line_total": 212.50
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-ET-003",
+        "description": "Edge Protectors 2x2x48 - Box of 100",
+        "quantity": 4.0,
+        "unit_price": 18.75,
+        "line_total": 75.00
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-ST-004",
+        "description": "Stretch Film Hand Rolls 5\" x 1000 ft",
+        "quantity": 12.0,
+        "unit_price": 6.90,
+        "line_total": 82.80
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-LB-005",
+        "description": "Laser Labels 8.5x11 - 100 sheets",
+        "quantity": 3.0,
+        "unit_price": 22.00,
+        "line_total": 66.00
+      }
+    ],
+    "subtotal": 786.30,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0825,
+        "amount": 64.87
+      }
+    ],
+    "total": 852.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Total rounded up to nearest dollar (851.17 → 852). Scanned PDF with hand-written note 'Deliver to dock 4'. Header placement slightly shifted."
+  },
+  {
+    "invoice_id": "P002_INV_20260327_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-45678",
+    "invoice_date": "2026-03-27",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1500 Industrial Blvd, Suite 200\nDetroit, MI 48201\nUSA",
+      "vendor_tax_id": "EIN 38-1234567",
+      "buyer_name": "NexGen Retail Inc.",
+      "buyer_address": "123 Commerce Drive, Suite 400\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "Sarah Johnson, sarah.johnson@nexgenretail.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-CR-001",
+        "description": "Cardboard Rolls 48\" x 200 ft",
+        "quantity": 6.0,
+        "unit_price": 28.50,
+        "line_total": 171.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-TP-002",
+        "description": "Polypropylene Strapping 1/2\" x 5000 ft",
+        "quantity": 4.0,
+        "unit_price": 15.25,
+        "line_total": 61.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-BU-003",
+        "description": "Bubble Cushioning Roll 24\" x 250 ft",
+        "quantity": 8.0,
+        "unit_price": 19.80,
+        "line_total": 158.40
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-LA-004",
+        "description": "Label Applicator Handheld",
+        "quantity": 2.0,
+        "unit_price": 45.00,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-BX-005",
+        "description": "Box Sealer Tape 2\" x 1000 yd - Case of 36",
+        "quantity": 1.0,
+        "unit_price": 112.00,
+        "line_total": 112.00
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-PA-006",
+        "description": "Packing Peanuts 10 cu ft Bag",
+        "quantity": 5.0,
+        "unit_price": 14.50,
+        "line_total": 72.50
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-SH-007",
+        "description": "Shrink Wrap 20\" x 1000 ft - 4 rolls",
+        "quantity": 3.0,
+        "unit_price": 32.00,
+        "line_total": 96.00
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-TK-008",
+        "description": "Tack Cloth - Box of 50",
+        "quantity": 10.0,
+        "unit_price": 4.25,
+        "line_total": 42.50
+      }
+    ],
+    "subtotal": 803.40,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0825,
+        "amount": 66.28
+      }
+    ],
+    "total": 870.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Total rounded up to nearest dollar (869.68 → 870). Hand-written note 'Thank you!' on top margin. Scanned PDF with header fields not aligned."
+  }
+]
+```

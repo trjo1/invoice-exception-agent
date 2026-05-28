@@ -1,0 +1,315 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260415_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-15",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Mumbai, Maharashtra 400001, India",
+      "vendor_tax_id": "GSTIN: 27AABCB1234C1Z5, PAN: AABCB1234C",
+      "buyer_name": "Global Manufacturing Inc.",
+      "buyer_address": "456 Tech Park, Bangalore, Karnataka 560001, India",
+      "buyer_po_contact": "Rajesh Kumar, rajesh.kumar@globalmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MS-ROD-12",
+        "description": "Steel rods 12mm, HSN 7214-20",
+        "quantity": 100,
+        "unit_price": 150.00,
+        "line_total": 15000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MS-ROD-16",
+        "description": "Steel rods 16mm, HSN 721420",
+        "quantity": 50,
+        "unit_price": 200.00,
+        "line_total": 10000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MS-PLATE-10",
+        "description": "Steel plates 10mm, HSN 7208-51",
+        "quantity": 20,
+        "unit_price": 500.00,
+        "line_total": 10000.00
+      }
+    ],
+    "subtotal": 35000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 6300.00
+      }
+    ],
+    "total": 41300.00,
+    "error_injected": "HSN_CODE_FORMAT_INCONSISTENCY",
+    "ground_truth_note": "Invoice contains HSN codes with inconsistent formatting: line 1 uses '7214-20' (with dash), line 2 uses '721420' (without dash), line 3 uses '7208-51' (with dash). The extractor should flag this inconsistency."
+  },
+  {
+    "invoice_id": "P005_INV_20260125_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-01-25",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brasil. Boleto: 34191.23456 67890.123456 78901.234567 1 12345678901234",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Manufacturing Inc.",
+      "buyer_address": "Rua do Comércio, 200, Rio de Janeiro, RJ 20010-010, Brasil",
+      "buyer_po_contact": "Maria Silva, maria.silva@globalmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "PAR-001",
+        "description": "Parafuso de aço (Steel screw) M8x30",
+        "quantity": 500,
+        "unit_price": 2.50,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "POR-001",
+        "description": "Porca de aço (Steel nut) M8",
+        "quantity": 500,
+        "unit_price": 1.20,
+        "line_total": 600.00
+      }
+    ],
+    "subtotal": 1850.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 333.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 185.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 30.53
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 140.60
+      }
+    ],
+    "total": 2539.13,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e invoice with multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) and boleto bancário reference. All fields correct."
+  },
+  {
+    "invoice_id": "P004_INV_20260301_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-01",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Mumbai, Maharashtra 400001, India",
+      "vendor_tax_id": "GSTIN: 27AABCB1234C1Z5, PAN: AABCB1234C",
+      "buyer_name": "Global Manufacturing Inc.",
+      "buyer_address": "456 Tech Park, Bangalore, Karnataka 560001, India",
+      "buyer_po_contact": "Rajesh Kumar, rajesh.kumar@globalmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MS-ROD-20",
+        "description": "Steel rods 20mm, HSN 7214-30",
+        "quantity": 200,
+        "unit_price": 180.00,
+        "line_total": 36000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MS-ROD-25",
+        "description": "Steel rods 25mm, HSN 7214-40",
+        "quantity": 150,
+        "unit_price": 220.00,
+        "line_total": 33000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MS-ANGLE-50",
+        "description": "Steel angle 50x50mm, HSN 7216-10",
+        "quantity": 80,
+        "unit_price": 350.00,
+        "line_total": 28000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MS-CHAN-100",
+        "description": "Steel channel 100mm, HSN 7216-20",
+        "quantity": 60,
+        "unit_price": 400.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MS-PLATE-20",
+        "description": "Steel plate 20mm, HSN 7208-52",
+        "quantity": 30,
+        "unit_price": 600.00,
+        "line_total": 18000.00
+      }
+    ],
+    "subtotal": 139000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 25020.00
+      }
+    ],
+    "total": 164020.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. with consistent HSN codes (all with dashes), proper GST breakdown, and cross-currency USD reference. No errors."
+  },
+  {
+    "invoice_id": "P003_INV_20260112_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-98765",
+    "invoice_date": "2026-01-12",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 10, 60327 Frankfurt am Main, Deutschland\nSEPA: DE89 3704 0044 0532 0130 00",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Manufacturing Inc.",
+      "buyer_address": "Rue de la Paix, 75002 Paris, France",
+      "buyer_po_contact": "John Smith, john.smith@globalmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "STA-001",
+        "description": "Stahlstangen 12mm (Steel rods 12mm)",
+        "quantity": 100,
+        "unit_price": 15.00,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "STA-002",
+        "description": "Stahlplatten 10mm (Steel plates 10mm)",
+        "quantity": 50,
+        "unit_price": 25.00,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SCH-001",
+        "description": "Schrauben M10 (Screws M10)",
+        "quantity": 200,
+        "unit_price": 0.50,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MUT-001",
+        "description": "Muttern M10 (Nuts M10)",
+        "quantity": 200,
+        "unit_price": 0.30,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 5,
+        "sku": "WER-001",
+        "description": "Werkzeugkasten (Tool box)",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 3360.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 3360.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH with reverse-charge VAT (0% charged) for intra-EU supply to France. SEPA bank details included. Bilingual descriptions (German primary, English secondary)."
+  },
+  {
+    "invoice_id": "P005_INV_20260131_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-13579",
+    "invoice_date": "2026-01-31",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brasil. Boleto: 34191.23456 67890.123456 78901.234567 1 12345678901234",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Manufacturing Inc.",
+      "buyer_address": "Rua do Comércio, 200, Rio de Janeiro, RJ 20010-010, Brasil",
+      "buyer_po_contact": "Maria Silva, maria.silva@globalmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ENG-001",
+        "description": "Motor elétrico 5HP (Electric motor 5HP)",
+        "quantity": 10,
+        "unit_price": 850.00,
+        "line_total": 8500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "BOM-001",
+        "description": "Bomba hidráulica (Hydraulic pump)",
+        "quantity": 5,
+        "unit_price": 1200.00,
+        "line_total": 6000.00
+      }
+    ],
+    "subtotal": 14500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 2610.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 1450.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 239.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 1102.00
+      }
+    ],
+    "total": 19901.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e invoice with Brazilian taxes (ICMS, IPI, PIS, COFINS) and boleto bancário reference. All fields correct."
+  }
+]
+```

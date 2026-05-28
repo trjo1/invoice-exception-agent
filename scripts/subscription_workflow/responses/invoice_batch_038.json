@@ -1,0 +1,310 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260208_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-00001",
+    "invoice_date": "2026-02-08",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 10, 60329 Frankfurt am Main, Germany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "42 Rue de Rivoli, 75001 Paris, France",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Hydraulikpumpe (Hydraulic Pump) - Modell HP-200",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      }
+    ],
+    "subtotal": 900.00,
+    "tax": [],
+    "total": 900.00,
+    "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers",
+    "ground_truth_note": "Invoice to non-DE EU buyer (France) should have reverse-charge VAT (0%). However, the VAT tax line is completely missing from the invoice. Extractor should flag that no VAT is charged and note the missing field."
+  },
+  {
+    "invoice_id": "P005_INV_20260107_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-00002",
+    "invoice_date": "2026-01-07",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Peças, 500, São Paulo, SP 01001-000, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "Avenida Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Parafuso de Aço Inoxidável M10 (Stainless Steel Bolt M10)",
+        "quantity": 100,
+        "unit_price": 0.50,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Porca Sextavada M10 (Hex Nut M10)",
+        "quantity": 100,
+        "unit_price": 0.30,
+        "line_total": 30.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Arruela de Pressão M10 (Spring Washer M10)",
+        "quantity": 200,
+        "unit_price": 0.10,
+        "line_total": 20.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "Mancal de Rolamento (Bearing Housing)",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "Correia Síncrona (Timing Belt) - 100XL",
+        "quantity": 10,
+        "unit_price": 15.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-006",
+        "description": "Sensor de Proximidade (Proximity Sensor) - M12",
+        "quantity": 20,
+        "unit_price": 25.00,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-007",
+        "description": "Válvula Solenoide (Solenoid Valve) - 24VDC",
+        "quantity": 3,
+        "unit_price": 85.00,
+        "line_total": 255.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-008",
+        "description": "Atuador Linear (Linear Actuator) - 200mm",
+        "quantity": 2,
+        "unit_price": 200.00,
+        "line_total": 400.00
+      }
+    ],
+    "subtotal": 2005.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 360.90
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 200.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 33.08
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 152.38
+      }
+    ],
+    "total": 2751.86,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Invoice includes four separate tax lines (ICMS, IPI, PIS, COFINS) typical of Brazilian NF-e. Extractor must correctly parse each tax type and compute total. Boleto bancário reference: Boleto code 12345678901."
+  },
+  {
+    "invoice_id": "P003_INV_20260117_003",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-00003",
+    "invoice_date": "2026-01-17",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 10, 60329 Frankfurt am Main, Germany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "Musterstraße 5, 10115 Berlin, Germany",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-010",
+        "description": "Kugellager (Ball Bearing) - 6205",
+        "quantity": 50,
+        "unit_price": 8.50,
+        "line_total": 425.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-011",
+        "description": "Zahnriemen (Timing Belt) - T5-1000",
+        "quantity": 10,
+        "unit_price": 12.00,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-012",
+        "description": "Dichtungssatz (Seal Kit) - Typ A",
+        "quantity": 20,
+        "unit_price": 15.50,
+        "line_total": 310.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-013",
+        "description": "Hydraulikschlauch (Hydraulic Hose) - 1m",
+        "quantity": 30,
+        "unit_price": 22.00,
+        "line_total": 660.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-014",
+        "description": "Feder (Spring) - Druckfeder 50x5",
+        "quantity": 100,
+        "unit_price": 1.20,
+        "line_total": 120.00
+      }
+    ],
+    "subtotal": 1635.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 310.65
+      }
+    ],
+    "total": 1945.65,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with standard German VAT at 19%. All fields present and correct. SEPA bank details included in vendor address."
+  },
+  {
+    "invoice_id": "P001_INV_20260315_004",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-00004",
+    "invoice_date": "2026-03-15",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "123 Corporate Drive, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-100",
+        "description": "Industrial Sensor Module - ISM-200",
+        "quantity": 5,
+        "unit_price": 1200.00,
+        "line_total": 6000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-101",
+        "description": "Control Board - CB-500",
+        "quantity": 2,
+        "unit_price": 3500.00,
+        "line_total": 7000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-102",
+        "description": "Cable Assembly - CA-100",
+        "quantity": 10,
+        "unit_price": 85.00,
+        "line_total": 850.00
+      }
+    ],
+    "subtotal": 13850.00,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08875,
+        "amount": 1229.19
+      }
+    ],
+    "total": 15079.19,
+    "error_injected": null,
+    "ground_truth_note": "Clean US invoice with New York sales tax. Totals rounded to two decimals. Multi-currency capability noted but invoice in USD."
+  },
+  {
+    "invoice_id": "P004_INV_20260213_005",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-00005",
+    "invoice_date": "2026-02-13",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 7, MIDC Industrial Area, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "PAN: AABCM1234C, GSTIN: 27AABCM1234C1ZJ",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "MG Road, Bangalore, Karnataka 560001, India",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "HSN 8483 - Bearing Housing - BH-200",
+        "quantity": 10,
+        "unit_price": 1500.00,
+        "line_total": 15000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "HSN 8536 - Electrical Switch - ES-100",
+        "quantity": 25,
+        "unit_price": 400.00,
+        "line_total": 10000.00
+      }
+    ],
+    "subtotal": 25000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-GST",
+        "rate": 0.18,
+        "amount": 4500.00
+      }
+    ],
+    "total": 29500.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean Indian invoice with GST at 18%. HSN codes included in line descriptions. Vendor PAN and GSTIN provided in tax ID field. Cross-currency to USD common."
+  }
+]
+```

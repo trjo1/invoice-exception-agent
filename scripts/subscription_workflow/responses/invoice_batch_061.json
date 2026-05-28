@@ -1,0 +1,344 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260302_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-02",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 123\nSão Paulo, SP 01001-000\nBrazil",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "Av. Paulista, 1000\nSão Paulo, SP 01310-100\nBrazil",
+      "buyer_po_contact": "Maria Silva, maria.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "BRG-6205",
+        "description": "Rolamento esférico 6205",
+        "quantity": 10,
+        "unit_price": 45.5,
+        "line_total": 455.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SEAL-001",
+        "description": "Vedação de óleo",
+        "quantity": 20,
+        "unit_price": 12.3,
+        "line_total": 246.0
+      },
+      {
+        "line_no": 3,
+        "sku": "BELT-100",
+        "description": "Correia dentada",
+        "quantity": 5,
+        "unit_price": 89.9,
+        "line_total": 449.5
+      },
+      {
+        "line_no": 4,
+        "sku": "GEAR-200",
+        "description": "Engrenagem helicoidal",
+        "quantity": 2,
+        "unit_price": 320.0,
+        "line_total": 640.0
+      },
+      {
+        "line_no": 5,
+        "sku": "SCREW-50",
+        "description": "Parafuso de fixação",
+        "quantity": 100,
+        "unit_price": 1.5,
+        "line_total": 150.0
+      }
+    ],
+    "subtotal": 1940.5,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 349.29
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.1,
+        "amount": 194.05
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 32.02
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 147.48
+      }
+    ],
+    "total": 2515.86,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Deliberate error: COFINS tax amount (147.48) is omitted from total calculation. Extractor should correctly sum all four taxes to get 2663.34."
+  },
+  {
+    "invoice_id": "P003_INV_20260114_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-23456",
+    "invoice_date": "2026-01-14",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 10\n60327 Frankfurt\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "Münchner Strasse 50\n60329 Frankfurt\nGermany",
+      "buyer_po_contact": "Anna Müller, anna.mueller@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "DE-BRG-6205",
+        "description": "Kugellager 6205 (Ball bearing 6205)",
+        "quantity": 10,
+        "unit_price": 45.5,
+        "line_total": 455.0
+      },
+      {
+        "line_no": 2,
+        "sku": "DE-SEAL-001",
+        "description": "Öldichtung (Oil seal)",
+        "quantity": 20,
+        "unit_price": 12.3,
+        "line_total": 246.0
+      },
+      {
+        "line_no": 3,
+        "sku": "DE-BELT-100",
+        "description": "Zahnriemen (Timing belt)",
+        "quantity": 5,
+        "unit_price": 89.9,
+        "line_total": 449.5
+      },
+      {
+        "line_no": 4,
+        "sku": "DE-GEAR-200",
+        "description": "Schrägverzahnung (Helical gear)",
+        "quantity": 2,
+        "unit_price": 320.0,
+        "line_total": 640.0
+      },
+      {
+        "line_no": 5,
+        "sku": "DE-SCREW-50",
+        "description": "Befestigungsschraube (Fastening screw)",
+        "quantity": 100,
+        "unit_price": 1.5,
+        "line_total": 150.0
+      }
+    ],
+    "subtotal": 1940.5,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 368.7
+      }
+    ],
+    "total": 2309.2,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should extract all fields correctly. VAT at 19% itemized."
+  },
+  {
+    "invoice_id": "P005_INV_20260404_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-34567",
+    "invoice_date": "2026-04-04",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 123\nSão Paulo, SP 01001-000\nBrazil",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "Av. Paulista, 1000\nSão Paulo, SP 01310-100\nBrazil",
+      "buyer_po_contact": "Maria Silva, maria.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "BRG-ROLL-01",
+        "description": "Rolamento de rolos",
+        "quantity": 5,
+        "unit_price": 120.0,
+        "line_total": 600.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SEAL-HYD",
+        "description": "Vedação hidráulica",
+        "quantity": 10,
+        "unit_price": 85.0,
+        "line_total": 850.0
+      },
+      {
+        "line_no": 3,
+        "sku": "BELT-V-200",
+        "description": "Correia em V",
+        "quantity": 8,
+        "unit_price": 55.0,
+        "line_total": 440.0
+      },
+      {
+        "line_no": 4,
+        "sku": "GEAR-CON-01",
+        "description": "Engrenagem cônica",
+        "quantity": 3,
+        "unit_price": 450.0,
+        "line_total": 1350.0
+      },
+      {
+        "line_no": 5,
+        "sku": "SCREW-HEX-10",
+        "description": "Parafuso sextavado",
+        "quantity": 200,
+        "unit_price": 2.5,
+        "line_total": 500.0
+      },
+      {
+        "line_no": 6,
+        "sku": "BUSH-BRZ",
+        "description": "Bucha de bronze",
+        "quantity": 15,
+        "unit_price": 30.0,
+        "line_total": 450.0
+      },
+      {
+        "line_no": 7,
+        "sku": "SPRING-COMP",
+        "description": "Mola de compressão",
+        "quantity": 50,
+        "unit_price": 8.0,
+        "line_total": 400.0
+      },
+      {
+        "line_no": 8,
+        "sku": "RING-RET",
+        "description": "Anel de retenção",
+        "quantity": 100,
+        "unit_price": 4.5,
+        "line_total": 450.0
+      }
+    ],
+    "subtotal": 5040.0,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 907.2
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.1,
+        "amount": 504.0
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 100.8
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 383.04
+      }
+    ],
+    "total": 6935.04,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Deliberate error: PIS tax amount is incorrectly calculated as 2% of subtotal (100.80) instead of 1.65% (83.16). Extractor should detect the discrepancy."
+  },
+  {
+    "invoice_id": "P003_INV_20260104_002",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-45678",
+    "invoice_date": "2026-01-04",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 10\n60327 Frankfurt\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "Münchner Strasse 50\n60329 Frankfurt\nGermany",
+      "buyer_po_contact": "Anna Müller, anna.mueller@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "DE-GEARBOX-01",
+        "description": "Industriegetriebe (Industrial gearbox)",
+        "quantity": 1,
+        "unit_price": 7500.0,
+        "line_total": 7500.0
+      }
+    ],
+    "subtotal": 7500.0,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 1425.0
+      }
+    ],
+    "total": 8925.0,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Single line item with VAT at 19%."
+  },
+  {
+    "invoice_id": "P004_INV_20260224_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-56789",
+    "invoice_date": "2026-02-24",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate\nAndheri East, Mumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCU9603R1ZP, PAN: AABCU9603R",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "MG Road\nBangalore, Karnataka 560001\nIndia",
+      "buyer_po_contact": "Raj Patel, raj.patel@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SS-SHEET-3MM",
+        "description": "Stainless Steel Sheets (HSN 7219)",
+        "quantity": 50,
+        "unit_price": 1200.0,
+        "line_total": 60000.0
+      }
+    ],
+    "subtotal": 60000.0,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 5400.0
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 5400.0
+      }
+    ],
+    "total": 70800.0,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Single line item with HSN code, CGST and SGST at 9% each."
+  }
+]
+```

@@ -1,0 +1,309 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260214_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-14",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "PAN: AABCM1234C, GSTIN: 27AABCM1234C1Z1",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Suite 400, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Industrial Sensor Module (HSN 8471)",
+        "quantity": 10,
+        "unit_price": 1250.00,
+        "line_total": 12500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-042",
+        "description": "Electrical Connector Kit (HSN 8536)",
+        "quantity": 5,
+        "unit_price": 3200.00,
+        "line_total": 16000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-107",
+        "description": "Pressure Gauge Digital (HSN 9027)",
+        "quantity": 2,
+        "unit_price": 4500.00,
+        "line_total": 9000.00
+      }
+    ],
+    "subtotal": 37500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.12,
+        "amount": 4500.00
+      }
+    ],
+    "total": 42000.00,
+    "error_injected": "GST_MISROUTED",
+    "ground_truth_note": "Error: IGST applied at 12% instead of splitting into CGST and SGST at 6% each for intra-state supply. Cross-currency to USD is common but not shown."
+  },
+  {
+    "invoice_id": "P002_INV_20260221_002",
+    "persona_id": "P002",
+    "po_reference": "N/A",
+    "invoice_date": "2026-02-21",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "15 Maple Street, Suite 200, Portland, OR 97201, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Suite 400, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-101",
+        "description": "Shipping Crate Large",
+        "quantity": 20,
+        "unit_price": 45.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-202",
+        "description": "Pallet Jack Standard",
+        "quantity": 3,
+        "unit_price": 150.75,
+        "line_total": 453.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-303",
+        "description": "Stretch Wrap Roll",
+        "quantity": 50,
+        "unit_price": 12.30,
+        "line_total": 615.00
+      }
+    ],
+    "subtotal": 1968.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.0,
+        "amount": 0.0
+      }
+    ],
+    "total": 1968.00,
+    "error_injected": "MISSING_PO_REFERENCE",
+    "ground_truth_note": "PO reference is missing; extractor should infer from delivery note number DN-2026-02-21-001. Hand-written notes and inconsistent header placement present on scanned invoice."
+  },
+  {
+    "invoice_id": "P003_INV_20260409_003",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-98765",
+    "invoice_date": "2026-04-09",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Suite 400, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Hydraulikpumpe (Hydraulic Pump)",
+        "quantity": 2,
+        "unit_price": 850.00,
+        "line_total": 1700.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-022",
+        "description": "Dichtungssatz (Seal Kit)",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-045",
+        "description": "Steuerungseinheit (Control Unit)",
+        "quantity": 1,
+        "unit_price": 3200.00,
+        "line_total": 3200.00
+      }
+    ],
+    "subtotal": 5500.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 1045.00
+      }
+    ],
+    "total": 6545.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with German VAT (19%) and bilingual descriptions. SEPA bank details are present in header but not captured in schema."
+  },
+  {
+    "invoice_id": "P003_INV_20260221_004",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-45678",
+    "invoice_date": "2026-02-21",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Suite 400, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Hydraulikpumpe (Hydraulic Pump)",
+        "quantity": 3,
+        "unit_price": 850.00,
+        "line_total": 2550.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-022",
+        "description": "Dichtungssatz (Seal Kit)",
+        "quantity": 10,
+        "unit_price": 120.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-045",
+        "description": "Steuerungseinheit (Control Unit)",
+        "quantity": 2,
+        "unit_price": 3200.00,
+        "line_total": 6400.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-078",
+        "description": "Ventilblock (Valve Block)",
+        "quantity": 4,
+        "unit_price": 450.00,
+        "line_total": 1800.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-112",
+        "description": "Drucksensor (Pressure Sensor)",
+        "quantity": 6,
+        "unit_price": 210.00,
+        "line_total": 1260.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-156",
+        "description": "Filterelement (Filter Element)",
+        "quantity": 20,
+        "unit_price": 35.00,
+        "line_total": 700.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-189",
+        "description": "Kupplung (Coupling)",
+        "quantity": 8,
+        "unit_price": 65.00,
+        "line_total": 520.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-203",
+        "description": "Schlauch (Hose)",
+        "quantity": 15,
+        "unit_price": 18.50,
+        "line_total": 277.50
+      }
+    ],
+    "subtotal": 14707.50,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 2794.43
+      }
+    ],
+    "total": 17501.93,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with 8 line items, German VAT (19%), and bilingual descriptions. SEPA bank details present."
+  },
+  {
+    "invoice_id": "P003_INV_20260115_005",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-34567",
+    "invoice_date": "2026-01-15",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Suite 400, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Hydraulikpumpe (Hydraulic Pump)",
+        "quantity": 1,
+        "unit_price": 850.00,
+        "line_total": 850.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-022",
+        "description": "Dichtungssatz (Seal Kit)",
+        "quantity": 3,
+        "unit_price": 120.00,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-045",
+        "description": "Steuerungseinheit (Control Unit)",
+        "quantity": 1,
+        "unit_price": 3200.00,
+        "line_total": 3200.00
+      }
+    ],
+    "subtotal": 4410.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 837.90
+      }
+    ],
+    "total": 5247.90,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with 3 line items, German VAT (19%), and bilingual descriptions. SEPA bank details present."
+  }
+]
+```

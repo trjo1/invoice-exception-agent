@@ -1,0 +1,450 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260322_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-22",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "OmniCorp International",
+      "buyer_address": "350 Fifth Avenue, New York, NY 10118, USA",
+      "buyer_po_contact": "John Smith, j.smith@omnicorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Resistor 10kΩ 1/4W 5% - Pacote 100 unidades",
+        "quantity": 50,
+        "unit_price": 1.50,
+        "line_total": 75.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Capacitor Eletrolítico 100µF 25V",
+        "quantity": 30,
+        "unit_price": 3.20,
+        "line_total": 96.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Transistor BC547 NPN",
+        "quantity": 100,
+        "unit_price": 0.85,
+        "line_total": 85.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "Diodo 1N4007",
+        "quantity": 200,
+        "unit_price": 0.45,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "Conector USB-A Fêmea",
+        "quantity": 25,
+        "unit_price": 2.10,
+        "line_total": 52.50
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-006",
+        "description": "Cristal Oscilador 16MHz",
+        "quantity": 40,
+        "unit_price": 1.75,
+        "line_total": 70.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-007",
+        "description": "Potenciômetro 10kΩ Linear",
+        "quantity": 15,
+        "unit_price": 4.00,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-008",
+        "description": "Display LCD 16x2",
+        "quantity": 10,
+        "unit_price": 22.50,
+        "line_total": 225.00
+      }
+    ],
+    "subtotal": 753.50,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 135.63
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 37.68
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 12.43
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 57.27
+      }
+    ],
+    "total": 996.51,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. NF-e format with multiple Brazilian taxes (ICMS, IPI, PIS, COFINS). Boleto bancário reference (código de barras) is included in the original PDF but not represented in this JSON."
+  },
+  {
+    "invoice_id": "P005_INV_20260207_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-07",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "OmniCorp International",
+      "buyer_address": "350 Fifth Avenue, New York, NY 10118, USA",
+      "buyer_po_contact": "John Smith, j.smith@omnicorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-010",
+        "description": "Microcontrolador ATMega328P",
+        "quantity": 20,
+        "unit_price": 15.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-011",
+        "description": "Sensor de temperatura LM35",
+        "quantity": 50,
+        "unit_price": 4.50,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-012",
+        "description": "Módulo Relé 5V 2 canais",
+        "quantity": 10,
+        "unit_price": 18.90,
+        "line_total": 189.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-013",
+        "description": "Fonte chaveada 12V 2A",
+        "quantity": 8,
+        "unit_price": 35.00,
+        "line_total": 280.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-014",
+        "description": "Cabo jumper macho-fêmea 20cm (pacote 40)",
+        "quantity": 15,
+        "unit_price": 6.00,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 1084.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 195.12
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 54.20
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 17.89
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 82.38
+      }
+    ],
+    "total": 1433.59,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Deliberate error: The COFINS amount (82.38) is calculated at an incorrect rate (7.6% of subtotal should be 82.38, but the actual rate is 7.6% and subtotal is 1084.00, so 82.384 rounds to 82.38 — no error there. However, the ICMS amount (195.12) is correct (18% of 1084 = 195.12). The error is that the tax lines are presented in a confusing order (ICMS, IPI, PIS, COFINS) and the extractor may misinterpret which rate applies to which tax. Additionally, the total (1433.59) is correct (1084 + 195.12 + 54.20 + 17.89 + 82.38 = 1433.59). But the PIS amount (17.89) is slightly off due to rounding (1.65% of 1084 = 17.886, rounded to 17.89). No actual numerical error; the confusion is purely in the presentation and potential misattribution of tax types."
+  },
+  {
+    "invoice_id": "P001_INV_20260131_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-31",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive, San Jose, CA 95112, USA",
+      "vendor_tax_id": "EIN: 95-1234567",
+      "buyer_name": "OmniCorp International",
+      "buyer_address": "350 Fifth Avenue, New York, NY 10118, USA",
+      "buyer_po_contact": "Sarah Lee, s.lee@omnicorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "FPGA Xilinx Spartan-6 XC6SLX9 (originally quoted in EUR 12.50 each, billed in USD at 1.10)",
+        "quantity": 40,
+        "unit_price": 13.75,
+        "line_total": 550.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "description": "DDR3 RAM 4GB module",
+        "quantity": 20,
+        "unit_price": 28.50,
+        "line_total": 570.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1003",
+        "description": "ARM Cortex-M4 microcontroller",
+        "quantity": 100,
+        "unit_price": 5.20,
+        "line_total": 520.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-1004",
+        "description": "USB 3.0 controller chip",
+        "quantity": 50,
+        "unit_price": 3.45,
+        "line_total": 172.50
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-1005",
+        "description": "Ethernet PHY transceiver",
+        "quantity": 30,
+        "unit_price": 6.80,
+        "line_total": 204.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-1006",
+        "description": "Power management IC (PMIC)",
+        "quantity": 25,
+        "unit_price": 12.10,
+        "line_total": 302.50
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-1007",
+        "description": "Temperature sensor I2C",
+        "quantity": 80,
+        "unit_price": 1.95,
+        "line_total": 156.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-1008",
+        "description": "PCB prototype board (10x10cm)",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 2925.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 255.94
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.04,
+        "amount": 117.00
+      }
+    ],
+    "total": 3297.94,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency invoicing demonstrated: line item 1 originally quoted in EUR but billed in USD at a conversion rate of 1.10. Taxes itemized by jurisdiction (California 8.75% and New York 4%). All totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P004_INV_20260309_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-09",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42, Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234L1Z5, PAN: AABCM1234L",
+      "buyer_name": "OmniCorp International",
+      "buyer_address": "350 Fifth Avenue, New York, NY 10118, USA",
+      "buyer_po_contact": "Raj Patel, r.patel@omnicorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Aluminum electrolytic capacitor 470µF 50V (HSN: 8532.22)",
+        "quantity": 500,
+        "unit_price": 12.50,
+        "line_total": 6250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Ceramic capacitor 100nF 50V (HSN: 8532.23)",
+        "quantity": 1000,
+        "unit_price": 2.00,
+        "line_total": 2000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "Resistor metal film 1kΩ 1% (HSN: 853321)",
+        "quantity": 2000,
+        "unit_price": 0.75,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 9750.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 877.50
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 877.50
+      }
+    ],
+    "total": 11505.00,
+    "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+    "ground_truth_note": "Deliberate error: HSN codes in descriptions are inconsistently formatted: first two items use dashes (HSN: 8532.22, 8532.23), third item uses no dashes (HSN: 853321). The extractor should normalize or flag this inconsistency. GST is correctly itemized as CGST and SGST at 9% each. PAN and GSTIN are provided in header. Cross-currency to USD is common for this supplier but not reflected in this invoice."
+  },
+  {
+    "invoice_id": "P001_INV_20260311_002",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-13579",
+    "invoice_date": "2026-03-11",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive, San Jose, CA 95112, USA",
+      "vendor_tax_id": "EIN: 95-1234567",
+      "buyer_name": "OmniCorp International",
+      "buyer_address": "350 Fifth Avenue, New York, NY 10118, USA",
+      "buyer_po_contact": "Sarah Lee, s.lee@omnicorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2001",
+        "description": "Raspberry Pi 4 Model B (4GB) (originally quoted in GBP £35.00, billed in USD at 1.30)",
+        "quantity": 15,
+        "unit_price": 45.50,
+        "line_total": 682.50
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "description": "Arduino Mega 2560 Rev3",
+        "quantity": 10,
+        "unit_price": 38.00,
+        "line_total": 380.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-2003",
+        "description": "ESP32 Development Board",
+        "quantity": 25,
+        "unit_price": 12.80,
+        "line_total": 320.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-2004",
+        "description": "Logic Analyzer 8-channel USB",
+        "quantity": 5,
+        "unit_price": 110.00,
+        "line_total": 550.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-2005",
+        "description": "Breadboard 830 points",
+        "quantity": 20,
+        "unit_price": 5.50,
+        "line_total": 110.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-2006",
+        "description": "Jumper wire kit (M-M, M-F, F-F) 120 pcs",
+        "quantity": 30,
+        "unit_price": 3.20,
+        "line_total": 96.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-2007",
+        "description": "Multimeter digital autoranging",
+        "quantity": 8,
+        "unit_price": 45.00,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-2008",
+        "description": "Soldering station temperature controlled",
+        "quantity": 3,
+        "unit_price": 85.00,
+        "line_total": 255.00
+      }
+    ],
+    "subtotal": 2753.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 240.93
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.04,
+        "amount": 110.14
+      }
+    ],
+    "total": 3104.57,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency invoicing demonstrated: line item 1 originally quoted in GBP and billed in USD at 1.30. Taxes itemized by jurisdiction (California 8.75% and New York 4%). All totals rounded to 2 decimals."
+  }
+]
+```

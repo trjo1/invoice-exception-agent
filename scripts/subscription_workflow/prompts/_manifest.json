@@ -1,0 +1,10 @@
+{
+  "seed": 42,
+  "count": 500,
+  "batch_size": 5,
+  "error_rate": 0.35,
+  "total_batches": 100,
+  "mode": "api",
+  "personas_hash": "101290755b0ecd5a",
+  "generated_at": "2026-05-11T21:42:13"
+}

@@ -1,0 +1,323 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260404_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-04",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP\nBrazil",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "Acme Global Purchasing",
+      "buyer_address": "123 Main St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith\njohn.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Resistor 10k Ohm",
+        "quantity": 100,
+        "unit_price": 0.50,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Capacitor 100uF",
+        "quantity": 50,
+        "unit_price": 1.20,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Transistor BC547",
+        "quantity": 200,
+        "unit_price": 0.30,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "LED Red 5mm",
+        "quantity": 500,
+        "unit_price": 0.10,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "PCB Prototype Board",
+        "quantity": 10,
+        "unit_price": 15.00,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 370.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP",
+        "rate": 0.18,
+        "amount": 66.60
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.10,
+        "amount": 37.00
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.0165,
+        "amount": 6.11
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.076,
+        "amount": 28.12
+      }
+    ],
+    "total": 507.83,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Invoice contains four separate Brazilian tax types (ICMS, IPI, PIS, COFINS) which may confuse extraction. The extractor should correctly parse each tax line and compute total. Also references Boleto bancário payment slip."
+  },
+  {
+    "invoice_id": "P001_INV_20260416_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-16",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "500 Tech Blvd\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Global Purchasing",
+      "buyer_address": "123 Main St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith\njohn.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-100",
+        "description": "Microchip AVR128",
+        "quantity": 25,
+        "unit_price": 12.50,
+        "line_total": 312.50
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-200",
+        "description": "Temperature Sensor",
+        "quantity": 100,
+        "unit_price": 3.75,
+        "line_total": 375.00
+      }
+    ],
+    "subtotal": 687.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 56.72
+      }
+    ],
+    "total": 744.22,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with standard US tax line (CA 8.25%). Multi-currency capability is noted but not used in this invoice."
+  },
+  {
+    "invoice_id": "P005_INV_20260111_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-01-11",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP\nBrazil",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "Acme Global Purchasing",
+      "buyer_address": "123 Main St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith\njohn.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-010",
+        "description": "Motor Driver L298N",
+        "quantity": 20,
+        "unit_price": 8.00,
+        "line_total": 160.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-011",
+        "description": "Servo Motor SG90",
+        "quantity": 30,
+        "unit_price": 5.50,
+        "line_total": 165.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-012",
+        "description": "Ultrasonic Sensor HC-SR04",
+        "quantity": 40,
+        "unit_price": 2.25,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 415.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP",
+        "rate": 0.18,
+        "amount": 74.70
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.10,
+        "amount": 41.50
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.0165,
+        "amount": 6.85
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.076,
+        "amount": 31.54
+      }
+    ],
+    "total": 569.59,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Similar to Invoice 1, contains multiple Brazilian tax types. Extractor should parse ICMS, IPI, PIS, COFINS correctly. Boleto bancário referenced."
+  },
+  {
+    "invoice_id": "P003_INV_20260122_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-11111",
+    "invoice_date": "2026-01-22",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 10\n60327 Frankfurt\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Purchasing",
+      "buyer_address": "123 Main St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith\njohn.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Dichtung (Gasket)",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Lager (Bearing)",
+        "quantity": 50,
+        "unit_price": 8.00,
+        "line_total": 400.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Schraube (Screw) M8",
+        "quantity": 500,
+        "unit_price": 0.20,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-004",
+        "description": "Kabel (Cable) 10m",
+        "quantity": 20,
+        "unit_price": 15.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-005",
+        "description": "Stecker (Connector)",
+        "quantity": 200,
+        "unit_price": 1.50,
+        "line_total": 300.00
+      }
+    ],
+    "subtotal": 1350.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 256.50
+      }
+    ],
+    "total": 1606.50,
+    "error_injected": "Cross-currency edge when buyer is in USD",
+    "ground_truth_note": "Invoice is in EUR while buyer operates in USD. Extractor should flag the currency mismatch and handle cross-currency correctly. Also includes bilingual labels and SEPA bank details."
+  },
+  {
+    "invoice_id": "P003_INV_20260404_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-22222",
+    "invoice_date": "2026-04-04",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 10\n60327 Frankfurt\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Purchasing",
+      "buyer_address": "123 Main St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith\njohn.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-010",
+        "description": "Filter (Filter)",
+        "quantity": 30,
+        "unit_price": 12.00,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-011",
+        "description": "Ventil (Valve)",
+        "quantity": 15,
+        "unit_price": 45.00,
+        "line_total": 675.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-012",
+        "description": "Druckregler (Pressure Regulator)",
+        "quantity": 10,
+        "unit_price": 80.00,
+        "line_total": 800.00
+      }
+    ],
+    "subtotal": 1835.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 348.65
+      }
+    ],
+    "total": 2183.65,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with standard DE VAT 19%, bilingual labels, SEPA bank details."
+  }
+]
+```

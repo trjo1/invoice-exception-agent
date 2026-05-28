@@ -1,0 +1,319 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260412_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-12",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Oak Street, Portland, OR 97201",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Chicago, IL 60601",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHIP-001",
+        "description": "Standard overnight shipping - small package",
+        "quantity": 1,
+        "unit_price": 20.00,
+        "line_total": 20
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-SHIP-002",
+        "description": "Freight handling fee",
+        "quantity": 2,
+        "unit_price": 15.00,
+        "line_total": 30
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-SHIP-003",
+        "description": "Insurance - value up to $500",
+        "quantity": 1,
+        "unit_price": 15.00,
+        "line_total": 15
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-SHIP-004",
+        "description": "Fuel surcharge - domestic",
+        "quantity": 1,
+        "unit_price": 25.00,
+        "line_total": 25
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-SHIP-005",
+        "description": "Residential delivery fee",
+        "quantity": 1,
+        "unit_price": 10.00,
+        "line_total": 10
+      }
+    ],
+    "subtotal": 100,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.08,
+        "amount": 8.00
+      }
+    ],
+    "total": 108,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Handwritten note on scan: 'Thanks for the business!'. Header placement is slightly offset but all fields present. Totals are rounded up to nearest dollar."
+  },
+  {
+    "invoice_id": "P005_INV_20260318_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "18/03/2026",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100",
+      "vendor_tax_id": "12.345.678/0001-99",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Chicago, IL 60601",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-ELEC-001",
+        "description": "Resistor 10k Ohm 1/4W",
+        "quantity": 100,
+        "unit_price": 0.50,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-ELEC-002",
+        "description": "Capacitor 100uF 25V",
+        "quantity": 50,
+        "unit_price": 1.20,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-ELEC-003",
+        "description": "Transistor BC547",
+        "quantity": 200,
+        "unit_price": 0.30,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SP-ELEC-004",
+        "description": "LED 5mm Red",
+        "quantity": 500,
+        "unit_price": 0.10,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SP-ELEC-005",
+        "description": "Diodo 1N4007",
+        "quantity": 100,
+        "unit_price": 0.25,
+        "line_total": 25.00
+      }
+    ],
+    "subtotal": 245.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP",
+        "rate": 0.18,
+        "amount": 44.10
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.05,
+        "amount": 12.25
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.0165,
+        "amount": 4.04
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.076,
+        "amount": 18.62
+      }
+    ],
+    "total": 324.01,
+    "error_injected": "DATE_FORMAT_DDMMYYYY",
+    "ground_truth_note": "Invoice date is in dd/mm/yyyy format ('18/03/2026') instead of ISO. Multiple tax types (ICMS, IPI, PIS, COFINS) included. NF-e access key and boleto bancário reference present in original document."
+  },
+  {
+    "invoice_id": "P005_INV_20260329_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-29",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100",
+      "vendor_tax_id": "12.345.678/0001-99",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Chicago, IL 60601",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-MOTOR-001",
+        "description": "Motor DC 12V 100rpm",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 450.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP",
+        "rate": 0.18,
+        "amount": 81.00
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.05,
+        "amount": 22.50
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.0165,
+        "amount": 7.43
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.076,
+        "amount": 34.20
+      }
+    ],
+    "total": 595.13,
+    "error_injected": "MULTIPLE_TAX_TYPES_CONFUSION",
+    "ground_truth_note": "Single line item but four tax types (ICMS, IPI, PIS, COFINS) are present, which may confuse extraction. All tax amounts correctly calculated."
+  },
+  {
+    "invoice_id": "P005_INV_20260409_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-45678",
+    "invoice_date": "2026-04-09",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100",
+      "vendor_tax_id": "12.345.678/0001-99",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Chicago, IL 60601",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-SENSOR-001",
+        "description": "Sensor de temperatura LM35",
+        "quantity": 25,
+        "unit_price": 8.50,
+        "line_total": 212.50
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-SENSOR-002",
+        "description": "Sensor de umidade DHT22",
+        "quantity": 10,
+        "unit_price": 22.00,
+        "line_total": 220.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-SENSOR-003",
+        "description": "Sensor de movimento PIR",
+        "quantity": 15,
+        "unit_price": 12.00,
+        "line_total": 180.00
+      }
+    ],
+    "subtotal": 612.50,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP",
+        "rate": 0.18,
+        "amount": 110.25
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.05,
+        "amount": 30.63
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.0165,
+        "amount": 10.11
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.076,
+        "amount": 46.55
+      }
+    ],
+    "total": 810.04,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multiple tax types (ICMS, IPI, PIS, COFINS) present. Boleto bancário reference included in original document."
+  },
+  {
+    "invoice_id": "P001_INV_20260228_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-12354",
+    "invoice_date": "2026-02-28",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1 Tech Drive, San Jose, CA 95110",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Industrial Blvd, Chicago, IL 60601",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-IC-001",
+        "description": "Microchip ATmega328P - for international shipment",
+        "quantity": 1000,
+        "unit_price": 2.50,
+        "line_total": 2500.00
+      }
+    ],
+    "subtotal": 2500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 181.25
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08875,
+        "amount": 221.88
+      }
+    ],
+    "total": 2903.13,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference has a transposed digit: should be PO-2026-02-12345 but is written as PO-2026-02-12354. Two tax jurisdictions (CA and NY) itemized. Invoice is in USD despite multi-currency capability."
+  }
+]
+```

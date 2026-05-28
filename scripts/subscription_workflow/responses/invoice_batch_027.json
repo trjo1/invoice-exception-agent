@@ -1,0 +1,312 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260131_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-31",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista\nSão Paulo, SP 01310-100\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Purchasing Inc.",
+      "buyer_address": "1234 Commerce Drive\nSuite 200\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Maria Silva / maria.silva@globalpurchasing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ELEC-MOT-001",
+        "description": "Motor elétrico 5HP trifásico",
+        "quantity": 10,
+        "unit_price": 450.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "CABO-10MM-100",
+        "description": "Cabo elétrico 10mm², 100m",
+        "quantity": 5,
+        "unit_price": 320.00,
+        "line_total": 1600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "DISJ-63A-3P",
+        "description": "Disjuntor tripolar 63A",
+        "quantity": 20,
+        "unit_price": 85.00,
+        "line_total": 1700.00
+      }
+    ],
+    "subtotal": 7800.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 1404.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 390.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 128.70
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 592.80
+      }
+    ],
+    "total": 10315.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with NF-e style combining invoice and tax receipt. Multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) itemized. Boleto bancário payment slip referenced on original document. Extract all line items and tax amounts as shown."
+  },
+  {
+    "invoice_id": "P004_INV_20260131_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-01-31",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "45 Industrial Estate\nAndheri East\nMumbai, Maharashtra 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCU1234C1Z1\nPAN: AABCU1234C",
+      "buyer_name": "Global Purchasing Inc.",
+      "buyer_address": "1234 Commerce Drive\nSuite 200\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Raj Patel / raj.patel@globalpurchasing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HSN-8481-RAW",
+        "description": "Raw steel plates (HSN 7208) - 500 units",
+        "quantity": 500,
+        "unit_price": 120.00,
+        "line_total": 60000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "HSN-7318-BOLT",
+        "description": "High tensile bolts M20 (HSN 7318) - 2000 pcs",
+        "quantity": 2000,
+        "unit_price": 8.50,
+        "line_total": 17000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "HSN-4011-TIRE",
+        "description": "Industrial tires 18x7x8 (HSN 4011) - 100 pcs",
+        "quantity": 100,
+        "unit_price": 2500.00,
+        "line_total": 250000.00
+      }
+    ],
+    "subtotal": 327000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-MH-CGST",
+        "rate": 0.09,
+        "amount": 29430.00
+      },
+      {
+        "jurisdiction": "IN-MH-SGST",
+        "rate": 0.09,
+        "amount": 29430.00
+      }
+    ],
+    "total": 385860.00,
+    "error_injected": "GST_PERCENTAGE_MISROUTE",
+    "ground_truth_note": "Deliberate GST error: interstate transaction (buyer in US) should have IGST 18% (₹58,860) but invoice incorrectly shows CGST 9% and SGST 9% (total ₹58,860 same amount but wrong tax type). Extractor should flag that CGST/SGST not applicable for interstate export. PAN and GSTIN are present in header."
+  },
+  {
+    "invoice_id": "P003_INV_20260118_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-11223",
+    "invoice_date": "2026-01-18",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45\n60327 Frankfurt am Main\nDeutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Purchasing Inc.",
+      "buyer_address": "1234 Commerce Drive\nSuite 200\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Hans Schmidt / hans.schmidt@globalpurchasing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MASCH-007",
+        "description": "CNC Fräsmaschine / CNC Milling Machine (reverse charge)",
+        "quantity": 1,
+        "unit_price": 45000.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ERSATZ-023",
+        "description": "Ersatzteile / Spare parts kit (reverse charge)",
+        "quantity": 2,
+        "unit_price": 1250.00,
+        "line_total": 2500.00
+      }
+    ],
+    "subtotal": 47500.00,
+    "tax": [],
+    "total": 47500.00,
+    "error_injected": "VAT_FIELD_MISSING",
+    "ground_truth_note": "Intra-EU shipment to non-DE buyer (USA) – reverse charge applies, so VAT field is correctly omitted. However, the error mode is 'VAT_FIELD_MISSING' meaning the extractor should note that no VAT line is present. SEPA bank details on original: IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX. Bilingual labels used."
+  },
+  {
+    "invoice_id": "P002_INV_20260120_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-33445",
+    "invoice_date": "2026-01-20",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1500 Industrial Blvd\nSuite 100\nBuffalo, NY 14203\nUSA",
+      "vendor_tax_id": "EIN: 16-1234567",
+      "buyer_name": "Global Purchasing Inc.",
+      "buyer_address": "1234 Commerce Drive\nSuite 200\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Miller / john.miller@globalpurchasing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "WHS-STOR-001",
+        "description": "Warehouse storage pallets (48x40)",
+        "quantity": 50,
+        "unit_price": 45.00,
+        "line_total": 2250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FORK-3T",
+        "description": "Forklift rental 3-ton (monthly)",
+        "quantity": 1,
+        "unit_price": 1500.00,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 3750.00,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08,
+        "amount": 300.00
+      }
+    ],
+    "total": 4050.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean scanned invoice with handwritten notes (e.g., 'rush delivery' in margin). Header placement is inconsistent on original. Total rounded up to nearest dollar from $4050.00 to $4050 (already integer). Extract line items and tax as shown."
+  },
+  {
+    "invoice_id": "P001_INV_20260212_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-55678",
+    "invoice_date": "2026-02-12",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "200 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "EIN: 94-1234567",
+      "buyer_name": "Global Purchasing Inc.",
+      "buyer_address": "1234 Commerce Drive\nSuite 200\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Emily Chen / emily.chen@globalpurchasing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "CPU-INTEL-12700",
+        "description": "Intel Core i7-12700 CPU",
+        "quantity": 100,
+        "unit_price": 320.00,
+        "line_total": 32000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "RAM-DDR4-32GB",
+        "description": "DDR4 32GB RAM module",
+        "quantity": 200,
+        "unit_price": 85.00,
+        "line_total": 17000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SSD-2TB-NVME",
+        "description": "2TB NVMe SSD",
+        "quantity": 50,
+        "unit_price": 250.00,
+        "line_total": 12500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GPU-NVIDIA-A4000",
+        "description": "NVIDIA RTX A4000 GPU",
+        "quantity": 10,
+        "unit_price": 1200.00,
+        "line_total": 12000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "PSU-750W",
+        "description": "750W Power Supply Unit",
+        "quantity": 100,
+        "unit_price": 110.00,
+        "line_total": 11000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MBD-ATX-Z690",
+        "description": "ATX Motherboard Z690 chipset",
+        "quantity": 50,
+        "unit_price": 180.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "CASE-MID-TOWER",
+        "description": "Mid-tower computer case",
+        "quantity": 80,
+        "unit_price": 65.00,
+        "line_total": 5200.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FAN-120MM",
+        "description": "120mm case fan (5-pack)",
+        "quantity": 200,
+        "unit_price": 25.00,
+        "line_total": 5000.00
+      }
+    ],
+    "subtotal": 103700.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 7518.25
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.04,
+        "amount": 4148.00
+      }
+    ],
+    "total": 115366.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean modern invoice with 8 line items. Multi-currency capability (USD used for this shipment). Tax itemized by jurisdiction (CA and NY). Totals rounded to 2 decimals. Extract all line items and taxes accurately."
+  }
+]
+```

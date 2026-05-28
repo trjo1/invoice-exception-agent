@@ -1,0 +1,326 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260406_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-06",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 23\n60327 Frankfurt\nDeutschland\nSEPA: DE89 3704 0044 0532 0130 00",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "OmniCorp GmbH",
+      "buyer_address": "Musterstr. 42\n80331 München\nDeutschland",
+      "buyer_po_contact": "Klaus Mueller, klaus.mueller@omnicorp.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "F-1001",
+        "description": "Hydraulikzylinder / Hydraulic cylinder",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 2,
+        "sku": "F-1002",
+        "description": "Dichtungssatz / Seal kit",
+        "quantity": 10,
+        "unit_price": 45.50,
+        "line_total": 455.00
+      },
+      {
+        "line_no": 3,
+        "sku": "F-1003",
+        "description": "Steuerblock / Control block",
+        "quantity": 2,
+        "unit_price": 890.00,
+        "line_total": 1780.00
+      },
+      {
+        "line_no": 4,
+        "sku": "F-1004",
+        "description": "Filterelement / Filter element",
+        "quantity": 20,
+        "unit_price": 18.90,
+        "line_total": 378.00
+      },
+      {
+        "line_no": 5,
+        "sku": "F-1005",
+        "description": "Druckregler / Pressure regulator",
+        "quantity": 3,
+        "unit_price": 320.00,
+        "line_total": 960.00
+      },
+      {
+        "line_no": 6,
+        "sku": "F-1006",
+        "description": "Schlauchleitung / Hose assembly",
+        "quantity": 15,
+        "unit_price": 67.80,
+        "line_total": 1017.00
+      },
+      {
+        "line_no": 7,
+        "sku": "F-1007",
+        "description": "Sensor PT100 / Sensor PT100",
+        "quantity": 8,
+        "unit_price": 55.00,
+        "line_total": 440.00
+      },
+      {
+        "line_no": 8,
+        "sku": "F-1008",
+        "description": "Montageset / Mounting kit",
+        "quantity": 25,
+        "unit_price": 12.40,
+        "line_total": 310.00
+      }
+    ],
+    "subtotal": 5940.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 1128.60
+      }
+    ],
+    "total": 7068.60,
+    "error_injected": null,
+    "ground_truth_note": "Clean German invoice with 19% VAT, SEPA bank details in vendor address, bilingual descriptions. All fields correct."
+  },
+  {
+    "invoice_id": "P004_INV_20260404_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-04",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 7, Industrial Area\nAndheri East, Mumbai 400093\nMaharashtra, India",
+      "vendor_tax_id": "PAN: AABCB1234C, GSTIN: 27AABCB1234C1Z5",
+      "buyer_name": "OmniCorp India Pvt. Ltd.",
+      "buyer_address": "Marine Drive, Fort\nMumbai 400001, India",
+      "buyer_po_contact": "Anika Sharma, anika.sharma@omnicorp.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HSN-8471",
+        "description": "Computer server rack",
+        "quantity": 1,
+        "unit_price": 85000.00,
+        "line_total": 85000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "HSN-7318",
+        "description": "Stainless steel bolts pack of 100",
+        "quantity": 50,
+        "unit_price": 150.00,
+        "line_total": 7500.00
+      }
+    ],
+    "subtotal": 92500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 8325.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 8325.00
+      }
+    ],
+    "total": 109150.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean Indian invoice with HSN codes per line, PAN and GSTIN in header, CGST and SGST applied. Cross-currency to USD common but not present."
+  },
+  {
+    "invoice_id": "P004_INV_20260417_003",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-67890",
+    "invoice_date": "2026-04-17",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 7, Industrial Area\nAndheri East, Mumbai 400093\nMaharashtra, India",
+      "vendor_tax_id": "PAN: AABCB1234C, GSTIN: 27AABCB1234C1Z5",
+      "buyer_name": "OmniCorp India Pvt. Ltd.",
+      "buyer_address": "Marine Drive, Fort\nMumbai 400001, India",
+      "buyer_po_contact": "Anika Sharma, anika.sharma@omnicorp.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HSN-8473",
+        "description": "Hard drive 2TB",
+        "quantity": 10,
+        "unit_price": 4500.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "HSN-8542",
+        "description": "Microcontroller IC",
+        "quantity": 100,
+        "unit_price": 120.00,
+        "line_total": 12000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "HSN-3926",
+        "description": "Plastic enclosures",
+        "quantity": 50,
+        "unit_price": 85.00,
+        "line_total": 4250.00
+      },
+      {
+        "line_no": 4,
+        "sku": "HSN-7318",
+        "description": "Hex nuts (kg)",
+        "quantity": 5,
+        "unit_price": 200.00,
+        "line_total": 1000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "HSN-8481",
+        "description": "Ball valves",
+        "quantity": 25,
+        "unit_price": 650.00,
+        "line_total": 16250.00
+      }
+    ],
+    "subtotal": 78500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 7065.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 7065.00
+      }
+    ],
+    "total": 92630.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean Indian invoice with 5 line items, HSN codes per line, GST breakdown."
+  },
+  {
+    "invoice_id": "P005_INV_20260205_004",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-11111",
+    "invoice_date": "2026-02-05",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Industrias, 500\nVila Industrial, São Paulo - SP\nCEP 01000-000\nBoleto: Banco do Brasil, Ag. 1234-5, C/C 98765-6",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "OmniCorp Brasil Ltda.",
+      "buyer_address": "Av. Paulista, 1000\nBela Vista, São Paulo - SP\nCEP 01310-000",
+      "buyer_po_contact": "Carlos Silva, carlos.silva@omnicorp.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "BR-A001",
+        "description": "Conjunto de rolamentos / Bearing assembly",
+        "quantity": 10,
+        "unit_price": 1500.00,
+        "line_total": 15000.00
+      }
+    ],
+    "subtotal": 15000.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.12,
+        "amount": 1800.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 750.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 247.50
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 1140.00
+      }
+    ],
+    "total": 18937.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean Brazilian NF-e style invoice with one line item and four taxes (ICMS, IPI, PIS, COFINS). Boleto bancário reference included in vendor address."
+  },
+  {
+    "invoice_id": "P003_INV_20260131_005",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-98765",
+    "invoice_date": "2026-01-31",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 23\n60327 Frankfurt\nDeutschland\nSEPA: DE89 3704 0044 0532 0130 00",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "OmniCorp GmbH",
+      "buyer_address": "Musterstr. 42\n80331 München\nDeutschland",
+      "buyer_po_contact": "Klaus Mueller, klaus.mueller@omnicorp.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "P-2001",
+        "description": "Industriepumpe / Industrial pump - Preis in USD 5000",
+        "quantity": 2,
+        "unit_price": 4500.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "D-1001",
+        "description": "Dichtung / Seal",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "V-3001",
+        "description": "Ventil / Valve",
+        "quantity": 3,
+        "unit_price": 800.00,
+        "line_total": 2400.00
+      }
+    ],
+    "subtotal": 12000.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 2280.00
+      }
+    ],
+    "total": 14280.00,
+    "error_injected": "Cross-currency edge: item 1 description mentions USD price",
+    "ground_truth_note": "The first line item description states 'Preis in USD 5000' but unit price is 4500 EUR. This cross-currency inconsistency is deliberate. All other fields correct."
+  }
+]
+```

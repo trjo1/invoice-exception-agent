@@ -1,0 +1,372 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260421_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-12354",
+    "invoice_date": "2026-04-21",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1000 Innovation Drive, Suite 200, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Apex Manufacturing LLC",
+      "buyer_address": "555 Industrial Parkway, Detroit, MI 48226, USA",
+      "buyer_po_contact": "Sarah Chen, s.chen@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Capacitor array 10µF 50V X7R 1210",
+        "quantity": 500,
+        "unit_price": 0.45,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2003",
+        "description": "Voltage regulator LDO 3.3V SOT-223",
+        "quantity": 1200,
+        "unit_price": 0.89,
+        "line_total": 1068.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3042",
+        "description": "Connector USB-C female vertical mount",
+        "quantity": 300,
+        "unit_price": 1.25,
+        "line_total": 375.00
+      }
+    ],
+    "subtotal": 1668.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 145.95
+      }
+    ],
+    "total": 1813.95,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference PO-2026-04-12345 should be PO-2026-04-12354 (digits 4 and 5 transposed). Tax line itemized separately for California. All amounts rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P001_INV_20260205_002",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-07891",
+    "invoice_date": "2026-02-05",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1000 Innovation Drive, Suite 200, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Apex Manufacturing LLC",
+      "buyer_address": "555 Industrial Parkway, Detroit, MI 48226, USA",
+      "buyer_po_contact": "Sarah Chen, s.chen@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-4007",
+        "description": "Microcontroller ARM Cortex-M4 100MHz LQFP144",
+        "quantity": 400,
+        "unit_price": 4.56,
+        "line_total": 1824.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-5112",
+        "description": "Temperature sensor I2C ±0.5°C SOIC-8",
+        "quantity": 600,
+        "unit_price": 1.12,
+        "line_total": 672.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-6218",
+        "description": "LED driver constant current 16-channel QFN",
+        "quantity": 250,
+        "unit_price": 2.89,
+        "line_total": 722.50
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-7345",
+        "description": "Ferrite bead 100Ω 2A 0805",
+        "quantity": 2000,
+        "unit_price": 0.06,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-8021",
+        "description": "Oscillator 25MHz ±25ppm SMD 7x5mm",
+        "quantity": 100,
+        "unit_price": 0.75,
+        "line_total": 75.00
+      }
+    ],
+    "subtotal": 3413.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 298.68
+      }
+    ],
+    "total": 3712.18,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency note: this shipment is domestic, so all amounts USD. Tax itemized for California. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260403_003",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-00432",
+    "invoice_date": "2026-04-03",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "4321 River Road, Bldg B, Columbus, OH 43215, USA",
+      "vendor_tax_id": "EIN 98-7654321",
+      "buyer_name": "Midwest Distributors Inc.",
+      "buyer_address": "789 Commerce Blvd, Chicago, IL 60607, USA",
+      "buyer_po_contact": "Tom Williams, t.williams@midwestdist.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-PK-001",
+        "description": "Corrugated box 18x12x10 single wall",
+        "quantity": 500,
+        "unit_price": 0.65,
+        "line_total": 325.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-PK-002",
+        "description": "Bubble wrap roll 12\"x175ft",
+        "quantity": 20,
+        "unit_price": 22.50,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-PK-003",
+        "description": "Packing tape 2\"x110yd clear",
+        "quantity": 100,
+        "unit_price": 3.20,
+        "line_total": 320.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-SH-001",
+        "description": "Pallet rental (48x40) - daily rate",
+        "quantity": 10,
+        "unit_price": 12.00,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-SH-002",
+        "description": "Forklift service - hourly labor",
+        "quantity": 5,
+        "unit_price": 45.00,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-PK-004",
+        "description": "Stretch wrap 5\"x1000ft",
+        "quantity": 30,
+        "unit_price": 11.50,
+        "line_total": 345.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-PK-005",
+        "description": "Desiccant packets 5g (1000/bag)",
+        "quantity": 15,
+        "unit_price": 8.90,
+        "line_total": 133.50
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-AD-001",
+        "description": "Address labels 4x2 sheets of 10",
+        "quantity": 50,
+        "unit_price": 4.75,
+        "line_total": 237.50
+      }
+    ],
+    "subtotal": 2156.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OH",
+        "rate": 0.0725,
+        "amount": 156.31
+      }
+    ],
+    "total": 2313.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean scanned invoice. Hand-written note 'Please expedite' visible on margin. Header placed slightly left of center. Totals rounded up to nearest dollar (subtotal+tax=2312.31 → 2313)."
+  },
+  {
+    "invoice_id": "P005_INV_20260411_004",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-98765",
+    "invoice_date": "2026-04-11",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Andar 5, Bela Vista, São Paulo - SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-98",
+      "buyer_name": "AutoParts do Brasil S.A.",
+      "buyer_address": "Rodovia BR-101, km 50, Jd. Primavera, Jacareí - SP, 12300-000, Brasil",
+      "buyer_po_contact": "Carlos Mendes, c.mendes@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Sensor de pressão óleo 0-10bar 1/8NPT",
+        "quantity": 200,
+        "unit_price": 34.50,
+        "line_total": 6900.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Válvula solenoide 12V DC DN15",
+        "quantity": 80,
+        "unit_price": 89.90,
+        "line_total": 7192.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Conector elétrico 3 vias fêmea",
+        "quantity": 500,
+        "unit_price": 2.15,
+        "line_total": 1075.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "Filtro de combustível in-line 10 microns",
+        "quantity": 150,
+        "unit_price": 12.60,
+        "line_total": 1890.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "Mangueira silicone 3/4\" azul 1m",
+        "quantity": 300,
+        "unit_price": 5.00,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 18557.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 3340.26
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 927.85
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 306.19
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 1410.33
+      }
+    ],
+    "total": 24541.63,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice with multiple tax types (ICMS, IPI, PIS, COFINS) itemized. Boleto bancário reference number 34191.23456.78901.23456.78901.23456.78901.2 included in header comments. All amounts in BRL."
+  },
+  {
+    "invoice_id": "P004_INV_20260326_005",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-26",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Unit 7, BKC Complex, G-Block, Bandra East, Mumbai, MH 400051, India",
+      "vendor_tax_id": "GSTIN 27AABCM1234N1Z2",
+      "buyer_name": "Delhi Automotive Pvt Ltd",
+      "buyer_address": "Plot 45, Sector 2, Noida, UP 201301, India",
+      "buyer_po_contact": "Ravi Sharma, r.sharma@delhiautomotive.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-1001",
+        "description": "HSN 8471.30.10 - Laptop docking station USB-C",
+        "quantity": 50,
+        "unit_price": 3200.00,
+        "line_total": 160000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-2002",
+        "description": "HSN 84733030 - Hard drive caddy 2.5\" SATA",
+        "quantity": 100,
+        "unit_price": 450.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-3003",
+        "description": "HSN 85176290 - Network switch 8-port gigabit",
+        "quantity": 25,
+        "unit_price": 5500.00,
+        "line_total": 137500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-4004",
+        "description": "HSN 84714100 - Desktop computer i5 8GB",
+        "quantity": 10,
+        "unit_price": 18500.00,
+        "line_total": 185000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-5005",
+        "description": "HSN 84719000 - Barcode scanner wireless",
+        "quantity": 40,
+        "unit_price": 2100.00,
+        "line_total": 84000.00
+      }
+    ],
+    "subtotal": 611500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 110070.00
+      }
+    ],
+    "total": 721570.00,
+    "error_injected": "HSN_CODE_FORMAT_INCONSISTENCY",
+    "ground_truth_note": "HSN codes appear with dashes (e.g., 8471.30.10) on most lines, but line 3 shows 84719000 without dashes, creating inconsistency. PAN AABCM1234N and GSTIN 27AABCM1234N1Z2 in header. Cross-currency to USD is common for this supplier; invoice is in INR."
+  }
+]
+```

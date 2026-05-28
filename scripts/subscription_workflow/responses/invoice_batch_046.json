@@ -1,0 +1,283 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260301_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-12344",
+    "invoice_date": "2026-03-01",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive, Suite 200, San Jose, CA 95110, USA",
+      "vendor_tax_id": "EIN 95-1234567",
+      "buyer_name": "Nexus Manufacturing Corp.",
+      "buyer_address": "5678 Industrial Parkway, Detroit, MI 48201, USA",
+      "buyer_po_contact": "Jennifer Adams, jennifer.adams@nexusmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-2026",
+        "description": "Server motherboard XEON-2026, 64GB DDR5, dual LAN",
+        "quantity": 10,
+        "unit_price": 1250.00,
+        "line_total": 12500.00
+      }
+    ],
+    "subtotal": 12500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 1093.75
+      }
+    ],
+    "total": 13593.75,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference has a transposed digit: correct PO-2026-03-12345 became PO-2026-03-12344. Extractor should flag mismatch against purchase order system. All other fields are accurate; tax is itemized by jurisdiction and totals rounded to two decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260402_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-78901",
+    "invoice_date": "2026-04-02",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "89 Maple Avenue, Unit 3, Portland, OR 97201, USA",
+      "vendor_tax_id": "EIN 88-7654321",
+      "buyer_name": "Nexus Manufacturing Corp.",
+      "buyer_address": "5678 Industrial Parkway, Detroit, MI 48201, USA",
+      "buyer_po_contact": "Jennifer Adams, jennifer.adams@nexusmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLG-WD-001",
+        "description": "Warehouse shelving unit, heavy-duty 8ft",
+        "quantity": 5,
+        "unit_price": 340.00,
+        "line_total": 1700.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLG-PL-022",
+        "description": "Pallet jack, manual 5500 lb capacity",
+        "quantity": 2,
+        "unit_price": 475.50,
+        "line_total": 951.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLG-SG-104",
+        "description": "Safety gloves, box of 100 pairs",
+        "quantity": 10,
+        "unit_price": 22.30,
+        "line_total": 223.00
+      }
+    ],
+    "subtotal": 2874.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.0,
+        "amount": 0.00
+      }
+    ],
+    "total": 2874.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Handwritten notes and inconsistent header placement are expected in scanned PDF but not reflected in JSON. Total is rounded up to nearest dollar (here already integer). Extractor should extract all fields correctly."
+  },
+  {
+    "invoice_id": "P005_INV_20260223_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-54321",
+    "invoice_date": "2026-02-23",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Sala 501, São Paulo - SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Nexus Manufacturing Corp.",
+      "buyer_address": "Rua das Industrias, 200, São Bernardo do Campo - SP, 09750-001, Brasil",
+      "buyer_po_contact": "Carlos Silva, carlos.silva@nexusmfg.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-MOT-123",
+        "description": "Motor elétrico trifásico 5CV",
+        "quantity": 3,
+        "unit_price": 1250.00,
+        "line_total": 3750.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-CAB-456",
+        "description": "Cabo de alimentação 10mm², 50m",
+        "quantity": 10,
+        "unit_price": 85.50,
+        "line_total": 855.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-CON-789",
+        "description": "Conector industrial IP67, pacote 10 unidades",
+        "quantity": 5,
+        "unit_price": 320.00,
+        "line_total": 1600.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-SEN-321",
+        "description": "Sensor de temperatura PT100, faixa -50 a 200°C",
+        "quantity": 20,
+        "unit_price": 47.30,
+        "line_total": 946.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-REL-654",
+        "description": "Relé de proteção térmica, 30A",
+        "quantity": 8,
+        "unit_price": 112.75,
+        "line_total": 902.00
+      }
+    ],
+    "subtotal": 8053.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 1449.54
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 402.65
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 132.87
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 612.03
+      }
+    ],
+    "total": 10650.09,
+    "error_injected": null,
+    "ground_truth_note": "NF-e style invoice with multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) each itemized. Boleto bancário payment slip referenced in original document but not in JSON. Extractor should correctly sum taxes and total in BRL."
+  },
+  {
+    "invoice_id": "P004_INV_20260219_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-19",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 45, MIDC Industrial Area, Andheri East, Mumbai - 400093, India",
+      "vendor_tax_id": "PAN: AABCM1234D, GSTIN: 27AABCM1234D1Z5",
+      "buyer_name": "Nexus Manufacturing Corp.",
+      "buyer_address": "Unit 12, SEZ, Whitefield, Bengaluru - 560066, India",
+      "buyer_po_contact": "Priya Sharma, priya.sharma@nexusmfg.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-BRG-101",
+        "description": "Ball bearing 6205ZZ (HSN 84821020)",
+        "quantity": 500,
+        "unit_price": 45.00,
+        "line_total": 22500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-GSK-202",
+        "description": "Gasket set for pump model P100 (HSN 84849000)",
+        "quantity": 100,
+        "unit_price": 120.50,
+        "line_total": 12050.00
+      }
+    ],
+    "subtotal": 34550.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 6219.00
+      }
+    ],
+    "total": 40769.00,
+    "error_injected": "HSN_CODE_INCONSISTENCY",
+    "ground_truth_note": "HSN codes are included in descriptions: line 1 has 'HSN 84821020' (no dashes), line 2 has 'HSN 84849000' (no dashes). Error: formatting inconsistency (both without dashes, but spec says with/without; here both lack dashes to simulate inconsistency across line items). Extractor should note HSN code patterns. GSTIN and PAN present in vendor_tax_id."
+  },
+  {
+    "invoice_id": "P005_INV_20260423_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-13579",
+    "invoice_date": "2026-04-23",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Sala 501, São Paulo - SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Nexus Manufacturing Corp.",
+      "buyer_address": "Rua das Industrias, 200, São Bernardo do Campo - SP, 09750-001, Brasil",
+      "buyer_po_contact": "Carlos Silva, carlos.silva@nexusmfg.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-PLC-001",
+        "description": "CLP Siemens S7-1200, 8 entradas/6 saídas",
+        "quantity": 2,
+        "unit_price": 4500.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-FIO-002",
+        "description": "Fio flexível 2,5mm², rolo 100m",
+        "quantity": 5,
+        "unit_price": 180.00,
+        "line_total": 900.00
+      }
+    ],
+    "subtotal": 9900.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 1782.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 495.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 163.35
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 752.40
+      }
+    ],
+    "total": 13092.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice with two line items and four Brazilian taxes. Boleto bancário reference expected in original document. Extractor should validate all totals and tax breakdown."
+  }
+]
+```

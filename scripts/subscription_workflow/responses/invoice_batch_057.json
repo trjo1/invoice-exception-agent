@@ -1,0 +1,344 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260313_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-00001",
+    "invoice_date": "2026-03-13",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP 01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Nexus Supply Corp.",
+      "buyer_address": "Rua Funchal, 100\nSão Paulo, SP 04551-060\nBrazil",
+      "buyer_po_contact": "Maria Silva, maria.silva@nexussupply.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MOT-001",
+        "description": "Motor elétrico 5HP",
+        "quantity": 10,
+        "unit_price": 450.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "CAB-010",
+        "description": "Cabo de alimentação 3m",
+        "quantity": 50,
+        "unit_price": 12.50,
+        "line_total": 625.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SEN-002",
+        "description": "Sensor de temperatura PT100",
+        "quantity": 20,
+        "unit_price": 85.00,
+        "line_total": 1700.00
+      }
+    ],
+    "subtotal": 6825.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 1228.50
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 341.25
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 112.61
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 518.70
+      }
+    ],
+    "total": 9026.06,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from São Paulo Componentes Ltda. with standard NF-e structure including ICMS, IPI, PIS, COFINS taxes. Boleto bancário payment slip is referenced in the original document."
+  },
+  {
+    "invoice_id": "P005_INV_20260323_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-00002",
+    "invoice_date": "2026-03-23",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP 01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Nexus Supply Corp.",
+      "buyer_address": "Rua Funchal, 100\nSão Paulo, SP 04551-060\nBrazil",
+      "buyer_po_contact": "Maria Silva, maria.silva@nexussupply.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MOT-001",
+        "description": "Motor elétrico 5HP",
+        "quantity": 5,
+        "unit_price": 450.00,
+        "line_total": 2250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "CAB-010",
+        "description": "Cabo de alimentação 3m",
+        "quantity": 100,
+        "unit_price": 12.50,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SEN-002",
+        "description": "Sensor de temperatura PT100",
+        "quantity": 30,
+        "unit_price": 85.00,
+        "line_total": 2550.00
+      },
+      {
+        "line_no": 4,
+        "sku": "CON-001",
+        "description": "Conector RJ45",
+        "quantity": 200,
+        "unit_price": 3.50,
+        "line_total": 700.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FON-001",
+        "description": "Fonte de alimentação 24V",
+        "quantity": 10,
+        "unit_price": 120.00,
+        "line_total": 1200.00
+      }
+    ],
+    "subtotal": 7950.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 1431.00
+      },
+      {
+        "jurisdiction": "BR-SP-ICMS-ST",
+        "rate": 0.05,
+        "amount": 397.50
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 397.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 131.18
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 604.20
+      }
+    ],
+    "total": 10911.38,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Deliberately injected multiple tax types with overlapping jurisdictions to test extraction accuracy. The tax lines include ICMS, ICMS-ST (additional), IPI, PIS, and COFINS. The ICMS-ST line is an extra tax not typically present in standard NF-e, which may cause confusion."
+  },
+  {
+    "invoice_id": "P003_INV_20260115_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-00001",
+    "invoice_date": "2026-01-15",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 15\n60327 Frankfurt am Main\nGermany\nSEPA: DE89 3704 0044 0532 0130 00",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Nexus Supply Corp.",
+      "buyer_address": "1000 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@nexussupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "IND-001",
+        "description": "Industriemotor 10kW / Industrial motor 10kW",
+        "quantity": 2,
+        "unit_price": 1500.00,
+        "line_total": 3000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIL-002",
+        "description": "Hydraulikfilter / Hydraulic filter",
+        "quantity": 10,
+        "unit_price": 85.00,
+        "line_total": 850.00
+      }
+    ],
+    "subtotal": 3850.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 731.50
+      }
+    ],
+    "total": 4581.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH with German VAT 19%. Bilingual labels (German/English) and SEPA bank details provided."
+  },
+  {
+    "invoice_id": "P001_INV_20260208_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-00001",
+    "invoice_date": "2026-02-08",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Tech Park Blvd\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Nexus Supply Corp.",
+      "buyer_address": "1000 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@nexussupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Microcontroller ATmega328P",
+        "quantity": 500,
+        "unit_price": 2.50,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "description": "Resistor 10kΩ pack of 100",
+        "quantity": 200,
+        "unit_price": 1.20,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "description": "Capacitor 100µF",
+        "quantity": 1000,
+        "unit_price": 0.35,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-4004",
+        "description": "LED 5mm Red",
+        "quantity": 2000,
+        "unit_price": 0.10,
+        "line_total": 200.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-5005",
+        "description": "PCB Prototype Board",
+        "quantity": 50,
+        "unit_price": 15.00,
+        "line_total": 750.00
+      }
+    ],
+    "subtotal": 2790.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 202.28
+      }
+    ],
+    "total": 2992.28,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. with US-CA sales tax. Multi-currency capability noted but invoice is in USD."
+  },
+  {
+    "invoice_id": "P001_INV_20260219_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-12354",
+    "invoice_date": "2026-02-19",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Tech Park Blvd\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Nexus Supply Corp.",
+      "buyer_address": "1000 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@nexussupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Microcontroller ATmega328P",
+        "quantity": 300,
+        "unit_price": 2.50,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "description": "Resistor 10kΩ pack of 100",
+        "quantity": 150,
+        "unit_price": 1.20,
+        "line_total": 180.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "description": "Capacitor 100µF",
+        "quantity": 800,
+        "unit_price": 0.35,
+        "line_total": 280.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-4004",
+        "description": "LED 5mm Red",
+        "quantity": 1500,
+        "unit_price": 0.10,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-5005",
+        "description": "PCB Prototype Board",
+        "quantity": 30,
+        "unit_price": 15.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 1810.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 131.23
+      }
+    ],
+    "total": 1941.23,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "Deliberate PO reference typo: transposed last two digits of the PO number (should be 12345, but written as 12354). All other fields correct."
+  }
+]
+```

@@ -1,0 +1,338 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260501_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-05-12345",
+    "invoice_date": "2026-05-01",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo - SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Tech Solutions Ltda.",
+      "buyer_address": "Rua da Consolação, 500, Consolação, São Paulo - SP, 01301-000, Brasil",
+      "buyer_po_contact": "João Silva, joao.silva@globaltech.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Parafuso de aço inoxidável M10 x 50mm",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Porca sextavada M10",
+        "quantity": 200,
+        "unit_price": 0.80,
+        "line_total": 160.00
+      }
+    ],
+    "subtotal": 410.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 73.80
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 20.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 6.77
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 31.16
+      }
+    ],
+    "total": 542.23,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with NF-e format, multiple Brazilian taxes (ICMS, IPI, PIS, COFINS), and Boleto bancário reference. Extractor should correctly sum subtotal and tax amounts."
+  },
+  {
+    "invoice_id": "P003_INV_20260327_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-27",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 10, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Tech Solutions GmbH",
+      "buyer_address": "Musterstr. 20, 10115 Berlin, Deutschland",
+      "buyer_po_contact": "Hans Müller, hans.mueller@globaltech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-100",
+        "description": "Hochleistungs-Schmieröl (High-performance lubricant oil)",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-200",
+        "description": "Hydraulikzylinder (Hydraulic cylinder)",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-300",
+        "description": "Dichtungssatz (Seal kit)",
+        "quantity": 10,
+        "unit_price": 35.00,
+        "line_total": 350.00
+      }
+    ],
+    "subtotal": 1850.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 351.50
+      }
+    ],
+    "total": 2201.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with German VAT at 19%, bilingual labels, SEPA bank details, and reverse-charge applicable for intra-EU. Extractor should correctly parse VAT and total."
+  },
+  {
+    "invoice_id": "P005_INV_20260403_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-23456",
+    "invoice_date": "2026-04-03",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo - SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Tech Solutions Ltda.",
+      "buyer_address": "Rua da Consolação, 500, Consolação, São Paulo - SP, 01301-000, Brasil",
+      "buyer_po_contact": "João Silva, joao.silva@globaltech.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-003",
+        "description": "Rolamento de esferas 6205",
+        "quantity": 50,
+        "unit_price": 15.00,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-004",
+        "description": "Correia dentada HTD 5M",
+        "quantity": 20,
+        "unit_price": 45.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-005",
+        "description": "Mola de compressão 30mm",
+        "quantity": 100,
+        "unit_price": 1.20,
+        "line_total": 120.00
+      }
+    ],
+    "subtotal": 1770.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 318.60
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 88.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 29.21
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 134.52
+      }
+    ],
+    "total": 2340.83,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Deliberate error: multiple tax types (ICMS, IPI, PIS, COFINS) are presented in a confusing manner, with overlapping rates and amounts. Extractor should correctly identify and sum all tax components, but may misinterpret the subtotal or total due to complexity."
+  },
+  {
+    "invoice_id": "P005_INV_20260211_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-34567",
+    "invoice_date": "2026-02-11",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo - SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Tech Solutions Ltda.",
+      "buyer_address": "Rua da Consolação, 500, Consolação, São Paulo - SP, 01301-000, Brasil",
+      "buyer_po_contact": "João Silva, joao.silva@globaltech.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-006",
+        "description": "Válvula solenoide 24V",
+        "quantity": 10,
+        "unit_price": 85.00,
+        "line_total": 850.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-007",
+        "description": "Sensor de proximidade indutivo",
+        "quantity": 25,
+        "unit_price": 32.00,
+        "line_total": 800.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-008",
+        "description": "Relé de estado sólido 10A",
+        "quantity": 15,
+        "unit_price": 55.00,
+        "line_total": 825.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-009",
+        "description": "Fonte chaveada 12V 5A",
+        "quantity": 8,
+        "unit_price": 120.00,
+        "line_total": 960.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-010",
+        "description": "Conector M12 4 pinos",
+        "quantity": 50,
+        "unit_price": 4.50,
+        "line_total": 225.00
+      }
+    ],
+    "subtotal": 3660.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 658.80
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 183.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 60.39
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 278.16
+      }
+    ],
+    "total": 4840.35,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "Deliberate error: the invoice date is presented as '11/02/2026' (dd/mm/yyyy) instead of ISO format. Extractor should correctly interpret the date as 2026-02-11, but may misparse due to ambiguous formatting."
+  },
+  {
+    "invoice_id": "P003_INV_20260125_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-45678",
+    "invoice_date": "2026-01-25",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 10, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Tech Solutions GmbH",
+      "buyer_address": "Musterstr. 20, 10115 Berlin, Deutschland",
+      "buyer_po_contact": "Hans Müller, hans.mueller@globaltech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-400",
+        "description": "Elektromotor 5 kW (Electric motor 5 kW)",
+        "quantity": 3,
+        "unit_price": 1200.00,
+        "line_total": 3600.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-500",
+        "description": "Frequenzumrichter (Frequency converter)",
+        "quantity": 2,
+        "unit_price": 800.00,
+        "line_total": 1600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-600",
+        "description": "Kupplung (Coupling)",
+        "quantity": 10,
+        "unit_price": 150.00,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-700",
+        "description": "Getriebe (Gearbox)",
+        "quantity": 1,
+        "unit_price": 2500.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-800",
+        "description": "Lager (Bearing)",
+        "quantity": 20,
+        "unit_price": 75.00,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 10700.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 2033.00
+      }
+    ],
+    "total": 12733.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with German VAT at 19%, bilingual labels, SEPA bank details, and reverse-charge applicable for intra-EU. Extractor should correctly parse VAT and total."
+  }
+]
+```

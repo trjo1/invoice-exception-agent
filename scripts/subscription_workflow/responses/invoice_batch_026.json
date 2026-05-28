@@ -1,0 +1,387 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260407_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-00001",
+    "invoice_date": "2026-04-07",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo - SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "123 Tech Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "Maria Silva, maria.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-101",
+        "description": "Parafusos M8 x 30mm",
+        "quantity": 500,
+        "unit_price": 0.85,
+        "line_total": 425.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-102",
+        "description": "Porcas M8",
+        "quantity": 500,
+        "unit_price": 0.45,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-103",
+        "description": "Arruelas de pressão M8",
+        "quantity": 1000,
+        "unit_price": 0.12,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-104",
+        "description": "Anéis de vedação 20mm",
+        "quantity": 200,
+        "unit_price": 1.50,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-105",
+        "description": "Molas de compressão 50mm",
+        "quantity": 100,
+        "unit_price": 2.80,
+        "line_total": 280.00
+      }
+    ],
+    "subtotal": 1350.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 243.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 67.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 22.28
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 102.60
+      }
+    ],
+    "total": 1785.38,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from São Paulo Componentes Ltda. with NF-e structure including multiple Brazilian taxes (ICMS, IPI, PIS, COFINS). Boleto bancário payment slip referenced. Extractor should capture all line items and tax breakdown."
+  },
+  {
+    "invoice_id": "P005_INV_20260425_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-00002",
+    "invoice_date": "2026-04-25",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo - SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "123 Tech Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "Maria Silva, maria.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-201",
+        "description": "Conectores RJ45 fêmea",
+        "quantity": 1000,
+        "unit_price": 0.35,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-202",
+        "description": "Cabos de rede CAT6 1m",
+        "quantity": 200,
+        "unit_price": 2.50,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-203",
+        "description": "Fusíveis 10A",
+        "quantity": 500,
+        "unit_price": 0.60,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-204",
+        "description": "Terminais elétricos 6mm",
+        "quantity": 1000,
+        "unit_price": 0.15,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-205",
+        "description": "Resistores 100 ohm",
+        "quantity": 2000,
+        "unit_price": 0.08,
+        "line_total": 160.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-206",
+        "description": "Capacitores 100µF",
+        "quantity": 500,
+        "unit_price": 0.45,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-207",
+        "description": "Diodos retificadores 1N4007",
+        "quantity": 1000,
+        "unit_price": 0.12,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-208",
+        "description": "Transistores BC547",
+        "quantity": 500,
+        "unit_price": 0.30,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 1955.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 351.90
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 97.75
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 32.26
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 148.58
+      }
+    ],
+    "total": 2585.49,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from São Paulo Componentes Ltda. with NF-e structure including multiple Brazilian taxes (ICMS, IPI, PIS, COFINS). Boleto bancário payment slip referenced. Extractor should capture all 8 line items and tax breakdown."
+  },
+  {
+    "invoice_id": "P004_INV_20260312_003",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-00003",
+    "invoice_date": "2026-03-12",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "PAN: AABCU9603R, GSTIN: 27AABCU9603R1Z1",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "123 Tech Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "Maria Silva, maria.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "HSN 7318 - Bolts and nuts, M12 x 50mm",
+        "quantity": 1000,
+        "unit_price": 15.50,
+        "line_total": 15500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "HSN 7320 - Springs, compression type 100mm",
+        "quantity": 500,
+        "unit_price": 28.00,
+        "line_total": 14000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "HSN 8481 - Valves, ball valve 2 inch",
+        "quantity": 100,
+        "unit_price": 125.00,
+        "line_total": 12500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "HSN 4016 - Rubber gaskets, 150mm diameter",
+        "quantity": 200,
+        "unit_price": 45.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "HSN 7318 - Washers, M12",
+        "quantity": 2000,
+        "unit_price": 2.50,
+        "line_total": 5000.00
+      }
+    ],
+    "subtotal": 56000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 10080.00
+      }
+    ],
+    "total": 66080.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. with GST itemized and HSN codes in line descriptions. Includes PAN and GSTIN in header. Cross-currency to USD is common but not applied here."
+  },
+  {
+    "invoice_id": "P002_INV_20260302_004",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-00004",
+    "invoice_date": "2026-03-02",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Maple Avenue, Suite 100, Burlington, VT 05401, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "123 Tech Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "Maria Silva, maria.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-101",
+        "description": "LTL freight service - Burlington to San Francisco",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-102",
+        "description": "Pallet storage - 30 days",
+        "quantity": 10,
+        "unit_price": 35.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-103",
+        "description": "Packaging materials - bubble wrap",
+        "quantity": 50,
+        "unit_price": 4.50,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-104",
+        "description": "Hazardous material handling fee",
+        "quantity": 1,
+        "unit_price": 75.00,
+        "line_total": 75.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-105",
+        "description": "Insurance - declared value $10,000",
+        "quantity": 1,
+        "unit_price": 120.00,
+        "line_total": 120.00
+      }
+    ],
+    "subtotal": 1220.00,
+    "tax": [
+      {
+        "jurisdiction": "US-VT",
+        "rate": 0.06,
+        "amount": 73.20
+      }
+    ],
+    "total": 1293.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB with hand-written notes and inconsistent header placement. Totals are rounded up to the nearest dollar (1293 from 1293.20)."
+  },
+  {
+    "invoice_id": "P003_INV_20260418_005",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-00005",
+    "invoice_date": "2026-04-18",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 10, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "123 Tech Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "Maria Silva, maria.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Schrauben M10 (Screws M10) - 500 Stück",
+        "quantity": 500,
+        "unit_price": 1.20,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Kugellager 6205 (Ball bearing 6205) - 100 Stück",
+        "quantity": 100,
+        "unit_price": 8.50,
+        "line_total": 850.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Hydraulikzylinder (Hydraulic cylinder) 50mm Hub - 10 Stück",
+        "quantity": 10,
+        "unit_price": 155.00,
+        "line_total": 1550.00
+      }
+    ],
+    "subtotal": 3000.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 570.00
+      }
+    ],
+    "total": 3570.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH with DE VAT (19%) itemized. Bilingual labels (German/English) and SEPA bank details present on invoice."
+  }
+]
+```

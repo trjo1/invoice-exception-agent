@@ -1,0 +1,111 @@
+# Golden test case GTC-018
+# Scenario: 50 units ordered, 47 received, but invoice bills for 50.
+# Expected: three_way_match_quantity_variance → escalate to buyer for short delivery.
+
+id: GTC-018
+title: Partial short delivery — invoice bills for full PO quantity
+exception_category: three_way_match_quantity_variance
+difficulty: easy
+created: 2026-05-13
+notes: |
+  Most common quantity variance pattern. Supplier ships 47 of 50 (perhaps due
+  to inventory shortfall) but invoices for the full 50. The agent must hold
+  payment for the 3-unit shortfall and route to the buyer for resolution
+  (accept partial, hold for backorder, or request credit memo).
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-25T11:00:00Z
+      payload:
+        po_id: PO-2026-04-14400
+        vendor_id: P001
+        line_items:
+          - sku: SKU-B500
+            description: Replacement filters
+            quantity: 50
+            unit_price_usd: 32.00
+            line_total_usd: 1600.00
+        currency: USD
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-09T14:00:00Z
+      payload:
+        po_id: PO-2026-04-14400
+        gr_id: GR-2026-05-09099
+        line_items:
+          - sku: SKU-B500
+            quantity_received: 47   # short by 3
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-11T10:00:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-05-11_012.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-05-11_012.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-05-11-012
+        po_reference: PO-2026-04-14400
+        vendor_id: P001
+        line_items:
+          - sku: SKU-B500
+            quantity: 50            # billed for 50 even though GR shows 47
+            unit_price_usd: 32.00
+            line_total_usd: 1600.00
+        total_usd: 1600.00
+        currency: USD
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: three_way_match_quantity_variance
+    min_confidence: 0.85
+    must_contain_evidence:
+      - gr_quantity_47
+      - invoice_quantity_50
+      - short_by_3_units
+
+  recommendation:
+    action: escalate_to_buyer_for_short_delivery
+    rationale_must_mention:
+      - 50 ordered
+      - 47 received
+      - billed for 50
+      - short by 3
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - the_gr_quantity
+      - the_invoice_quantity
+
+  drafting:
+    must_produce_draft: true
+    draft_type: internal_note
+    draft_recipient: buyer
+    draft_content_must_mention:
+      - SKU-B500
+      - 3 units short
+      - $96
+
+  execution:
+    must_not_post_invoice_before_approval: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.30
+
+pass_criteria:
+  - classification.class_label == three_way_match_quantity_variance
+  - recommendation.action == escalate_to_buyer_for_short_delivery
+  - hitl.tier == 2
+  - drafting.draft_produced == true

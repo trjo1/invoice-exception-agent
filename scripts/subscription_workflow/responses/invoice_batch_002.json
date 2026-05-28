@@ -1,0 +1,352 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260101_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2025-12-12345",
+    "invoice_date": "2026-01-01",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 12\n60327 Frankfurt\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center\nNew York, NY 10007\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FB-1001",
+        "description": "Kugellager / Ball bearing",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FB-1002",
+        "description": "Schmierfett / Grease",
+        "quantity": 5,
+        "unit_price": 12.50,
+        "line_total": 62.50
+      }
+    ],
+    "subtotal": 512.50,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 97.38
+      }
+    ],
+    "total": 609.88,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with DE VAT at 19%, bilingual labels (German primary, English secondary), SEPA bank details (IBAN DE89 3704 0044 0532 0130 00) present on invoice."
+  },
+  {
+    "invoice_id": "P004_INV_20260128_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-28",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate\nAndheri East\nMumbai - 400093\nIndia",
+      "vendor_tax_id": "27AABCS1234B1Z2",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center\nNew York, NY 10007\nUSA",
+      "buyer_po_contact": "Jane Doe, jane.doe@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MC-101",
+        "description": "Computer parts (HSN 8471.30)",
+        "quantity": 100,
+        "unit_price": 150.00,
+        "line_total": 15000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MC-102",
+        "description": "Plastic components (HSN 847130)",
+        "quantity": 200,
+        "unit_price": 25.00,
+        "line_total": 5000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MC-103",
+        "description": "Rubber seals (HSN 3926.90)",
+        "quantity": 50,
+        "unit_price": 80.00,
+        "line_total": 4000.00
+      }
+    ],
+    "subtotal": 24000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 4320.00
+      }
+    ],
+    "total": 28320.00,
+    "error_injected": "HSN_CODE_FORMATTING_INCONSISTENT",
+    "ground_truth_note": "HSN codes per line: first with dash (8471.30), second without (847130), third with dash (3926.90). PAN: AABCS1234B. GSTIN: 27AABCS1234B1Z2. Cross-currency (USD) commonly used but invoice in INR."
+  },
+  {
+    "invoice_id": "P001_INV_20260215_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-97865",
+    "invoice_date": "2026-02-15",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "95-1234567",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center\nNew York, NY 10007\nUSA",
+      "buyer_po_contact": "Bob Johnson, bob.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-001",
+        "description": "Microchips",
+        "quantity": 1000,
+        "unit_price": 0.50,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-002",
+        "description": "Resistors",
+        "quantity": 5000,
+        "unit_price": 0.10,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-003",
+        "description": "Capacitors",
+        "quantity": 2000,
+        "unit_price": 0.20,
+        "line_total": 400.00
+      }
+    ],
+    "subtotal": 1400.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 115.50
+      },
+      {
+        "jurisdiction": "US-CA-SantaClara",
+        "rate": 0.01,
+        "amount": 14.00
+      }
+    ],
+    "total": 1529.50,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference has a transposed digit: correct PO is PO-2026-02-98765, but invoice shows PO-2026-02-97865. Multi-currency invoicing capability noted. Tax itemized by jurisdiction. All totals rounded to two decimals."
+  },
+  {
+    "invoice_id": "P005_INV_20260404_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-11111",
+    "invoice_date": "2026-04-04",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP 01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center\nNew York, NY 10007\nUSA",
+      "buyer_po_contact": "Maria Silva, maria.silva@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-001",
+        "description": "Parafuso M6",
+        "quantity": 100,
+        "unit_price": 0.50,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-002",
+        "description": "Porca M6",
+        "quantity": 100,
+        "unit_price": 0.30,
+        "line_total": 30.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-003",
+        "description": "Arruela",
+        "quantity": 200,
+        "unit_price": 0.10,
+        "line_total": 20.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SP-004",
+        "description": "Mola",
+        "quantity": 50,
+        "unit_price": 2.00,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SP-005",
+        "description": "Engrenagem",
+        "quantity": 10,
+        "unit_price": 15.00,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 350.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 63.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 35.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 5.78
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 26.60
+      }
+    ],
+    "total": 480.38,
+    "error_injected": "MULTIPLE_TAX_TYPES_CONFUSE_EXTRACTION",
+    "ground_truth_note": "NF-e structure with multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) itemized. Boleto bancário reference number 12345678901 included. Extractor must correctly parse all four tax lines and sum to total tax."
+  },
+  {
+    "invoice_id": "P005_INV_20260111_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2025-12-22222",
+    "invoice_date": "2026-01-11",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP 01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center\nNew York, NY 10007\nUSA",
+      "buyer_po_contact": "Maria Silva, maria.silva@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-006",
+        "description": "Parafuso M8",
+        "quantity": 200,
+        "unit_price": 0.60,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-007",
+        "description": "Porca M8",
+        "quantity": 200,
+        "unit_price": 0.35,
+        "line_total": 70.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-008",
+        "description": "Arruela de pressão",
+        "quantity": 300,
+        "unit_price": 0.15,
+        "line_total": 45.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SP-009",
+        "description": "Mola de compressão",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SP-010",
+        "description": "Engrenagem reta",
+        "quantity": 20,
+        "unit_price": 18.00,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SP-011",
+        "description": "Correia dentada",
+        "quantity": 10,
+        "unit_price": 25.00,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SP-012",
+        "description": "Rolamento",
+        "quantity": 50,
+        "unit_price": 12.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SP-013",
+        "description": "Vedador",
+        "quantity": 100,
+        "unit_price": 3.00,
+        "line_total": 300.00
+      }
+    ],
+    "subtotal": 1995.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 359.10
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 199.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 32.92
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 151.62
+      }
+    ],
+    "total": 2738.14,
+    "error_injected": "DATE_FORMAT_DDMMYYYY_VS_ISO",
+    "ground_truth_note": "Original invoice date is '11/01/2026' (dd/mm/yyyy). Correct ISO date is 2026-01-11. Extractor must output ISO format. NF-e structure with multiple taxes and boleto bancário reference."
+  }
+]
+```

@@ -1,0 +1,304 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260102_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-00001",
+    "invoice_date": "2026-01-02",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "AL-001",
+        "description": "Aluminium Sheets 2mm, HSN 7606.12",
+        "quantity": 100,
+        "unit_price": 150.00,
+        "line_total": 15000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ST-002",
+        "description": "Steel Rods 12mm, HSN 7214.20",
+        "quantity": 50,
+        "unit_price": 200.00,
+        "line_total": 10000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "PL-003",
+        "description": "Plastic Granules, HSN 3901.10",
+        "quantity": 200,
+        "unit_price": 75.00,
+        "line_total": 15000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "RU-004",
+        "description": "Rubber Gaskets, HSN 401693",
+        "quantity": 500,
+        "unit_price": 10.50,
+        "line_total": 5250.00
+      },
+      {
+        "line_no": 5,
+        "sku": "WI-005",
+        "description": "Wiring Harness, HSN 8544.30",
+        "quantity": 30,
+        "unit_price": 450.00,
+        "line_total": 13500.00
+      }
+    ],
+    "subtotal": 58750.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0,
+        "amount": 0
+      }
+    ],
+    "total": 58750.00,
+    "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+    "ground_truth_note": "Invoice has HSN codes in descriptions: items 1-3 and 5 use dashes (e.g., 7606.12), item 4 uses no dash (401693). Extract HSN codes correctly. Invoice is in INR; cross-currency to USD is common but not shown in data."
+  },
+  {
+    "invoice_id": "P005_INV_20260113_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-00002",
+    "invoice_date": "2026-01-13",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-99, IE: 123.456.789.112",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MOT-100",
+        "description": "Motor Elétrico 5CV, NCM 8501.52.00",
+        "quantity": 10,
+        "unit_price": 1250.00,
+        "line_total": 12500.00
+      }
+    ],
+    "subtotal": 12500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 2250.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 625.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 206.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 950.00
+      }
+    ],
+    "total": 16531.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e invoice with multiple Brazilian taxes (ICMS, IPI, PIS, COFINS). Boleto bancário payment slip referenced but not included in JSON data. Single line item."
+  },
+  {
+    "invoice_id": "P005_INV_20260117_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-00003",
+    "invoice_date": "2026-01-17",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-99, IE: 123.456.789.112",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "BOM-200",
+        "description": "Bomba Hidráulica 2HP",
+        "quantity": 5,
+        "unit_price": 800.00,
+        "line_total": 4000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "VAL-300",
+        "description": "Válvula Solenoide 24V",
+        "quantity": 20,
+        "unit_price": 150.00,
+        "line_total": 3000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "CIL-400",
+        "description": "Cilindro Pneumático 100mm",
+        "quantity": 10,
+        "unit_price": 600.00,
+        "line_total": 6000.00
+      }
+    ],
+    "subtotal": 13000.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 2340.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 650.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 214.50
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 988.00
+      }
+    ],
+    "total": 17192.50,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "Invoice date in document appears as 17/01/2026 (Brazilian format). The JSON field uses ISO 2026-01-17. Extractor should handle conversion. Also includes multiple taxes and boleto reference."
+  },
+  {
+    "invoice_id": "P001_INV_20260217_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-00004",
+    "invoice_date": "2026-02-17",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "500 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "CPU-100",
+        "description": "Intel Xeon Processor",
+        "quantity": 10,
+        "unit_price": 2500.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "RAM-200",
+        "description": "32GB DDR5 RAM Module",
+        "quantity": 20,
+        "unit_price": 150.00,
+        "line_total": 3000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SSD-300",
+        "description": "1TB NVMe SSD",
+        "quantity": 15,
+        "unit_price": 200.00,
+        "line_total": 3000.00
+      }
+    ],
+    "subtotal": 31000.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 2247.50
+      },
+      {
+        "jurisdiction": "US-CA-LOCAL",
+        "rate": 0.01,
+        "amount": 310.00
+      }
+    ],
+    "total": 33557.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with multi-currency capability (not shown here). Tax itemized by jurisdiction (state and local). Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260311_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-00005",
+    "invoice_date": "2026-03-11",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "42 Industrial Blvd, Detroit, MI 48201, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "TRK-001",
+        "description": "Freight Service - LTL shipment",
+        "quantity": 1,
+        "unit_price": 1500.00,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-002",
+        "description": "Warehousing Storage 1 month",
+        "quantity": 1,
+        "unit_price": 2000.00,
+        "line_total": 2000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "PKG-003",
+        "description": "Packaging Materials",
+        "quantity": 100,
+        "unit_price": 5.25,
+        "line_total": 525.00
+      }
+    ],
+    "subtotal": 4025.00,
+    "tax": [
+      {
+        "jurisdiction": "US-MI",
+        "rate": 0.06,
+        "amount": 241.50
+      }
+    ],
+    "total": 4267.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with hand-written notes (not in data). Header placement inconsistent in scanned document. Total rounded up to nearest dollar: actual sum 4266.50, billed 4267.00."
+  }
+]
+```

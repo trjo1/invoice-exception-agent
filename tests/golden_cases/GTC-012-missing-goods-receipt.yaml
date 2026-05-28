@@ -1,0 +1,107 @@
+# Golden test case GTC-012
+# Scenario: Invoice arrives before any goods receipt is recorded against the PO.
+# Expected: Hold for goods receipt. Buyer notified to either confirm receipt or chase shipment.
+
+id: GTC-012
+title: Invoice arrived before goods receipt was recorded
+exception_category: missing_goods_receipt
+difficulty: medium
+created: 2026-05-13
+notes: |
+  GR-timing anchor. Common when suppliers invoice on ship vs deliver, or when
+  receiving operations are slow to confirm receipt in the ERP. The agent must
+  hold posting (no 2-way match shortcut) and surface the gap for buyer follow-up.
+  Distinct from missing_po: PO exists and is open; what's missing is the GR.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-05-01T09:30:00Z
+      payload:
+        po_id: PO-2026-05-04421
+        vendor_id: P001
+        line_items:
+          - sku: SKU-D900
+            description: Industrial bearings, 6203-2RS, qty 500
+            quantity: 500
+            unit_price_usd: 4.20
+            line_total_usd: 2100.00
+        currency: USD
+        terms: NET-30
+        status: open
+
+    # Note: no goods_receipt event in the timeline
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-12T15:45:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-05-12_004.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-05-12_004.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-05-12-004
+        po_reference: PO-2026-05-04421
+        vendor_id: P001
+        line_items:
+          - sku: SKU-D900
+            quantity: 500
+            unit_price_usd: 4.20
+            line_total_usd: 2100.00
+        total_usd: 2100.00
+        currency: USD
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: missing_goods_receipt
+    min_confidence: 0.80
+    must_contain_evidence:
+      - po_open
+      - no_goods_receipt
+      - invoice_arrived_before_gr
+
+  recommendation:
+    action: hold_for_goods_receipt
+    rationale_must_mention:
+      - no goods receipt on file
+      - PO is open
+      - cannot complete 3-way match
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - the_open_po
+      - missing_gr_signal
+
+  drafting:
+    must_produce_draft: true
+    draft_type: internal_note
+    draft_recipient: buyer
+    draft_content_must_mention:
+      - PO-2026-05-04421
+      - goods receipt
+      - hold
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.30
+    time_to_recommendation_p95_seconds_max: 45
+
+pass_criteria:
+  - classification.class_label == missing_goods_receipt
+  - recommendation.action == hold_for_goods_receipt
+  - hitl.tier == 2
+  - hitl.routed_to == buyer
+  - drafting.draft_produced == true
+  - execution.invoice_posted == false

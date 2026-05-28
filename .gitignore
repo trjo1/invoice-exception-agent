@@ -1,0 +1,102 @@
+# =============================================================================
+# Agent 1 — P2P Exception Orchestrator — gitignore
+# =============================================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+MANIFEST
+.installed.cfg
+pip-wheel-metadata/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.uv/
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# Type checking
+.mypy_cache/
+.pyright/
+
+# Linting
+.ruff_cache/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Secrets — never commit
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# Logs
+logs/
+*.log
+
+# Test corpus — too large for git, generated locally
+test_corpus/bpi_data/*
+!test_corpus/bpi_data/.gitkeep
+test_corpus/synthetic/invoices/*
+!test_corpus/synthetic/invoices/.gitkeep
+test_corpus/synthetic/emails/*
+!test_corpus/synthetic/emails/.gitkeep
+test_corpus/synthetic/master_data/*
+!test_corpus/synthetic/master_data/.gitkeep
+
+# But DO keep personas (the YAML definitions are source-of-truth)
+!test_corpus/personas/*.yaml
+!test_corpus/personas/*.yml
+
+# Stage 9 traces — generated, not source
+stage9_traces/
+*.jsonl
+
+# But keep the structured llm_calls log for cost analysis at session level
+# (it's gitignored too because it contains keys' tail occasionally; review before commit)
+
+# Docker
+.dockerignore.local
+
+# Database dumps
+*.dump
+*.sql.gz
+
+# Generated docs
+docs/_build/
+site/

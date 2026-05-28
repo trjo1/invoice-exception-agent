@@ -1,0 +1,276 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260301_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-00123",
+    "invoice_date": "2026-03-01",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 45\n60327 Frankfurt am Main\nDeutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "AutoParts AG",
+      "buyer_address": "Musterstr. 10\n80339 München\nDeutschland",
+      "buyer_po_contact": "Anna Schmidt (anna.schmidt@autoparts.de)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-IND-001",
+        "description": "Hydraulikzylinder / Hydraulic Cylinder – Typ HC-200",
+        "quantity": 5,
+        "unit_price": 1200.00,
+        "line_total": 6000.00
+      }
+    ],
+    "subtotal": 6000.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 1140.00
+      }
+    ],
+    "total": 7140.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with 19% DE VAT itemized, SEPA bank details (DE12 3456 7890 1234 5678 90) in header, bilingual labels. Extractor should capture all fields correctly."
+  },
+  {
+    "invoice_id": "P001_INV_20260413_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-00456",
+    "invoice_date": "2026-04-13",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Drive\nSan Jose, CA 95134\nUnited States",
+      "vendor_tax_id": "EIN 98-7654321",
+      "buyer_name": "EuroParts GmbH",
+      "buyer_address": "Am Hauptbahnhof 15\n60329 Frankfurt am Main\nDeutschland",
+      "buyer_po_contact": "Klaus Weber (klaus.weber@europarts.de)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-EL-2026",
+        "description": "Servo Motor Assembly – SMA-3000",
+        "quantity": 2,
+        "unit_price": 2500.00,
+        "line_total": 5000.00
+      }
+    ],
+    "subtotal": 5000.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 437.50
+      },
+      {
+        "jurisdiction": "EU-DE-VAT (reverse charge)",
+        "rate": 0.0,
+        "amount": 0.00
+      }
+    ],
+    "total": 5437.50,
+    "error_injected": "Multi-page invoices where line-items continue across pages",
+    "ground_truth_note": "Invoice has a page break after line 1, with continuation note 'Continued on next page' and a second page header. Extractor should merge both pages to get full line-item data."
+  },
+  {
+    "invoice_id": "P002_INV_20260118_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-00789",
+    "invoice_date": "2026-01-18",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nSpringfield, IL 62701\nUnited States",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Midwest Manufacturing Co.",
+      "buyer_address": "456 Oak Avenue\nChicago, IL 60616\nUnited States",
+      "buyer_po_contact": "John Miller (john.miller@midwestmfg.com)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRE-001",
+        "description": "Freight service – Chicago to Springfield (palletized)",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-FRE-002",
+        "description": "LTL shipment – Industrial parts (Class 85)",
+        "quantity": 3,
+        "unit_price": 275.00,
+        "line_total": 825.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-WAR-001",
+        "description": "Warehousing – Storage per pallet per week",
+        "quantity": 10,
+        "unit_price": 35.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-INS-001",
+        "description": "Insurance – Cargo coverage (0.5% of value)",
+        "quantity": 1,
+        "unit_price": 120.00,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-FUE-001",
+        "description": "Fuel surcharge – 15% on freight",
+        "quantity": 1,
+        "unit_price": 191.25,
+        "line_total": 191.25
+      }
+    ],
+    "subtotal": 1936.25,
+    "tax": [],
+    "total": 1937.00,
+    "error_injected": "Tax line sometimes absent for in-state shipments",
+    "ground_truth_note": "No tax line present (in-state shipment to Illinois, but Illinois does tax freight services; deliberate omission). Extractor should flag missing tax. Total rounded up to nearest dollar (1937). Hand-written note 'Please expedite' in margin."
+  },
+  {
+    "invoice_id": "P002_INV_20260422_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-00999",
+    "invoice_date": "2026-04-22",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nSpringfield, IL 62701\nUnited States",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Midwest Manufacturing Co.",
+      "buyer_address": "456 Oak Avenue\nChicago, IL 60616\nUnited States",
+      "buyer_po_contact": "John Miller (john.miller@midwestmfg.com)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRE-003",
+        "description": "Expedited freight service – Chicago to St. Louis",
+        "quantity": 1,
+        "unit_price": 675.00,
+        "line_total": 675.00
+      }
+    ],
+    "subtotal": 675.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 42.19
+      }
+    ],
+    "total": 718.00,
+    "error_injected": "Missing PO reference (must be inferred from delivery note)",
+    "ground_truth_note": "PO reference field is empty, but a delivery note attached to invoice mentions PO-2026-04-00999. Extractor should infer PO from the delivery note. Hand-written note 'Delivered on 4/20' in margin."
+  },
+  {
+    "invoice_id": "P004_INV_20260420_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-00555",
+    "invoice_date": "2026-04-20",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Unit 7, Industrial Estate\nAndheri East, Mumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234H1Z1\nPAN: AABCM1234H",
+      "buyer_name": "Global Auto Parts Ltd.",
+      "buyer_address": "Plot 15, Sector 3\nGurugram, Haryana 122001\nIndia",
+      "buyer_po_contact": "Rajesh Kumar (rajesh.kumar@globalautoparts.in)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-BOLT-001",
+        "description": "Stainless steel bolts M10 (HSN 7318)",
+        "quantity": 500,
+        "unit_price": 12.50,
+        "line_total": 6250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-NUT-002",
+        "description": "Hex nuts M10 (HSN 7318)",
+        "quantity": 500,
+        "unit_price": 8.75,
+        "line_total": 4375.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-WASH-003",
+        "description": "Flat washers M10 (HSN 7318)",
+        "quantity": 1000,
+        "unit_price": 3.20,
+        "line_total": 3200.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-GEAR-004",
+        "description": "Helical gear assembly (HSN 8483)",
+        "quantity": 10,
+        "unit_price": 4500.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-BEAR-005",
+        "description": "Ball bearing 6205 (HSN 8482)",
+        "quantity": 200,
+        "unit_price": 85.00,
+        "line_total": 17000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-SEAL-006",
+        "description": "Oil seal 25x52x7 (HSN 8484)",
+        "quantity": 150,
+        "unit_price": 45.00,
+        "line_total": 6750.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-SPR-007",
+        "description": "Compression spring (HSN 7320)",
+        "quantity": 300,
+        "unit_price": 18.50,
+        "line_total": 5550.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-CAB-008",
+        "description": "PVC insulated cable 2.5mm (HSN 8544)",
+        "quantity": 250,
+        "unit_price": 62.00,
+        "line_total": 15500.00
+      }
+    ],
+    "subtotal": 103625.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 18652.50
+      }
+    ],
+    "total": 122277.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with IGST at 18% on inter-state supply. HSN codes present for each line item. PAN and GSTIN in header. Cross-currency note: 'USD equivalent: $1,480.00 at rate 82.5 INR/USD' in footer."
+  }
+]
+```

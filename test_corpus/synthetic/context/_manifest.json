@@ -1,0 +1,11 @@
+{
+  "seed": 42,
+  "n_invoices": 490,
+  "n_vendors": 5,
+  "n_pos": 152,
+  "n_grs": 152,
+  "n_summaries": 490,
+  "n_duplicates": 10,
+  "n_split": 15,
+  "generated_at": "2026-05-12T17:10:59"
+}

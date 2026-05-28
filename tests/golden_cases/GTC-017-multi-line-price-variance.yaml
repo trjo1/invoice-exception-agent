@@ -1,0 +1,134 @@
+# Golden test case GTC-017
+# Scenario: 3-line invoice; only 1 line has a price variance above tolerance.
+# Expected: classifier picks three_way_match_price_variance even though most lines match.
+
+id: GTC-017
+title: Multi-line invoice — only one line has price variance
+exception_category: three_way_match_price_variance
+difficulty: medium
+created: 2026-05-13
+notes: |
+  Real-world price variance often hides in a single line of a multi-line
+  invoice. The agent must not be fooled into classifying as `none` because
+  most lines match. Tests line-level comparison vs. invoice-total
+  shortcuts.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-20T10:00:00Z
+      payload:
+        po_id: PO-2026-04-13301
+        vendor_id: P001
+        line_items:
+          - sku: SKU-A100
+            description: Widget A
+            quantity: 50
+            unit_price_usd: 12.00
+            line_total_usd: 600.00
+          - sku: SKU-A200
+            description: Widget B
+            quantity: 30
+            unit_price_usd: 22.00
+            line_total_usd: 660.00
+          - sku: SKU-A300
+            description: Widget C
+            quantity: 20
+            unit_price_usd: 45.00
+            line_total_usd: 900.00
+        currency: USD
+        terms: NET-30
+        status: open
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-04T13:00:00Z
+      payload:
+        po_id: PO-2026-04-13301
+        gr_id: GR-2026-05-09011
+        line_items:
+          - sku: SKU-A100
+            quantity_received: 50
+          - sku: SKU-A200
+            quantity_received: 30
+          - sku: SKU-A300
+            quantity_received: 20
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-08T09:00:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-05-08_011.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-05-08_011.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-05-08-011
+        po_reference: PO-2026-04-13301
+        vendor_id: P001
+        line_items:
+          - sku: SKU-A100
+            quantity: 50
+            unit_price_usd: 12.00      # matches PO
+            line_total_usd: 600.00
+          - sku: SKU-A200
+            quantity: 30
+            unit_price_usd: 22.00      # matches PO
+            line_total_usd: 660.00
+          - sku: SKU-A300
+            quantity: 20
+            unit_price_usd: 48.00      # MISMATCH: PO was $45 — $3 over per unit, $60 total
+            line_total_usd: 960.00
+        total_usd: 2220.00              # PO total was 2160.00
+        currency: USD
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: three_way_match_price_variance
+    min_confidence: 0.80
+    must_contain_evidence:
+      - SKU-A300_price_mismatch
+      - line_variance_$3_per_unit
+      - other_lines_matched
+
+  recommendation:
+    action: request_supplier_credit_memo
+    rationale_must_mention:
+      - SKU-A300
+      - $3 per unit
+      - $60 variance
+      - other lines match
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - line_level_diff
+      - draft_credit_memo_request
+
+  drafting:
+    must_produce_draft: true
+    draft_type: supplier_email
+    draft_recipient: supplier
+    draft_content_must_mention:
+      - SKU-A300
+      - credit memo
+      - $60
+
+  execution:
+    must_not_post_invoice_before_approval: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.35
+
+pass_criteria:
+  - classification.class_label == three_way_match_price_variance
+  - recommendation.action == request_supplier_credit_memo
+  - hitl.tier == 2
+  - drafting.draft_produced == true

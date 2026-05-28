@@ -1,0 +1,121 @@
+# Golden test case GTC-011
+# Scenario: Invoice references a PO that was never approved (above threshold).
+# Expected: HITL Tier 2; route to the approver; do not post.
+
+id: GTC-011
+title: Invoice on PO that lacks required approval (above threshold)
+exception_category: missing_approval
+difficulty: medium
+created: 2026-05-10
+notes: |
+  Approval-workflow anchor. PO was created but the approver chain stalled.
+  Goods may have been delivered anyway. Agent must recognize, route to the
+  approver who needs to act, surface the dollar implication.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-01T08:00:00Z
+      payload:
+        po_id: PO-2026-04-00099
+        vendor_id: P001
+        line_items:
+          - sku: SKU-A782
+            description: Specialized lab equipment
+            quantity: 1
+            unit_price_usd: 42000.00
+            line_total_usd: 42000.00
+        currency: USD
+        terms: NET-45
+        approval_status: PENDING_VP_FINANCE
+        approval_threshold_breached: true
+        approvers_required: [DEPT_HEAD, VP_FINANCE]
+        approvers_completed: [DEPT_HEAD]
+        approvers_outstanding: [VP_FINANCE]
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-04-18T13:00:00Z
+      payload:
+        po_id: PO-2026-04-00099
+        gr_id: GR-2026-04-01007
+        line_items:
+          - sku: SKU-A782
+            quantity_received: 1
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-04-22T11:00:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-04-22_002.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-04-22_002.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-04-22-002
+        po_reference: PO-2026-04-00099
+        vendor_id: P001
+        line_items:
+          - sku: SKU-A782
+            quantity: 1
+            unit_price_usd: 42000.00
+            line_total_usd: 42000.00
+        total_usd: 42000.00
+        currency: USD
+        terms: NET-45
+
+expected:
+  classification:
+    class_label: missing_approval
+    min_confidence: 0.85
+    must_contain_evidence:
+      - po_approval_pending
+      - approver_outstanding_VP_FINANCE
+      - threshold_breached
+      - amount_42000
+
+  recommendation:
+    action: approve_pending_review
+    rationale_must_mention:
+      - PO not yet approved
+      - VP Finance approval outstanding
+      - $42,000 above threshold
+      - goods already delivered
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: VP_FINANCE
+    must_include_in_payload:
+      - the_recommendation
+      - the_pending_approval_state
+      - the_goods_receipt_evidence
+
+  drafting:
+    must_produce_draft: true
+    draft_type: internal_approval_request
+    draft_recipient: VP_FINANCE
+    draft_content_must_mention:
+      - PO-2026-04-00099
+      - $42,000
+      - goods delivered
+      - approval needed before AP can post
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.40
+
+pass_criteria:
+  - classification.class_label == missing_approval
+  - recommendation.action == approve_pending_review
+  - hitl.tier == 2
+  - hitl.routed_to == VP_FINANCE
+  - drafting.draft_produced == true
+  - execution.invoice_posted == false

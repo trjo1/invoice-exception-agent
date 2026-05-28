@@ -1,0 +1,125 @@
+# Golden test case GTC-014
+# Scenario: India intra-state shipment but invoice books IGST instead of CGST+SGST.
+# Expected: tax_field_mismatch → request supplier correction with the right tax breakdown.
+
+id: GTC-014
+title: India invoice — IGST booked on intra-state shipment (should be CGST+SGST)
+exception_category: tax_field_mismatch
+difficulty: medium
+created: 2026-05-13
+notes: |
+  India-jurisdiction anchor. Place-of-supply rules say intra-state shipments
+  attract CGST+SGST (each at half the tax rate); inter-state shipments attract
+  IGST (the full tax rate). Suppliers occasionally misroute these — either
+  because the GSTN code on the buyer is parsed wrong, or the supplier's
+  invoice template defaults to IGST. The agent must catch the mismatch and
+  ask for a corrected invoice; ITC is recoverable only if the tax breakdown
+  is correct on the original invoice.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-15T11:00:00Z
+      payload:
+        po_id: PO-2026-04-09955
+        vendor_id: P004
+        vendor_country: IN
+        vendor_state: KA   # Karnataka
+        buyer_state: KA    # Karnataka — intra-state, so CGST+SGST applies
+        line_items:
+          - sku: HSN-8517
+            description: Networking switch, 24-port managed
+            quantity: 5
+            unit_price_inr: 28000.00
+            line_total_inr: 140000.00
+        currency: INR
+        terms: NET-45
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-05T13:00:00Z
+      payload:
+        po_id: PO-2026-04-09955
+        gr_id: GR-2026-05-04101
+        line_items:
+          - sku: HSN-8517
+            quantity_received: 5
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-08T10:00:00Z
+      payload:
+        from: ap@bangalore-distributors.example.com
+        invoice_attachment: P004_INV_2026-05-08_005.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P004_INV_2026-05-08_005.pdf
+      ground_truth_fields:
+        invoice_number: BD/2026/05/0019
+        po_reference: PO-2026-04-09955
+        vendor_id: P004
+        line_items:
+          - sku: HSN-8517
+            quantity: 5
+            unit_price_inr: 28000.00
+            line_total_inr: 140000.00
+        subtotal_inr: 140000.00
+        # WRONG: invoice books IGST (18%) — but this is intra-KA so should be CGST 9% + SGST 9%
+        tax:
+          - type: IGST
+            rate: 18.0
+            amount_inr: 25200.00
+        total_inr: 165200.00
+        currency: INR
+        terms: NET-45
+
+expected:
+  classification:
+    class_label: tax_field_mismatch
+    min_confidence: 0.75
+    must_contain_evidence:
+      - igst_booked
+      - intra_state_shipment
+      - cgst_sgst_expected
+
+  recommendation:
+    action: request_supplier_correction
+    rationale_must_mention:
+      - intra-state
+      - CGST and SGST
+      - IGST incorrect
+      - ITC recovery
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - the_tax_breakdown
+      - the_jurisdiction
+      - draft_correction_request
+
+  drafting:
+    must_produce_draft: true
+    draft_type: supplier_email
+    draft_recipient: supplier
+    draft_content_must_mention:
+      - intra-state
+      - CGST
+      - SGST
+      - corrected GST invoice
+
+  execution:
+    must_not_post_invoice_before_approval: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.40
+
+pass_criteria:
+  - classification.class_label == tax_field_mismatch
+  - recommendation.action == request_supplier_correction
+  - hitl.tier == 2
+  - drafting.draft_produced == true

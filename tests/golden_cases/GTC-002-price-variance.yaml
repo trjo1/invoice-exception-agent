@@ -1,0 +1,131 @@
+# Golden test case GTC-002
+# Scenario: Invoice unit price 8% over PO; quantity matches
+# Expected: HITL Tier 2 (buyer); draft credit-memo request; halt posting.
+#
+# This is one of the 30-50 golden cases referenced in docs/test_corpus_design.md §3.
+# Template for new cases — copy this file, change values, add to tests/golden_cases/.
+
+id: GTC-002
+title: Invoice unit price 8% over PO; quantity matches
+exception_category: three_way_match_price_variance
+difficulty: medium
+created: 2026-05-10
+notes: |
+  Anchor case for the Price Variance class. Tests that the agent (a) classifies
+  correctly, (b) routes to Tier 2 not Tier 1, (c) drafts the supplier comm,
+  (d) does NOT post the invoice until human approves.
+
+# -----------------------------------------------------------------------------
+# Input — what the agent receives
+# -----------------------------------------------------------------------------
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-01T10:00:00Z
+      payload:
+        po_id: PO-2026-04-00134
+        vendor_id: P001
+        line_items:
+          - sku: SKU-A445
+            description: Industrial sensor module
+            quantity: 100
+            unit_price_usd: 25.00
+            line_total_usd: 2500.00
+        currency: USD
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-04-15T14:23:00Z
+      payload:
+        po_id: PO-2026-04-00134
+        gr_id: GR-2026-04-00789
+        line_items:
+          - sku: SKU-A445
+            quantity_received: 100
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-04-20T09:12:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-04-20.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-04-20.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-04-20-001
+        po_reference: PO-2026-04-00134
+        vendor_id: P001
+        line_items:
+          - sku: SKU-A445
+            quantity: 100
+            unit_price_usd: 27.00     # 8% over PO
+            line_total_usd: 2700.00
+        total_usd: 2700.00
+        currency: USD
+        terms: NET-30
+
+# -----------------------------------------------------------------------------
+# Expected behavior — what the agent should do
+# -----------------------------------------------------------------------------
+
+expected:
+  classification:
+    class_label: three_way_match_price_variance
+    min_confidence: 0.80
+    must_contain_evidence:
+      - unit_price_mismatch
+      - po_unit_price_25
+      - invoice_unit_price_27
+
+  recommendation:
+    action: request_supplier_credit_memo
+    rationale_must_mention:
+      - 8% price variance
+      - PO terms 25.00 per unit
+      - invoice 27.00 per unit
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - the_recommendation
+      - the_draft_supplier_comm
+      - the_counterfactual
+
+  drafting:
+    must_produce_draft: true
+    draft_type: supplier_credit_memo_request
+    draft_recipient: ap@globaltech.example.com
+    draft_content_must_mention:
+      - PO-2026-04-00134
+      - $25.00 per unit
+      - $27.00 per unit
+      - credit memo
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.50
+    time_to_recommendation_p95_seconds_max: 60
+
+# -----------------------------------------------------------------------------
+# Pass criteria — binary pass/fail
+# -----------------------------------------------------------------------------
+
+pass_criteria:
+  - classification.class_label == three_way_match_price_variance
+  - classification.confidence >= 0.80
+  - recommendation.action == request_supplier_credit_memo
+  - hitl.tier == 2
+  - drafting.draft_produced == true
+  - execution.invoice_posted == false
+  - stage9.cost_per_case_usd <= 0.50

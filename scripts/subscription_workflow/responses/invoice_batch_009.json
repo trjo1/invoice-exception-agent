@@ -1,0 +1,278 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260407_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-00123",
+    "invoice_date": "2026-04-07",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Industrial Blvd, Suite 5\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "EIN 36-7890123",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, Floor 3\nSan Jose, CA 95110\nUSA",
+      "buyer_po_contact": "Alice Johnson / alice.johnson@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "WH-001",
+        "description": "Warehouse storage pallet rental, monthly",
+        "quantity": 50,
+        "unit_price": 12.75,
+        "line_total": 637.50
+      },
+      {
+        "line_no": 2,
+        "sku": "TR-022",
+        "description": "Local freight delivery service (per trip)",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 1087.50,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 67.97
+      }
+    ],
+    "total": 1156.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Subtotal 1087.50, tax 67.97, total rounded to 1156.00. Hand-written note 'Thanks!' in margin. Header slightly misaligned."
+  },
+  {
+    "invoice_id": "P003_INV_20260327_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-00456",
+    "invoice_date": "2026-03-27",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Musterstraße 12\n60329 Frankfurt am Main\nGermany",
+      "vendor_tax_id": "DE 123456789",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, Floor 3\nSan Jose, CA 95110\nUSA",
+      "buyer_po_contact": "Bob Müller / bob.mueller@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "IND-100",
+        "description": "Hydraulikpumpe / Hydraulic pump, model HP-200",
+        "quantity": 5,
+        "unit_price": 340.00,
+        "line_total": 1700.00
+      },
+      {
+        "line_no": 2,
+        "sku": "IND-202",
+        "description": "Dichtungsset / Seal kit, standard",
+        "quantity": 20,
+        "unit_price": 18.50,
+        "line_total": 370.00
+      },
+      {
+        "line_no": 3,
+        "sku": "IND-305",
+        "description": "Steuerungseinheit / Control unit, CU-12",
+        "quantity": 2,
+        "unit_price": 890.00,
+        "line_total": 1780.00
+      }
+    ],
+    "subtotal": 3850.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 731.50
+      }
+    ],
+    "total": 4581.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with German VAT at 19%. Line items have bilingual descriptions. SEPA bank details: IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX. No errors."
+  },
+  {
+    "invoice_id": "P004_INV_20260227_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-00789",
+    "invoice_date": "2026-02-27",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 45, Andheri Industrial Estate\nMumbai, Maharashtra 400053\nIndia",
+      "vendor_tax_id": "GSTIN 27AABCM1234K1Z5",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, Floor 3\nSan Jose, CA 95110\nUSA",
+      "buyer_po_contact": "Priya Sharma / priya.sharma@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "STL-500",
+        "description": "Stainless steel sheets, grade 304, 2mm thick (per sq. meter)",
+        "quantity": 100,
+        "unit_price": 450.00,
+        "line_total": 45000.00
+      }
+    ],
+    "subtotal": 45000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 8100.00
+      }
+    ],
+    "total": 53100.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. GST at 18% IGST (inter-state). HSN code 7219.30. PAN: AABCM1234K. Cross-currency note: ~$637 USD equivalent. No errors."
+  },
+  {
+    "invoice_id": "P002_INV_20260103_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-00100",
+    "invoice_date": "2026-01-03",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Industrial Blvd, Suite 5\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "EIN 36-7890123",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, Floor 3\nSan Jose, CA 95110\nUSA",
+      "buyer_po_contact": "Alice Johnson / alice.johnson@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "WH-001",
+        "description": "Warehouse storage pallet rental, monthly",
+        "quantity": 100,
+        "unit_price": 12.75,
+        "line_total": 1275.00
+      },
+      {
+        "line_no": 2,
+        "sku": "TR-022",
+        "description": "Local freight delivery service (per trip)",
+        "quantity": 25,
+        "unit_price": 45.00,
+        "line_total": 1125.00
+      },
+      {
+        "line_no": 3,
+        "sku": "PKG-100",
+        "description": "Cardboard packaging boxes, standard (per 100)",
+        "quantity": 30,
+        "unit_price": 22.50,
+        "line_total": 675.00
+      },
+      {
+        "line_no": 4,
+        "sku": "PKG-110",
+        "description": "Bubble wrap rolls, 50m each",
+        "quantity": 15,
+        "unit_price": 18.00,
+        "line_total": 270.00
+      },
+      {
+        "line_no": 5,
+        "sku": "EQ-300",
+        "description": "Forklift battery charger, model FC-4",
+        "quantity": 2,
+        "unit_price": 850.00,
+        "line_total": 1700.00
+      },
+      {
+        "line_no": 6,
+        "sku": "EQ-400",
+        "description": "Pallet jack, hydraulic, 2.5 ton",
+        "quantity": 3,
+        "unit_price": 320.00,
+        "line_total": 960.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SUP-050",
+        "description": "Safety gloves, nitrile, box of 100",
+        "quantity": 10,
+        "unit_price": 15.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SUP-060",
+        "description": "Safety glasses, polycarbonate (per pair)",
+        "quantity": 20,
+        "unit_price": 4.50,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 6245.00,
+    "tax": [],
+    "total": 6245.00,
+    "error_injected": "Tax line sometimes absent for in-state shipments",
+    "ground_truth_note": "Error: tax line missing because shipment is in-state (Illinois to Illinois). Extractor should flag missing tax. Total 6245.00 (rounded). Hand-written note 'Rush order' in margin."
+  },
+  {
+    "invoice_id": "P005_INV_20260101_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-00111",
+    "invoice_date": "2026-01-01",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Sala 405\nSão Paulo, SP 01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Global Tech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, Floor 3\nSan Jose, CA 95110\nUSA",
+      "buyer_po_contact": "Carlos Silva / carlos.silva@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MC-001",
+        "description": "Motor elétrico trifásico, 5 CV / Three-phase electric motor, 5 HP",
+        "quantity": 10,
+        "unit_price": 850.00,
+        "line_total": 8500.00
+      }
+    ],
+    "subtotal": 8500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 1530.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 425.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 140.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 646.00
+      }
+    ],
+    "total": 11241.25,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Error: four different tax types (ICMS, IPI, PIS, COFINS) are present, which may confuse extraction. Total 11241.25 BRL. NF-e format with boleto bancário reference: 34191.23456 67890.123456 78901.234567 1 12345678901234."
+  }
+]
+```

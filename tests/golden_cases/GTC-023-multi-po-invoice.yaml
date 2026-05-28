@@ -1,0 +1,140 @@
+# Golden test case GTC-023
+# Scenario: One invoice references TWO POs at once (consolidated billing).
+# Expected: classify as `other` — multi-PO aggregation needs manual handling for v1.
+
+id: GTC-023
+title: Single invoice references two separate POs (consolidated billing)
+exception_category: other
+difficulty: hard
+created: 2026-05-13
+notes: |
+  Aggregation-pattern anchor. Some suppliers consolidate multiple POs into
+  one monthly statement-style invoice. The agent's current 3-way-match logic
+  is one-PO-per-invoice; multi-PO requires splitting the invoice or
+  individually matching against each PO. For v1, the right action is to
+  route to AP team for manual splitting. Tests that the agent recognizes
+  the pattern instead of forcing a single-PO match.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-10T09:00:00Z
+      payload:
+        po_id: PO-2026-04-18801
+        vendor_id: P002
+        line_items:
+          - sku: SVC-Q2-EXEC
+            description: Executive coaching Q2
+            quantity: 1
+            unit_price_usd: 15000.00
+            line_total_usd: 15000.00
+        currency: USD
+        terms: NET-30
+
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-12T10:00:00Z
+      payload:
+        po_id: PO-2026-04-18802
+        vendor_id: P002
+        line_items:
+          - sku: SVC-Q2-WORKSHOP
+            description: Leadership workshop facilitation
+            quantity: 1
+            unit_price_usd: 9000.00
+            line_total_usd: 9000.00
+        currency: USD
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-05T16:00:00Z
+      payload:
+        po_id: PO-2026-04-18801
+        gr_id: GR-2026-05-09444
+        line_items: [{sku: SVC-Q2-EXEC, quantity_received: 1}]
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-05T16:05:00Z
+      payload:
+        po_id: PO-2026-04-18802
+        gr_id: GR-2026-05-09445
+        line_items: [{sku: SVC-Q2-WORKSHOP, quantity_received: 1}]
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-10T11:00:00Z
+      payload:
+        from: billing@advisorypartners.example.com
+        invoice_attachment: P002_INV_2026-05-10_017.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P002_INV_2026-05-10_017.pdf
+      ground_truth_fields:
+        invoice_number: AP-2026-05-CON-007
+        po_reference: "PO-2026-04-18801, PO-2026-04-18802"   # TWO POs
+        vendor_id: P002
+        line_items:
+          - sku: SVC-Q2-EXEC
+            description: Executive coaching Q2 (PO-2026-04-18801)
+            quantity: 1
+            unit_price_usd: 15000.00
+            line_total_usd: 15000.00
+          - sku: SVC-Q2-WORKSHOP
+            description: Leadership workshop facilitation (PO-2026-04-18802)
+            quantity: 1
+            unit_price_usd: 9000.00
+            line_total_usd: 9000.00
+        total_usd: 24000.00
+        currency: USD
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: other
+    min_confidence: 0.65
+    must_contain_evidence:
+      - multi_po_reference
+      - consolidated_invoice
+      - both_pos_valid
+
+  recommendation:
+    action: other
+    rationale_must_mention:
+      - two POs
+      - consolidated
+      - manual splitting
+      - AP review
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - both_po_references
+      - both_grs
+
+  drafting:
+    must_produce_draft: true
+    draft_type: internal_note
+    draft_recipient: buyer
+    draft_content_must_mention:
+      - two PO references
+      - manual split
+      - PO-2026-04-18801
+      - PO-2026-04-18802
+
+  execution:
+    must_not_post_invoice_before_approval: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.40
+
+pass_criteria:
+  - classification.class_label == other
+  - hitl.tier == 2
+  - drafting.draft_produced == true

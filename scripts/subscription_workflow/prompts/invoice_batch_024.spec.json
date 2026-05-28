@@ -1,0 +1,96 @@
+{
+  "batch_no": 24,
+  "n_invoices": 5,
+  "specs": [
+    {
+      "spec_index": 115,
+      "persona_id": "P002",
+      "persona_name": "Maple Logistics SMB",
+      "persona_region": "US",
+      "persona_language": "en",
+      "persona_currency": "USD",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-45",
+      "persona_quirks": [
+        "Hand-written notes occasionally on scanned invoices",
+        "Inconsistent header placement",
+        "Round totals up to nearest dollar"
+      ],
+      "invoice_date_hint": "2026-02-06",
+      "line_item_count_hint": 8,
+      "error_injected": null
+    },
+    {
+      "spec_index": 116,
+      "persona_id": "P005",
+      "persona_name": "S\u00e3o Paulo Componentes Ltda.",
+      "persona_region": "LATAM-BR",
+      "persona_language": "pt",
+      "persona_currency": "BRL",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "NF-e (Brazil tax document) shape \u2014 invoice + tax receipt combined",
+        "Multiple tax types (ICMS, IPI, PIS, COFINS)",
+        "Boleto banc\u00e1rio payment slip referenced"
+      ],
+      "invoice_date_hint": "2026-03-28",
+      "line_item_count_hint": 3,
+      "error_injected": "Multiple tax types confuse extraction"
+    },
+    {
+      "spec_index": 117,
+      "persona_id": "P002",
+      "persona_name": "Maple Logistics SMB",
+      "persona_region": "US",
+      "persona_language": "en",
+      "persona_currency": "USD",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-45",
+      "persona_quirks": [
+        "Hand-written notes occasionally on scanned invoices",
+        "Inconsistent header placement",
+        "Round totals up to nearest dollar"
+      ],
+      "invoice_date_hint": "2026-01-19",
+      "line_item_count_hint": 1,
+      "error_injected": null
+    },
+    {
+      "spec_index": 118,
+      "persona_id": "P001",
+      "persona_name": "Global Tech Components Inc.",
+      "persona_region": "US",
+      "persona_language": "en",
+      "persona_currency": "USD",
+      "persona_layout_style": "modern_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "Multi-currency invoicing when shipping abroad",
+        "Tax line itemized separately by jurisdiction",
+        "Round totals to 2 decimals"
+      ],
+      "invoice_date_hint": "2026-03-20",
+      "line_item_count_hint": 1,
+      "error_injected": "Multi-page invoices where line-items continue across pages"
+    },
+    {
+      "spec_index": 119,
+      "persona_id": "P004",
+      "persona_name": "Mumbai Materials Co.",
+      "persona_region": "APAC-IN",
+      "persona_language": "en",
+      "persona_currency": "INR",
+      "persona_layout_style": "legacy_pdf",
+      "persona_payment_terms": "NET-60",
+      "persona_quirks": [
+        "GST itemized; HSN codes per line",
+        "PAN + GSTIN in header",
+        "Cross-currency to USD common"
+      ],
+      "invoice_date_hint": "2026-03-22",
+      "line_item_count_hint": 8,
+      "error_injected": null
+    }
+  ]
+}

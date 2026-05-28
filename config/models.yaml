@@ -1,0 +1,172 @@
+# =============================================================================
+# Per-task model assignments
+# =============================================================================
+# This file maps each named task in the agent to a default model.
+# Override per-task with MODEL_OVERRIDE_<task>=<model_id> in env.
+#
+# Model IDs follow OpenRouter conventions: <provider>/<model-id>.
+# When using a direct provider API, the same model ID still works because
+# the model client routes by ID.
+#
+# All cost figures are USD per million tokens, sourced 2026-05-10. Refresh
+# quarterly via `uv run python scripts/refresh_model_prices.py`.
+
+# -----------------------------------------------------------------------------
+# Default routes — open-source first
+# -----------------------------------------------------------------------------
+
+tasks:
+  corpus_generation:
+    model: deepseek/deepseek-v4-flash
+    fallback: deepseek/deepseek-chat
+    notes: Synthetic invoice / email / master data generation. Cheap, 1M ctx, fine at structured JSON.
+
+  invoice_extraction:
+    model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-4
+    notes: Strong on structured JSON output; cheap.
+
+  email_parsing:
+    model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-4
+
+  exception_classification:
+    model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-4
+    notes: Multi-class, outputs label + confidence + evidence.
+
+  decision_support_reasoning:
+    model: deepseek/deepseek-r1
+    fallback: anthropic/claude-sonnet-4
+    notes: Reasoning model — produces explicit chain-of-thought rationale.
+
+  counterfactual_generation:
+    model: deepseek/deepseek-r1
+    fallback: anthropic/claude-sonnet-4
+
+  orchestration_agentic:
+    model: moonshotai/kimi-k2
+    fallback: anthropic/claude-sonnet-4
+    notes: Designed for agentic workflows; 128K context; strong tool-calling.
+
+  drafting_supplier_comms:
+    model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-4
+    notes: Conversational quality acceptable; human-reviewed before send.
+
+  drafting_internal_notes:
+    model: deepseek/deepseek-v4-flash
+    fallback: anthropic/claude-haiku-4
+
+  embedding:
+    model: BAAI/bge-large-en-v1.5
+    fallback: openai/text-embedding-3-small
+    notes: Self-hosted via sentence-transformers; ~0 marginal cost.
+
+  reranking:
+    model: BAAI/bge-reranker-v2-m3
+    fallback: openai/text-embedding-3-small
+    notes: Cross-encoder reranker; self-hosted, no API needed.
+
+# -----------------------------------------------------------------------------
+# Provider routing
+# -----------------------------------------------------------------------------
+
+providers:
+  openrouter:
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    default: true
+    strip_provider_prefix: false
+    handles:
+      - deepseek/*
+      - moonshotai/*
+      - anthropic/*
+      - openai/*
+      - qwen/*
+      - meta-llama/*
+
+  deepseek-direct:
+    base_url: https://api.deepseek.com/v1
+    api_key_env: DEEPSEEK_API_KEY
+    # Disabled until monthly spend justifies the direct API; until then all
+    # DeepSeek traffic flows through OpenRouter via the `deepseek/*` wildcard.
+    # When the spend threshold is hit, set DEEPSEEK_API_KEY in .env and move
+    # specific model IDs into `handles:` below.
+    handles: []
+    enabled_when: monthly_spend_above_500_usd
+
+  moonshot-direct:
+    base_url: https://api.moonshot.cn/v1
+    api_key_env: MOONSHOT_API_KEY
+    handles:
+      - moonshotai/kimi-k2
+
+  anthropic-direct:
+    base_url: https://api.anthropic.com
+    api_key_env: ANTHROPIC_API_KEY
+    handles:
+      - anthropic/*
+
+  openai-direct:
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    handles:
+      - openai/*
+
+# -----------------------------------------------------------------------------
+# Model price catalog (USD per 1M tokens)
+# Used by the cost calculator. Refresh quarterly.
+# -----------------------------------------------------------------------------
+
+prices:
+  deepseek/deepseek-v4-flash:
+    input: 0.14
+    output: 0.28
+  deepseek/deepseek-v4-pro:
+    input: 0.55
+    output: 2.19
+  deepseek/deepseek-chat:
+    input: 0.27
+    output: 1.10
+  deepseek/deepseek-r1:
+    input: 0.55
+    output: 2.19
+  moonshotai/kimi-k2:
+    input: 0.15
+    output: 2.50
+  qwen/qwen-2.5-72b-instruct:
+    input: 0.35
+    output: 0.40
+  meta-llama/llama-3.3-70b-instruct:
+    input: 0.13
+    output: 0.39
+  anthropic/claude-sonnet-4:
+    input: 3.00
+    output: 15.00
+  anthropic/claude-haiku-4:
+    input: 0.80
+    output: 4.00
+  openai/gpt-4o:
+    input: 2.50
+    output: 10.00
+  openai/text-embedding-3-small:
+    input: 0.02
+    output: 0.00
+  BAAI/bge-large-en-v1.5:
+    input: 0.00  # self-hosted
+    output: 0.00
+  BAAI/bge-reranker-v2-m3:
+    input: 0.00  # self-hosted
+    output: 0.00
+
+# -----------------------------------------------------------------------------
+# Quality gates (used by `scripts/refresh_model_defaults.py`)
+# A model becomes a default only when it clears all gates on its task.
+# -----------------------------------------------------------------------------
+
+quality_gates:
+  golden_accuracy_min: 0.80      # ≥ 80% of closed-model baseline accuracy
+  p95_latency_multiplier_max: 2  # ≤ 2× closed-model baseline latency
+  json_validity_min: 0.95        # ≥ 95% valid structured output
+  citation_accuracy_min: 0.90    # ≥ 90% citation accuracy (RAG tasks)

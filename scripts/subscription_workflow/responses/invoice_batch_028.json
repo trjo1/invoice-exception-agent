@@ -1,0 +1,355 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260127_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-27",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Mumbai Materials Co.\n42 Industrial Estate\nAndheri East, Mumbai 400093\nMaharashtra, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1\nPAN: AABCM1234C",
+      "buyer_name": "Worldwide Procurement Corp",
+      "buyer_address": "123 Commerce Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, po@worldwideproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Steel rods 12mm (HSN 7214)",
+        "quantity": 100,
+        "unit_price": 250.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Cement bags 50kg (HSN 2523)",
+        "quantity": 50,
+        "unit_price": 350.00,
+        "line_total": 17500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "Bricks (HSN 6901)",
+        "quantity": 2000,
+        "unit_price": 8.50,
+        "line_total": 17000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "Paint buckets 20L (HSN 3208)",
+        "quantity": 20,
+        "unit_price": 1200.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "PVC pipes 6m (HSN 3917)",
+        "quantity": 150,
+        "unit_price": 180.00,
+        "line_total": 27000.00
+      }
+    ],
+    "subtotal": 110500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-GST",
+        "rate": 0.18,
+        "amount": 19890.00
+      }
+    ],
+    "total": 130390.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. in INR. Includes GST at 18% with HSN codes per line. Vendor PAN and GSTIN in header. Cross-currency USD equivalent often shown but not captured in schema."
+  },
+  {
+    "invoice_id": "P004_INV_20260316_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-16",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Mumbai Materials Co.\n42 Industrial Estate\nAndheri East, Mumbai 400093\nMaharashtra, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1\nPAN: AABCM1234C",
+      "buyer_name": "Worldwide Procurement Corp",
+      "buyer_address": "123 Commerce Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, po@worldwideproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-006",
+        "description": "Aluminum sheets 2mm (HSN 7606)",
+        "quantity": 50,
+        "unit_price": 1200.00,
+        "line_total": 60000.00
+      }
+    ],
+    "subtotal": 60000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-GST",
+        "rate": 0.18,
+        "amount": 10800.00
+      }
+    ],
+    "total": 70800.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean single-line invoice from Mumbai Materials Co. INR, GST 18%, HSN code included."
+  },
+  {
+    "invoice_id": "P005_INV_20260101_003",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-11111",
+    "invoice_date": "2026-01-01",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Peças, 500\nSão Paulo, SP 01000-000\nBrasil",
+      "vendor_tax_id": "CNPJ: 00.000.000/0001-91",
+      "buyer_name": "Worldwide Procurement Corp",
+      "buyer_address": "123 Commerce Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, po@worldwideproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Parafusos M8",
+        "quantity": 500,
+        "unit_price": 0.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Porcas sextavadas",
+        "quantity": 500,
+        "unit_price": 0.30,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Arruelas",
+        "quantity": 1000,
+        "unit_price": 0.10,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 90.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 25.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 8.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 38.00
+      }
+    ],
+    "total": 661.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice from São Paulo Componentes Ltda. in BRL. Includes ICMS, IPI, PIS, COFINS taxes. Boleto bancário payment slip referenced in header or notes (not captured in schema)."
+  },
+  {
+    "invoice_id": "P003_INV_20260420_004",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-22222",
+    "invoice_date": "2026-04-20",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 15\n60327 Frankfurt am Main\nDeutschland",
+      "vendor_tax_id": "USt-IdNr.: DE123456789",
+      "buyer_name": "Worldwide Procurement Corp",
+      "buyer_address": "123 Commerce Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, po@worldwideproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Stahlträger 200mm (Steel beams 200mm)",
+        "quantity": 10,
+        "unit_price": 450.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Aluminiumprofile 3m (Aluminum profiles 3m)",
+        "quantity": 25,
+        "unit_price": 120.00,
+        "line_total": 3000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Schraubensatz M10 (Screw kit M10)",
+        "quantity": 100,
+        "unit_price": 5.50,
+        "line_total": 550.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-004",
+        "description": "Hydraulikzylinder 50mm (Hydraulic cylinder 50mm)",
+        "quantity": 5,
+        "unit_price": 890.00,
+        "line_total": 4450.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-005",
+        "description": "Dichtungssatz (Seal kit)",
+        "quantity": 20,
+        "unit_price": 35.00,
+        "line_total": 700.00
+      }
+    ],
+    "subtotal": 13200.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 2508.00
+      }
+    ],
+    "total": 15708.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH in EUR. German VAT 19% itemized. Bilingual labels (German/English). SEPA bank details present in invoice (e.g., IBAN DE89 3704 0044 0532 0130 00) but not captured in schema."
+  },
+  {
+    "invoice_id": "P005_INV_20260311_005",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-33333",
+    "invoice_date": "2026-03-11",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Peças, 500\nSão Paulo, SP 01000-000\nBrasil",
+      "vendor_tax_id": "CNPJ: 00.000.000/0001-91",
+      "buyer_name": "Worldwide Procurement Corp",
+      "buyer_address": "123 Commerce Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, po@worldwideproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-004",
+        "description": "Molas de compressão",
+        "quantity": 200,
+        "unit_price": 1.20,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-005",
+        "description": "Engrenagens pequenas",
+        "quantity": 50,
+        "unit_price": 15.00,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-006",
+        "description": "Rolamentos 6205",
+        "quantity": 100,
+        "unit_price": 8.50,
+        "line_total": 850.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-007",
+        "description": "Correias dentadas",
+        "quantity": 30,
+        "unit_price": 22.00,
+        "line_total": 660.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-008",
+        "description": "Vedantes de borracha",
+        "quantity": 500,
+        "unit_price": 0.40,
+        "line_total": 200.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-009",
+        "description": "Cabos de aço 5mm",
+        "quantity": 200,
+        "unit_price": 3.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-010",
+        "description": "Mangueiras hidráulicas",
+        "quantity": 40,
+        "unit_price": 25.00,
+        "line_total": 1000.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-011",
+        "description": "Conectores elétricos",
+        "quantity": 300,
+        "unit_price": 1.10,
+        "line_total": 330.00
+      }
+    ],
+    "subtotal": 4630.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 833.40
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 231.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 76.40
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 351.88
+      }
+    ],
+    "total": 6123.18,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice with 8 line items from São Paulo Componentes Ltda. BRL, multiple taxes, boleto referenced."
+  }
+]
+```

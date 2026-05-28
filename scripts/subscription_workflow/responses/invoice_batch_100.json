@@ -1,0 +1,440 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260221_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-21",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "742 Evergreen Terrace, Springfield, IL 62704",
+      "vendor_tax_id": "EIN 36-7890123",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Main Street, Metropolis, NY 10001",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHP-001",
+        "description": "Standard pallet shipping service",
+        "quantity": 5,
+        "unit_price": 120.50,
+        "line_total": 602.50
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-SHP-002",
+        "description": "Express parcel delivery",
+        "quantity": 12,
+        "unit_price": 45.00,
+        "line_total": 540.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-SHP-003",
+        "description": "Warehouse storage per pallet per day",
+        "quantity": 20,
+        "unit_price": 8.75,
+        "line_total": 175.00
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-SHP-004",
+        "description": "Freight insurance (value-based)",
+        "quantity": 1,
+        "unit_price": 250.00,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-SHP-005",
+        "description": "Hazardous material handling fee",
+        "quantity": 3,
+        "unit_price": 65.00,
+        "line_total": 195.00
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-SHP-006",
+        "description": "Last-mile delivery surcharge",
+        "quantity": 8,
+        "unit_price": 30.00,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-SHP-007",
+        "description": "Customs brokerage fee",
+        "quantity": 1,
+        "unit_price": 150.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-SHP-008",
+        "description": "Fuel surcharge (variable)",
+        "quantity": 1,
+        "unit_price": 85.00,
+        "line_total": 85.00
+      }
+    ],
+    "subtotal": 2237.50,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 139.84
+      }
+    ],
+    "total": 2377.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB; totals rounded up to nearest dollar. Hand-written note 'Thanks!' appears in margin (not extracted)."
+  },
+  {
+    "invoice_id": "P001_INV_20260402_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-98765",
+    "invoice_date": "2026-04-02",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "4500 Innovation Drive, San Jose, CA 95134",
+      "vendor_tax_id": "EIN 94-1234567",
+      "buyer_name": "ElectroWorld GmbH",
+      "buyer_address": "Industriestrasse 10, 80339 Munich, Germany",
+      "buyer_po_contact": "Klaus Mueller, k.mueller@electroworld.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-IC-001",
+        "description": "Microcontroller ATmega328P (bulk)",
+        "quantity": 5000,
+        "unit_price": 0.45,
+        "line_total": 2250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SEN-002",
+        "description": "Temperature sensor DS18B20",
+        "quantity": 2000,
+        "unit_price":  rent 1.20,
+        "line_total": 2400.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-CAP-003",
+        "description": "Capacitor 100µF 25V electrolytic",
+        "quantity": 10000,
+        "unit_price": 0.08,
+        "line_total": 800.00
+      }
+    ],
+    "subtotal": 5450.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 395.13
+      },
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 1035.50
+      }
+    ],
+    "total": 6880.63,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference PO-2026-04-98765 has a transposed digit; actual PO should be PO-2026-04-98756. Tax itemized separately for California and German VAT. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P004_INV_20260120_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-20",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 7, MIDC Industrial Area, Andheri East, Mumbai 400093",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1ZP, PAN: AABCM1234C",
+      "buyer_name": "Delta Electronics Pvt Ltd",
+      "buyer_address": "B-23, Sector 62, Noida, Uttar Pradesh 201309",
+      "buyer_po_contact": "Ravi Sharma, ravi.sharma@deltaelectronics.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-CHEM-001",
+        "description": "Sodium hydroxide flakes (99% purity), 25kg bag",
+        "quantity": 50,
+        "unit_price": 850.00,
+        "line_total": 42500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-CHEM-002",
+        "description": "Hydrochloric acid (35%), 20L carboy",
+        "quantity": 20,
+        "unit_price": 1200.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-CHEM-003",
+        "description": "Acetone (technical grade), 5L can",
+        "quantity": 100,
+        "unit_price": 450.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-CHEM-004",
+        "description": "Methanol (HPLC grade), 4L bottle",
+        "quantity": 30,
+        "unit_price": 1800.00,
+        "line_total": 54000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-CHEM-005",
+        "description": "Sulfuric acid (98%), 2.5L bottle",
+        "quantity": 40,
+        "unit_price": 950.00,
+        "line_total": 38000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-CHEM-006",
+        "description": "Ammonium hydroxide (28%), 1L bottle",
+        "quantity": 60,
+        "unit_price": 300.00,
+        "line_total": 18000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-CHEM-007",
+        "description": "Ethanol (absolute), 2.5L bottle",
+        "quantity": 25,
+        "unit_price": 1100.00,
+        "line_total": 27500.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-CHEM-008",
+        "description": "Isopropyl alcohol (99%), 1L bottle",
+        "quantity": 80,
+        "unit_price": 250.00,
+        "line_total": 20000.00
+      }
+    ],
+    "subtotal": 269000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 48420.00
+      }
+    ],
+    "total": 317420.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with GST and HSN codes per line (not shown in JSON but present in original). Cross-currency USD equivalent noted in header (not extracted)."
+  },
+  {
+    "invoice_id": "P005_INV_20260121_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-11111",
+    "invoice_date": "2026-01-21",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 1234, Jardim Paulista, São Paulo, SP 01410-001",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90, IE: 123.456.789.112",
+      "buyer_name": "AutoParts do Brasil S.A.",
+      "buyer_address": "Av. Industrial, 500, Distrito Industrial, Campinas, SP 13050-000",
+      "buyer_po_contact": "Carlos Silva, c.silva@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-PEC-001",
+        "description": "Parafuso de cabeça sextavada M10x30 (aço inox)",
+        "quantity": 500,
+        "unit_price": 2.50,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-PEC-002",
+        "description": "Porca sextavada M10 (aço carbono)",
+        "quantity": 500,
+        "unit_price": 1.80,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-PEC-003",
+        "description": "Arruela lisa M10 (aço inox)",
+        "quantity": 1000,
+        "unit_price": 0.60,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-PEC-004",
+        "description": "Rolamento de esferas 6205-2Z",
+        "quantity": 200,
+        "unit_price": 15.00,
+        "line_total": 3000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-PEC-005",
+        "description": "Mola helicoidal de compressão (d=2mm, L=50mm)",
+        "quantity": 300,
+        "unit_price": 4.20,
+        "line_total": 1260.00
+      }
+    ],
+    "subtotal": 7010.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 1261.80
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 350.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 115.67
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 532.76
+      }
+    ],
+    "total": 9270.73,
+    "error_injected": "DATE_FORMAT_WRONG",
+    "ground_truth_note": "Invoice date printed as '21/01/2026' (dd/mm/yyyy) instead of ISO 2026-01-21. Extractor should normalize to ISO. Boleto bancário reference number included in footer (not extracted)."
+  },
+  {
+    "invoice_id": "P005_INV_20260208_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-22222",
+    "invoice_date": "2026-02-08",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 1234, Jardim Paulista, São Paulo, SP 01410-001",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90, IE: 123.456.789.112",
+      "buyer_name": "Construtora Nova Era Ltda.",
+      "buyer_address": "Av. Paulista, 1000, Bela Vista, São Paulo, SP 01310-100",
+      "buyer_po_contact": "Fernanda Oliveira, f.oliveira@construtoranovaera.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-FER-001",
+        "description": "Vergalhão de aço CA-50 (10mm), barra 12m",
+        "quantity": 200,
+        "unit_price": 45.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-FER-002",
+        "description": "Telas soldadas Q-196 (3,0m x 2,0m)",
+        "quantity": 50,
+        "unit_price": 120.00,
+        "line_total": 6000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-FER-003",
+        "description": "Cimento Portland CP-II (50kg saco)",
+        "quantity": 300,
+        "unit_price": 35.00,
+        "line_total": 10500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-FER-004",
+        "description": "Areia média lavada (m³)",
+        "quantity": 40,
+        "unit_price": 80.00,
+        "line_total": 3200.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-FER-005",
+        "description": "Brita 1 (m³)",
+        "quantity": 30,
+        "unit_price": 90.00,
+        "line_total": 2700.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-FER-006",
+        "description": "Tijolo cerâmico 9x19x19cm (milheiro)",
+        "quantity": 10,
+        "unit_price": 450.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-FER-007",
+        "description": "Telha fibrocimento 6mm (2,44m x 1,10m)",
+        "quantity": 200,
+        "unit_price": 55.00,
+        "line_total": 11000.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-FER-008",
+        "description": "Cal hidratada CH-I (20kg saco)",
+        "quantity": 100,
+        "unit_price": 18.00,
+        "line_total": 1800.00
+      }
+    ],
+    "subtotal": 48700.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 8766.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 2435.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 803.55
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 3701.20
+      }
+    ],
+    "total": 64405.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from São Paulo Componentes Ltda. NF-e format includes ICMS, IPI, PIS, and COFINS taxes. Boleto bancário reference number included in footer (not extracted)."
+  }
+]
+```

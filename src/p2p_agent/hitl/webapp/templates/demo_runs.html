@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}All runs{% endblock %}
+{% block content %}
+
+<h2>Past runs ({{ runs|length }})</h2>
+<p style="color:var(--muted)"><a href="/demo">← back to upload</a></p>
+
+{% if runs %}
+<table>
+  <thead>
+    <tr>
+      <th>When</th>
+      <th>File</th>
+      <th>Class</th>
+      <th>Action</th>
+      <th>Tier</th>
+      <th>Routed to</th>
+      <th>Latency</th>
+      <th>In queue?</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for run in runs %}
+    <tr>
+      <td>{{ run.uploaded_at.strftime('%Y-%m-%d %H:%M') if run.uploaded_at else '' }}</td>
+      <td><a href="/demo/run/{{ run.id }}">{{ run.uploaded_filename }}</a></td>
+      <td>{{ run.class_label or '—' }}</td>
+      <td>{{ run.recommended_action or '—' }}</td>
+      <td>{% if run.tier %}<span class="chip t{{ run.tier }}">T{{ run.tier }}</span>{% else %}—{% endif %}</td>
+      <td>{% if run.routed_to %}<span class="chip">{{ run.routed_to }}</span>{% else %}—{% endif %}</td>
+      <td>{{ (run.latency_ms or 0) // 1000 }}s</td>
+      <td>
+        {% if run.hitl_item_id %}<a href="/item/{{ run.hitl_item_id }}">open queue item</a>{% else %}—{% endif %}
+      </td>
+      <td>
+        {% if run.status == 'completed' %}<span class="chip status-approved">done</span>
+        {% elif run.status == 'failed' %}<span class="chip status-rejected">failed</span>
+        {% else %}<span class="chip status-pending">{{ run.status }}</span>{% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p style="color:var(--muted)">No runs yet. <a href="/demo">Upload your first invoice.</a></p>
+{% endif %}
+
+{% endblock %}

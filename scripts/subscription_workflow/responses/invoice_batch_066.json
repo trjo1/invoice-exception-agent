@@ -1,0 +1,334 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260417_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-17",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Indústrias, 1500\nSão Paulo, SP 01001-000\nBrazil",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "123 Industrial Blvd\nDetroit, MI 48201\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-001",
+        "description": "Parafuso M8 x 30mm (caixa com 100)",
+        "quantity": 10,
+        "unit_price": 15.50,
+        "line_total": 155.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-002",
+        "description": "Arruela de pressão M8 (caixa com 200)",
+        "quantity": 5,
+        "unit_price": 8.20,
+        "line_total": 41.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-003",
+        "description": "Porca sextavada M8 (caixa com 100)",
+        "quantity": 20,
+        "unit_price": 3.75,
+        "line_total": 75.00
+      }
+    ],
+    "subtotal": 271.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 48.78
+      },
+      {
+        "jurisdiction": "BR-SP-IPI",
+        "rate": 0.10,
+        "amount": 27.10
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 4.47
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 20.60
+      }
+    ],
+    "total": 371.95,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice in Brazilian NF-e format with multiple tax types (ICMS, IPI, PIS, COFINS) and Boleto reference. All fields correct."
+  },
+  {
+    "invoice_id": "P001_INV_20260428_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-67890",
+    "invoice_date": "2026-04-28",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1 Tech Park Drive\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "123 Industrial Blvd\nDetroit, MI 48201\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GT-100",
+        "description": "Server Motherboard X9",
+        "quantity": 2,
+        "unit_price": 1250.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GT-101",
+        "description": "DDR4 32GB RAM Module",
+        "quantity": 8,
+        "unit_price": 180.00,
+        "line_total": 1440.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GT-102",
+        "description": "Samsung 1TB NVMe SSD",
+        "quantity": 5,
+        "unit_price": 220.00,
+        "line_total": 1100.00
+      }
+    ],
+    "subtotal": 5040.00,
+    "tax": [
+      {
+        "jurisdiction": "US-MI",
+        "rate": 0.06,
+        "amount": 302.40
+      }
+    ],
+    "total": 5342.40,
+    "error_injected": "MULTI_PAGE_LINE_ITEMS",
+    "ground_truth_note": "Invoice spans multiple pages with line items continued. Tax and totals correct. Extractor should combine all line items from all pages."
+  },
+  {
+    "invoice_id": "P003_INV_20260314_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-14",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 42\n60327 Frankfurt\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "5 Rue de la République\n75001 Paris\nFrance",
+      "buyer_po_contact": "John Smith, john.smith@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-200",
+        "description": "Hydraulikpumpe HP-100",
+        "quantity": 3,
+        "unit_price": 450.00,
+        "line_total": 1350.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-201",
+        "description": "Dichtungssatz für HP-100",
+        "quantity": 10,
+        "unit_price": 25.00,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-202",
+        "description": "Ölfilter O-200",
+        "quantity": 20,
+        "unit_price": 12.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-203",
+        "description": "Schlauchleitung DN10, 2m",
+        "quantity": 15,
+        "unit_price": 18.00,
+        "line_total": 270.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-204",
+        "description": "Steuerventil SV-5",
+        "quantity": 2,
+        "unit_price": 320.00,
+        "line_total": 640.00
+      }
+    ],
+    "subtotal": 2760.00,
+    "tax": [],
+    "total": 2760.00,
+    "error_injected": "MISSING_TAX_LINE",
+    "ground_truth_note": "Intra-EU shipment to non-DE buyer (France). VAT field is missing; should show reverse-charge or 0% VAT. Extractor should flag missing tax line."
+  },
+  {
+    "invoice_id": "P001_INV_20260112_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-97865",
+    "invoice_date": "2026-01-12",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1 Tech Park Drive\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "123 Industrial Blvd\nDetroit, MI 48201\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GT-103",
+        "description": "CPU Intel Xeon Gold 6248",
+        "quantity": 1,
+        "unit_price": 2400.00,
+        "line_total": 2400.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GT-104",
+        "description": "GPU NVIDIA A100",
+        "quantity": 2,
+        "unit_price": 12000.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GT-105",
+        "description": "Power Supply 1600W",
+        "quantity": 4,
+        "unit_price": 350.00,
+        "line_total": 1400.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GT-106",
+        "description": "Cooling Fan 120mm",
+        "quantity": 20,
+        "unit_price": 15.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GT-107",
+        "description": "Cable Management Kit",
+        "quantity": 10,
+        "unit_price": 25.00,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GT-108",
+        "description": "Network Switch 48-port",
+        "quantity": 2,
+        "unit_price": 1200.00,
+        "line_total": 2400.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GT-109",
+        "description": "Rack Mount Kit",
+        "quantity": 5,
+        "unit_price": 80.00,
+        "line_total": 400.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GT-110",
+        "description": "SAS Cable 1m",
+        "quantity": 30,
+        "unit_price": 8.00,
+        "line_total": 240.00
+      }
+    ],
+    "subtotal": 31390.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 2746.63
+      }
+    ],
+    "total": 34136.63,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference has a transposed digit (should be PO-2026-01-98765, but written as PO-2026-01-97865). Extractor should detect mismatch."
+  },
+  {
+    "invoice_id": "P002_INV_20260228_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-11223",
+    "invoice_date": "2026-02-28",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nBurlington, VT 05401\nUSA",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "123 Industrial Blvd\nDetroit, MI 48201\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-001",
+        "description": "Wooden Pallet (48x40)",
+        "quantity": 100,
+        "unit_price": 12.50,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-002",
+        "description": "Stretch Wrap Roll",
+        "quantity": 50,
+        "unit_price": 8.00,
+        "line_total": 400.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-003",
+        "description": "Shipping Label (1000 pack)",
+        "quantity": 10,
+        "unit_price": 15.00,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 1800.00,
+    "tax": [
+      {
+        "jurisdiction": "US-VT",
+        "rate": 0.06,
+        "amount": 108.00
+      }
+    ],
+    "total": 1909.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with hand-written notes and inconsistent header placement typical of scanned PDF. Total rounded up to nearest dollar."
+  }
+]
+```

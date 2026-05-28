@@ -1,0 +1,317 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260110_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-10",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15\n60327 Frankfurt am Main\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions AG",
+      "buyer_address": "Technologiepark 1\n85716 Unterschleißheim\nGermany",
+      "buyer_po_contact": "Hans Müller / hans.mueller@globaltech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-2026-001",
+        "description": "Hydraulikpumpe Typ HP-300 / Hydraulic Pump Type HP-300",
+        "quantity": 5,
+        "unit_price": 450.00,
+        "line_total": 2250.00
+      }
+    ],
+    "subtotal": 2250.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 427.50
+      }
+    ],
+    "total": 2677.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with German VAT (19%) itemized, bilingual labels, SEPA bank details (DE89 3704 0044 0532 0130 00). The extractor should correctly parse all fields including the reverse-charge VAT."
+  },
+  {
+    "invoice_id": "P002_INV_20260318_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-18",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "742 Evergreen Terrace\nPortland, OR 97201\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "GlobalTech Solutions AG",
+      "buyer_address": "1 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "buyer_po_contact": "Sarah Johnson / sarah.johnson@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-2026-001",
+        "description": "Warehouse Storage Rack (72x48x96 inches)",
+        "quantity": 10,
+        "unit_price": 125.00,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-2026-002",
+        "description": "Heavy-Duty Pallet Jack (5000 lb capacity)",
+        "quantity": 3,
+        "unit_price": 450.00,
+        "line_total": 1350.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-2026-003",
+        "description": "Industrial Shelving Unit (36x18x72 inches)",
+        "quantity": 15,
+        "unit_price": 85.00,
+        "line_total": 1275.00
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-2026-004",
+        "description": "Steel Hand Truck (600 lb capacity)",
+        "quantity": 8,
+        "unit_price": 110.00,
+        "line_total": 880.00
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-2026-005",
+        "description": "Safety Cones (28 inch, orange)",
+        "quantity": 50,
+        "unit_price": 8.50,
+        "line_total": 425.00
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-2026-006",
+        "description": "Shipping Labels (4x6 thermal, roll of 500)",
+        "quantity": 20,
+        "unit_price": 18.00,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-2026-007",
+        "description": "Bubble Wrap Roll (12 inch x 175 feet)",
+        "quantity": 12,
+        "unit_price": 22.00,
+        "line_total": 264.00
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-2026-008",
+        "description": "Packing Tape (2 inch x 110 yard, case of 36)",
+        "quantity": 5,
+        "unit_price": 48.00,
+        "line_total": 240.00
+      }
+    ],
+    "subtotal": 6044.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.00,
+        "amount": 0.00
+      }
+    ],
+    "total": 6044.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean scanned invoice with handwritten notes (e.g., 'Received OK' in margin), inconsistent header placement (vendor address left-aligned, buyer address right-aligned), and totals rounded up to nearest dollar. Extractor should handle OCR variations."
+  },
+  {
+    "invoice_id": "P003_INV_20260301_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-01",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15\n60327 Frankfurt am Main\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions AG",
+      "buyer_address": "Technologiepark 1\n85716 Unterschleißheim\nGermany",
+      "buyer_po_contact": "Hans Müller / hans.mueller@globaltech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-2026-010",
+        "description": "Edelstahlrohr 2 Zoll / Stainless Steel Pipe 2 inch",
+        "quantity": 20,
+        "unit_price": 35.00,
+        "line_total": 700.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-2026-011",
+        "description": "Flansch DN50 / Flange DN50",
+        "quantity": 40,
+        "unit_price": 12.50,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-2026-012",
+        "description": "Dichtungssatz / Gasket Set",
+        "quantity": 10,
+        "unit_price": 28.00,
+        "line_total": 280.00
+      }
+    ],
+    "subtotal": 1480.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 281.20
+      }
+    ],
+    "total": 1761.20,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with three line items, German VAT (19%) itemized, bilingual descriptions, SEPA bank details (DE89 3704 0044 0532 0130 00). Extractor should correctly parse all fields."
+  },
+  {
+    "invoice_id": "P004_INV_20260306_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-06",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate\nAndheri East, Mumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1ZP",
+      "buyer_name": "GlobalTech Solutions AG",
+      "buyer_address": "1 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "buyer_po_contact": "Priya Sharma / priya.sharma@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-2026-001",
+        "description": "Copper Wire (2.5 mm, 100m roll) - HSN 7408",
+        "quantity": 50,
+        "unit_price": 850.00,
+        "line_total": 42500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-2026-002",
+        "description": "Aluminum Sheet (1mm thick, 4x8 ft) - HSN 7606",
+        "quantity": 25,
+        "unit_price": 1200.00,
+        "line_total": 30000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-2026-003",
+        "description": "Steel Rod (12mm dia, 6m length) - HSN 7214",
+        "quantity": 100,
+        "unit_price": 320.00,
+        "line_total": 32000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-2026-004",
+        "description": "Brass Fitting (1/2 inch) - HSN 7412",
+        "quantity": 200,
+        "unit_price": 45.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-2026-005",
+        "description": "PVC Pipe (2 inch, 3m length) - HSN 3917",
+        "quantity": 80,
+        "unit_price": 150.00,
+        "line_total": 12000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-2026-006",
+        "description": "Stainless Steel Sheet (2mm, 4x8 ft) - HSN 7219",
+        "quantity": 15,
+        "unit_price": 2500.00,
+        "line_total": 37500.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-2026-007",
+        "description": "Galvanized Iron Pipe (1 inch, 6m) - HSN 7306",
+        "quantity": 60,
+        "unit_price": 400.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-2026-008",
+        "description": "Rubber Gasket (various sizes) - HSN 4016",
+        "quantity": 500,
+        "unit_price": 12.00,
+        "line_total": 6000.00
+      }
+    ],
+    "subtotal": 193000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 34740.00
+      }
+    ],
+    "total": 227740.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with 8 line items, GST (18% IGST) itemized, HSN codes per line, PAN and GSTIN in header (PAN: AABCM1234C). Extractor should correctly parse all fields and note cross-currency to USD common."
+  },
+  {
+    "invoice_id": "P004_INV_20260318_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-24680",
+    "invoice_date": "2026-03-18",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate\nAndheri East, Mumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1ZP",
+      "buyer_name": "GlobalTech Solutions AG",
+      "buyer_address": "1 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "buyer_po_contact": "Priya Sharma / priya.sharma@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-2026-010",
+        "description": "Industrial Gearbox (10:1 ratio, 5 HP) - HSN 8483",
+        "quantity": 2,
+        "unit_price": 45000.00,
+        "line_total": 90000.00
+      }
+    ],
+    "subtotal": 90000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 16200.00
+      }
+    ],
+    "total": 106200.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with single line item, GST (18% IGST) itemized, HSN code (8483), PAN and GSTIN in header. Extractor should correctly parse all fields and note cross-currency to USD common."
+  }
+]
+```

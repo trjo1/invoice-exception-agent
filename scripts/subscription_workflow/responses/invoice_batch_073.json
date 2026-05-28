@@ -1,0 +1,259 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260105_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-05",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1000 Innovation Drive, Sunnyvale, CA 94089, USA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "LondonTech Ltd.",
+      "buyer_address": "50 Victoria Street, London SW1H 0TL, UK",
+      "buyer_po_contact": "John Smith, j.smith@londontech.co.uk"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SRV-1000",
+        "description": "High-end server components - see continuation on next page",
+        "quantity": 100,
+        "unit_price": 150.00,
+        "line_total": 0.00
+      }
+    ],
+    "subtotal": 0.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.08,
+        "amount": 0.00
+      }
+    ],
+    "total": 0.00,
+    "error_injected": "Multi-page invoices where line-items continue across pages",
+    "ground_truth_note": "This invoice has two pages; the line item's quantity and unit price are on page 1, but the line total and continuation are on page 2. The extractor should flag that the line_total is missing (set to 0) and that the description indicates continuation."
+  },
+  {
+    "invoice_id": "P003_INV_20260110_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-01-10",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 10, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "ParisTech SARL",
+      "buyer_address": "12 Rue de la Paix, 75002 Paris, France",
+      "buyer_po_contact": "Marie Dupont, m.dupont@paristech.fr"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HP-200",
+        "description": "Hydraulic pump HP-200",
+        "quantity": 5,
+        "unit_price": 450.00,
+        "line_total": 2250.00
+      }
+    ],
+    "subtotal": 2250.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT (Reverse Charge)",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 2250.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. German VAT at 19% is shown but reverse-charged (0% charged) due to intra-EU sale. Bilingual labels and SEPA bank details are present in the original PDF."
+  },
+  {
+    "invoice_id": "P005_INV_20260219_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-54321",
+    "invoice_date": "2026-02-19",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Rio Comércio Ltda.",
+      "buyer_address": "Rua da Assembleia, 200, Rio de Janeiro, RJ 20010-000, Brazil",
+      "buyer_po_contact": "Carlos Silva, c.silva@riocom.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "RES-100",
+        "description": "Resistor 100 Ohm 1/4W",
+        "quantity": 1000,
+        "unit_price": 0.50,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "CAP-10U",
+        "description": "Capacitor 10µF 25V",
+        "quantity": 500,
+        "unit_price": 1.20,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "IC-555",
+        "description": "Timer IC NE555",
+        "quantity": 200,
+        "unit_price": 3.50,
+        "line_total": 700.00
+      },
+      {
+        "line_no": 4,
+        "sku": "LED-RED",
+        "description": "LED Red 5mm",
+        "quantity": 2000,
+        "unit_price": 0.15,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 5,
+        "sku": "TRANS-2N",
+        "description": "Transistor 2N2222",
+        "quantity": 300,
+        "unit_price": 0.80,
+        "line_total": 240.00
+      }
+    ],
+    "subtotal": 2340.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 421.20
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 234.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 38.61
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 177.84
+      }
+    ],
+    "total": 3211.65,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice with multiple Brazilian taxes (ICMS, IPI, PIS, COFINS). Boleto bancário reference is included in the original PDF."
+  },
+  {
+    "invoice_id": "P005_INV_20260412_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-98765",
+    "invoice_date": "2026-04-12",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Rio Comércio Ltda.",
+      "buyer_address": "Rua da Assembleia, 200, Rio de Janeiro, RJ 20010-000, Brazil",
+      "buyer_po_contact": "Carlos Silva, c.silva@riocom.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MOTOR-12V",
+        "description": "DC Motor 12V 100RPM",
+        "quantity": 50,
+        "unit_price": 25.00,
+        "line_total": 1250.00
+      }
+    ],
+    "subtotal": 1250.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 225.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 125.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 20.63
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 95.00
+      }
+    ],
+    "total": 1715.63,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e invoice with single line item and Brazilian tax breakdown. Boleto bancário referenced."
+  },
+  {
+    "invoice_id": "P004_INV_20260315_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-11111",
+    "invoice_date": "2026-03-15",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCB1234C1Z1, PAN: AABCB1234C",
+      "buyer_name": "Delhi Distributors Pvt. Ltd.",
+      "buyer_address": "456 Connaught Place, New Delhi 110001, India",
+      "buyer_po_contact": "Rajesh Kumar, r.kumar@delhidistributors.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "STEEL-ROD",
+        "description": "Steel Rod 12mm (HSN 7214)",
+        "quantity": 500,
+        "unit_price": 150.00,
+        "line_total": 75000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ALUM-SHEET",
+        "description": "Aluminium Sheet 2mm (HSN 7606)",
+        "quantity": 200,
+        "unit_price": 400.00,
+        "line_total": 80000.00
+      }
+    ],
+    "subtotal": 155000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 27900.00
+      }
+    ],
+    "total": 182900.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with GST (IGST) itemized. HSN codes included per line. PAN and GSTIN in header. Cross-currency to USD is common but not shown in this JSON."
+  }
+]
+```

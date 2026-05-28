@@ -1,0 +1,315 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260408_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-08",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 25\n60327 Frankfurt am Main\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "AutoParts AG",
+      "buyer_address": "Hauptstraße 100\n10115 Berlin\nGermany",
+      "buyer_po_contact": "Klaus Müller / klaus.mueller@autoparts.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-2026-001",
+        "description": "Hydraulikzylinder / Hydraulic Cylinder, Typ HZ-200",
+        "quantity": 5,
+        "unit_price": 340.00,
+        "line_total": 1700.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-2026-002",
+        "description": "Dichtungssatz / Seal Kit, für HZ-200",
+        "quantity": 10,
+        "unit_price": 85.00,
+        "line_total": 850.00
+      }
+    ],
+    "subtotal": 2550.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 484.50
+      }
+    ],
+    "total": 3034.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. Extractor should capture bilingual descriptions, DE VAT at 19%, SEPA bank details (not shown in schema but typical), and reverse-charge note if applicable."
+  },
+  {
+    "invoice_id": "P005_INV_20260422_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-67890",
+    "invoice_date": "2026-04-22",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1500\nBela Vista, São Paulo - SP\n01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "MotoParts S.A.",
+      "buyer_address": "Rua da Consolação, 500\nCentro, São Paulo - SP\n01001-000\nBrazil",
+      "buyer_po_contact": "Ana Costa / ana.costa@motoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-2026-001",
+        "description": "Parafuso de Fixação M8 x 30mm (aço inox)",
+        "quantity": 200,
+        "unit_price": 1.25,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-2026-002",
+        "description": "Mola de Compressão 50mm (aço carbono)",
+        "quantity": 100,
+        "unit_price": 3.80,
+        "line_total": 380.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-2026-003",
+        "description": "Anel de Vedação 20mm (borracha nitrílica)",
+        "quantity": 50,
+        "unit_price": 2.10,
+        "line_total": 105.00
+      }
+    ],
+    "subtotal": 735.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 132.30
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 36.75
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 12.13
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 55.86
+      }
+    ],
+    "total": 972.04,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice from São Paulo Componentes Ltda. Extractor should handle multiple Brazilian tax types (ICMS, IPI, PIS, COFINS), boleto bancário reference, and CNPJ format."
+  },
+  {
+    "invoice_id": "P005_INV_20260120_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-11111",
+    "invoice_date": "2026-01-20",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1500\nBela Vista, São Paulo - SP\n01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "MotoParts S.A.",
+      "buyer_address": "Rua da Consolação, 500\nCentro, São Paulo - SP\n01001-000\nBrazil",
+      "buyer_po_contact": "Ana Costa / ana.costa@motoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-2026-004",
+        "description": "Rolamento de Esferas 6205ZZ",
+        "quantity": 30,
+        "unit_price": 12.50,
+        "line_total": 375.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-2026-005",
+        "description": "Correia Dentada 200L (poliuretano)",
+        "quantity": 15,
+        "unit_price": 28.00,
+        "line_total": 420.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-2026-006",
+        "description": "Engrenagem Cônica 20 dentes (aço liga)",
+        "quantity": 8,
+        "unit_price": 45.00,
+        "line_total": 360.00
+      }
+    ],
+    "subtotal": 1155.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 207.90
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 57.75
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 19.06
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 87.78
+      }
+    ],
+    "total": 1527.49,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice from São Paulo Componentes Ltda., earlier date. Extractor should validate multiple tax lines and boleto reference."
+  },
+  {
+    "invoice_id": "P002_INV_20260410_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-22222",
+    "invoice_date": "2026-04-10",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Industrial Blvd\nSuite 200\nDetroit, MI 48201\nUSA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Midwest Auto Repair Inc.",
+      "buyer_address": "456 Oak Street\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "John Smith / john.smith@midwestauto.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-001",
+        "description": "Oil Filter, heavy-duty",
+        "quantity": 50,
+        "unit_price": 12.50,
+        "line_total": 625.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-002",
+        "description": "Brake Pad Set, front",
+        "quantity": 20,
+        "unit_price": 45.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-003",
+        "description": "Spark Plug, iridium",
+        "quantity": 100,
+        "unit_price": 8.75,
+        "line_total": 875.00
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-004",
+        "description": "Air Filter, engine",
+        "quantity": 30,
+        "unit_price": 15.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-005",
+        "description": "Transmission Fluid, 1 gal",
+        "quantity": 12,
+        "unit_price": 28.00,
+        "line_total": 336.00
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-006",
+        "description": "Wiper Blade Set",
+        "quantity": 40,
+        "unit_price": 18.50,
+        "line_total": 740.00
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-007",
+        "description": "Battery, 12V group 65",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-008",
+        "description": "Coolant, 50/50 mix 1 gal",
+        "quantity": 25,
+        "unit_price": 10.00,
+        "line_total": 250.00
+      }
+    ],
+    "subtotal": 4776.00,
+    "tax": [
+      {
+        "jurisdiction": "US-MI",
+        "rate": 0.06,
+        "amount": 286.56
+      }
+    ],
+    "total": 5063.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Extractor should handle hand-written notes (not in schema), inconsistent header placement, and rounding of total to nearest dollar ($5063 instead of $5062.56)."
+  },
+  {
+    "invoice_id": "P001_INV_20260304_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-33333",
+    "invoice_date": "2026-03-04",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1 Tech Park Drive\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "EuroTech GmbH",
+      "buyer_address": "Musterstraße 50\n80339 Munich\nGermany",
+      "buyer_po_contact": "Hans Schmidt / hans.schmidt@eurotech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2026-001",
+        "description": "Microcontroller Board, model MC-3000",
+        "quantity": 100,
+        "unit_price": 245.00,
+        "line_total": 24500.00
+      }
+    ],
+    "subtotal": 24500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 2143.75
+      }
+    ],
+    "total": 26643.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. Extractor should handle multi-currency invoicing (USD for US supplier), separate tax line for California, and rounding to 2 decimals."
+  }
+]
+```

@@ -1,0 +1,123 @@
+# Golden test case GTC-022
+# Scenario: Capex purchase ($45K server) routed to opex approver (department manager).
+# Expected: missing_approval → route to VP-Finance for capex sign-off.
+
+id: GTC-022
+title: Capex invoice routed to opex approver — wrong approval matrix
+exception_category: missing_approval
+difficulty: medium
+created: 2026-05-13
+notes: |
+  Approval-matrix anchor distinct from GTC-011. The PO IS approved at the
+  department level — but capex purchases require finance VP sign-off
+  regardless of department approval. Tests that the agent reads the
+  category metadata (capex vs opex) on the PO and verifies the right
+  approval lane was used.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-28T13:00:00Z
+      payload:
+        po_id: PO-2026-04-17715
+        vendor_id: P001
+        spend_category: capex
+        capex_classification: IT_HARDWARE
+        line_items:
+          - sku: SKU-S9000
+            description: Database server + 3yr support
+            quantity: 1
+            unit_price_usd: 45000.00
+            line_total_usd: 45000.00
+        currency: USD
+        terms: NET-45
+        approvers_required: [DEPT_HEAD, VP_FINANCE]
+        approvers_completed: [DEPT_HEAD]
+        approvers_outstanding: [VP_FINANCE]
+        approval_status: PENDING_CAPEX_SIGNOFF
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-10T15:00:00Z
+      payload:
+        po_id: PO-2026-04-17715
+        gr_id: GR-2026-05-09333
+        line_items:
+          - sku: SKU-S9000
+            quantity_received: 1
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-12T10:00:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-05-12_016.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-05-12_016.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-05-12-016
+        po_reference: PO-2026-04-17715
+        vendor_id: P001
+        line_items:
+          - sku: SKU-S9000
+            quantity: 1
+            unit_price_usd: 45000.00
+            line_total_usd: 45000.00
+        total_usd: 45000.00
+        currency: USD
+        terms: NET-45
+
+expected:
+  classification:
+    class_label: missing_approval
+    min_confidence: 0.85
+    must_contain_evidence:
+      - capex_purchase
+      - vp_finance_signoff_required
+      - approver_outstanding_VP_FINANCE
+      - dept_head_approval_insufficient
+
+  recommendation:
+    action: route_to_vp_finance_approval
+    rationale_must_mention:
+      - capex
+      - $45,000
+      - VP Finance signoff
+      - goods delivered
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: vp_finance
+    must_include_in_payload:
+      - the_capex_classification
+      - the_approval_chain_status
+      - the_goods_receipt
+
+  drafting:
+    must_produce_draft: true
+    draft_type: internal_note
+    draft_recipient: vp_finance
+    draft_content_must_mention:
+      - PO-2026-04-17715
+      - capex
+      - $45,000
+      - approval before AP can post
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.35
+
+pass_criteria:
+  - classification.class_label == missing_approval
+  - recommendation.action == route_to_vp_finance_approval
+  - hitl.tier == 2
+  - hitl.routed_to == vp_finance
+  - drafting.draft_produced == true

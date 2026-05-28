@@ -1,0 +1,383 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260404_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-00001",
+    "invoice_date": "2026-04-04",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "742 Evergreen Terrace\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "EIN 36-1234567",
+      "buyer_name": "EuroPacific Trading Co.",
+      "buyer_address": "1 Maritime Plaza\nSuite 300\nSan Francisco, CA 94111\nUSA",
+      "buyer_po_contact": "Jane Smith <j.smith@europacific.com>"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHP-001",
+        "description": "Standard pallet shipping (LTL)",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-SHP-002",
+        "description": "Express parcel delivery (next day)",
+        "quantity": 5,
+        "unit_price": 89.50,
+        "line_total": 447.50
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-WRH-001",
+        "description": "Warehouse storage per pallet per month",
+        "quantity": 20,
+        "unit_price": 15.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-PCK-001",
+        "description": "Custom crating service",
+        "quantity": 2,
+        "unit_price": 120.00,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-LOG-001",
+        "description": "Freight forwarding documentation",
+        "quantity": 1,
+        "unit_price": 250.00,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-INS-001",
+        "description": "Cargo insurance (value-based)",
+        "quantity": 1,
+        "unit_price": 175.00,
+        "line_total": 175.00
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-DIS-001",
+        "description": "Fuel surcharge (15% of shipping)",
+        "quantity": 1,
+        "unit_price": 134.63,
+        "line_total": 134.63
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-ADM-001",
+        "description": "Administrative handling fee",
+        "quantity": 1,
+        "unit_price": 25.00,
+        "line_total": 25.00
+      }
+    ],
+    "subtotal": 2022.13,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0825,
+        "amount": 166.83
+      }
+    ],
+    "total": 2189.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Round total up to nearest dollar (2189.00). Hand-written note 'Thx!' appears in header area. Header placement slightly shifted right. Extractor should capture all line items and tax correctly."
+  },
+  {
+    "invoice_id": "P003_INV_20260428_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-00234",
+    "invoice_date": "2026-04-28",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45\n60327 Frankfurt am Main\nGermany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroPacific Trading Co.",
+      "buyer_address": "Musterstraße 12\n10115 Berlin\nGermany",
+      "buyer_po_contact": "Hans Müller <h.mueller@europacific.de>"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-STA-001",
+        "description": "Edelstahlschrauben M8 x 40 (Stainless steel screws M8x40)",
+        "quantity": 500,
+        "unit_price": 0.35,
+        "line_total": 175.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-STA-002",
+        "description": "Unterlegscheiben M8 (M8 washers)",
+        "quantity": 1000,
+        "unit_price": 0.08,
+        "line_total": 80.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-STA-003",
+        "description": "Sechskantmuttern M8 (Hex nuts M8)",
+        "quantity": 800,
+        "unit_price": 0.12,
+        "line_total": 96.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-HYD-001",
+        "description": "Hydraulikzylinder 50mm Hub (Hydraulic cylinder 50mm stroke)",
+        "quantity": 10,
+        "unit_price": 145.00,
+        "line_total": 1450.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-HYD-002",
+        "description": "Dichtungssatz für Zylinder (Seal kit for cylinder)",
+        "quantity": 5,
+        "unit_price": 38.50,
+        "line_total": 192.50
+      },
+      {
+        "line_no": 6,
+        "sku": "FI-ELE-001",
+        "description": "Industrieschalter IP67 (Industrial switch IP67)",
+        "quantity": 25,
+        "unit_price": 22.30,
+        "line_total": 557.50
+      },
+      {
+        "line_no": 7,
+        "sku": "FI-ELE-002",
+        "description": "Kabelverschraubung M20 (Cable gland M20)",
+        "quantity": 100,
+        "unit_price": 1.85,
+        "line_total": 185.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FI-WER-001",
+        "description": "Werkzeugkoffer 19-teilig (Tool case 19-piece)",
+        "quantity": 3,
+        "unit_price": 89.90,
+        "line_total": 269.70
+      }
+    ],
+    "subtotal": 3005.70,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 571.08
+      }
+    ],
+    "total": 3576.78,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. German primary descriptions with English in parentheses. VAT 19% correctly applied. SEPA bank details included in vendor address. Extractor should capture all line items and VAT."
+  },
+  {
+    "invoice_id": "P004_INV_20260416_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-00123",
+    "invoice_date": "2026-04-16",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 7, MIDC Industrial Area\nAndheri East\nMumbai, Maharashtra 400093\nIndia",
+      "vendor_tax_id": "PAN: AABCM1234C\nGSTIN: 27AABCM1234C1Z5",
+      "buyer_name": "EuroPacific Trading Co.",
+      "buyer_address": "501, Trade Tower\nNariman Point\nMumbai, Maharashtra 400021\nIndia",
+      "buyer_po_contact": "Priya Sharma <priya.sharma@europacific.in>"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MM-RAW-001",
+        "description": "Aluminium sheets 2mm thick (HSN 7606)",
+        "quantity": 50,
+        "unit_price": 450.00,
+        "line_total": 22500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MM-RAW-002",
+        "description": "Copper wire 1.5 sq mm (HSN 7408)",
+        "quantity": 200,
+        "unit_price": 85.00,
+        "line_total": 17000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MM-RAW-003",
+        "description": "Mild steel rods 12mm dia (HSN 7214)",
+        "quantity": 100,
+        "unit_price": 320.00,
+        "line_total": 32000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MM-RAW-004",
+        "description": "Polypropylene granules (HSN 3902)",
+        "quantity": 500,
+        "unit_price": 95.00,
+        "line_total": 47500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MM-RAW-005",
+        "description": "Titanium dioxide powder (HSN 3206)",
+        "quantity": 25,
+        "unit_price": 1200.00,
+        "line_total": 30000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MM-RAW-006",
+        "description": "Brass fittings assortment (HSN 7412)",
+        "quantity": 10,
+        "unit_price": 750.00,
+        "line_total": 7500.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MM-RAW-007",
+        "description": "Rubber gaskets 6 inch (HSN 4016)",
+        "quantity": 300,
+        "unit_price": 18.00,
+        "line_total": 5400.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MM-RAW-008",
+        "description": "Carbon fiber fabric (HSN 6815)",
+        "quantity": 5,
+        "unit_price": 2500.00,
+        "line_total": 12500.00
+      }
+    ],
+    "subtotal": 174400.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 31392.00
+      }
+    ],
+    "total": 205792.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. GST (IGST 18%) applied. HSN codes included in descriptions. PAN and GSTIN in header. Extractor should capture all line items and tax correctly. Note: cross-currency (USD) often quoted separately but not included here."
+  },
+  {
+    "invoice_id": "P003_INV_20260417_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-00567",
+    "invoice_date": "2026-04-17",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45\n60327 Frankfurt am Main\nGermany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroPacific Trading Co.",
+      "buyer_address": "12 Rue de la Paix\n75002 Paris\nFrance",
+      "buyer_po_contact": "Jean Dupont <j.dupont@europacific.fr>"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-HYD-003",
+        "description": "Hydraulikpumpe 10L/min (Hydraulic pump 10L/min)",
+        "quantity": 2,
+        "unit_price": 850.00,
+        "line_total": 1700.00
+      }
+    ],
+    "subtotal": 1700.00,
+    "tax": [],
+    "total": 1700.00,
+    "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers",
+    "ground_truth_note": "Deliberate error: VAT field missing. This is an intra-EU shipment to a buyer in France (non-DE). According to reverse-charge rules, no VAT should be charged. The extractor should note that the tax array is empty and flag that VAT is absent; however, this is correct for reverse charge. The error is that the invoice does not explicitly state 'Reverse Charge' or include a VAT line with 0% rate. The extractor should identify this as a potential missing tax line error."
+  },
+  {
+    "invoice_id": "P003_INV_20260201_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-00999",
+    "invoice_date": "2026-02-01",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45\n60327 Frankfurt am Main\nGermany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroPacific Trading Co.",
+      "buyer_address": "Musterstraße 12\n10115 Berlin\nGermany",
+      "buyer_po_contact": "Hans Müller <h.mueller@europacific.de>"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-WER-002",
+        "description": "Schraubendreher-Set 6-teilig (Screwdriver set 6-piece)",
+        "quantity": 20,
+        "unit_price": 12.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-WER-003",
+        "description": "Maulschlüssel-Satz 10-19mm (Wrench set 10-19mm)",
+        "quantity": 10,
+        "unit_price": 34.00,
+        "line_total": 340.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-WER-004",
+        "description": "Wasserwaage 60cm (Spirit level 60cm)",
+        "quantity": 5,
+        "unit_price": 18.90,
+        "line_total": 94.50
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-WER-005",
+        "description": "Hammer 500g (Hammer 500g)",
+        "quantity": 15,
+        "unit_price": 9.80,
+        "line_total": 147.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-WER-006",
+        "description": "Maßband 5m (Tape measure 5m)",
+        "quantity": 25,
+        "unit_price": 6.50,
+        "line_total": 162.50
+      }
+    ],
+    "subtotal": 994.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 188.86
+      }
+    ],
+    "total": 1182.86,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. 5 line items, VAT 19% correctly applied. Bilingual descriptions, SEPA bank details in vendor address. Extractor should capture all fields correctly."
+  }
+]
+```

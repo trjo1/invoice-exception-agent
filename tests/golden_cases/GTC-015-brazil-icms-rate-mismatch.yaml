@@ -1,0 +1,133 @@
+# Golden test case GTC-015
+# Scenario: Brazil invoice uses wrong ICMS rate for the destination state.
+# Expected: tax_field_mismatch → request supplier correction; do not post.
+
+id: GTC-015
+title: Brazil invoice — ICMS rate doesn't match destination state rate
+exception_category: tax_field_mismatch
+difficulty: hard
+created: 2026-05-13
+notes: |
+  Brazil-jurisdiction anchor. ICMS rates vary by state (e.g., SP-to-SP intrastate
+  at 18%, SP-to-MG interstate at 12%, SP-to-AM interstate at 7%). The agent must
+  recognize when the booked ICMS rate doesn't match the SP-to-destination rule
+  and ask for a corrected nota fiscal. Misrouted ICMS is a SPED-reporting problem
+  and creates a reverse-credit headache during fiscal close.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-10T09:00:00Z
+      payload:
+        po_id: PO-2026-04-07210
+        vendor_id: P005
+        vendor_country: BR
+        vendor_state: SP   # São Paulo
+        buyer_state: MG    # Minas Gerais — interstate, ICMS 12%
+        line_items:
+          - sku: NCM-8528
+            description: Industrial LCD monitors (50 units)
+            quantity: 50
+            unit_price_brl: 1200.00
+            line_total_brl: 60000.00
+        currency: BRL
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-02T15:30:00Z
+      payload:
+        po_id: PO-2026-04-07210
+        gr_id: GR-2026-05-08120
+        line_items:
+          - sku: NCM-8528
+            quantity_received: 50
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-05T11:00:00Z
+      payload:
+        from: faturamento@saopaulo-tech.example.com
+        invoice_attachment: P005_INV_2026-05-05_007.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P005_INV_2026-05-05_007.pdf
+      ground_truth_fields:
+        invoice_number: NFE-2026-05-0019
+        po_reference: PO-2026-04-07210
+        vendor_id: P005
+        line_items:
+          - sku: NCM-8528
+            quantity: 50
+            unit_price_brl: 1200.00
+            line_total_brl: 60000.00
+        subtotal_brl: 60000.00
+        tax:
+          # WRONG: SP→MG should be 12%, invoice books 18% (the SP-intrastate rate)
+          - type: ICMS
+            rate: 18.0
+            amount_brl: 10800.00
+          - type: IPI
+            rate: 10.0
+            amount_brl: 6000.00
+          - type: PIS
+            rate: 1.65
+            amount_brl: 990.00
+          - type: COFINS
+            rate: 7.6
+            amount_brl: 4560.00
+        total_brl: 82350.00
+        currency: BRL
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: tax_field_mismatch
+    min_confidence: 0.75
+    must_contain_evidence:
+      - icms_rate_18
+      - destination_state_MG
+      - expected_rate_12
+
+  recommendation:
+    action: request_supplier_correction
+    rationale_must_mention:
+      - ICMS rate
+      - 18% booked
+      - 12% expected
+      - SP to MG
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - the_tax_breakdown
+      - the_jurisdiction
+      - draft_correction_request
+
+  drafting:
+    must_produce_draft: true
+    draft_type: supplier_email
+    draft_recipient: supplier
+    draft_content_must_mention:
+      - ICMS
+      - 12%
+      - corrected nota fiscal
+      - Minas Gerais
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.40
+
+pass_criteria:
+  - classification.class_label == tax_field_mismatch
+  - recommendation.action == request_supplier_correction
+  - hitl.tier == 2
+  - drafting.draft_produced == true

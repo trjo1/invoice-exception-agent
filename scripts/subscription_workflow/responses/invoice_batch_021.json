@@ -1,0 +1,287 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260203_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-03",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1234 Maple Drive, Suite 200\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "EIN 36-1234567",
+      "buyer_name": "Greenfield Manufacturing",
+      "buyer_address": "5678 Industrial Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@greenfield.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHIP-001",
+        "description": "Freight service – LTL shipment of steel components",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 450.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.08,
+        "amount": 36.00
+      }
+    ],
+    "total": 486.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Handwritten note 'Thanks John!' visible on scanned image. Total rounded up to nearest dollar from $485.60 to $486.00."
+  },
+  {
+    "invoice_id": "P001_INV_20260214_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-14",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Drive\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "EIN 94-1234567",
+      "buyer_name": "Greenfield Manufacturing",
+      "buyer_address": "5678 Industrial Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "Jane Doe, j.doe@greenfield.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-IC-2024",
+        "description": "Integrated circuit – model IC-2024, 1000 units",
+        "quantity": 1000,
+        "unit_price": 2.50,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-RES-101",
+        "description": "Resistor pack – 10k ohm, SMD, 5000 units",
+        "quantity": 5000,
+        "unit_price": 0.10,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-CAP-202",
+        "description": "Capacitor – 100uF, electrolytic, 2000 units",
+        "quantity": 2000,
+        "unit_price": 0.75,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 4500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 393.75
+      },
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0825,
+        "amount": 371.25
+      }
+    ],
+    "total": 5265.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency note on invoice: 'Foreign shipments billed in USD.' Tax itemized separately by California and Illinois jurisdictions. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P004_INV_20260307_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-11111",
+    "invoice_date": "2026-03-07",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "45 Industrial Zone\nAndheri East, Mumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN 27AABCM1234C1ZQ",
+      "buyer_name": "Greenfield Manufacturing",
+      "buyer_address": "5678 Industrial Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "Raj Patel, r.patel@greenfield.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-STL-001",
+        "description": "Steel rods – grade 304, 1000 kg, HSN 7214",
+        "quantity": 1000,
+        "unit_price": 150.00,
+        "line_total": 150000.00
+      }
+    ],
+    "subtotal": 150000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 27000.00
+      }
+    ],
+    "total": 177000.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. GST itemized as IGST at 18%. HSN code 7214 per line. PAN: AABCM1234C, GSTIN: 27AABCM1234C1ZQ in header. Cross-currency note: 'USD equivalent $2,130.00' at bottom."
+  },
+  {
+    "invoice_id": "P004_INV_20260125_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-22222",
+    "invoice_date": "2026-01-25",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "45 Industrial Zone\nAndheri East, Mumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN 27AABCM1234C1ZQ",
+      "buyer_name": "Greenfield Manufacturing",
+      "buyer_address": "5678 Industrial Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "Raj Patel, r.patel@greenfield.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-CEM-001",
+        "description": "Cement – OPC 53 grade, 500 bags, HSN 2523",
+        "quantity": 500,
+        "unit_price": 400.00,
+        "line_total": 200000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-SND-001",
+        "description": "Construction sand – fine grade, 1000 kg, HSN 2505",
+        "quantity": 1000,
+        "unit_price": 50.00,
+        "line_total": 50000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-BRK-001",
+        "description": "Bricks – red clay, 10000 units, HSN 6901",
+        "quantity": 10000,
+        "unit_price": 8.00,
+        "line_total": 80000.00
+      }
+    ],
+    "subtotal": 330000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 59400.00
+      }
+    ],
+    "total": 389400.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. GST itemized as IGST at 18%. HSN codes per line: 2523, 2505, 6901. PAN: AABCM1234C, GSTIN: 27AABCM1234C1ZQ in header. Cross-currency note: 'USD equivalent $4,680.00' at bottom."
+  },
+  {
+    "invoice_id": "P001_INV_20260101_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-33333",
+    "invoice_date": "2026-01-01",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Drive\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "EIN 94-1234567",
+      "buyer_name": "Greenfield Manufacturing",
+      "buyer_address": "5678 Industrial Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "Jane Doe, j.doe@greenfield.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MCU-001",
+        "description": "Microcontroller – ARM Cortex-M4, 500 units",
+        "quantity": 500,
+        "unit_price": 12.00,
+        "line_total": 6000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SEN-002",
+        "description": "Temperature sensor – digital, I2C, 1000 units",
+        "quantity": 1000,
+        "unit_price": 1.50,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-LED-003",
+        "description": "LED module – RGB, 5mm, 2000 units",
+        "quantity": 2000,
+        "unit_price": 0.45,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-TRA-004",
+        "description": "Transformer – 12V, 1A, 300 units",
+        "quantity": 300,
+        "unit_price": 8.00,
+        "line_total": 2400.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-CON-005",
+        "description": "Connector – USB Type-C, 500 units",
+        "quantity": 500,
+        "unit_price": 1.20,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-BAT-006",
+        "description": "Battery – Li-ion 18650, 3.7V, 400 units",
+        "quantity": 400,
+        "unit_price": 5.00,
+        "line_total": 2000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-PCB-007",
+        "description": "PCB – custom design, 4-layer, 100 units",
+        "quantity": 100,
+        "unit_price": 25.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-CBL-008",
+        "description": "Cable assembly – USB 2.0, 1m, 1000 units",
+        "quantity": 1000,
+        "unit_price": 0.80,
+        "line_total": 800.00
+      }
+    ],
+    "subtotal": 16700.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 1461.25
+      },
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0825,
+        "amount": 1377.75
+      }
+    ],
+    "total": 19539.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency note on invoice: 'Foreign shipments billed in USD.' Tax itemized separately by California and Illinois jurisdictions. Totals rounded to 2 decimals."
+  }
+]
+```

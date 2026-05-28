@@ -1,0 +1,103 @@
+# Golden test case GTC-005
+# Scenario: Invoice for goods/services received but PO was never created.
+# Expected: Route to buyer. Flag for policy review (config-driven).
+
+id: GTC-005
+title: Goods received but PO never created (retroactive invoice)
+exception_category: missing_po
+difficulty: medium
+created: 2026-05-10
+notes: |
+  "Maverick spend" anchor. Vendor delivered without a PO in place. Some
+  clients tolerate this for low-dollar items; others have strict no-PO-no-pay
+  policies. The agent must recognize, route to the buyer who should have
+  created the PO, and surface the policy implication.
+
+input:
+  events:
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-04-28T16:00:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-04-28_001.pdf
+
+    - source: SAP
+      event_type: po_lookup_failed
+      timestamp: 2026-04-28T16:05:00Z
+      payload:
+        po_reference_on_invoice: "NO PO REFERENCED"
+        vendor_id: P001
+        amount_usd: 3450.00
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-04-28_001.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-04-28-001
+        po_reference: null
+        vendor_id: P001
+        line_items:
+          - sku: SKU-A998
+            description: "Emergency on-site service - server room cooling failure"
+            quantity: 1
+            unit_price_usd: 3450.00
+            line_total_usd: 3450.00
+        total_usd: 3450.00
+        currency: USD
+        terms: NET-30
+        ground_truth_note: |
+          Invoice has no PO reference. Vendor delivered emergency service;
+          buyer never raised a PO. Policy decision: route to buyer + flag.
+
+expected:
+  classification:
+    class_label: missing_po
+    min_confidence: 0.85
+    must_contain_evidence:
+      - no_po_reference_on_invoice
+      - po_lookup_returned_empty
+      - service_appears_to_have_been_delivered
+
+  recommendation:
+    action: request_po_amendment   # i.e. create the missing PO retroactively
+    rationale_must_mention:
+      - no PO on file
+      - service apparently delivered
+      - retroactive PO needed
+      - policy review
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer_for_that_category
+    must_include_in_payload:
+      - extracted_invoice
+      - policy_implication_summary
+      - draft_retroactive_po_request
+
+  drafting:
+    must_produce_draft: true
+    draft_type: internal_retroactive_po_request
+    draft_recipient: buyer
+    draft_content_must_mention:
+      - emergency service
+      - no PO on file
+      - $3,450.00
+      - retroactive PO required
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true
+    must_log_policy_review_flag: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.50
+
+pass_criteria:
+  - classification.class_label == missing_po
+  - hitl.tier == 2
+  - drafting.draft_produced == true
+  - execution.invoice_posted == false
+  - execution.policy_review_flagged == true

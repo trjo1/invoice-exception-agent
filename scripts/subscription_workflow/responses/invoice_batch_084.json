@@ -1,0 +1,296 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260219_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-19",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Automotivo ABC Ltda.",
+      "buyer_address": "Rua das Indústrias, 500, São Bernardo do Campo, SP, 09750-000, Brasil",
+      "buyer_po_contact": "João Silva, joao.silva@abcautomotivo.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "PAR-001",
+        "description": "Parafuso M8 x 30mm",
+        "quantity": 500,
+        "unit_price": 0.45,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 2,
+        "sku": "POR-002",
+        "description": "Porca M8",
+        "quantity": 500,
+        "unit_price": 0.20,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ARR-003",
+        "description": "Arruela Lisa M8",
+        "quantity": 1000,
+        "unit_price": 0.10,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MOL-004",
+        "description": "Mola Helicoidal",
+        "quantity": 200,
+        "unit_price": 1.50,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 5,
+        "sku": "EIX-005",
+        "description": "Eixo de Transmissão",
+        "quantity": 50,
+        "unit_price": 12.00,
+        "line_total": 600.00
+      }
+    ],
+    "subtotal": 1325.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP",
+        "rate": 0.18,
+        "amount": 238.50
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.05,
+        "amount": 66.25
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.0165,
+        "amount": 21.86
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.076,
+        "amount": 100.70
+      }
+    ],
+    "total": 1752.31,
+    "error_injected": null,
+    "ground_truth_note": "Clean Brazilian NF-e with ICMS, IPI, PIS, COFINS taxes. Includes reference to Boleto bancário payment slip."
+  },
+  {
+    "invoice_id": "P001_INV_20260217_002",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-23456",
+    "invoice_date": "2026-02-17",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "2500 Innovation Way, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "EuroTech GmbH",
+      "buyer_address": "Industriestr. 10, 80339 München, Germany",
+      "buyer_po_contact": "Hans Mueller, hans.mueller@eurotech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MC-001",
+        "description": "Microchip AVR128DA64",
+        "quantity": 100,
+        "unit_price": 3.50,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 2,
+        "sku": "RS-002",
+        "description": "Resistor 10k Ohm 1/4W",
+        "quantity": 1000,
+        "unit_price": 0.02,
+        "line_total": 20.00
+      },
+      {
+        "line_no": 3,
+        "sku": "CP-003",
+        "description": "Capacitor 100uF 25V",
+        "quantity": 500,
+        "unit_price": 0.15,
+        "line_total": 75.00
+      }
+    ],
+    "subtotal": 445.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 32.26
+      },
+      {
+        "jurisdiction": "US-Local",
+        "rate": 0.01,
+        "amount": 4.45
+      }
+    ],
+    "total": 481.71,
+    "error_injected": null,
+    "ground_truth_note": "Clean US invoice with multi-jurisdiction tax lines. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P001_INV_20260109_003",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-34567",
+    "invoice_date": "2026-01-09",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "2500 Innovation Way, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "AsiaTech Ltd.",
+      "buyer_address": "1 Science Park Avenue, Hong Kong",
+      "buyer_po_contact": "Li Wei, li.wei@asiatech.hk"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MC-004",
+        "description": "Microchip STM32F103",
+        "quantity": 50,
+        "unit_price": 8.00,
+        "line_total": 400.00
+      },
+      {
+        "line_no": 2,
+        "sku": "RS-005",
+        "description": "Resistor 1k Ohm 1/4W",
+        "quantity": 2000,
+        "unit_price": 0.01,
+        "line_total": 20.00
+      },
+      {
+        "line_no": 3,
+        "sku": "CP-006",
+        "description": "Capacitor 10uF 16V",
+        "quantity": 1000,
+        "unit_price": 0.08,
+        "line_total": 80.00
+      }
+    ],
+    "subtotal": 500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 36.25
+      }
+    ],
+    "total": 536.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean US invoice with single tax jurisdiction. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260322_004",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-45678",
+    "invoice_date": "2026-03-22",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street, Springfield, IL 62701, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "456 Oak Avenue, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Jane Doe, jane.doe@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FR-001",
+        "description": "Freight Shipping LTL - Chicago to Springfield",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 450.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 28.13
+      }
+    ],
+    "total": 479.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics with hand-written note in margin. Total rounded up to nearest dollar."
+  },
+  {
+    "invoice_id": "P005_INV_20260212_005",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-56789",
+    "invoice_date": "2026-02-12",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Automotivo ABC Ltda.",
+      "buyer_address": "Rua das Indústrias, 500, São Bernardo do Campo, SP, 09750-000, Brasil",
+      "buyer_po_contact": "João Silva, joao.silva@abcautomotivo.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "TUB-001",
+        "description": "Tubo de Aço Inoxidável 1m",
+        "quantity": 20,
+        "unit_price": 35.00,
+        "line_total": 700.00
+      },
+      {
+        "line_no": 2,
+        "sku": "VAL-002",
+        "description": "Válvula Solenoide 24V",
+        "quantity": 10,
+        "unit_price": 85.00,
+        "line_total": 850.00
+      }
+    ],
+    "subtotal": 1550.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP",
+        "rate": 0.18,
+        "amount": 279.00
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.05,
+        "amount": 77.50
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.0165,
+        "amount": 25.58
+      },
+      {
+        "jurisdiction": "BR-Federal",
+        "rate": 0.076,
+        "amount": 117.80
+      }
+    ],
+    "total": 2049.88,
+    "error_injected": null,
+    "ground_truth_note": "Clean Brazilian NF-e with multiple taxes. Boleto bancário referenced."
+  }
+]
+```

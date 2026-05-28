@@ -1,0 +1,116 @@
+# Golden test case GTC-013
+# Scenario: PO authorizes NET-30 terms but invoice was issued at NET-15.
+# Expected: Request supplier correction. Don't post until terms align.
+
+id: GTC-013
+title: Invoice payment terms differ from PO (NET-15 vs NET-30)
+exception_category: payment_term_mismatch
+difficulty: easy
+created: 2026-05-13
+notes: |
+  Terms-discipline anchor. Suppliers sometimes default to NET-15 on their
+  invoice template even when the PO authorizes NET-30. Posting the invoice
+  at the supplier's NET-15 would shorten the buyer's payable cycle and
+  break treasury planning. Distinct from price/quantity variance — terms
+  variance is a field-level mismatch, not a 3-way match break.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-22T10:00:00Z
+      payload:
+        po_id: PO-2026-04-08812
+        vendor_id: P002
+        line_items:
+          - sku: SVC-CONS-Q2
+            description: Q2 consulting retainer
+            quantity: 1
+            unit_price_usd: 18000.00
+            line_total_usd: 18000.00
+        currency: USD
+        terms: NET-30
+        status: open
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-08T16:00:00Z
+      payload:
+        po_id: PO-2026-04-08812
+        gr_id: GR-2026-05-02401
+        line_items:
+          - sku: SVC-CONS-Q2
+            quantity_received: 1
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-10T09:15:00Z
+      payload:
+        from: billing@consultpartners.example.com
+        invoice_attachment: P002_INV_2026-05-10_003.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P002_INV_2026-05-10_003.pdf
+      ground_truth_fields:
+        invoice_number: CP-2026-05-001
+        po_reference: PO-2026-04-08812
+        vendor_id: P002
+        line_items:
+          - sku: SVC-CONS-Q2
+            quantity: 1
+            unit_price_usd: 18000.00
+            line_total_usd: 18000.00
+        total_usd: 18000.00
+        currency: USD
+        terms: NET-15   # mismatch — PO authorized NET-30
+
+expected:
+  classification:
+    class_label: payment_term_mismatch
+    min_confidence: 0.80
+    must_contain_evidence:
+      - terms_mismatch
+      - po_net_30
+      - invoice_net_15
+
+  recommendation:
+    action: request_supplier_correction
+    rationale_must_mention:
+      - PO authorized NET-30
+      - invoice shows NET-15
+      - request corrected invoice
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - the_po_terms
+      - the_invoice_terms
+      - draft_correction_request
+
+  drafting:
+    must_produce_draft: true
+    draft_type: supplier_email
+    draft_recipient: supplier
+    draft_content_must_mention:
+      - PO-2026-04-08812
+      - NET-30
+      - NET-15
+      - corrected invoice
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.30
+
+pass_criteria:
+  - classification.class_label == payment_term_mismatch
+  - recommendation.action == request_supplier_correction
+  - hitl.tier == 2
+  - drafting.draft_produced == true
+  - drafting.draft_type == supplier_email

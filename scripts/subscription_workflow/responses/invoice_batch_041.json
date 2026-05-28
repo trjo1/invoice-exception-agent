@@ -1,0 +1,299 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260318_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-18",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Raj Patel, raj.patel@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-2026-001",
+        "description": "High-purity copper wire, 1mm gauge, 100m spool",
+        "quantity": 50,
+        "unit_price": 250.00,
+        "line_total": 12500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-2026-002",
+        "description": "Aluminum alloy sheets, 2mm thick, 1m x 2m",
+        "quantity": 20,
+        "unit_price": 1800.00,
+        "line_total": 36000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-2026-003",
+        "description": "Stainless steel bolts, M8x30mm, grade 8.8",
+        "quantity": 1000,
+        "unit_price": 12.00,
+        "line_total": 12000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-2026-004",
+        "description": "Industrial lubricant, 5L canister",
+        "quantity": 10,
+        "unit_price": 450.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-2026-005",
+        "description": "Rubber gaskets, 150mm diameter, pack of 10",
+        "quantity": 25,
+        "unit_price": 320.00,
+        "line_total": 8000.00
+      }
+    ],
+    "subtotal": 73000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 6570.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 6570.00
+      }
+    ],
+    "total": 86140.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with standard GST breakdown. HSN codes (e.g., 7408.11 for copper wire, 7606.12 for aluminum sheets) are consistently formatted with dashes. Cross-currency note: buyer is USD-based, but invoice is in INR."
+  },
+  {
+    "invoice_id": "P003_INV_20260401_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-67890",
+    "invoice_date": "2026-04-01",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Anna Schmidt, anna.schmidt@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-2026-101",
+        "description": "CNC machining spindle, 12kW, HSK-A63",
+        "quantity": 2,
+        "unit_price": 8500.00,
+        "line_total": 17000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-2026-102",
+        "description": "Industrial robot arm, 6-axis, payload 10kg",
+        "quantity": 1,
+        "unit_price": 45000.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-2026-103",
+        "description": "Servo motor driver, 48V/10A",
+        "quantity": 5,
+        "unit_price": 1200.00,
+        "line_total": 6000.00
+      }
+    ],
+    "subtotal": 68000.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 12920.00
+      }
+    ],
+    "total": 80920.00,
+    "error_injected": "Cross-currency edge when buyer is in USD",
+    "ground_truth_note": "Invoice is in EUR but buyer is USD-based. The extractor should correctly handle the currency conversion edge case. VAT at 19% is included; reverse-charge may apply intra-EU but buyer is outside EU so standard VAT applies. SEPA bank details: IBAN DE89370400440532013000, BIC COBADEFFXXX."
+  },
+  {
+    "invoice_id": "P004_INV_20260429_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-23456",
+    "invoice_date": "2026-04-29",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Raj Patel, raj.patel@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-2026-006",
+        "description": "Carbon fiber rods, 10mm diameter, 1m length",
+        "quantity": 30,
+        "unit_price": 1500.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-2026-007",
+        "description": "Titanium alloy plates, 5mm thick, 500mm x 500mm",
+        "quantity": 10,
+        "unit_price": 3200.00,
+        "line_total": 32000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-2026-008",
+        "description": "Polyurethane foam sheets, 50mm thick, 1m x 2m",
+        "quantity": 15,
+        "unit_price": 800.00,
+        "line_total": 12000.00
+      }
+    ],
+    "subtotal": 89000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 8010.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 8010.00
+      }
+    ],
+    "total": 105020.00,
+    "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+    "ground_truth_note": "HSN codes are inconsistent: line 1 uses '6815 12' (with space), line 2 uses '8108.90' (with dot), line 3 uses '3921' (no separator). The extractor should normalize these to a consistent format."
+  },
+  {
+    "invoice_id": "P005_INV_20260430_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-34567",
+    "invoice_date": "2026-04-30",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Indústrias, 500, Jardim Paulista, São Paulo, SP 01419-001, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90, IE: 123.456.789.112",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Carlos Oliveira, carlos.oliveira@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-2026-001",
+        "description": "Electronic control module, 24V, for industrial automation",
+        "quantity": 5,
+        "unit_price": 2500.00,
+        "line_total": 12500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-2026-002",
+        "description": "Temperature sensor, PT100, -50°C to 200°C, with cable",
+        "quantity": 20,
+        "unit_price": 180.00,
+        "line_total": 3600.00
+      }
+    ],
+    "subtotal": 16100.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 2898.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 805.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 265.65
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 1223.60
+      }
+    ],
+    "total": 21292.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice with full Brazilian tax breakdown (ICMS, IPI, PIS, COFINS). Boleto bancário reference: 12345678901-2. Includes access key for electronic invoice."
+  },
+  {
+    "invoice_id": "P004_INV_20260324_003",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-45678",
+    "invoice_date": "2026-03-24",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Raj Patel, raj.patel@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-2026-009",
+        "description": "Nylon tubing, 6mm outer diameter, 50m roll",
+        "quantity": 40,
+        "unit_price": 350.00,
+        "line_total": 14000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-2026-010",
+        "description": "Brass fittings, 1/4 inch BSP, pack of 50",
+        "quantity": 10,
+        "unit_price": 650.00,
+        "line_total": 6500.00
+      }
+    ],
+    "subtotal": 20500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 1845.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 1845.00
+      }
+    ],
+    "total": 24190.00,
+    "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+    "ground_truth_note": "HSN codes are inconsistent: line 1 uses '3926.90' (with dot), line 2 uses '7412 20' (with space). The extractor should normalize these to a consistent format."
+  }
+]
+```

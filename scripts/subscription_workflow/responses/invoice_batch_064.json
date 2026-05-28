@@ -1,0 +1,297 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260112_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-12435",
+    "invoice_date": "2026-01-12",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "US-EIN: 95-1234567",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "5678 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-A100",
+        "description": "Microcontroller ATmega328P, 100 pcs",
+        "quantity": 100,
+        "unit_price": 2.45,
+        "line_total": 245.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-B200",
+        "description": "PCB Prototype Board, 50 pcs",
+        "quantity": 50,
+        "unit_price": 12.30,
+        "line_total": 615.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-C300",
+        "description": "Resistor Kit 1k-10k, 200 pcs",
+        "quantity": 200,
+        "unit_price": 0.15,
+        "line_total": 30.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-D400",
+        "description": "LED Assorted Colors, 500 pcs",
+        "quantity": 500,
+        "unit_price": 0.08,
+        "line_total": 40.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-E500",
+        "description": "Capacitor Ceramic 100nF, 300 pcs",
+        "quantity": 300,
+        "unit_price": 0.05,
+        "line_total": 15.00
+      }
+    ],
+    "subtotal": 945.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 59.06
+      }
+    ],
+    "total": 1004.06,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "Invoice from Global Tech Components Inc. dated 2026-01-12. PO reference contains a digit transposition: PO-2026-01-12435 should be PO-2026-01-12345. All other fields are correct. Tax is itemized by jurisdiction US-IL at 6.25%."
+  },
+  {
+    "invoice_id": "P001_INV_20260217_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-17",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "US-EIN: 95-1234567",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "5678 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-F600",
+        "description": "WiFi Module ESP8266, 25 pcs",
+        "quantity": 25,
+        "unit_price": 4.50,
+        "line_total": 112.50
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-G700",
+        "description": "Temperature Sensor DS18B20, 40 pcs",
+        "quantity": 40,
+        "unit_price": 3.20,
+        "line_total": 128.00
+      }
+    ],
+    "subtotal": 240.50,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 15.03
+      }
+    ],
+    "total": 255.53,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. dated 2026-02-17. Two line items, tax at US-IL 6.25%. No errors."
+  },
+  {
+    "invoice_id": "P005_INV_20260327_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-00001",
+    "invoice_date": "2026-03-27",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "5678 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Resistor 10k Ohm 1/4W, 1000 unidades",
+        "quantity": 1000,
+        "unit_price": 0.12,
+        "line_total": 120.00
+      }
+    ],
+    "subtotal": 120.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 21.60
+      },
+      {
+        "jurisdiction": "BR-SP-IPI",
+        "rate": 0.05,
+        "amount": 6.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 1.98
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 9.12
+      }
+    ],
+    "total": 158.70,
+    "error_injected": "DATE_FORMAT_DDMMYYYY",
+    "ground_truth_note": "Invoice from São Paulo Componentes Ltda. dated 27/03/2026 (dd/mm/yyyy format). The extractor should convert to ISO date 2026-03-27. Includes ICMS, IPI, PIS, COFINS taxes. NF-e and boleto bancário payment method referenced."
+  },
+  {
+    "invoice_id": "P004_INV_20260327_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-27",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AAAAA1234C1Z5, PAN: AAAAA1234C",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "5678 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Steel Rod 12mm dia, 5m length (HSN: 7214.20)",
+        "quantity": 200,
+        "unit_price": 150.00,
+        "line_total": 30000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Aluminum Sheet 2mm, 1m x 2m (HSN: 7606.12)",
+        "quantity": 50,
+        "unit_price": 800.00,
+        "line_total": 40000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "Copper Wire 1.5 sqmm, 100m roll (HSN: 7408.11)",
+        "quantity": 30,
+        "unit_price": 1200.00,
+        "line_total": 36000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "Brass Fitting 1/2 inch (HSN: 7412.20)",
+        "quantity": 500,
+        "unit_price": 45.00,
+        "line_total": 22500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "PVC Pipe 2 inch, 6m length (HSN: 3917.23)",
+        "quantity": 100,
+        "unit_price": 250.00,
+        "line_total": 25000.00
+      }
+    ],
+    "subtotal": 153500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-MH-CGST",
+        "rate": 0.09,
+        "amount": 13815.00
+      },
+      {
+        "jurisdiction": "IN-MH-SGST",
+        "rate": 0.09,
+        "amount": 13815.00
+      }
+    ],
+    "total": 181130.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. dated 2026-03-27. HSN codes per line, GST itemized as CGST and SGST at 9% each. Vendor PAN and GSTIN provided. Supplier commonly deals in USD but this invoice is in INR."
+  },
+  {
+    "invoice_id": "P001_INV_20260318_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-18",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "US-EIN: 95-1234567",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "5678 Industrial Blvd, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-H800",
+        "description": "Raspberry Pi 4 Model B, 10 pcs",
+        "quantity": 10,
+        "unit_price": 55.00,
+        "line_total": 550.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-I900",
+        "description": "Arduino Mega 2560, 15 pcs",
+        "quantity": 15,
+        "unit_price": 38.50,
+        "line_total": 577.50
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-J100",
+        "description": "Breadboard 830 points, 20 pcs",
+        "quantity": 20,
+        "unit_price": 5.25,
+        "line_total": 105.00
+      }
+    ],
+    "subtotal": 1232.50,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 77.03
+      }
+    ],
+    "total": 1309.53,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. dated 2026-03-18. Three line items, tax at US-IL 6.25%. No errors."
+  }
+]
+```

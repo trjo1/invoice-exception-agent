@@ -1,0 +1,274 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260314_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-14",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "500 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Global Procurement Ltd.",
+      "buyer_address": "123 Main St, New York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-001",
+        "description": "Motherboard X100",
+        "quantity": 50,
+        "unit_price": 120.00,
+        "line_total": 6000.00
+      }
+    ],
+    "subtotal": 6000.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 495.00
+      }
+    ],
+    "total": 6495.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should extract all fields accurately. Multi-currency not used here but persona quirk. Tax line itemized for California."
+  },
+  {
+    "invoice_id": "P003_INV_20260326_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-26",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Deutschland | IBAN: DE89 3704 0044 0532 0130 00 | BIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Procurement Ltd.",
+      "buyer_address": "123 Main St, New York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Hydraulikpumpe / Hydraulic Pump",
+        "quantity": 10,
+        "unit_price": 250.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Dichtungssatz / Seal Kit",
+        "quantity": 20,
+        "unit_price": 45.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Steuerventil / Control Valve",
+        "quantity": 5,
+        "unit_price": 180.00,
+        "line_total": 900.00
+      }
+    ],
+    "subtotal": 4300.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 817.00
+      }
+    ],
+    "total": 5117.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice in German with bilingual labels. VAT 19% itemized. SEPA bank details included in vendor address."
+  },
+  {
+    "invoice_id": "P001_INV_20260213_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-54321",
+    "invoice_date": "2026-02-13",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "500 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Global Procurement Ltd.",
+      "buyer_address": "123 Main St, New York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-CPU-002",
+        "description": "CPU Processor X200",
+        "quantity": 100,
+        "unit_price": 350.00,
+        "line_total": 35000.00
+      }
+    ],
+    "subtotal": 35000.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 2887.50
+      }
+    ],
+    "total": 37887.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency not used. Tax line itemized for California."
+  },
+  {
+    "invoice_id": "P004_INV_20260114_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-98765",
+    "invoice_date": "2026-01-14",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN 27AABCM1234A1Z5, PAN AABCM1234A",
+      "buyer_name": "Global Procurement Ltd.",
+      "buyer_address": "123 Main St, New York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-STL-001",
+        "description": "Stainless Steel Sheet 2mm, HSN 7219",
+        "quantity": 50,
+        "unit_price": 1500.00,
+        "line_total": 75000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-AL-002",
+        "description": "Aluminum Rod 10mm, HSN 7604",
+        "quantity": 100,
+        "unit_price": 800.00,
+        "line_total": 80000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-CU-003",
+        "description": "Copper Wire 1.5mm, HSN 7408",
+        "quantity": 200,
+        "unit_price": 600.00,
+        "line_total": 120000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-PL-004",
+        "description": "Plastic Granules ABS, HSN 3903",
+        "quantity": 500,
+        "unit_price": 250.00,
+        "line_total": 125000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-RB-005",
+        "description": "Rubber Gasket set, HSN 4016",
+        "quantity": 30,
+        "unit_price": 1200.00,
+        "line_total": 36000.00
+      }
+    ],
+    "subtotal": 436000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-MH-CGST",
+        "rate": 0.09,
+        "amount": 39240.00
+      },
+      {
+        "jurisdiction": "IN-MH-SGST",
+        "rate": 0.09,
+        "amount": 39240.00
+      }
+    ],
+    "total": 514480.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with GST itemized as CGST and SGST. HSN codes per line. PAN and GSTIN in header."
+  },
+  {
+    "invoice_id": "P003_INV_20260417_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-11111",
+    "invoice_date": "2026-04-17",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Deutschland | IBAN: DE89 3704 0044 0532 0130 00 | BIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Procurement Ltd.",
+      "buyer_address": "123 Main St, New York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-101",
+        "description": "Elektromotor 5kW / Electric Motor 5kW",
+        "quantity": 4,
+        "unit_price": 1200.00,
+        "line_total": 4800.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-102",
+        "description": "Getriebe / Gearbox",
+        "quantity": 2,
+        "unit_price": 3500.00,
+        "line_total": 7000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-103",
+        "description": "Förderband / Conveyor Belt",
+        "quantity": 10,
+        "unit_price": 450.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-104",
+        "description": "Lager / Bearing",
+        "quantity": 50,
+        "unit_price": 25.00,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-105",
+        "description": "Schraubensatz / Screw Set",
+        "quantity": 100,
+        "unit_price": 8.00,
+        "line_total": 800.00
+      }
+    ],
+    "subtotal": 18350.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 3486.50
+      }
+    ],
+    "total": 21836.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice in German with bilingual labels. VAT 19% itemized. SEPA bank details in vendor address."
+  }
+]
+```

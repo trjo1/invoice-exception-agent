@@ -1,0 +1,285 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260423_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-23",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "4500 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 95-1234567",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "TC-1000",
+        "description": "Microcontroller Unit",
+        "quantity": 50,
+        "unit_price": 12.50,
+        "line_total": 625.00
+      },
+      {
+        "line_no": 2,
+        "sku": "TC-2000",
+        "description": "Resistor Kit 100pcs",
+        "quantity": 200,
+        "unit_price": 0.45,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 3,
+        "sku": "TC-3000",
+        "description": "Capacitor Set",
+        "quantity": 10,
+        "unit_price": 8.99,
+        "line_total": 89.90
+      }
+    ],
+    "subtotal": 804.90,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 66.40
+      }
+    ],
+    "total": 871.30,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. All fields correct. Tax line itemized per jurisdiction."
+  },
+  {
+    "invoice_id": "P002_INV_20260111_001",
+    "persona_id": "P002",
+    "po_reference": "",
+    "invoice_date": "2026-01-11",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1200 Freight Ave, Chicago, IL 60601, USA",
+      "vendor_tax_id": "EIN 36-9876543",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "Jane Doe, j.doe@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "LTL-001",
+        "description": "Less-than-Truckload Freight",
+        "quantity": 1,
+        "unit_price": 150.00,
+        "line_total": 150
+      },
+      {
+        "line_no": 2,
+        "sku": "FCL-002",
+        "description": "Full Container Load",
+        "quantity": 2,
+        "unit_price": 1200.00,
+        "line_total": 2400
+      },
+      {
+        "line_no": 3,
+        "sku": "WH-001",
+        "description": "Warehousing per pallet",
+        "quantity": 5,
+        "unit_price": 75.00,
+        "line_total": 375
+      },
+      {
+        "line_no": 4,
+        "sku": "INSP-001",
+        "description": "Inspection Service",
+        "quantity": 1,
+        "unit_price": 250.00,
+        "line_total": 250
+      },
+      {
+        "line_no": 5,
+        "sku": "DOC-001",
+        "description": "Documentation Fee",
+        "quantity": 1,
+        "unit_price": 50.00,
+        "line_total": 50
+      }
+    ],
+    "subtotal": 3225,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 202
+      }
+    ],
+    "total": 3427,
+    "error_injected": "MISSING_PO_REFERENCE",
+    "ground_truth_note": "PO reference is missing; must be inferred from delivery note. Totals rounded up to nearest dollar. Hand-written notes may appear on scanned image."
+  },
+  {
+    "invoice_id": "P001_INV_20260310_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-10",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "4500 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 95-1234567",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "Alice Johnson, a.johnson@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "TC-4000",
+        "description": "Power Supply Unit",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "TC-5000",
+        "description": "Cable Bundle",
+        "quantity": 25,
+        "unit_price": 12.50,
+        "line_total": 312.50
+      }
+    ],
+    "subtotal": 762.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 62.91
+      }
+    ],
+    "total": 825.41,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Two line items. Tax itemized."
+  },
+  {
+    "invoice_id": "P002_INV_20260312_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-12",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1200 Freight Ave, Chicago, IL 60601, USA",
+      "vendor_tax_id": "EIN 36-9876543",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "Bob Williams, b.williams@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "TRK-001",
+        "description": "Trucking Service",
+        "quantity": 1,
+        "unit_price": 500.00,
+        "line_total": 500
+      },
+      {
+        "line_no": 2,
+        "sku": "CRT-001",
+        "description": "Crating Service",
+        "quantity": 3,
+        "unit_price": 150.00,
+        "line_total": 450
+      }
+    ],
+    "subtotal": 950,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 60
+      }
+    ],
+    "total": 1010,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Two line items. Totals rounded up to nearest dollar."
+  },
+  {
+    "invoice_id": "P003_INV_20260319_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-11111",
+    "invoice_date": "2026-03-19",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 42, 60327 Frankfurt, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "Klaus Mueller, k.mueller@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "IND-001",
+        "description": "Schrauben M8 (Screws M8)",
+        "quantity": 100,
+        "unit_price": 0.85,
+        "line_total": 85.00
+      },
+      {
+        "line_no": 2,
+        "sku": "IND-002",
+        "description": "Dichtungen (Gaskets)",
+        "quantity": 50,
+        "unit_price": 2.30,
+        "line_total": 115.00
+      },
+      {
+        "line_no": 3,
+        "sku": "IND-003",
+        "description": "Lager (Bearings)",
+        "quantity": 20,
+        "unit_price": 15.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 4,
+        "sku": "IND-004",
+        "description": "Hydraulikschläuche (Hydraulic Hoses)",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 5,
+        "sku": "IND-005",
+        "description": "Elektromotoren (Electric Motors)",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      }
+    ],
+    "subtotal": 1550.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 294.50
+      }
+    ],
+    "total": 1844.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. German supplier with 19% VAT itemized. Bilingual descriptions. SEPA bank details available on original document."
+  }
+]
+```

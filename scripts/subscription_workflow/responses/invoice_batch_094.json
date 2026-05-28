@@ -1,0 +1,302 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260117_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-17",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "4500 Innovation Way, Suite 200\nSan Jose, CA 95134\nUnited States",
+      "vendor_tax_id": "EIN 94-1234567",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Main Street, Floor 10\nNew York, NY 10001\nUnited States",
+      "buyer_po_contact": "Jane Smith j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-2025",
+        "description": "Microcontroller Board, model MB-2025, 100 units",
+        "quantity": 100,
+        "unit_price": 45.50,
+        "line_total": 4550.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SEN-101",
+        "description": "Temperature Sensor, model TS-101, 200 units",
+        "quantity": 200,
+        "unit_price": 12.30,
+        "line_total": 2460.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-CBL-05",
+        "description": "USB-C Cable, 1m, 500 units",
+        "quantity": 500,
+        "unit_price": 3.45,
+        "line_total": 1725.00
+      }
+    ],
+    "subtotal": 8735.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 720.64
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08875,
+        "amount": 39.06
+      }
+    ],
+    "total": 9494.70,
+    "error_injected": "Multi-page invoices where line-items continue across pages",
+    "ground_truth_note": "Invoice has 3 line items, but the line items are split across two pages in the original PDF. The extractor should combine all line items from both pages. No other errors."
+  },
+  {
+    "invoice_id": "P005_INV_20260306_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-06",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 1234\nSão Paulo, SP 01001-000\nBrasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "Av. Paulista, 1500\nSão Paulo, SP 01310-100\nBrasil",
+      "buyer_po_contact": "Carlos Silva c.silva@acmecorp.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-RES-10K",
+        "description": "Resistor 10kΩ, lote 5000 unidades",
+        "quantity": 5000,
+        "unit_price": 0.15,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-CAP-100u",
+        "description": "Capacitor 100µF, lote 2000 unidades",
+        "quantity": 2000,
+        "unit_price": 0.85,
+        "line_total": 1700.00
+      }
+    ],
+    "subtotal": 2450.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 441.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 122.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 40.43
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 186.20
+      }
+    ],
+    "total": 3240.13,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. NF-e style with multiple tax types (ICMS, IPI, PIS, COFINS). Boleto bancário reference: 34191.23456 67890.123456 78901.234567 1 12345678901234."
+  },
+  {
+    "invoice_id": "P005_INV_20260120_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-20",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 1234\nSão Paulo, SP 01001-000\nBrasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "Av. Paulista, 1500\nSão Paulo, SP 01310-100\nBrasil",
+      "buyer_po_contact": "Carlos Silva c.silva@acmecorp.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-LED-R",
+        "description": "LED Vermelho 5mm, lote 10000 unidades",
+        "quantity": 10000,
+        "unit_price": 0.08,
+        "line_total": 800.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-TRAN-2N",
+        "description": "Transistor 2N2222, lote 3000 unidades",
+        "quantity": 3000,
+        "unit_price": 0.55,
+        "line_total": 1650.00
+      }
+    ],
+    "subtotal": 2450.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 441.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 122.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 40.43
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 186.20
+      }
+    ],
+    "total": 3240.13,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. NF-e style with multiple tax types (ICMS, IPI, PIS, COFINS). Boleto bancário reference: 34191.23456 67890.123456 78901.234567 2 12345678901235."
+  },
+  {
+    "invoice_id": "P005_INV_20260319_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-19",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 1234\nSão Paulo, SP 01001-000\nBrasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "Av. Paulista, 1500\nSão Paulo, SP 01310-100\nBrasil",
+      "buyer_po_contact": "Carlos Silva c.silva@acmecorp.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-DIODE-1N",
+        "description": "Diodo 1N4007, lote 8000 unidades",
+        "quantity": 8000,
+        "unit_price": 0.10,
+        "line_total": 800.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-IC-555",
+        "description": "CI Timer 555, lote 1000 unidades",
+        "quantity": 1000,
+        "unit_price": 1.20,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-CONN-DB9",
+        "description": "Conector DB9 macho, lote 500 unidades",
+        "quantity": 500,
+        "unit_price": 2.50,
+        "line_total": 1250.00
+      }
+    ],
+    "subtotal": 3250.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 585.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 162.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 53.63
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 247.00
+      }
+    ],
+    "total": 4298.13,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. NF-e style with multiple tax types (ICMS, IPI, PIS, COFINS). Boleto bancário reference: 34191.23456 67890.123456 78901.234567 3 12345678901236."
+  },
+  {
+    "invoice_id": "P005_INV_20260111_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-11111",
+    "invoice_date": "2026-01-11",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 1234\nSão Paulo, SP 01001-000\nBrasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "Av. Paulista, 1500\nSão Paulo, SP 01310-100\nBrasil",
+      "buyer_po_contact": "Carlos Silva c.silva@acmecorp.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-FUSE-2A",
+        "description": "Fusível 2A, lote 10000 unidades",
+        "quantity": 10000,
+        "unit_price": 0.05,
+        "line_total": 500.00
+      }
+    ],
+    "subtotal": 500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 90.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 25.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 8.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 38.00
+      }
+    ],
+    "total": 661.25,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Deliberately confusing tax structure: ICMS, IPI, PIS, and COFINS are all listed separately. The extractor might misinterpret one as the total tax or miss some. Total is correct: subtotal 500.00 + sum of taxes (90.00+25.00+8.25+38.00) = 661.25. Boleto bancário reference: 34191.23456 67890.123456 78901.234567 4 12345678901237."
+  }
+]
+```

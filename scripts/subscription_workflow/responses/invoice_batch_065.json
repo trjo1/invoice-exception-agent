@@ -1,0 +1,344 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260120_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-20",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 42\n60327 Frankfurt am Main\nGermany\nIBAN: DE89370400440532013000\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroParts Ltd.",
+      "buyer_address": "12 Rue de la République\n75001 Paris\nFrance",
+      "buyer_po_contact": "Jean Dupont, jean.dupont@europarts.fr"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-1001",
+        "description": "Kugellager 6205 (Ball bearing 6205)",
+        "quantity": 10,
+        "unit_price": 12.50,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-1002",
+        "description": "Wellendichtring 25x40x7 (Shaft seal 25x40x7)",
+        "quantity": 20,
+        "unit_price": 3.75,
+        "line_total": 75.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-1003",
+        "description": "Zahnriemen HTD 300 (Timing belt HTD 300)",
+        "quantity": 5,
+        "unit_price": 18.20,
+        "line_total": 91.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-1004",
+        "description": "Hydraulikfilter (Hydraulic filter)",
+        "quantity": 2,
+        "unit_price": 45.00,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-1005",
+        "description": "Edelstahlschrauben M8 (Stainless steel screws M8 - pack of 100)",
+        "quantity": 3,
+        "unit_price": 8.90,
+        "line_total": 26.70
+      }
+    ],
+    "subtotal": 407.70,
+    "tax": [],
+    "total": 407.70,
+    "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers",
+    "ground_truth_note": "Invoice for intra-EU supply from DE to FR. VAT not charged due to reverse charge (Art. 44 EU VAT Directive). Tax array is intentionally empty. Extractor should not expect VAT line, but note that VAT field is missing if schema requires it. This tests handling of missing tax data."
+  },
+  {
+    "invoice_id": "P002_INV_20260214_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-54321",
+    "invoice_date": "2026-02-14",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "XX-XXXXXXX",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "1 Corporate Drive\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Alice Johnson, alice.johnson@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Freight charge - LTL shipment",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Warehouse storage - pallet per day",
+        "quantity": 30,
+        "unit_price": 2.50,
+        "line_total": 75.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "description": "Packing materials",
+        "quantity": 10,
+        "unit_price": 5.00,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-004",
+        "description": "Insurance - declared value",
+        "quantity": 1,
+        "unit_price": 120.00,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-005",
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 35.00,
+        "line_total": 35.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-006",
+        "description": "Documentation fee",
+        "quantity": 1,
+        "unit_price": 25.00,
+        "line_total": 25.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-007",
+        "description": "Expedited handling",
+        "quantity": 1,
+        "unit_price": 60.00,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-008",
+        "description": "Delivery confirmation",
+        "quantity": 1,
+        "unit_price": 15.00,
+        "line_total": 15.00
+      }
+    ],
+    "subtotal": 830.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 51.88
+      }
+    ],
+    "total": 882.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. All fields present. Hand-written notes and inconsistent header placement are not represented in JSON but are present in original scanned PDF. Total is rounded up to nearest dollar."
+  },
+  {
+    "invoice_id": "P003_INV_20260315_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-15",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 42\n60327 Frankfurt am Main\nGermany\nIBAN: DE89370400440532013000\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "1 Corporate Drive\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Alice Johnson, alice.johnson@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-2001",
+        "description": "Industriegetriebe (Industrial gearbox)",
+        "quantity": 1,
+        "unit_price": 2500.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-2002",
+        "description": "Kupplung (Coupling)",
+        "quantity": 2,
+        "unit_price": 180.00,
+        "line_total": 360.00
+      }
+    ],
+    "subtotal": 2860.00,
+    "tax": [],
+    "total": 2860.00,
+    "error_injected": "Cross-currency edge when buyer is in USD",
+    "ground_truth_note": "Invoice issued in EUR but buyer operates in USD. No currency conversion provided. VAT is not charged as it's an export outside EU. Extractor should detect currency mismatch and missing VAT. This tests cross-currency handling."
+  },
+  {
+    "invoice_id": "P004_INV_20260409_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-11111",
+    "invoice_date": "2026-04-09",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Zone\nAndheri East\nMumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234H1Z0, PAN: AABCM1234H",
+      "buyer_name": "GlobalTech Solutions India Pvt. Ltd.",
+      "buyer_address": "5 Tech Park\nWhitefield\nBangalore 560066\nIndia",
+      "buyer_po_contact": "Rajesh Kumar, rajesh.kumar@globaltech.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "HSN 3901 - Polyethylene granules LDPE",
+        "quantity": 500,
+        "unit_price": 85.00,
+        "line_total": 42500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "HSN 3902 - Polypropylene granules",
+        "quantity": 300,
+        "unit_price": 92.00,
+        "line_total": 27600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "HSN 3907 - PET granules",
+        "quantity": 200,
+        "unit_price": 110.00,
+        "line_total": 22000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "HSN 3204 - Synthetic dyes",
+        "quantity": 50,
+        "unit_price": 450.00,
+        "line_total": 22500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "HSN 2818 - Aluminium oxide",
+        "quantity": 100,
+        "unit_price": 320.00,
+        "line_total": 32000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-006",
+        "description": "HSN 3824 - Chemical additive",
+        "quantity": 25,
+        "unit_price": 600.00,
+        "line_total": 15000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-007",
+        "description": "HSN 3926 - Plastic packaging",
+        "quantity": 1000,
+        "unit_price": 12.00,
+        "line_total": 12000.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-008",
+        "description": "HSN 4001 - Natural rubber",
+        "quantity": 200,
+        "unit_price": 180.00,
+        "line_total": 36000.00
+      }
+    ],
+    "subtotal": 209600.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 37728.00
+      }
+    ],
+    "total": 247328.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. GST is itemized with IGST at 18%. HSN codes are included in line descriptions. PAN and GSTIN are present in header."
+  },
+  {
+    "invoice_id": "P005_INV_20260313_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-22222",
+    "invoice_date": "2026-03-13",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP 01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90, IE: 123.456.789.110",
+      "buyer_name": "Comercial Brasil Ltda.",
+      "buyer_address": "Rua Augusta, 500\nSão Paulo, SP 01304-001\nBrazil",
+      "buyer_po_contact": "Carlos Silva, carlos.silva@comercialbrasil.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Motor elétrico 5CV trifásico",
+        "quantity": 1,
+        "unit_price": 2500.00,
+        "line_total": 2500.00
+      }
+    ],
+    "subtotal": 2500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 450.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 125.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 41.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 190.00
+      }
+    ],
+    "total": 3306.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice in NF-e format. Multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) are included. Boleto bancário reference is present in original but not in JSON. Extractor should handle multiple tax lines."
+  }
+]
+```

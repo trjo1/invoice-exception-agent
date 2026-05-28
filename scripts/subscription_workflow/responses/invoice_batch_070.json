@@ -1,0 +1,246 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260211_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-11",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45\n60327 Frankfurt am Main\nDeutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroParts S.A.",
+      "buyer_address": "Rue de la Loi 12\n1040 Brussels\nBelgium",
+      "buyer_po_contact": "Marie Dupont / m.dupont@europarts.be"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-100",
+        "description": "Kugellager (Ball bearing) - Typ 6205",
+        "quantity": 50,
+        "unit_price": 12.50,
+        "line_total": 625.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-202",
+        "description": "Dichtungsring (Sealing ring) - DN 80",
+        "quantity": 100,
+        "unit_price": 3.80,
+        "line_total": 380.00
+      }
+    ],
+    "subtotal": 1005.00,
+    "tax": [],
+    "total": 1005.00,
+    "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers",
+    "ground_truth_note": "The invoice is for an intra-EU sale to a Belgian buyer; German VAT (19%) should be itemized but is deliberately omitted. The extractor should note the missing tax line and flag the reverse-charge obligation."
+  },
+  {
+    "invoice_id": "P005_INV_20260330_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-30",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1500\n01310-100 São Paulo, SP\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "AutoPeças Argentina S.A.",
+      "buyer_address": "Av. Corrientes 2500\nBuenos Aires, Argentina",
+      "buyer_po_contact": "Carlos García / c.garcia@autopecas.ar"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-500",
+        "description": "Parafuso de roda (Wheel bolt) - M12x1.5",
+        "quantity": 200,
+        "unit_price": 4.50,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-501",
+        "description": "Porca de roda (Wheel nut) - M12",
+        "quantity": 200,
+        "unit_price": 3.20,
+        "line_total": 640.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-502",
+        "description": "Mola de suspensão (Suspension spring) - Dianteira",
+        "quantity": 50,
+        "unit_price": 28.00,
+        "line_total": 1400.00
+      }
+    ],
+    "subtotal": 2940.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 529.20
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 147.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 48.51
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 223.44
+      }
+    ],
+    "total": 3888.15,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) listed. Extractor should validate all tax lines and the total. Boleto bancário reference is implied but not required in JSON."
+  },
+  {
+    "invoice_id": "P001_INV_20260114_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-11111",
+    "invoice_date": "2026-01-14",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "AutoTech GmbH",
+      "buyer_address": "Musterstraße 10\n80339 München\nGermany",
+      "buyer_po_contact": "Hans Schmidt / h.schmidt@autotech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Microcontroller unit - ATmega328P",
+        "quantity": 500,
+        "unit_price": 2.45,
+        "line_total": 1225.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "description": "Temperature sensor - DS18B20",
+        "quantity": 1000,
+        "unit_price": 1.20,
+        "line_total": 1200.00
+      }
+    ],
+    "subtotal": 2425.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 212.19
+      }
+    ],
+    "total": 2637.19,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with US sales tax itemized. Multi-currency capability noted but not used. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P004_INV_20260309_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-22222",
+    "invoice_date": "2026-03-09",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Unit 5, Industrial Estate\nAndheri East, Mumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1\nPAN: AABCM1234C",
+      "buyer_name": "Singapore Hardware Pte Ltd",
+      "buyer_address": "12 Jurong East Street 32\nSingapore 609200",
+      "buyer_po_contact": "Lim Wei Ming / lim.wm@singhardware.sg"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Stainless steel pipe - 2 inch, Schedule 40 (HSN 7306)",
+        "quantity": 100,
+        "unit_price": 450.00,
+        "line_total": 45000.00
+      }
+    ],
+    "subtotal": 45000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 8100.00
+      }
+    ],
+    "total": 53100.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with IGST for export. HSN code included in description. PAN and GSTIN in header. Cross-currency to USD is typical but not in JSON."
+  },
+  {
+    "invoice_id": "P004_INV_20260406_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-33333",
+    "invoice_date": "2026-04-06",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Unit 5, Industrial Estate\nAndheri East, Mumbai 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1\nPAN: AABCM1234C",
+      "buyer_name": "Dubai Engineering LLC",
+      "buyer_address": "P.O. Box 12345\nDubai, UAE",
+      "buyer_po_contact": "Ahmed Al-Rashid / a.alrashid@dubaieng.ae"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-010",
+        "description": "Brass valve - 1 inch (HSN 8481)",
+        "quantity": 50,
+        "unit_price": 320.00,
+        "line_total": 16000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-011",
+        "description": "Copper pipe - 1/2 inch (HSN 7411)",
+        "quantity": 200,
+        "unit_price": 85.00,
+        "line_total": 17000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-012",
+        "description": "PVC fitting set (HSN 3917)",
+        "quantity": 30,
+        "unit_price": 250.00,
+        "line_total": 7500.00
+      }
+    ],
+    "subtotal": 40500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 7290.00
+      }
+    ],
+    "total": 47790.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with IGST for export. HSN codes per line item. PAN and GSTIN in header."
+  }
+]
+```

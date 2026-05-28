@@ -1,0 +1,137 @@
+# Golden test case GTC-016
+# Scenario: Vendor's bank account changed 12 days ago; same vendor sends a high-value invoice.
+# Expected: fraud_signal → halt + escalate to AP fraud team. Bank-detail verification required.
+
+id: GTC-016
+title: Vendor bank-account change + high-value invoice (potential supplier-impersonation fraud)
+exception_category: fraud_signal
+difficulty: hard
+created: 2026-05-13
+notes: |
+  Fraud-detection anchor distinct from GTC-007 (split-invoice fraud). Most
+  common vendor-impersonation attack: a fraudster compromises the supplier's
+  email, sends "updated banking details" to AP, then issues a real-looking
+  invoice that pays to the new account. Defense: the agent must combine
+  (1) recent bank-detail change in the vendor master, (2) high invoice value,
+  and (3) tight time window — and halt payment for out-of-band verification.
+
+input:
+  events:
+    - source: SAP
+      event_type: vendor_master_change
+      timestamp: 2026-05-01T10:30:00Z
+      payload:
+        vendor_id: P001
+        change_type: bank_account
+        previous_last4: "9182"
+        new_last4: "4471"
+        change_source: email_request
+        verified_out_of_band: false
+
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-25T09:00:00Z
+      payload:
+        po_id: PO-2026-04-11502
+        vendor_id: P001
+        line_items:
+          - sku: SKU-K500
+            description: Enterprise server hardware
+            quantity: 10
+            unit_price_usd: 8500.00
+            line_total_usd: 85000.00
+        currency: USD
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-09T14:00:00Z
+      payload:
+        po_id: PO-2026-04-11502
+        gr_id: GR-2026-05-09530
+        line_items:
+          - sku: SKU-K500
+            quantity_received: 10
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-13T08:45:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-05-13_008.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-05-13_008.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-05-13-008
+        po_reference: PO-2026-04-11502
+        vendor_id: P001
+        line_items:
+          - sku: SKU-K500
+            quantity: 10
+            unit_price_usd: 8500.00
+            line_total_usd: 85000.00
+        total_usd: 85000.00
+        currency: USD
+        terms: NET-30
+        remit_to_bank_last4: "4471"   # matches the just-changed account
+      cross_case_signals:
+        vendor_bank_changed_within_days: 12
+        invoice_value_above_high_value_threshold: true
+        bank_change_verified_out_of_band: false
+
+expected:
+  classification:
+    class_label: fraud_signal
+    min_confidence: 0.85
+    must_contain_evidence:
+      - bank_account_changed
+      - high_value_invoice
+      - bank_change_within_30_days
+      - bank_change_not_verified
+
+  recommendation:
+    action: halt_require_supervisor
+    rationale_must_mention:
+      - bank account changed
+      - 12 days ago
+      - $85,000
+      - out-of-band verification required
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 3
+    routed_to: ap_fraud_team
+    must_include_in_payload:
+      - the_bank_change_event
+      - the_invoice_remit_to
+      - the_vendor_history
+
+  drafting:
+    must_produce_draft: true
+    draft_type: internal_note
+    draft_recipient: ap_fraud_team
+    draft_content_must_mention:
+      - bank account change
+      - "$85,000"
+      - call vendor at known number
+      - do not pay until verified
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true
+    must_halt_pay_run: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.40
+
+pass_criteria:
+  - classification.class_label == fraud_signal
+  - recommendation.action == halt_require_supervisor
+  - hitl.tier == 3
+  - hitl.routed_to == ap_fraud_team
+  - drafting.draft_produced == true
+  - execution.invoice_posted == false
+  - execution.pay_run_halted == true

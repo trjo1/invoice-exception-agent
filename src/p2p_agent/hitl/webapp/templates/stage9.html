@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% block title %}Stage 9 metrics{% endblock %}
+{% block content %}
+
+<h2>Stage 9 — measurement</h2>
+<p style="color:var(--muted); margin-top:4px">
+  Every LLM call writes to <code>logs/llm_calls.jsonl</code>; every /demo upload writes to the
+  pipeline-runs table; every routing tier ≥ 2 case writes to the HITL queue. This page aggregates all
+  three. Stage 9 is the recurring-revenue moat — measurement ships from day one.
+</p>
+
+<div class="filterbar" style="margin:14px 0 20px;">
+  <strong style="color:var(--text)">Window:</strong>
+  {% for w in available_windows %}
+    <a href="?window={{ w }}" class="{% if window == w %}active{% endif %}">{{ w }}</a>
+  {% endfor %}
+</div>
+
+<!-- ============ Headline tiles ============ -->
+<div class="summary-row">
+  <div class="summary-tile">
+    <div class="label">Cases processed</div>
+    <div class="value">{{ ops.cases_processed }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Auto-pass rate (Tier 1)</div>
+    <div class="value">{{ "%.0f"|format((ops.auto_pass_rate.rate or 0) * 100) }}%</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">LLM calls</div>
+    <div class="value">{{ cost.total_calls }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Spend ({{ window }})</div>
+    <div class="value">${{ "%.4f"|format(cost.total_usd) }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Overall p95 latency</div>
+    <div class="value">{{ "%.1f"|format((latency.overall_p95_ms or 0) / 1000) }}s</div>
+  </div>
+</div>
+
+<!-- ============ Charts row ============ -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+
+  <div class="card">
+    <h3>Classification mix</h3>
+    {% if ops.classification_distribution %}
+    <canvas id="classChart" height="180"></canvas>
+    {% else %}
+    <p style="color:var(--muted)">No completed runs in this window yet. Upload an invoice at <a href="/demo">/demo</a>.</p>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h3>HITL resolution</h3>
+    {% if ops.hitl_resolution.total %}
+    <canvas id="hitlChart" height="180"></canvas>
+    <table style="margin-top:10px">
+      <tbody>
+        <tr><td>Pending</td><td>{{ ops.hitl_resolution.pending }}</td></tr>
+        <tr><td>Approved</td><td>{{ ops.hitl_resolution.approved }}</td></tr>
+        <tr><td>Edited &amp; approved</td><td>{{ ops.hitl_resolution.edited_approved }}</td></tr>
+        <tr><td>Rejected</td><td>{{ ops.hitl_resolution.rejected }}</td></tr>
+        <tr><td><strong>Approval rate (resolved)</strong></td>
+            <td><strong>{{ "%.0f"|format((ops.hitl_resolution.approval_rate or 0) * 100) }}%</strong></td></tr>
+      </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--muted)">No HITL items yet in this window.</p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ============ Cost breakdown ============ -->
+<div class="card">
+  <h3>Cost breakdown — by task</h3>
+  {% if cost.by_task %}
+  <table>
+    <thead>
+      <tr>
+        <th>Task</th><th>Calls</th><th>Input tokens</th><th>Output tokens</th><th>Cost (USD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task, v in cost.by_task.items()|sort(attribute='1.cost_usd', reverse=True) %}
+      <tr>
+        <td><code>{{ task }}</code></td>
+        <td>{{ v.calls }}</td>
+        <td>{{ "{:,}".format(v.input_tokens) }}</td>
+        <td>{{ "{:,}".format(v.output_tokens) }}</td>
+        <td>${{ "%.4f"|format(v.cost_usd) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:var(--muted)">No LLM calls recorded in this window.</p>
+  {% endif %}
+</div>
+
+<!-- ============ Cost breakdown — by model ============ -->
+<div class="card">
+  <h3>Cost breakdown — by model</h3>
+  {% if cost.by_model %}
+  <table>
+    <thead><tr><th>Model</th><th>Calls</th><th>Cost (USD)</th></tr></thead>
+    <tbody>
+      {% for model, v in cost.by_model.items()|sort(attribute='1.cost_usd', reverse=True) %}
+      <tr><td><code>{{ model }}</code></td><td>{{ v.calls }}</td><td>${{ "%.4f"|format(v.cost_usd) }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+
+<!-- ============ Latency ============ -->
+<div class="card">
+  <h3>Latency — per task</h3>
+  {% if latency.by_task %}
+  <table>
+    <thead>
+      <tr><th>Task</th><th>Calls</th><th>p50</th><th>p95</th><th>p99</th><th>Max</th></tr>
+    </thead>
+    <tbody>
+      {% for task, v in latency.by_task.items() %}
+      <tr>
+        <td><code>{{ task }}</code></td>
+        <td>{{ v.calls }}</td>
+        <td>{{ "%.0f"|format(v.p50_ms) }} ms</td>
+        <td>{{ "%.0f"|format(v.p95_ms) }} ms</td>
+        <td>{{ "%.0f"|format(v.p99_ms) }} ms</td>
+        <td>{{ "%.0f"|format(v.max_ms) }} ms</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+
+<!-- ============ Tier breakdown + action mix ============ -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+  <div class="card">
+    <h3>Tier breakdown</h3>
+    {% if ops.tier_breakdown %}
+    <table>
+      <thead><tr><th>Tier</th><th>Count</th></tr></thead>
+      <tbody>
+        {% for tier, count in ops.tier_breakdown.items() %}
+        <tr><td><span class="chip t{{ tier }}">T{{ tier }}</span></td><td>{{ count }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--muted)">No tier-classified runs yet.</p>
+    {% endif %}
+  </div>
+  <div class="card">
+    <h3>Top recommended actions</h3>
+    {% if ops.action_distribution %}
+    <table>
+      <thead><tr><th>Action</th><th>Count</th></tr></thead>
+      <tbody>
+        {% for action, count in ops.action_distribution.items() %}
+        <tr><td><code>{{ action }}</code></td><td>{{ count }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--muted)">No actions recorded yet.</p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ============ Recent calls tail ============ -->
+{% if tail %}
+<div class="card">
+  <h3>Recent LLM calls (latest 20)</h3>
+  <table>
+    <thead>
+      <tr><th>When</th><th>Task</th><th>Model</th><th>Tokens in/out</th><th>Cost</th><th>Latency</th></tr>
+    </thead>
+    <tbody>
+      {% for r in tail %}
+      <tr>
+        <td>{{ r.timestamp[:19] if r.timestamp else '' }}</td>
+        <td><code>{{ r.task }}</code></td>
+        <td><code>{{ r.model }}</code></td>
+        <td>{{ "{:,}".format(r.input_tokens or 0) }} / {{ "{:,}".format(r.output_tokens or 0) }}</td>
+        <td>${{ "%.4f"|format(r.cost_usd or 0) }}</td>
+        <td>{{ "%.0f"|format(r.latency_ms or 0) }} ms</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+<!-- ============ Chart.js (CDN) ============ -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+  const NAVY  = '#1F3A68';
+  const RED   = '#C0392B';
+  const GREEN = '#1A6D3F';
+  const SOFT  = '#E8EEF5';
+  const AMBER = '#f3c34a';
+
+  {% if ops.classification_distribution %}
+  new Chart(document.getElementById('classChart'), {
+    type: 'bar',
+    data: {
+      labels: {{ ops.classification_distribution.keys()|list|tojson }},
+      datasets: [{
+        label: 'Cases',
+        data: {{ ops.classification_distribution.values()|list|tojson }},
+        backgroundColor: NAVY
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false }},
+      scales: { x: { ticks: { autoSkip: false, maxRotation: 60, minRotation: 45 }}}
+    }
+  });
+  {% endif %}
+
+  {% if ops.hitl_resolution.total %}
+  new Chart(document.getElementById('hitlChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Pending', 'Approved', 'Edited & approved', 'Rejected'],
+      datasets: [{
+        data: [
+          {{ ops.hitl_resolution.pending }},
+          {{ ops.hitl_resolution.approved }},
+          {{ ops.hitl_resolution.edited_approved }},
+          {{ ops.hitl_resolution.rejected }}
+        ],
+        backgroundColor: [AMBER, GREEN, NAVY, RED]
+      }]
+    },
+    options: { plugins: { legend: { position: 'bottom' }}}
+  });
+  {% endif %}
+</script>
+
+{% endblock %}

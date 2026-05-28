@@ -1,0 +1,477 @@
+{
+  "by_id": {
+    "VEN-P001": {
+      "id": "VEN-P001",
+      "name": "Global Tech Components Inc.",
+      "tax_id": "US-EIN: 12-3456789",
+      "country": "US",
+      "addresses": [
+        "100 Innovation Drive, San Jose, CA 95134, USA"
+      ],
+      "bank_account_last4": "6713",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P001 canonical vendor."
+    },
+    "VEN-P002": {
+      "id": "VEN-P002",
+      "name": "Maple Logistics SMB",
+      "tax_id": "US-EIN: 98-7654321",
+      "country": "US",
+      "addresses": [
+        "45 Maple Street, Portland, OR 97201, USA"
+      ],
+      "bank_account_last4": "6850",
+      "contract_type": "spot",
+      "tier": "tactical",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P002 canonical vendor."
+    },
+    "VEN-P003": {
+      "id": "VEN-P003",
+      "name": "Frankfurt Industriebedarf GmbH",
+      "tax_id": "DE123456789",
+      "country": "DE",
+      "addresses": [
+        "Industriestr. 12\n60327 Frankfurt\nGermany"
+      ],
+      "bank_account_last4": "6987",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P003 canonical vendor."
+    },
+    "VEN-P004": {
+      "id": "VEN-P004",
+      "name": "Mumbai Materials Co.",
+      "tax_id": "27AABCS1234B1Z2",
+      "country": "IN",
+      "addresses": [
+        "42 Industrial Estate\nAndheri East\nMumbai - 400093\nIndia"
+      ],
+      "bank_account_last4": "7124",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P004 canonical vendor."
+    },
+    "VEN-P005": {
+      "id": "VEN-P005",
+      "name": "S\u00e3o Paulo Componentes Ltda.",
+      "tax_id": "12.345.678/0001-90",
+      "country": "BR",
+      "addresses": [
+        "Av. Paulista, 1000, S\u00e3o Paulo, SP 01310-100, Brazil"
+      ],
+      "bank_account_last4": "7261",
+      "contract_type": "spot",
+      "tier": "tactical",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P005 canonical vendor."
+    }
+  },
+  "by_tax_id": {
+    "US-EIN: 12-3456789": {
+      "id": "VEN-P001",
+      "name": "Global Tech Components Inc.",
+      "tax_id": "US-EIN: 12-3456789",
+      "country": "US",
+      "addresses": [
+        "100 Innovation Drive, San Jose, CA 95134, USA"
+      ],
+      "bank_account_last4": "6713",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P001 canonical vendor."
+    },
+    "US-EIN: 98-7654321": {
+      "id": "VEN-P002",
+      "name": "Maple Logistics SMB",
+      "tax_id": "US-EIN: 98-7654321",
+      "country": "US",
+      "addresses": [
+        "45 Maple Street, Portland, OR 97201, USA"
+      ],
+      "bank_account_last4": "6850",
+      "contract_type": "spot",
+      "tier": "tactical",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P002 canonical vendor."
+    },
+    "DE123456789": {
+      "id": "VEN-P003",
+      "name": "Frankfurt Industriebedarf GmbH",
+      "tax_id": "DE123456789",
+      "country": "DE",
+      "addresses": [
+        "Industriestr. 12\n60327 Frankfurt\nGermany"
+      ],
+      "bank_account_last4": "6987",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P003 canonical vendor."
+    },
+    "27AABCS1234B1Z2": {
+      "id": "VEN-P004",
+      "name": "Mumbai Materials Co.",
+      "tax_id": "27AABCS1234B1Z2",
+      "country": "IN",
+      "addresses": [
+        "42 Industrial Estate\nAndheri East\nMumbai - 400093\nIndia"
+      ],
+      "bank_account_last4": "7124",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P004 canonical vendor."
+    },
+    "12.345.678/0001-90": {
+      "id": "VEN-P005",
+      "name": "S\u00e3o Paulo Componentes Ltda.",
+      "tax_id": "12.345.678/0001-90",
+      "country": "BR",
+      "addresses": [
+        "Av. Paulista, 1000, S\u00e3o Paulo, SP 01310-100, Brazil"
+      ],
+      "bank_account_last4": "7261",
+      "contract_type": "spot",
+      "tier": "tactical",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P005 canonical vendor."
+    }
+  },
+  "by_tax_id_aggressive": {
+    "usein123456789": {
+      "id": "VEN-P001",
+      "name": "Global Tech Components Inc.",
+      "tax_id": "US-EIN: 12-3456789",
+      "country": "US",
+      "addresses": [
+        "100 Innovation Drive, San Jose, CA 95134, USA"
+      ],
+      "bank_account_last4": "6713",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P001 canonical vendor."
+    },
+    "usein987654321": {
+      "id": "VEN-P002",
+      "name": "Maple Logistics SMB",
+      "tax_id": "US-EIN: 98-7654321",
+      "country": "US",
+      "addresses": [
+        "45 Maple Street, Portland, OR 97201, USA"
+      ],
+      "bank_account_last4": "6850",
+      "contract_type": "spot",
+      "tier": "tactical",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P002 canonical vendor."
+    },
+    "de123456789": {
+      "id": "VEN-P003",
+      "name": "Frankfurt Industriebedarf GmbH",
+      "tax_id": "DE123456789",
+      "country": "DE",
+      "addresses": [
+        "Industriestr. 12\n60327 Frankfurt\nGermany"
+      ],
+      "bank_account_last4": "6987",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P003 canonical vendor."
+    },
+    "27aabcs1234b1z2": {
+      "id": "VEN-P004",
+      "name": "Mumbai Materials Co.",
+      "tax_id": "27AABCS1234B1Z2",
+      "country": "IN",
+      "addresses": [
+        "42 Industrial Estate\nAndheri East\nMumbai - 400093\nIndia"
+      ],
+      "bank_account_last4": "7124",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P004 canonical vendor."
+    },
+    "12345678000190": {
+      "id": "VEN-P005",
+      "name": "S\u00e3o Paulo Componentes Ltda.",
+      "tax_id": "12.345.678/0001-90",
+      "country": "BR",
+      "addresses": [
+        "Av. Paulista, 1000, S\u00e3o Paulo, SP 01310-100, Brazil"
+      ],
+      "bank_account_last4": "7261",
+      "contract_type": "spot",
+      "tier": "tactical",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P005 canonical vendor."
+    }
+  },
+  "by_tax_id_last6": {
+    "456789": {
+      "id": "VEN-P003",
+      "name": "Frankfurt Industriebedarf GmbH",
+      "tax_id": "DE123456789",
+      "country": "DE",
+      "addresses": [
+        "Industriestr. 12\n60327 Frankfurt\nGermany"
+      ],
+      "bank_account_last4": "6987",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P003 canonical vendor."
+    },
+    "654321": {
+      "id": "VEN-P002",
+      "name": "Maple Logistics SMB",
+      "tax_id": "US-EIN: 98-7654321",
+      "country": "US",
+      "addresses": [
+        "45 Maple Street, Portland, OR 97201, USA"
+      ],
+      "bank_account_last4": "6850",
+      "contract_type": "spot",
+      "tier": "tactical",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P002 canonical vendor."
+    },
+    "123412": {
+      "id": "VEN-P004",
+      "name": "Mumbai Materials Co.",
+      "tax_id": "27AABCS1234B1Z2",
+      "country": "IN",
+      "addresses": [
+        "42 Industrial Estate\nAndheri East\nMumbai - 400093\nIndia"
+      ],
+      "bank_account_last4": "7124",
+      "contract_type": "msa",
+      "tier": "strategic",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P004 canonical vendor."
+    },
+    "000190": {
+      "id": "VEN-P005",
+      "name": "S\u00e3o Paulo Componentes Ltda.",
+      "tax_id": "12.345.678/0001-90",
+      "country": "BR",
+      "addresses": [
+        "Av. Paulista, 1000, S\u00e3o Paulo, SP 01310-100, Brazil"
+      ],
+      "bank_account_last4": "7261",
+      "contract_type": "spot",
+      "tier": "tactical",
+      "onboarding_date": "2024-01-15",
+      "status": "active",
+      "sanctions_check_passed": true,
+      "phi_access": false,
+      "sbe_classification": "",
+      "notes": "Persona P005 canonical vendor."
+    }
+  },
+  "by_name_tokens": [
+    {
+      "tokens": [
+        "components",
+        "global",
+        "tech"
+      ],
+      "vendor": {
+        "id": "VEN-P001",
+        "name": "Global Tech Components Inc.",
+        "tax_id": "US-EIN: 12-3456789",
+        "country": "US",
+        "addresses": [
+          "100 Innovation Drive, San Jose, CA 95134, USA"
+        ],
+        "bank_account_last4": "6713",
+        "contract_type": "msa",
+        "tier": "strategic",
+        "onboarding_date": "2024-01-15",
+        "status": "active",
+        "sanctions_check_passed": true,
+        "phi_access": false,
+        "sbe_classification": "",
+        "notes": "Persona P001 canonical vendor."
+      }
+    },
+    {
+      "tokens": [
+        "logistics",
+        "maple",
+        "smb"
+      ],
+      "vendor": {
+        "id": "VEN-P002",
+        "name": "Maple Logistics SMB",
+        "tax_id": "US-EIN: 98-7654321",
+        "country": "US",
+        "addresses": [
+          "45 Maple Street, Portland, OR 97201, USA"
+        ],
+        "bank_account_last4": "6850",
+        "contract_type": "spot",
+        "tier": "tactical",
+        "onboarding_date": "2024-01-15",
+        "status": "active",
+        "sanctions_check_passed": true,
+        "phi_access": false,
+        "sbe_classification": "",
+        "notes": "Persona P002 canonical vendor."
+      }
+    },
+    {
+      "tokens": [
+        "frankfurt",
+        "industriebedarf"
+      ],
+      "vendor": {
+        "id": "VEN-P003",
+        "name": "Frankfurt Industriebedarf GmbH",
+        "tax_id": "DE123456789",
+        "country": "DE",
+        "addresses": [
+          "Industriestr. 12\n60327 Frankfurt\nGermany"
+        ],
+        "bank_account_last4": "6987",
+        "contract_type": "msa",
+        "tier": "strategic",
+        "onboarding_date": "2024-01-15",
+        "status": "active",
+        "sanctions_check_passed": true,
+        "phi_access": false,
+        "sbe_classification": "",
+        "notes": "Persona P003 canonical vendor."
+      }
+    },
+    {
+      "tokens": [
+        "materials",
+        "mumbai"
+      ],
+      "vendor": {
+        "id": "VEN-P004",
+        "name": "Mumbai Materials Co.",
+        "tax_id": "27AABCS1234B1Z2",
+        "country": "IN",
+        "addresses": [
+          "42 Industrial Estate\nAndheri East\nMumbai - 400093\nIndia"
+        ],
+        "bank_account_last4": "7124",
+        "contract_type": "msa",
+        "tier": "strategic",
+        "onboarding_date": "2024-01-15",
+        "status": "active",
+        "sanctions_check_passed": true,
+        "phi_access": false,
+        "sbe_classification": "",
+        "notes": "Persona P004 canonical vendor."
+      }
+    },
+    {
+      "tokens": [
+        "componentes",
+        "paulo",
+        "sao"
+      ],
+      "vendor": {
+        "id": "VEN-P005",
+        "name": "S\u00e3o Paulo Componentes Ltda.",
+        "tax_id": "12.345.678/0001-90",
+        "country": "BR",
+        "addresses": [
+          "Av. Paulista, 1000, S\u00e3o Paulo, SP 01310-100, Brazil"
+        ],
+        "bank_account_last4": "7261",
+        "contract_type": "spot",
+        "tier": "tactical",
+        "onboarding_date": "2024-01-15",
+        "status": "active",
+        "sanctions_check_passed": true,
+        "phi_access": false,
+        "sbe_classification": "",
+        "notes": "Persona P005 canonical vendor."
+      }
+    }
+  ]
+}

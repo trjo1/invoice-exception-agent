@@ -1,0 +1,338 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260115_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-00001",
+    "invoice_date": "2026-01-15",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Dr\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Main St\nSpringfield, IL 62701\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Advanced Microcontroller Unit",
+        "quantity": 500,
+        "unit_price": 12.50,
+        "line_total": 6250.00
+      }
+    ],
+    "subtotal": 6250.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 453.13
+      },
+      {
+        "jurisdiction": "US-TX",
+        "rate": 0.0825,
+        "amount": 515.63
+      }
+    ],
+    "total": 7218.76,
+    "error_injected": "Multi-page invoices where line-items continue across pages",
+    "ground_truth_note": "Invoice data spans two pages; the single line item's details and totals are split across pages. The extractor must concatenate the line item information from both pages to correctly compute the subtotal and total."
+  },
+  {
+    "invoice_id": "P004_INV_20260315_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-00001",
+    "invoice_date": "2026-03-15",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate\nAndheri East, Mumbai\nMaharashtra 400093\nIndia",
+      "vendor_tax_id": "GSTIN 27AABCS1234A1Z5\nPAN AABCS1234A",
+      "buyer_name": "Acme India Pvt Ltd",
+      "buyer_address": "5 Business Park\nBandra Kurla Complex, Mumbai\nMaharashtra 400051\nIndia",
+      "buyer_po_contact": "Priya Sharma, priya.sharma@acme.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-202",
+        "description": "Stainless Steel Bolts M10 (HSN 7318)",
+        "quantity": 1000,
+        "unit_price": 15.50,
+        "line_total": 15500.00
+      }
+    ],
+    "subtotal": 15500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-MH-CGST",
+        "rate": 0.09,
+        "amount": 1395.00
+      },
+      {
+        "jurisdiction": "IN-MH-SGST",
+        "rate": 0.09,
+        "amount": 1395.00
+      }
+    ],
+    "total": 18290.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with GST breakdown (CGST + SGST) and HSN code in line item description. Extractor should capture PAN and GSTIN from header."
+  },
+  {
+    "invoice_id": "P002_INV_20260111_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-00002",
+    "invoice_date": "2026-01-11",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Oak Ave\nPortland, OR 97201\nUSA",
+      "vendor_tax_id": "EIN 98-7654321",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Main St\nSpringfield, IL 62701\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-001",
+        "description": "Freight Service - Local Delivery",
+        "quantity": 1,
+        "unit_price": 250.00,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-002",
+        "description": "Warehousing - Monthly Storage",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      }
+    ],
+    "subtotal": 1450.00,
+    "tax": [],
+    "total": 1450.00,
+    "error_injected": "Tax line sometimes absent for in-state shipments",
+    "ground_truth_note": "Tax line missing because shipment is in-state (Oregon has no sales tax). Extractor should note absence of tax line. Hand-written note 'OK' appears on scanned copy."
+  },
+  {
+    "invoice_id": "P001_INV_20260223_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-00001",
+    "invoice_date": "2026-02-23",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Dr\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "123 Main St\nSpringfield, IL 62701\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2001",
+        "description": "Resistor Kit 1/4W 100pcs",
+        "quantity": 10,
+        "unit_price": 15.20,
+        "line_total": 152.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "description": "Capacitor Array 10uF 50V",
+        "quantity": 50,
+        "unit_price": 0.85,
+        "line_total": 42.50
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-2003",
+        "description": "LED Green 5mm (100 pack)",
+        "quantity": 5,
+        "unit_price": 8.40,
+        "line_total": 42.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-2004",
+        "description": "Voltage Regulator LM7805",
+        "quantity": 200,
+        "unit_price": 0.45,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-2005",
+        "description": "Microcontroller ATmega328P",
+        "quantity": 100,
+        "unit_price": 2.30,
+        "line_total": 230.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-2006",
+        "description": "PCB Prototype Board 5x7cm",
+        "quantity": 25,
+        "unit_price": 3.20,
+        "line_total": 80.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-2007",
+        "description": "Soldering Iron 60W",
+        "quantity": 3,
+        "unit_price": 18.50,
+        "line_total": 55.50
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-2008",
+        "description": "Heat Shrink Tubing Assorted",
+        "quantity": 10,
+        "unit_price": 4.75,
+        "line_total": 47.50
+      }
+    ],
+    "subtotal": 739.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 53.61
+      },
+      {
+        "jurisdiction": "US-TX",
+        "rate": 0.0825,
+        "amount": 61.01
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08875,
+        "amount": 65.63
+      }
+    ],
+    "total": 919.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with 8 line items and tax breakdown by three US jurisdictions. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P005_INV_20260129_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-00003",
+    "invoice_date": "2026-01-29",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista, São Paulo\nSP 01310-100\nBrasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Acme do Brasil Ltda.",
+      "buyer_address": "Rua Augusta, 500\nConsolação, São Paulo\nSP 01304-000\nBrasil",
+      "buyer_po_contact": "Carlos Silva, c.silva@acme.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-301",
+        "description": "Parafuso M8 x 30mm (caixa com 100)",
+        "quantity": 20,
+        "unit_price": 12.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-302",
+        "description": "Porca M8 (caixa com 100)",
+        "quantity": 15,
+        "unit_price": 8.30,
+        "line_total": 124.50
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-303",
+        "description": "Arruela M8 (caixa com 100)",
+        "quantity": 10,
+        "unit_price": 5.20,
+        "line_total": 52.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-304",
+        "description": "Cabo USB 2.0 1m",
+        "quantity": 50,
+        "unit_price": 3.80,
+        "line_total": 190.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-305",
+        "description": "Resistor 10kΩ 1/4W (pacote 100)",
+        "quantity": 10,
+        "unit_price": 6.40,
+        "line_total": 64.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-306",
+        "description": "LED Vermelho 5mm (pacote 100)",
+        "quantity": 5,
+        "unit_price": 9.20,
+        "line_total": 46.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-307",
+        "description": "Transistor BC547 (pacote 10)",
+        "quantity": 10,
+        "unit_price": 2.90,
+        "line_total": 29.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-308",
+        "description": "Protoboard 830 pontos",
+        "quantity": 5,
+        "unit_price": 15.40,
+        "line_total": 77.00
+      }
+    ],
+    "subtotal": 832.50,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 149.85
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 83.25
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 13.74
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 63.27
+      }
+    ],
+    "total": 1142.61,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e invoice with 8 line items and four tax types (ICMS, IPI, PIS, COFINS). Boleto bancário reference: 00190.00009 01234.567890 12345.678901 1 12345678901234. Extractor should capture all tax lines and NF-e format."
+  }
+]
+```

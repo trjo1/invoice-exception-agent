@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<h2>{{ title }} ({{ items|length }})</h2>
+
+<div class="summary-row">
+  <div class="summary-tile">
+    <div class="label">Total cases</div>
+    <div class="value">{{ stats.total }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Pending</div>
+    <div class="value">{{ stats.by_status.get('pending', 0) }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Approved</div>
+    <div class="value">{{ stats.by_status.get('approved', 0) + stats.by_status.get('edited_approved', 0) }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Rejected</div>
+    <div class="value">{{ stats.by_status.get('rejected', 0) }}</div>
+  </div>
+</div>
+
+<div class="filterbar">
+  <strong style="color:var(--text)">Tier:</strong>
+  <a href="?{% if filter_routed_to %}routed_to={{ filter_routed_to }}{% endif %}"
+     class="{% if filter_tier is none %}active{% endif %}">All</a>
+  <a href="?tier=2{% if filter_routed_to %}&routed_to={{ filter_routed_to }}{% endif %}"
+     class="{% if filter_tier == 2 %}active{% endif %}">Tier 2</a>
+  <a href="?tier=3{% if filter_routed_to %}&routed_to={{ filter_routed_to }}{% endif %}"
+     class="{% if filter_tier == 3 %}active{% endif %}">Tier 3</a>
+</div>
+
+{% if items %}
+<table>
+  <thead>
+    <tr>
+      <th>Created</th>
+      <th>Case</th>
+      <th>Class</th>
+      <th>Recommended action</th>
+      <th>Routed to</th>
+      <th>Tier</th>
+      <th>Conf.</th>
+      <th>Status</th>
+      <th>Executed</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in items %}
+    <tr>
+      <td>{{ item.created_at.strftime('%m-%d %H:%M') if item.created_at else '' }}</td>
+      <td><a href="/item/{{ item.id }}">{{ item.case_id }}</a></td>
+      <td>{{ item.class_label }}</td>
+      <td>{{ item.recommended_action }}</td>
+      <td><span class="chip">{{ item.routed_to }}</span></td>
+      <td><span class="chip t{{ item.tier }}">T{{ item.tier }}</span></td>
+      <td>{{ "%.2f"|format(item.confidence) }}</td>
+      <td><span class="chip status-{{ item.status }}">{{ item.status }}</span></td>
+      <td style="text-align:center;">
+        {% if item.execution_status == 'simulated_success' %}<span style="color:var(--green); font-weight:600;">✓</span>
+        {% elif item.execution_status == 'simulated_failed' %}<span style="color:var(--red); font-weight:600;">✗</span>
+        {% else %}—{% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p style="color:var(--muted)">No items match the current filter.
+{% if not show_all %}Run <code>make hitl-seed</code> to populate the queue.{% endif %}</p>
+{% endif %}
+{% endblock %}

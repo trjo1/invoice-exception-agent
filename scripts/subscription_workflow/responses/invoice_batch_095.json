@@ -1,0 +1,347 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260409_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-09",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo, SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "AutoParts Indústria S.A.",
+      "buyer_address": "Rua das Indústrias, 500, Galpão 3, Campinas, SP, 13050-000, Brasil",
+      "buyer_po_contact": "João Silva, joao.silva@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-MOT-001",
+        "description": "Motor elétrico 5CV trifásico",
+        "quantity": 2,
+        "unit_price": 4500.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-PEC-002",
+        "description": "Peça de reposição para motor, modelo X",
+        "quantity": 10,
+        "unit_price": 320.50,
+        "line_total": 3205.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-CAB-003",
+        "description": "Cabo de alimentação 10mm², 10m",
+        "quantity": 5,
+        "unit_price": 89.90,
+        "line_total": 449.50
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-SEN-004",
+        "description": "Sensor de temperatura industrial",
+        "quantity": 15,
+        "unit_price": 125.00,
+        "line_total": 1875.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-REL-005",
+        "description": "Relé de proteção térmica",
+        "quantity": 8,
+        "unit_price": 210.00,
+        "line_total": 1680.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-FUS-006",
+        "description": "Fusível rápido 32A",
+        "quantity": 20,
+        "unit_price": 15.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-TRA-007",
+        "description": "Transformador 220/110V 500VA",
+        "quantity": 3,
+        "unit_price": 780.00,
+        "line_total": 2340.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-PLA-008",
+        "description": "Placa controladora lógica programável",
+        "quantity": 1,
+        "unit_price": 3200.00,
+        "line_total": 3200.00
+      }
+    ],
+    "subtotal": 22049.50,
+    "tax": [
+      {
+        "jurisdiction": "ICMS-SP",
+        "rate": 0.18,
+        "amount": 3968.91
+      },
+      {
+        "jurisdiction": "IPI",
+        "rate": 0.10,
+        "amount": 2204.95
+      },
+      {
+        "jurisdiction": "PIS",
+        "rate": 0.0165,
+        "amount": 363.82
+      },
+      {
+        "jurisdiction": "COFINS",
+        "rate": 0.076,
+        "amount": 1675.76
+      }
+    ],
+    "total": 30262.94,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Invoice contains four separate tax lines (ICMS, IPI, PIS, COFINS) which may confuse extractors that expect a single tax. The extractor should correctly sum all tax amounts and identify each jurisdiction. Boleto bancário payment slip referenced in vendor address notes."
+  },
+  {
+    "invoice_id": "P004_INV_20260104_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-01-04",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN 27AABCU9603R1Z1, PAN AABCU9603R",
+      "buyer_name": "AutoParts Indústria S.A.",
+      "buyer_address": "Rua das Indústrias, 500, Galpão 3, Campinas, SP, 13050-000, Brasil",
+      "buyer_po_contact": "Ravi Patel, ravi.patel@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-STL-001",
+        "description": "Aço carbono laminado a frio, chapa 2mm",
+        "quantity": 500,
+        "unit_price": 120.00,
+        "line_total": 60000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-ALM-002",
+        "description": "Alumínio liga 6061, barra redonda 25mm",
+        "quantity": 200,
+        "unit_price": 350.00,
+        "line_total": 70000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-COB-003",
+        "description": "Cobre eletrolítico, fio 2.5mm²",
+        "quantity": 100,
+        "unit_price": 800.00,
+        "line_total": 80000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-PLA-004",
+        "description": "Plástico ABS granulado, cor preta",
+        "quantity": 300,
+        "unit_price": 90.00,
+        "line_total": 27000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-BOR-005",
+        "description": "Borracha sintética EPDM, folha 3mm",
+        "quantity": 150,
+        "unit_price": 200.00,
+        "line_total": 30000.00
+      }
+    ],
+    "subtotal": 267000.00,
+    "tax": [
+      {
+        "jurisdiction": "IGST",
+        "rate": 0.18,
+        "amount": 48060.00
+      }
+    ],
+    "total": 315060.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with GST at 18% IGST. All HSN codes are present per line (e.g., 7208 for steel, 7604 for aluminum, 7408 for copper, 3903 for plastic, 4002 for rubber). PAN and GSTIN correctly listed in header. No errors injected."
+  },
+  {
+    "invoice_id": "P005_INV_20260303_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-23456",
+    "invoice_date": "2026-04-03",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo, SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "AutoParts Indústria S.A.",
+      "buyer_address": "Rua das Indústrias, 500, Galpão 3, Campinas, SP, 13050-000, Brasil",
+      "buyer_po_contact": "João Silva, joao.silva@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-PEC-009",
+        "description": "Conjunto de rolamentos para eixo dianteiro",
+        "quantity": 4,
+        "unit_price": 1250.00,
+        "line_total": 5000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-PEC-010",
+        "description": "Mola helicoidal para suspensão",
+        "quantity": 8,
+        "unit_price": 480.00,
+        "line_total": 3840.00
+      }
+    ],
+    "subtotal": 8840.00,
+    "tax": [
+      {
+        "jurisdiction": "ICMS-SP",
+        "rate": 0.18,
+        "amount": 1591.20
+      },
+      {
+        "jurisdiction": "IPI",
+        "rate": 0.10,
+        "amount": 884.00
+      },
+      {
+        "jurisdiction": "PIS",
+        "rate": 0.0165,
+        "amount": 145.86
+      },
+      {
+        "jurisdiction": "COFINS",
+        "rate": 0.076,
+        "amount": 671.84
+      }
+    ],
+    "total": 12132.90,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "Invoice date is given as 03/04/2026 (dd/mm/yyyy) instead of ISO YYYY-MM-DD. The extractor should parse this correctly as 2026-04-03. Multiple tax types (ICMS, IPI, PIS, COFINS) also present. Boleto bancário reference included."
+  },
+  {
+    "invoice_id": "P004_INV_20260330_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-78901",
+    "invoice_date": "2026-03-30",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN 27AABCU9603R1Z1, PAN AABCU9603R",
+      "buyer_name": "AutoParts Indústria S.A.",
+      "buyer_address": "Rua das Indústrias, 500, Galpão 3, Campinas, SP, 13050-000, Brasil",
+      "buyer_po_contact": "Ravi Patel, ravi.patel@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-STL-006",
+        "description": "Aço inoxidável 304, chapa 1.5mm",
+        "quantity": 100,
+        "unit_price": 450.00,
+        "line_total": 45000.00
+      }
+    ],
+    "subtotal": 45000.00,
+    "tax": [
+      {
+        "jurisdiction": "IGST",
+        "rate": 0.18,
+        "amount": 8100.00
+      }
+    ],
+    "total": 53100.00,
+    "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+    "ground_truth_note": "HSN code for steel is given as 7219-22 (with dash) while other codes in previous invoices were without dashes. The extractor should handle both formats consistently. Single line item with GST at 18% IGST."
+  },
+  {
+    "invoice_id": "P002_INV_20260303_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-34567",
+    "invoice_date": "2026-03-03",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Industrial Blvd, Suite 200, Springfield, IL 62701, USA",
+      "vendor_tax_id": "EIN 36-1234567",
+      "buyer_name": "AutoParts Indústria S.A.",
+      "buyer_address": "Rua das Indústrias, 500, Galpão 3, Campinas, SP, 13050-000, Brasil",
+      "buyer_po_contact": "John Smith, john.smith@autoparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRT-001",
+        "description": "Frete rodoviário de equipamentos industriais",
+        "quantity": 1,
+        "unit_price": 2500.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-ARM-002",
+        "description": "Armazenagem de materiais perigosos (30 dias)",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-SEG-003",
+        "description": "Seguro de carga internacional",
+        "quantity": 1,
+        "unit_price": 800.00,
+        "line_total": 800.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-DOC-004",
+        "description": "Documentação alfandegária e despacho",
+        "quantity": 1,
+        "unit_price": 600.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-MAN-005",
+        "description": "Manuseio e carregamento de carga",
+        "quantity": 2,
+        "unit_price": 350.00,
+        "line_total": 700.00
+      }
+    ],
+    "subtotal": 5800.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 362.50
+      }
+    ],
+    "total": 6163.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with no errors. Totals are rounded up to nearest dollar (subtotal $5800.00, tax $362.50, total $6162.50 rounded to $6163.00). Hand-written note 'Received in good condition' appears in scanned image. Header placement may be inconsistent."
+  }
+]
+```

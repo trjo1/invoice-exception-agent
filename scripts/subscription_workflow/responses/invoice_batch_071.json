@@ -1,0 +1,323 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260110_001",
+    "persona_id": "P002",
+    "po_reference": "",
+    "invoice_date": "2026-01-10",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "456 Industrial Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRT-001",
+        "description": "Freight service - Chicago to Springfield (full truckload)",
+        "quantity": 1,
+        "unit_price": 1250.00,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-PAL-002",
+        "description": "Pallet rental - standard 48x40",
+        "quantity": 40,
+        "unit_price": 5.50,
+        "line_total": 220.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-LAB-003",
+        "description": "Labor - loading/unloading per hour",
+        "quantity": 8,
+        "unit_price": 45.00,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-WHS-004",
+        "description": "Warehousing - storage per pallet per day",
+        "quantity": 200,
+        "unit_price": 1.20,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-INS-005",
+        "description": "Insurance - cargo value coverage",
+        "quantity": 1,
+        "unit_price": 150.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-DOC-006",
+        "description": "Documentation fee - bill of lading",
+        "quantity": 1,
+        "unit_price": 25.00,
+        "line_total": 25.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-FUE-007",
+        "description": "Fuel surcharge (15% of freight)",
+        "quantity": 1,
+        "unit_price": 187.50,
+        "line_total": 187.50
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-ENV-008",
+        "description": "Environmental fee - recycling packaging",
+        "quantity": 1,
+        "unit_price": 35.00,
+        "line_total": 35.00
+      }
+    ],
+    "subtotal": 2467.50,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 154.22
+      }
+    ],
+    "total": 2622,
+    "error_injected": "MISSING_PO_REFERENCE",
+    "ground_truth_note": "PO reference field is empty. The delivery note number DN-2026-00123 is handwritten in the margin; extractor should infer this as the PO reference. Totals are rounded up to nearest dollar (actual total 2621.72 rounded to 2622)."
+  },
+  {
+    "invoice_id": "P001_INV_20260125_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-25",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Drive\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "EIN 98-7654321",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "456 Industrial Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-IC-001",
+        "description": "Integrated circuit - ATmega328P microcontroller",
+        "quantity": 500,
+        "unit_price": 2.15,
+        "line_total": 1075.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-RES-002",
+        "description": "Resistor kit - 1/4W 10k Ohm (100 pcs)",
+        "quantity": 20,
+        "unit_price": 3.50,
+        "line_total": 70.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-CAP-003",
+        "description": "Capacitor - 100uF 25V electrolytic",
+        "quantity": 200,
+        "unit_price": 0.45,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 1235.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 89.54
+      },
+      {
+        "jurisdiction": "US-CA-SANTA_CLARA",
+        "rate": 0.0125,
+        "amount": 15.44
+      }
+    ],
+    "total": 1339.98,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency capability noted but this invoice is in USD. Tax is itemized by state and local jurisdiction. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260415_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-15",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 10\n60327 Frankfurt\nGermany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroTech GmbH",
+      "buyer_address": "Musterstrasse 20\n10115 Berlin\nGermany",
+      "buyer_po_contact": "Hans Müller, hans.mueller@eurotech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-SCH-001",
+        "description": "Schrauben M8 x 30mm (VPE 100) / Screws M8 x 30mm (pack of 100)",
+        "quantity": 10,
+        "unit_price": 12.50,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-DIC-002",
+        "description": "Dichtungen für Hydraulik / Hydraulic seals (Satz / set)",
+        "quantity": 5,
+        "unit_price": 48.00,
+        "line_total": 240.00
+      }
+    ],
+    "subtotal": 365.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 69.35
+      }
+    ],
+    "total": 434.35,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. German VAT at 19% itemized. Bilingual descriptions (German primary, English secondary). SEPA bank details included in vendor address."
+  },
+  {
+    "invoice_id": "P002_INV_20260126_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-01-26",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "456 Industrial Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRT-009",
+        "description": "Expedited freight - Chicago to St. Louis (LTL)",
+        "quantity": 1,
+        "unit_price": 875.00,
+        "line_total": 875.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-PAL-010",
+        "description": "Pallet rental - heavy duty",
+        "quantity": 10,
+        "unit_price": 8.00,
+        "line_total": 80.00
+      }
+    ],
+    "subtotal": 955.00,
+    "tax": [],
+    "total": 955,
+    "error_injected": "MISSING_TAX_LINE",
+    "ground_truth_note": "Tax line is absent because this is an in-state shipment. The extractor should note that no tax was applied. Totals are rounded up to nearest dollar (actual 955.00 rounds to 955)."
+  },
+  {
+    "invoice_id": "P005_INV_20260123_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-98765",
+    "invoice_date": "2026-01-23",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 1000\nSão Paulo, SP 01001-000\nBrazil\nBoleto: 34191.23456 67890.123456 78901.234567 1 12345678901234",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Brasil Comércio Ltda.",
+      "buyer_address": "Avenida Paulista, 500\nSão Paulo, SP 01310-000\nBrazil",
+      "buyer_po_contact": "Maria Silva, maria.silva@brasilcomercio.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-CON-001",
+        "description": "Conector USB-C fêmea / USB-C female connector",
+        "quantity": 1000,
+        "unit_price": 1.50,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-CAB-002",
+        "description": "Cabo HDMI 2.1 1m / HDMI 2.1 cable 1m",
+        "quantity": 500,
+        "unit_price": 8.20,
+        "line_total": 4100.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-TRA-003",
+        "description": "Transformador 12V 2A / Transformer 12V 2A",
+        "quantity": 200,
+        "unit_price": 15.00,
+        "line_total": 3000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-SEN-004",
+        "description": "Sensor de temperatura DS18B20 / Temperature sensor DS18B20",
+        "quantity": 300,
+        "unit_price": 4.50,
+        "line_total": 1350.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-RES-005",
+        "description": "Resistor 1k Ohm 1/4W (lote 100) / Resistor 1k Ohm 1/4W (lot 100)",
+        "quantity": 50,
+        "unit_price": 2.00,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 10050.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 1809.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 1005.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 165.83
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 763.80
+      }
+    ],
+    "total": 13793.63,
+    "error_injected": "MULTIPLE_TAX_TYPES",
+    "ground_truth_note": "Invoice includes four Brazilian tax types (ICMS, IPI, PIS, COFINS) which may confuse extraction. The NF-e format combines invoice and tax receipt. Boleto bancário reference is included in vendor address. Totals rounded to 2 decimals."
+  }
+]
+```

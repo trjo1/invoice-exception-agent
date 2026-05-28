@@ -1,0 +1,331 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260401_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-01",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "NexGen Enterprises",
+      "buyer_address": "1234 Commerce Blvd, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Server Motherboard X200",
+        "quantity": 10,
+        "unit_price": 250.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2003",
+        "description": "DDR5 RAM 32GB",
+        "quantity": 20,
+        "unit_price": 120.00,
+        "line_total": 2400.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3010",
+        "description": "NVMe SSD 1TB",
+        "quantity": 15,
+        "unit_price": 180.00,
+        "line_total": 2700.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-4012",
+        "description": "Network Switch 48-Port",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-5005",
+        "description": "Power Supply Unit 750W",
+        "quantity": 8,
+        "unit_price": 85.00,
+        "line_total": 680.00
+      }
+    ],
+    "subtotal": 9180.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 757.35
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.04,
+        "amount": 367.20
+      }
+    ],
+    "total": 10304.55,
+    "error_injected": "Multi-page invoices where line-items continue across pages",
+    "ground_truth_note": "This invoice would span multiple pages; line items continue from page 1 to page 2. The extractor must concatenate line items across pages."
+  },
+  {
+    "invoice_id": "P002_INV_20260206_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-06",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Maple Ave, Portland, OR 97201, USA",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "NexGen Enterprises",
+      "buyer_address": "1234 Commerce Blvd, New York, NY 10001, USA",
+      "buyer_po_contact": "Jane Doe, jane.doe@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Standard pallet shipping (LTL)",
+        "quantity": 3,
+        "unit_price": 150.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Hazardous material handling fee",
+        "quantity": 1,
+        "unit_price": 200.00,
+        "line_total": 200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "description": "Customs brokerage service",
+        "quantity": 1,
+        "unit_price": 350.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-004",
+        "description": "Warehousing - per pallet per day",
+        "quantity": 10,
+        "unit_price": 12.50,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-005",
+        "description": "Insurance (0.5% of declared value)",
+        "quantity": 1,
+        "unit_price": 109.56,
+        "line_total": 109.56
+      }
+    ],
+    "subtotal": 1234.56,
+    "tax": [],
+    "total": 1235.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Hand-written note 'Received' appears in top margin. Header placement may be inconsistent."
+  },
+  {
+    "invoice_id": "P002_INV_20260227_002",
+    "persona_id": "P002",
+    "po_reference": "",
+    "invoice_date": "2026-02-27",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Maple Ave, Portland, OR 97201, USA",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "NexGen Enterprises",
+      "buyer_address": "1234 Commerce Blvd, New York, NY 10001, USA",
+      "buyer_po_contact": "Jane Doe, jane.doe@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-010",
+        "description": "Expedited shipping (air freight)",
+        "quantity": 1,
+        "unit_price": 300.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-011",
+        "description": "Packaging materials (boxes & tape)",
+        "quantity": 5,
+        "unit_price": 30.00,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 450.00,
+    "tax": [],
+    "total": 450.00,
+    "error_injected": "Missing PO reference (must be inferred from delivery note)",
+    "ground_truth_note": "PO reference is missing on invoice. The extractor should infer it from the accompanying delivery note (not provided here). Hand-written note 'Check PO' appears."
+  },
+  {
+    "invoice_id": "P004_INV_20260414_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-14",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "22 Industrial Estate, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "27AABCP1234C1Z5",
+      "buyer_name": "NexGen Enterprises",
+      "buyer_address": "1234 Commerce Blvd, New York, NY 10001, USA",
+      "buyer_po_contact": "Raj Patel, raj.patel@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-1001",
+        "description": "Steel rods (HSN 7214)",
+        "quantity": 100,
+        "unit_price": 150.00,
+        "line_total": 15000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-2002",
+        "description": "Copper wire (HSN 7408)",
+        "quantity": 50,
+        "unit_price": 450.00,
+        "line_total": 22500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-3003",
+        "description": "Aluminium sheets (HSN 7606)",
+        "quantity": 20,
+        "unit_price": 1200.00,
+        "line_total": 24000.00
+      }
+    ],
+    "subtotal": 61500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 5535.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 5535.00
+      }
+    ],
+    "total": 72570.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. PAN: AABCP1234C; GSTIN: 27AABCP1234C1Z5. HSN codes included in line descriptions."
+  },
+  {
+    "invoice_id": "P003_INV_20260312_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-12",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 10, 60327 Frankfurt am Main, Germany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "NexGen Enterprises",
+      "buyer_address": "1234 Commerce Blvd, New York, NY 10001, USA",
+      "buyer_po_contact": "Hans Mueller, h.mueller@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Maschinenschrauben / Machine screws (M10)",
+        "quantity": 500,
+        "unit_price": 0.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Dichtungen / Gaskets (Satz / set)",
+        "quantity": 100,
+        "unit_price": 3.20,
+        "line_total": 320.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Kugellager / Ball bearings (6205)",
+        "quantity": 200,
+        "unit_price": 1.80,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-004",
+        "description": "Hydraulikschläuche / Hydraulic hoses (1m)",
+        "quantity": 50,
+        "unit_price": 12.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-005",
+        "description": "Elektromotor / Electric motor (3 kW)",
+        "quantity": 4,
+        "unit_price": 250.00,
+        "line_total": 1000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-006",
+        "description": "Steuerungseinheit / Control unit (PLC)",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-007",
+        "description": "Schaltschrank / Electrical cabinet (800x600mm)",
+        "quantity": 1,
+        "unit_price": 780.00,
+        "line_total": 780.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-008",
+        "description": "Kabelbinder / Cable ties (100 Stk / pcs)",
+        "quantity": 10,
+        "unit_price": 5.50,
+        "line_total": 55.00
+      }
+    ],
+    "subtotal": 4265.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 4265.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Reverse-charge VAT (19%) applies; tax amount is 0. Bilingual labels (German primary, English secondary). SEPA bank details in vendor address."
+  }
+]
+```

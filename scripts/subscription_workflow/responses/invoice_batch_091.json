@@ -1,0 +1,288 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260419_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-00123",
+    "invoice_date": "2026-04-19",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 10\n60327 Frankfurt am Main\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "Musterstraße 1\n60313 Frankfurt\nGermany",
+      "buyer_po_contact": "Hans Müller / h.mueller@acme.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-HC-100",
+        "description": "Hydraulikzylinder / Hydraulic Cylinder",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-DS-200",
+        "description": "Dichtungssatz / Seal Kit",
+        "quantity": 10,
+        "unit_price": 45.50,
+        "line_total": 455.00
+      }
+    ],
+    "subtotal": 1055.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 200.45
+      }
+    ],
+    "total": 1255.45,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. German VAT at 19% itemized. SEPA bank details included in vendor header (not extracted). Bilingual descriptions. Intra-EU supply with reverse-charge logic not applied (VAT charged as buyer is in Germany)."
+  },
+  {
+    "invoice_id": "P002_INV_20260307_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-00456",
+    "invoice_date": "2026-03-07",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1425 Maple Ave\nSuite 200\nPortland, OR 97201\nUSA",
+      "vendor_tax_id": "XX-XXXXXXX",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1234 Commerce St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Jane Smith / j.smith@acmeprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHP-001",
+        "description": "Freight service - LTL shipment",
+        "quantity": 1,
+        "unit_price": 450.75,
+        "line_total": 450.75
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-WHS-002",
+        "description": "Warehousing storage (pallet/month)",
+        "quantity": 3,
+        "unit_price": 150.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 900.75,
+    "tax": [],
+    "total": 901.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Scanned PDF with hand-written notes in margins (not captured). Header placement inconsistent. Total rounded up to nearest dollar (subtotal 900.75 -> total 901.00)."
+  },
+  {
+    "invoice_id": "P001_INV_20260412_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-00789",
+    "invoice_date": "2026-04-12",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "200 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "XX-XXXXXXX",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1234 Commerce St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Jane Smith / j.smith@acmeprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MCU-001",
+        "description": "Microcontroller unit ATmega328",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SEN-002",
+        "description": "Temperature sensor module",
+        "quantity": 50,
+        "unit_price": 4.20,
+        "line_total": 210.00
+      }
+    ],
+    "subtotal": 460.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 40.25
+      }
+    ],
+    "total": 500.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. Multi-currency capability not used here; tax line itemized for California. Total rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260104_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-00234",
+    "invoice_date": "2026-01-04",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1425 Maple Ave\nSuite 200\nPortland, OR 97201\nUSA",
+      "vendor_tax_id": "XX-XXXXXXX",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1234 Commerce St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Jane Smith / j.smith@acmeprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHP-003",
+        "description": "Expedited freight - overnight",
+        "quantity": 1,
+        "unit_price": 275.00,
+        "line_total": 275.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-WHS-004",
+        "description": "Warehousing storage (pallet/month)",
+        "quantity": 2,
+        "unit_price": 150.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-LAB-001",
+        "description": "Labor - packing and labeling",
+        "quantity": 4,
+        "unit_price": 35.50,
+        "line_total": 142.00
+      }
+    ],
+    "subtotal": 717.00,
+    "tax": [],
+    "total": 717.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Scanned PDF with hand-written notes. Header placement inconsistent. Total rounded to nearest dollar (already integer)."
+  },
+  {
+    "invoice_id": "P005_INV_20260301_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-00567",
+    "invoice_date": "2026-03-01",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista, São Paulo - SP, 01310-100\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1234 Commerce St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Jane Smith / j.smith@acmeprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-RES-001",
+        "description": "Resistor 10kΩ 1/4W (pacote com 100)",
+        "quantity": 10,
+        "unit_price": 5.50,
+        "line_total": 55.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-CAP-002",
+        "description": "Capacitor eletrolítico 100µF 25V",
+        "quantity": 20,
+        "unit_price": 2.30,
+        "line_total": 46.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-DIO-003",
+        "description": "Diodo 1N4148 (pacote com 50)",
+        "quantity": 5,
+        "unit_price": 8.00,
+        "line_total": 40.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-TRA-004",
+        "description": "Transistor BC547 (pacote com 10)",
+        "quantity": 8,
+        "unit_price": 12.00,
+        "line_total": 96.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-CON-005",
+        "description": "Conector USB tipo A fêmea",
+        "quantity": 15,
+        "unit_price": 3.20,
+        "line_total": 48.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-LED-006",
+        "description": "LED vermelho 5mm (pacote com 100)",
+        "quantity": 2,
+        "unit_price": 25.00,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-IND-007",
+        "description": "Indutor 100µH",
+        "quantity": 12,
+        "unit_price": 4.50,
+        "line_total": 54.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-CIR-008",
+        "description": "Circuito integrado LM358",
+        "quantity": 6,
+        "unit_price": 7.80,
+        "line_total": 46.80
+      }
+    ],
+    "subtotal": 435.80,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 78.44
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 43.58
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 7.19
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 33.12
+      }
+    ],
+    "total": 598.13,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from São Paulo Componentes Ltda. NF-e style with multiple tax types (ICMS, IPI, PIS, COFINS). Boleto bancário reference included in payment instructions (not extracted)."
+  }
+]
+```

@@ -1,0 +1,347 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260315_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-15",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Zone, Mumbai, Maharashtra 400001",
+      "vendor_tax_id": "GSTIN: 27AABCB1234C1Z1, PAN: AABCB1234C",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "123 Main St, New York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MM-001",
+        "description": "Steel rods",
+        "quantity": 100,
+        "unit_price": 250.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MM-002",
+        "description": "Copper wire",
+        "quantity": 50,
+        "unit_price": 500.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MM-003",
+        "description": "Aluminum sheets",
+        "quantity": 20,
+        "unit_price": 1000.00,
+        "line_total": 20000.00
+      }
+    ],
+    "subtotal": 70000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 4050.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 4050.00
+      },
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 4500.00
+      }
+    ],
+    "total": 82600.00,
+    "error_injected": "GST_MISROUTING",
+    "ground_truth_note": "Line item 2 (Copper wire) is charged IGST instead of CGST+SGST. All items are intra-state, so should be split 9% each. Extractor should flag the GST allocation error."
+  },
+  {
+    "invoice_id": "P005_INV_20260103_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "03/01/2026",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "123 Main St, New York, NY 10001",
+      "buyer_po_contact": "Maria Silva, maria.silva@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SC-001",
+        "description": "Parafusos (Screws)",
+        "quantity": 1000,
+        "unit_price": 0.50,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SC-002",
+        "description": "Porcas (Nuts)",
+        "quantity": 500,
+        "unit_price": 0.80,
+        "line_total": 400.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SC-003",
+        "description": "Arruelas (Washers)",
+        "quantity": 2000,
+        "unit_price": 0.20,
+        "line_total": 400.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SC-004",
+        "description": "Molas (Springs)",
+        "quantity": 100,
+        "unit_price": 5.00,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SC-005",
+        "description": "Engrenagens (Gears)",
+        "quantity": 50,
+        "unit_price": 20.00,
+        "line_total": 1000.00
+      }
+    ],
+    "subtotal": 2800.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 504.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 140.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 46.20
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 212.80
+      }
+    ],
+    "total": 3703.00,
+    "error_injected": "DATE_FORMAT_DDMMYYYY",
+    "ground_truth_note": "Invoice date is given as '03/01/2026' (dd/mm/yyyy) instead of ISO format. Extractor should parse correctly. Also includes multiple Brazilian taxes and Boleto reference (not shown in JSON)."
+  },
+  {
+    "invoice_id": "P003_INV_20260427_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-11111",
+    "invoice_date": "2026-04-27",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 25, 60327 Frankfurt, Germany",
+      "vendor_tax_id": "VAT: DE123456789",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "45 Rue de Rivoli, 75001 Paris, France",
+      "buyer_po_contact": "Jean Dupont, jean.dupont@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-001",
+        "description": "Schrauben (Screws)",
+        "quantity": 500,
+        "unit_price": 0.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-002",
+        "description": "Muttern (Nuts)",
+        "quantity": 300,
+        "unit_price": 0.80,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-003",
+        "description": "Unterlegscheiben (Washers)",
+        "quantity": 1000,
+        "unit_price": 0.10,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-004",
+        "description": "Federn (Springs)",
+        "quantity": 200,
+        "unit_price": 2.00,
+        "line_total": 400.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-005",
+        "description": "Zahnräder (Gears)",
+        "quantity": 100,
+        "unit_price": 10.00,
+        "line_total": 1000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FI-006",
+        "description": "Kabel (Cables)",
+        "quantity": 1000,
+        "unit_price": 1.50,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FI-007",
+        "description": "Stecker (Plugs)",
+        "quantity": 500,
+        "unit_price": 2.00,
+        "line_total": 1000.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FI-008",
+        "description": "Schalter (Switches)",
+        "quantity": 200,
+        "unit_price": 5.00,
+        "line_total": 1000.00
+      }
+    ],
+    "subtotal": 5490.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 378.10
+      }
+    ],
+    "total": 5868.10,
+    "error_injected": "MISSING_VAT_INTRA_EU",
+    "ground_truth_note": "Intra-EU shipment lines (items 6-8) are missing VAT as per reverse charge rule. Extractor should note that no VAT is applied on these lines. SEPA bank details: IBAN DE89370400440532013000 BIC COBADEFFXXX."
+  },
+  {
+    "invoice_id": "P004_INV_20260426_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-22222",
+    "invoice_date": "2026-04-26",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Zone, Mumbai, Maharashtra 400001",
+      "vendor_tax_id": "GSTIN: 27AABCB1234C1Z1, PAN: AABCB1234C",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "123 Main St, New York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MM-004",
+        "description": "Brass fittings",
+        "quantity": 200,
+        "unit_price": 150.00,
+        "line_total": 30000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MM-005",
+        "description": "Steel pipes",
+        "quantity": 100,
+        "unit_price": 400.00,
+        "line_total": 40000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MM-006",
+        "description": "Aluminum extrusions",
+        "quantity": 50,
+        "unit_price": 800.00,
+        "line_total": 40000.00
+      }
+    ],
+    "subtotal": 110000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 9900.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 9900.00
+      }
+    ],
+    "total": 129800.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with correct GST allocation (CGST+SGST). PAN and GSTIN are present."
+  },
+  {
+    "invoice_id": "P002_INV_20260215_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-33333",
+    "invoice_date": "2026-02-15",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Oak Ave, Portland, OR 97201",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "123 Main St, New York, NY 10001",
+      "buyer_po_contact": "Jane Doe, jane.doe@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-001",
+        "description": "Warehouse storage rental - February",
+        "quantity": 1,
+        "unit_price": 2500.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-002",
+        "description": "Freight handling services",
+        "quantity": 1,
+        "unit_price": 1500.00,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 4000.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0,
+        "amount": 0
+      }
+    ],
+    "total": 4000.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Hand-written 'Thanks!' note appears at bottom of scanned PDF. Header placement is inconsistent (vendor name appears after address). Total is rounded to nearest dollar (already integer)."
+  }
+]
+```

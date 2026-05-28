@@ -1,0 +1,404 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260220_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-20",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Frankfurter Strasse 10, 60329 Frankfurt, Germany\nIBAN: DE89370400440532013000\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "123 Innovation Drive, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-1001",
+        "description": "Hydraulikzylinder / Hydraulic Cylinder",
+        "quantity": 4,
+        "unit_price": 125.50,
+        "line_total": 502.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-1002",
+        "description": "Dichtungssatz / Seal Kit",
+        "quantity": 10,
+        "unit_price": 34.80,
+        "line_total": 348.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-1003",
+        "description": "Steuerventil / Control Valve",
+        "quantity": 2,
+        "unit_price": 489.90,
+        "line_total": 979.80
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-1004",
+        "description": "Filterelement / Filter Element",
+        "quantity": 6,
+        "unit_price": 22.45,
+        "line_total": 134.70
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-1005",
+        "description": "Druckminderer / Pressure Regulator",
+        "quantity": 3,
+        "unit_price": 87.30,
+        "line_total": 261.90
+      }
+    ],
+    "subtotal": 2226.40,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 423.02
+      }
+    ],
+    "total": 2649.42,
+    "error_injected": "Cross-currency edge when buyer is in USD",
+    "ground_truth_note": "Invoice is issued in EUR while buyer operates in USD. The extractor should flag the currency mismatch for conversion. All other fields are correct. VAT is correctly calculated at 19%."
+  },
+  {
+    "invoice_id": "P002_INV_20260406_001",
+    "persona_id": "P002",
+    "po_reference": "See Delivery Note DN-2026-04-001",
+    "invoice_date": "2026-04-06",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Commerce Blvd, Buffalo, NY 14202, USA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "123 Innovation Drive, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Warehouse storage rental – March 2026",
+        "quantity": 1,
+        "unit_price": 3200.00,
+        "line_total": 3200.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Pallet jack rental",
+        "quantity": 3,
+        "unit_price": 145.00,
+        "line_total": 435.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "description": "Shipping supplies – corrugated boxes (100 pcs)",
+        "quantity": 5,
+        "unit_price": 78.50,
+        "line_total": 392.50
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-004",
+        "description": "Packing tape (rolls)",
+        "quantity": 20,
+        "unit_price": 3.25,
+        "line_total": 65.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-005",
+        "description": "Forklift operator labor (hours)",
+        "quantity": 12,
+        "unit_price": 55.00,
+        "line_total": 660.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-006",
+        "description": "Inventory count service",
+        "quantity": 1,
+        "unit_price": 850.00,
+        "line_total": 850.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-007",
+        "description": "Hazardous material handling fee",
+        "quantity": 2,
+        "unit_price": 175.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-008",
+        "description": "Documentation and customs paperwork",
+        "quantity": 1,
+        "unit_price": 220.00,
+        "line_total": 220.00
+      }
+    ],
+    "subtotal": 6172.50,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08,
+        "amount": 493.80
+      }
+    ],
+    "total": 6666.00,
+    "error_injected": "Missing PO reference (must be inferred from delivery note)",
+    "ground_truth_note": "The invoice does not contain a PO number; instead it references a delivery note number. The extractor should infer the PO from the delivery note if possible. The total is rounded to the nearest dollar (6666) due to supplier practice. Handwritten notes may appear on the scanned document."
+  },
+  {
+    "invoice_id": "P005_INV_20260425_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-25",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 100, São Paulo, SP, 01001-000, Brazil\nBoleto: 1234567890",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "123 Innovation Drive, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Resistor 10kΩ (lote 1000)",
+        "quantity": 10,
+        "unit_price": 15.50,
+        "line_total": 155.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Capacitor 100µF (lote 500)",
+        "quantity": 5,
+        "unit_price": 42.30,
+        "line_total": 211.50
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Transistor BC547 (lote 200)",
+        "quantity": 8,
+        "unit_price": 8.90,
+        "line_total": 71.20
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "LED branco 5mm (lote 1000)",
+        "quantity": 20,
+        "unit_price": 3.40,
+        "line_total": 68.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "Conector USB-C (50 unidades)",
+        "quantity": 4,
+        "unit_price": 67.50,
+        "line_total": 270.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-006",
+        "description": "Display OLED 128x64",
+        "quantity": 3,
+        "unit_price": 125.00,
+        "line_total": 375.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-007",
+        "description": "Sensor de temperatura LM35",
+        "quantity": 15,
+        "unit_price": 12.40,
+        "line_total": 186.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-008",
+        "description": "Placa de prototipagem (10 peças)",
+        "quantity": 2,
+        "unit_price": 95.00,
+        "line_total": 190.00
+      }
+    ],
+    "subtotal": 1526.70,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 274.81
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 152.67
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 25.19
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 116.03
+      }
+    ],
+    "total": 2095.40,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "The invoice date is written as 25/04/2026 (dd/mm/yyyy) on the document, which could be misinterpreted as mm/dd/yyyy in US context. The extracted date in JSON is correct ISO format. Multiple Brazilian tax types are included, and a Boleto bancário reference is present."
+  },
+  {
+    "invoice_id": "P004_INV_20260118_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-98765",
+    "invoice_date": "2026-01-18",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCU9603R1ZX, PAN: AABCU9603R",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "123 Innovation Drive, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Laptop Motherboard (HSN: 84713000)",
+        "quantity": 2,
+        "unit_price": 12500.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Power Supply Unit 500W (HSN: 85044030)",
+        "quantity": 5,
+        "unit_price": 3200.00,
+        "line_total": 16000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "RAM 16GB DDR4 (HSN: 84733030)",
+        "quantity": 10,
+        "unit_price": 4500.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "Solid State Drive 512GB (HSN: 84717020)",
+        "quantity": 8,
+        "unit_price": 6200.00,
+        "line_total": 49600.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "Graphics Card (HSN: 84733099)",
+        "quantity": 3,
+        "unit_price": 18500.00,
+        "line_total": 55500.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-006",
+        "description": "Cooling Fan (HSN: 84145990)",
+        "quantity": 15,
+        "unit_price": 850.00,
+        "line_total": 12750.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-007",
+        "description": "Cable Assembly SATA (HSN: 85444220)",
+        "quantity": 25,
+        "unit_price": 180.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-008",
+        "description": "Thermal Paste (HSN: 38249900)",
+        "quantity": 20,
+        "unit_price": 250.00,
+        "line_total": 5000.00
+      }
+    ],
+    "subtotal": 213350.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.0,
+        "amount": 0.0
+      }
+    ],
+    "total": 213350.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with all fields correct. GST is zero-rated for export. HSN codes are included per line (8-digit format). PAN and GSTIN are present in header. Cross-currency to USD is common but invoice is in INR."
+  },
+  {
+    "invoice_id": "P004_INV_20260421_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-21",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCU9603R1ZX, PAN: AABCU9603R",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "123 Innovation Drive, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-009",
+        "description": "Industrial Machinery Component (HSN: 8471.30)",
+        "quantity": 1,
+        "unit_price": 75000.00,
+        "line_total": 75000.00
+      }
+    ],
+    "subtotal": 75000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.0,
+        "amount": 0.0
+      }
+    ],
+    "total": 75000.00,
+    "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+    "ground_truth_note": "The HSN code is presented as '8471.30' (with a dash) instead of the standard 8-digit format '84713000', which may cause parsing issues. The invoice is otherwise clean."
+  }
+]
+```

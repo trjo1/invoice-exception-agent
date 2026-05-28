@@ -1,0 +1,328 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260413_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-13",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India\nPAN: AABCM1234C\nGSTIN: 27AABCM1234C1Z1",
+      "vendor_tax_id": "27AABCM1234C1Z1",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 Acme Plaza, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MC-001",
+        "description": "Resistor 10k Ohm (HSN 8533)",
+        "quantity": 100,
+        "unit_price": 15.50,
+        "line_total": 1550.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MC-002",
+        "description": "Capacitor 100uF (HSN 8532)",
+        "quantity": 50,
+        "unit_price": 22.30,
+        "line_total": 1115.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MC-003",
+        "description": "Connector D-Sub (HSN 8536)",
+        "quantity": 20,
+        "unit_price": 45.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MC-004",
+        "description": "Wire 22AWG (HSN 8544)",
+        "quantity": 500,
+        "unit_price": 2.50,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MC-005",
+        "description": "LED Red (HSN 8541)",
+        "quantity": 200,
+        "unit_price": 3.75,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MC-006",
+        "description": "Transistor NPN (HSN 8541)",
+        "quantity": 80,
+        "unit_price": 8.90,
+        "line_total": 712.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MC-007",
+        "description": "PCB Board (HSN 8534)",
+        "quantity": 10,
+        "unit_price": 120.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MC-008",
+        "description": "Heat Sink (HSN 8473)",
+        "quantity": 30,
+        "unit_price": 18.60,
+        "line_total": 558.00
+      }
+    ],
+    "subtotal": 8035.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0,
+        "amount": 0.00
+      }
+    ],
+    "total": 8035.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. All fields correct. GST is zero-rated for export; IGST line included at 0% as per standard. HSN codes embedded in descriptions."
+  },
+  {
+    "invoice_id": "P003_INV_20260102_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-02",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 10, 60327 Frankfurt, Germany\nIBAN: DE89370400440532013000\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 Acme Plaza, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FB-001",
+        "description": "Kugellager (Ball bearing)",
+        "quantity": 10,
+        "unit_price": 150.00,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FB-002",
+        "description": "Dichtung (Seal)",
+        "quantity": 25,
+        "unit_price": 45.00,
+        "line_total": 1125.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FB-003",
+        "description": "Hydraulikpumpe (Hydraulic pump)",
+        "quantity": 2,
+        "unit_price": 1200.00,
+        "line_total": 2400.00
+      }
+    ],
+    "subtotal": 5025.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 954.75
+      }
+    ],
+    "total": 5979.75,
+    "error_injected": "CROSS_CURRENCY_MISMATCH",
+    "ground_truth_note": "Invoice total is in EUR but buyer's PO is in USD; no exchange rate provided. Additionally, VAT at 19% is charged, but as export to the US it should be zero-rated. The extractor should flag the currency mismatch and the incorrect tax application."
+  },
+  {
+    "invoice_id": "P005_INV_20260328_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-28",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil\nCNPJ: 12.345.678/0001-90\nBoleto: 1234567890",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 Acme Plaza, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-001",
+        "description": "Parafuso (Screw)",
+        "quantity": 500,
+        "unit_price": 0.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-002",
+        "description": "Porca (Nut)",
+        "quantity": 500,
+        "unit_price": 0.30,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-003",
+        "description": "Arruela (Washer)",
+        "quantity": 500,
+        "unit_price": 0.20,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 90.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 25.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 8.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 38.00
+      }
+    ],
+    "total": 661.25,
+    "error_injected": "DATE_FORMAT_NON_ISO",
+    "ground_truth_note": "Invoice date is presented as 28/03/2026 (dd/mm/yyyy) on the document, but the invoice_date field is set to ISO format 2026-03-28. Extractor should correctly parse the date from the scanned document."
+  },
+  {
+    "invoice_id": "P005_INV_20260323_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-12346",
+    "invoice_date": "2026-03-23",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil\nCNPJ: 12.345.678/0001-90\nBoleto: 1234567891",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 Acme Plaza, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-004",
+        "description": "Parafuso (Screw) M8",
+        "quantity": 600,
+        "unit_price": 0.45,
+        "line_total": 270.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-005",
+        "description": "Porca (Nut) M8",
+        "quantity": 600,
+        "unit_price": 0.25,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-006",
+        "description": "Arruela (Washer) M8",
+        "quantity": 600,
+        "unit_price": 0.18,
+        "line_total": 108.00
+      }
+    ],
+    "subtotal": 528.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 95.04
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 26.40
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 8.71
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 40.13
+      }
+    ],
+    "total": 698.28,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. All fields correct. Multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) applied. Boleto reference included in vendor address."
+  },
+  {
+    "invoice_id": "P001_INV_20260302_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-02",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Tech Drive, San Jose, CA 95134, USA\nEIN: 12-3456789",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 Acme Plaza, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-001",
+        "description": "High-performance processor chip",
+        "quantity": 100,
+        "unit_price": 250.00,
+        "line_total": 25000.00
+      }
+    ],
+    "subtotal": 25000.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 1812.50
+      },
+      {
+        "jurisdiction": "US-CA-LOCAL",
+        "rate": 0.005,
+        "amount": 125.00
+      }
+    ],
+    "total": 26937.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Single line item with separate state and local taxes. Totals rounded to two decimals. Buyer is in a different state, but tax is based on vendor location."
+  }
+]
+```

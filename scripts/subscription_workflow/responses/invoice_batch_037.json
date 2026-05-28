@@ -1,0 +1,278 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260406_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-06",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany\nIBAN: DE89370400440532013000\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions GmbH",
+      "buyer_address": "Musterstraße 10, 80333 München, Germany",
+      "buyer_po_contact": "Anna Schmidt, anna.schmidt@globaltech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-1001",
+        "description": "Kugellager (Ball bearing) 6205-2RS",
+        "quantity": 10,
+        "unit_price": 15.50,
+        "line_total": 155.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-1002",
+        "description": "Wellendichtring (Shaft seal) 35x52x7",
+        "quantity": 20,
+        "unit_price": 4.25,
+        "line_total": 85.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-1003",
+        "description": "Zahnriemen (Timing belt) HTD 8M-30",
+        "quantity": 5,
+        "unit_price": 22.00,
+        "line_total": 110.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-1004",
+        "description": "Gleitlager (Plain bearing) 20x30x10",
+        "quantity": 15,
+        "unit_price": 6.80,
+        "line_total": 102.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-1005",
+        "description": "Dichtungssatz (Seal kit) für Hydraulikzylinder",
+        "quantity": 2,
+        "unit_price": 45.00,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FI-1006",
+        "description": "Elektromotor (Electric motor) 0.75 kW",
+        "quantity": 1,
+        "unit_price": 320.00,
+        "line_total": 320.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FI-1007",
+        "description": "Kupplung (Coupling) elastisch, Größe 28",
+        "quantity": 3,
+        "unit_price": 18.50,
+        "line_total": 55.50
+      },
+      {
+        "line_no": 8,
+        "sku": "FI-1008",
+        "description": "Hydraulikschlauch (Hydraulic hose) DN10, 1m",
+        "quantity": 25,
+        "unit_price": 3.20,
+        "line_total": 80.00
+      }
+    ],
+    "subtotal": 997.50,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 189.53
+      }
+    ],
+    "total": 1187.03,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with German VAT 19%. Extractor should extract all fields correctly."
+  },
+  {
+    "invoice_id": "P003_INV_20260228_002",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-28",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany\nIBAN: DE89370400440532013000\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions GmbH",
+      "buyer_address": "Musterstraße 10, 80333 München, Germany",
+      "buyer_po_contact": "Anna Schmidt, anna.schmidt@globaltech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-2001",
+        "description": "Druckminderer (Pressure regulator) 0-10 bar",
+        "quantity": 4,
+        "unit_price": 67.50,
+        "line_total": 270.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-2002",
+        "description": "Manometer (Pressure gauge) 0-16 bar",
+        "quantity": 6,
+        "unit_price": 22.00,
+        "line_total": 132.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-2003",
+        "description": "Kugelhahn (Ball valve) DN25",
+        "quantity": 10,
+        "unit_price": 14.80,
+        "line_total": 148.00
+      }
+    ],
+    "subtotal": 550.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 104.50
+      }
+    ],
+    "total": 654.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with German VAT 19%. Extractor should extract all fields correctly."
+  },
+  {
+    "invoice_id": "P003_INV_20260403_003",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-11111",
+    "invoice_date": "2026-04-03",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany\nIBAN: DE89370400440532013000\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroParts SAS",
+      "buyer_address": "12 Rue de la Paix, 75002 Paris, France",
+      "buyer_po_contact": "Jean Dupont, jean.dupont@europarts.fr"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-3001",
+        "description": "Getriebemotor (Gear motor) i=10",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-3002",
+        "description": "Frequenzumrichter (Variable frequency drive) 1.5 kW",
+        "quantity": 1,
+        "unit_price": 780.00,
+        "line_total": 780.00
+      }
+    ],
+    "subtotal": 1680.00,
+    "tax": [],
+    "total": 1680.00,
+    "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers",
+    "ground_truth_note": "No VAT applied as this is an intra-EU supply to a French buyer (reverse charge). Extractor should detect missing VAT line."
+  },
+  {
+    "invoice_id": "P003_INV_20260125_004",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-22222",
+    "invoice_date": "2026-01-25",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany\nIBAN: DE89370400440532013000\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Romeo S.p.A.",
+      "buyer_address": "Via Roma 100, 00100 Roma, Italy",
+      "buyer_po_contact": "Marco Rossi, marco.rossi@romeospa.it"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-4001",
+        "description": "Hydraulikpumpe (Hydraulic pump) 10cc",
+        "quantity": 1,
+        "unit_price": 1250.00,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-4002",
+        "description": "Filter (Filter) 10µm",
+        "quantity": 5,
+        "unit_price": 35.00,
+        "line_total": 175.00
+      }
+    ],
+    "subtotal": 1425.00,
+    "tax": [],
+    "total": 1425.00,
+    "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers",
+    "ground_truth_note": "No VAT applied as this is an intra-EU supply to an Italian buyer (reverse charge). Extractor should detect missing VAT line."
+  },
+  {
+    "invoice_id": "P004_INV_20260113_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-13",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCU9603R1ZJ, PAN: AABCU9603R",
+      "buyer_name": "TechCorp India Pvt Ltd",
+      "buyer_address": "456 Electronic City, Bengaluru 560100, Karnataka, India",
+      "buyer_po_contact": "Ravi Sharma, ravi.sharma@techcorp.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MM-5001",
+        "description": "Stainless steel rods (HSN 7214) 316 grade, 10mm dia",
+        "quantity": 100,
+        "unit_price": 250.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MM-5002",
+        "description": "Aluminium sheets (HSN 7606) 2mm thick",
+        "quantity": 50,
+        "unit_price": 400.00,
+        "line_total": 20000.00
+      }
+    ],
+    "subtotal": 45000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 4050.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 4050.00
+      }
+    ],
+    "total": 53100.00,
+    "error_injected": "GST percentage misrouted between IGST and CGST/SGST",
+    "ground_truth_note": "GST misrouted: inter-state supply to Karnataka should have IGST 18%, but invoice shows CGST 9% and SGST 9%. Extractor should flag jurisdiction error."
+  }
+]
+```

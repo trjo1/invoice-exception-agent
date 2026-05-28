@@ -1,0 +1,268 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260321_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-00012",
+    "invoice_date": "2026-03-21",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "AutoTech AG",
+      "buyer_address": "Musterstraße 10, 10115 Berlin, Deutschland",
+      "buyer_po_contact": "Hans Müller, hans.mueller@autotech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-1001",
+        "description": "Hydraulikpumpe (Hydraulic Pump)",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-2003",
+        "description": "Dichtungssatz (Seal Kit)",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-3012",
+        "description": "Filterelement (Filter Element)",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 1950.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 370.50
+      }
+    ],
+    "total": 2320.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should capture all line items, apply 19% VAT, and note SEPA bank details (not shown in schema)."
+  },
+  {
+    "invoice_id": "P005_INV_20260106_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-00045",
+    "invoice_date": "2026-01-06",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1500, São Paulo, SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Montadora ABC Ltda.",
+      "buyer_address": "Rodovia Anhanguera, km 15, Campinas, SP, 13000-000, Brasil",
+      "buyer_po_contact": "Carlos Silva, carlos.silva@montadoraabc.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-0101",
+        "description": "Parafuso de fixação M8 (M8 Fixing Bolt)",
+        "quantity": 500,
+        "unit_price": 1.50,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-0202",
+        "description": "Porca sextavada M8 (M8 Hex Nut)",
+        "quantity": 500,
+        "unit_price": 0.80,
+        "line_total": 400.00
+      }
+    ],
+    "subtotal": 1150.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 207.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 115.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 18.98
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 87.40
+      }
+    ],
+    "total": 1578.38,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Deliberate error: multiple tax types (ICMS, IPI, PIS, COFINS) included to simulate NF-e complexity. Extractor should parse all tax lines and sum correctly; boleto bancário reference omitted."
+  },
+  {
+    "invoice_id": "P003_INV_20260420_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-00067",
+    "invoice_date": "2026-04-20",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "AutoTech AG",
+      "buyer_address": "Musterstraße 10, 10115 Berlin, Deutschland",
+      "buyer_po_contact": "Hans Müller, hans.mueller@autotech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-4015",
+        "description": "Elektromotor 5kW (Electric Motor 5kW)",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-5021",
+        "description": "Steuerungseinheit (Control Unit)",
+        "quantity": 3,
+        "unit_price": 350.00,
+        "line_total": 1050.00
+      }
+    ],
+    "subtotal": 2250.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 427.50
+      }
+    ],
+    "total": 2677.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should capture line items, apply 19% VAT, and note SEPA bank details."
+  },
+  {
+    "invoice_id": "P001_INV_20260228_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-00034",
+    "invoice_date": "2026-02-28",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Innovation Drive, Sunnyvale, CA 94089, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "AeroSpace Corp.",
+      "buyer_address": "456 Aviation Blvd, Seattle, WA 98101, USA",
+      "buyer_po_contact": "Sarah Johnson, sarah.johnson@aerospacecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Titanium Alloy Sheet (Grade 5)",
+        "quantity": 10,
+        "unit_price": 250.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2003",
+        "description": "Precision Ball Bearings (Set of 10)",
+        "quantity": 5,
+        "unit_price": 180.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3015",
+        "description": "Hydraulic Actuator",
+        "quantity": 2,
+        "unit_price": 750.00,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 4900.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 428.75
+      }
+    ],
+    "total": 5328.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should capture line items, apply CA sales tax, and round totals to 2 decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260127_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-00089",
+    "invoice_date": "2026-01-27",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "789 Maple Street, Portland, OR 97201, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "RetailCo LLC",
+      "buyer_address": "321 Main Street, Suite 200, Portland, OR 97204, USA",
+      "buyer_po_contact": "John Doe, john.doe@retailco.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Warehouse Storage Racks (Set of 4)",
+        "quantity": 3,
+        "unit_price": 350.00,
+        "line_total": 1050.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Pallet Jack (Manual)",
+        "quantity": 2,
+        "unit_price": 275.00,
+        "line_total": 550.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "description": "Shipping Labels (Roll of 500)",
+        "quantity": 10,
+        "unit_price": 25.00,
+        "line_total": 250.00
+      }
+    ],
+    "subtotal": 1850.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.0,
+        "amount": 0.00
+      }
+    ],
+    "total": 1850.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should capture line items, note zero tax for Oregon, and round totals up to nearest dollar (here 1850.00 already integer)."
+  }
+]
+```

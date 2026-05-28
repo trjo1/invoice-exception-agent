@@ -1,0 +1,121 @@
+# Golden test case GTC-010
+# Scenario: PO in USD, invoice in EUR; FX rate variance > 2% vs system rate.
+# Expected: HITL Tier 2; validate FX rate; flag variance if > 2%.
+
+id: GTC-010
+title: Cross-currency invoice with FX variance
+exception_category: cross_currency_mismatch
+difficulty: medium
+created: 2026-05-10
+notes: |
+  Cross-currency anchor. PO authorized in USD; supplier invoiced in EUR
+  (typical for EU vendors selling to US buyers). Agent must convert,
+  compare to PO authorization at current FX, and flag if variance > 2%.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-10T09:00:00Z
+      payload:
+        po_id: PO-2026-04-00701
+        vendor_id: P003   # Frankfurt Industriebedarf, EU
+        line_items:
+          - sku: SKU-D556
+            description: Pneumatic actuator, ISO 6432
+            quantity: 50
+            unit_price_usd: 78.00
+            line_total_usd: 3900.00
+        currency: USD
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-04-22T14:00:00Z
+      payload:
+        po_id: PO-2026-04-00701
+        gr_id: GR-2026-04-01122
+        line_items:
+          - sku: SKU-D556
+            quantity_received: 50
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-04-25T11:00:00Z
+      payload:
+        from: ap@frankfurt-industriebedarf.example.de
+        invoice_attachment: P003_INV_2026-04-25_001.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P003_INV_2026-04-25_001.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-04-25-FFM-002
+        po_reference: PO-2026-04-00701
+        vendor_id: P003
+        line_items:
+          - sku: SKU-D556
+            quantity: 50
+            unit_price_eur: 75.40
+            line_total_eur: 3770.00
+        subtotal_eur: 3770.00
+        tax:
+          - jurisdiction: EU-DE-VAT-REVERSE-CHARGE
+            rate: 0.00
+            amount: 0.00
+            note: "Reverse charge — intra-EU export to non-EU buyer"
+        total_eur: 3770.00
+        currency: EUR
+        terms: NET-30
+        ground_truth_note: |
+          PO USD 3,900.00 = (assumed FX 1.07 USD/EUR) EUR 3,644.86.
+          Invoice EUR 3,770.00 = (assumed FX 1.07) USD 4,033.90.
+          USD variance: $4,033.90 vs $3,900.00 = +3.4% (over 2% threshold).
+
+      system_fx_rate_usd_per_eur: 1.07
+
+expected:
+  classification:
+    class_label: cross_currency_mismatch
+    min_confidence: 0.80
+    must_contain_evidence:
+      - po_currency_usd
+      - invoice_currency_eur
+      - fx_variance_calculation
+      - variance_above_2_percent
+
+  recommendation:
+    action: approve_pending_review
+    rationale_must_mention:
+      - cross-currency variance
+      - PO USD $3,900.00
+      - invoice EUR €3,770.00
+      - converts to ~USD $4,033.90
+      - 3.4% variance vs PO
+      - review FX assumption
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: ap_clerk
+    must_include_in_payload:
+      - the_extraction
+      - the_fx_rate_used
+      - the_variance_calculation
+
+  drafting:
+    must_produce_draft: false   # internal review only; no supplier comm
+
+  execution:
+    must_not_post_invoice_before_approval: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.40
+
+pass_criteria:
+  - classification.class_label == cross_currency_mismatch
+  - recommendation.action == approve_pending_review
+  - hitl.tier == 2
+  - execution.invoice_posted == false
+  - "recommendation.rationale.contains('FX') or recommendation.rationale.contains('currency')"

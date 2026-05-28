@@ -1,0 +1,313 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260210_001",
+    "persona_id": "P002",
+    "po_reference": "DN-2026-02-10-001",
+    "invoice_date": "2026-02-10",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Industrial Blvd, Suite 200\nPortland, OR 97201\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, Floor 85\nNew York, NY 10007\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SKU-1001",
+        "description": "Pallet of corrugated boxes (500 pcs)",
+        "quantity": 5,
+        "unit_price": 100.00,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-SKU-1002",
+        "description": "Roll of stretch wrap (2000 ft)",
+        "quantity": 10,
+        "unit_price": 50.00,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-SKU-1003",
+        "description": "Shipping labels (1000 per roll)",
+        "quantity": 2,
+        "unit_price": 25.00,
+        "line_total": 50.00
+      }
+    ],
+    "subtotal": 1050,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.08,
+        "amount": 84
+      }
+    ],
+    "total": 1134,
+    "error_injected": "Missing PO reference",
+    "ground_truth_note": "The invoice lacks a PO reference; the extractor should identify the delivery note number DN-2026-02-10-001 and infer the PO from it. Additionally, note the handwritten 'Received' stamp and the total rounded to nearest dollar."
+  },
+  {
+    "invoice_id": "P003_INV_20260117_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-00123",
+    "invoice_date": "2026-01-17",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH (Frankfurt Industrial Supply Ltd.)",
+      "vendor_address": "Industriestraße 10\n60329 Frankfurt am Main\nGermany\nSEPA: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Procurement GmbH",
+      "buyer_address": "Berliner Allee 50\n10117 Berlin\nGermany",
+      "buyer_po_contact": "Hans Müller, hans.mueller@globalproc.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-SKU-2001",
+        "description": "Hydraulikzylinder / Hydraulic cylinder (Model HZ-100)",
+        "quantity": 3,
+        "unit_price": 450.00,
+        "line_total": 1350.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-SKU-2002",
+        "description": "Dichtungssatz / Seal kit (SK-200)",
+        "quantity": 10,
+        "unit_price": 85.00,
+        "line_total": 850.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-SKU-2003",
+        "description": "Schmierfett / Lubricating grease (5 kg can)",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      }
+    ],
+    "subtotal": 2800.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 532.00
+      }
+    ],
+    "total": 3332.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice; all fields present. Note the bilingual vendor name and SEPA bank details in vendor address. VAT at 19% correctly applied."
+  },
+  {
+    "invoice_id": "P005_INV_20260210_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-00123",
+    "invoice_date": "2026-02-10",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo - SP, 01310-100\nBrasil\nBoleto: 34191.23456 67891.234567 12345.123456 1 12345678901234",
+      "vendor_tax_id": "12.345.678/0001-99",
+      "buyer_name": "Global Procurement Ltda.",
+      "buyer_address": "Rua Augusta, 500\nSão Paulo - SP, 01304-001\nBrasil",
+      "buyer_po_contact": "Maria Silva, maria.silva@globalproc.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-SKU-3001",
+        "description": "Parafusos M10 x 50mm (caixa com 100)",
+        "quantity": 20,
+        "unit_price": 12.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-SKU-3002",
+        "description": "Molas de compressão (pacote com 50)",
+        "quantity": 15,
+        "unit_price": 33.00,
+        "line_total": 495.00
+      }
+    ],
+    "subtotal": 745.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 134.10
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 74.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 12.29
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 56.62
+      }
+    ],
+    "total": 1022.51,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with NF-e format. Multiple taxes (ICMS, IPI, PIS, COFINS) itemized. Boleto bancário reference included in vendor address."
+  },
+  {
+    "invoice_id": "P004_INV_20260201_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-00123",
+    "invoice_date": "2026-02-01",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 45, MIDC Industrial Area\nAndheri East, Mumbai - 400093\nMaharashtra, India",
+      "vendor_tax_id": "GSTIN: 27AAAAA1234A1Z5\nPAN: AAAAA1234A",
+      "buyer_name": "Global Procurement India Pvt. Ltd.",
+      "buyer_address": "Bandra Kurla Complex, Bandra East\nMumbai - 400051\nMaharashtra, India",
+      "buyer_po_contact": "Raj Patel, raj.patel@globalproc.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MM-SKU-4001",
+        "description": "Steel rods 12mm dia (HSN 7214.20) - 1000 kg",
+        "quantity": 1000,
+        "unit_price": 65.00,
+        "line_total": 65000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MM-SKU-4002",
+        "description": "Aluminum sheets 2mm (HSN 7606.12) - 500 kg",
+        "quantity": 500,
+        "unit_price": 180.00,
+        "line_total": 90000.00
+      }
+    ],
+    "subtotal": 155000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 27900.00
+      }
+    ],
+    "total": 182900.00,
+    "error_injected": "GST percentage misrouted between IGST and CGST/SGST",
+    "ground_truth_note": "GST error: transaction is domestic (Maharashtra to Maharashtra) but IGST is applied instead of CGST+SGST. Extractor should flag the jurisdiction mismatch. HSN codes included in line descriptions. PAN and GSTIN present."
+  },
+  {
+    "invoice_id": "P001_INV_20260421_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-00123",
+    "invoice_date": "2026-04-21",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Drive\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, Floor 85\nNew York, NY 10007\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-SKU-5001",
+        "description": "Microcontroller ATmega328P (qty 1000)",
+        "quantity": 1000,
+        "unit_price": 2.50,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SKU-5002",
+        "description": "Resistor kit 1/4W (500 values)",
+        "quantity": 10,
+        "unit_price": 35.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-SKU-5003",
+        "description": "Capacitor ceramic set (100 pcs)",
+        "quantity": 5,
+        "unit_price": 12.00,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-SKU-5004",
+        "description": "PCB prototype board (10x10 cm) - 50 pcs",
+        "quantity": 50,
+        "unit_price": 8.50,
+        "line_total": 425.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-SKU-5005",
+        "description": "LED RGB strip 5m (EUR 25 @ 1.10 = USD 27.50)",
+        "quantity": 20,
+        "unit_price": 27.50,
+        "line_total": 550.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-SKU-5006",
+        "description": "Heat sink aluminum (100x50mm) - 200 pcs",
+        "quantity": 200,
+        "unit_price": 1.75,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-SKU-5007",
+        "description": "Connector header 40-pin (qty 500)",
+        "quantity": 5,
+        "unit_price": 22.00,
+        "line_total": 110.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-SKU-5008",
+        "description": "Breadboard 830 points (qty 30)",
+        "quantity": 30,
+        "unit_price": 6.00,
+        "line_total": 180.00
+      }
+    ],
+    "subtotal": 4525.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 328.06
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08875,
+        "amount": 401.59
+      }
+    ],
+    "total": 5254.65,
+    "error_injected": "Multi-page invoice",
+    "ground_truth_note": "Multi-page invoice: line items 1-4 on page 1, line items 5-8 on page 2. One line item includes a currency conversion note (EUR to USD). Tax line itemized for CA and NY. All totals rounded to 2 decimals."
+  }
+]
+```

@@ -1,0 +1,354 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260130_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "30/01/2026",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua dos Eletrônicos, 1000, São Paulo, SP, 01000-000, Brasil",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "1234 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Maria Santos, maria.santos@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-RES-100K",
+        "description": "Resistor 100kΩ 1/4W (Resistor 100kΩ 1/4W)",
+        "quantity": 1000,
+        "unit_price": 0.05,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-CAP-10UF",
+        "description": "Capacitor Eletrolítico 10µF 25V (Electrolytic Capacitor 10µF 25V)",
+        "quantity": 500,
+        "unit_price": 0.15,
+        "line_total": 75.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-CON-DB9",
+        "description": "Conector DB9 Fêmea (DB9 Female Connector)",
+        "quantity": 200,
+        "unit_price": 1.20,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-LED-RED",
+        "description": "LED Vermelho 5mm (Red LED 5mm)",
+        "quantity": 2000,
+        "unit_price": 0.02,
+        "line_total": 40.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-TRAN-2N2222",
+        "description": "Transistor NPN 2N2222 (NPN Transistor 2N2222)",
+        "quantity": 300,
+        "unit_price": 0.35,
+        "line_total": 105.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-IC-555",
+        "description": "CI Timer 555 (Timer IC 555)",
+        "quantity": 100,
+        "unit_price": 0.80,
+        "line_total": 80.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-POT-10K",
+        "description": "Potenciômetro Linear 10kΩ (Linear Potentiometer 10kΩ)",
+        "quantity": 150,
+        "unit_price": 0.60,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-FUSE-1A",
+        "description": "Fusível 1A 250V (Fuse 1A 250V)",
+        "quantity": 500,
+        "unit_price": 0.10,
+        "line_total": 50.00
+      }
+    ],
+    "subtotal": 730.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 131.40
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 73.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 12.05
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 55.48
+      }
+    ],
+    "total": 1001.93,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "Invoice date appears as '30/01/2026' (dd/mm/yyyy) instead of ISO 2026-01-30. Extractor should detect and correct date format. Taxes include ICMS, IPI, PIS, COFINS. Boleto bancário reference not included in JSON but present in document."
+  },
+  {
+    "invoice_id": "P002_INV_20260426_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-67890",
+    "invoice_date": "2026-04-26",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Oak Street, Suite 200, Portland, OR 97201, USA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "1234 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Maria Santos, maria.santos@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRT-001",
+        "description": "Freight charge for shipment #78945",
+        "quantity": 1,
+        "unit_price": 1250.00,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-FSC-002",
+        "description": "Fuel surcharge (8%)",
+        "quantity": 1,
+        "unit_price": 100.00,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 1350.00,
+    "tax": [],
+    "total": 1350.00,
+    "error_injected": "Tax line sometimes absent for in-state shipments",
+    "ground_truth_note": "Tax line is missing because this is an in-state shipment. Extractor should not expect a tax line. Total is rounded up to the nearest dollar (already integer). Hand-written notes may appear on scanned document."
+  },
+  {
+    "invoice_id": "P003_INV_20260315_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-11111",
+    "invoice_date": "2026-03-15",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 50, 60327 Frankfurt, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "1234 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Maria Santos, maria.santos@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-SCH-001",
+        "description": "M6 Schraube (M6 screw) / M6 screw",
+        "quantity": 500,
+        "unit_price": 0.10,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-MUT-002",
+        "description": "M6 Mutter (M6 nut) / M6 nut",
+        "quantity": 500,
+        "unit_price": 0.08,
+        "line_total": 40.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-SCH-003",
+        "description": "M8 Schraube (M8 screw) / M8 screw",
+        "quantity": 300,
+        "unit_price": 0.15,
+        "line_total": 45.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-UNS-004",
+        "description": "Unterlegscheibe M8 (M8 washer) / M8 washer",
+        "quantity": 1000,
+        "unit_price": 0.05,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-BOL-005",
+        "description": "Bolzen M10 (M10 bolt) / M10 bolt",
+        "quantity": 200,
+        "unit_price": 0.25,
+        "line_total": 50.00
+      }
+    ],
+    "subtotal": 235.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 44.65
+      }
+    ],
+    "total": 279.65,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with 19% VAT. Bilingual descriptions. SEPA bank details included in document."
+  },
+  {
+    "invoice_id": "P004_INV_20260410_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-22222",
+    "invoice_date": "2026-04-10",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot No. 7, MIDC Industrial Area, Mumbai, Maharashtra 400001, India",
+      "vendor_tax_id": "22AAAAA0000A1Z5",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "1234 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Maria Santos, maria.santos@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-STL-001",
+        "description": "Steel rods (HSN 7214) - 12mm dia",
+        "quantity": 100,
+        "unit_price": 250.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-CHM-002",
+        "description": "Sodium Hydroxide (HSN 2815) - 99% purity",
+        "quantity": 50,
+        "unit_price": 800.00,
+        "line_total": 40000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-BOL-003",
+        "description": "Hex bolts (HSN 7318) - M16",
+        "quantity": 500,
+        "unit_price": 15.00,
+        "line_total": 7500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-PIP-004",
+        "description": "PVC pipe (HSN 3917) - 2 inch",
+        "quantity": 200,
+        "unit_price": 120.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-WIR-005",
+        "description": "Copper wire (HSN 7408) - 1mm",
+        "quantity": 300,
+        "unit_price": 90.00,
+        "line_total": 27000.00
+      }
+    ],
+    "subtotal": 123500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 11115.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 11115.00
+      }
+    ],
+    "total": 145730.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with GST (CGST+SGST) at 9% each. HSN codes included per line. PAN and GSTIN present in header."
+  },
+  {
+    "invoice_id": "P005_INV_20260121_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-33333",
+    "invoice_date": "2026-01-21",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua dos Eletrônicos, 1000, São Paulo, SP, 01000-000, Brasil",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "GlobalTech Solutions",
+      "buyer_address": "1234 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Maria Santos, maria.santos@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-CAB-USB",
+        "description": "Cabo USB 2.0 Tipo A-B 1m (USB 2.0 A-B Cable 1m)",
+        "quantity": 100,
+        "unit_price": 3.50,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-SEN-TEMP",
+        "description": "Sensor de Temperatura LM35 (Temperature Sensor LM35)",
+        "quantity": 50,
+        "unit_price": 2.80,
+        "line_total": 140.00
+      }
+    ],
+    "subtotal": 490.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 88.20
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 49.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 8.09
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 37.24
+      }
+    ],
+    "total": 672.53,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with correct ISO date. Taxes include ICMS, IPI, PIS, COFINS. Boleto bancário referenced in document."
+  }
+]
+```

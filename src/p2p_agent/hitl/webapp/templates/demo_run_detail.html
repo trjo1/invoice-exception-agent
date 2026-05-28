@@ -1,0 +1,1059 @@
+{% extends "base.html" %}
+{% block title %}{{ run.uploaded_filename }}{% endblock %}
+{% block content %}
+
+<p style="margin-bottom:8px"><a href="/demo">← back to upload</a> · <a href="/demo/runs">all runs</a></p>
+
+<h2 style="margin-bottom:4px">{{ run.uploaded_filename }}</h2>
+<p class="meta" style="color:var(--muted)">
+  uploaded {{ run.uploaded_at.strftime('%Y-%m-%d %H:%M UTC') if run.uploaded_at else '' }}
+  {% if run.completed_at %}· completed {{ run.completed_at.strftime('%H:%M:%S') }}{% endif %}
+  · pipeline ran in {{ (run.latency_ms or 0) // 1000 }}s
+  · run id <code>{{ run.id[:12] }}</code>
+  · <a href="/demo/run/{{ run.id }}/pdf">download original PDF</a>
+</p>
+
+{% if run.status == 'failed' %}
+<div class="card" style="border-color:var(--red); background:#fde8e6">
+  <h3 style="color:var(--red)">Run failed</h3>
+  <pre style="white-space:pre-wrap">{{ run.error_message }}</pre>
+</div>
+{% endif %}
+
+{% if run.status == 'completed' %}
+
+{# ============================================================
+   Helper macros for compact rendering
+   ============================================================ #}
+{% macro fmt_money(amount, currency) %}
+  {%- if amount is not none -%}
+    {%- if currency -%}{{ currency }} {% endif -%}
+    {{ "{:,.2f}".format(amount|float) }}
+  {%- else -%}—{%- endif -%}
+{% endmacro %}
+
+{% macro yesno(value, yes_label="✓", no_label="—") %}
+  {%- if value -%}<span style="color:var(--green); font-weight:600">{{ yes_label }}</span>
+  {%- else -%}<span style="color:var(--muted)">{{ no_label }}</span>{%- endif -%}
+{% endmacro %}
+
+{# Map role/team slugs to human-readable names. #}
+{% macro humanize_role(slug) %}
+  {%- if slug == 'buyer' -%}AP buyer team
+  {%- elif slug == 'vendor_master_team' -%}Vendor master / onboarding team
+  {%- elif slug == 'vp_finance' -%}VP Finance
+  {%- elif slug == 'ap_fraud_team' -%}AP Fraud Investigation team
+  {%- elif slug == 'treasury' -%}Treasury team
+  {%- elif slug == 'ap_supervisor' -%}AP Supervisor
+  {%- elif slug == 'procurement' -%}Procurement team
+  {%- elif slug == 'ap_team' -%}AP team
+  {%- elif slug == 'none' -%}No human — auto-pass
+  {%- else -%}{{ slug }}
+  {%- endif -%}
+{% endmacro %}
+
+{# Plain-English explanation of what each RecommendedAction does next. #}
+{% macro action_explanation(action) %}
+  {%- if action == 'auto_resolve' -%}Approve and post the invoice to SAP. No human review needed.
+  {%- elif action == 'approve_pending_review' -%}Quick sanity-check before posting; nothing to fix, just a second pair of eyes.
+  {%- elif action == 'request_supplier_credit_memo' -%}Email the supplier asking them to issue a credit memo for the over-billed amount. Hold the invoice until the credit memo arrives.
+  {%- elif action == 'request_supplier_correction' -%}Email the supplier asking them to reissue the invoice with the field corrected. Hold the current one until the corrected version comes in.
+  {%- elif action == 'request_missing_po_from_supplier' -%}Email the supplier asking for the correct PO reference so we can match the invoice to a PO.
+  {%- elif action == 'request_po_amendment' -%}Open a ticket for procurement to amend the PO so the invoice can post against it.
+  {%- elif action == 'route_to_vendor_master_onboarding' -%}Pause payment and route to the vendor master team to onboard this supplier before any invoice posts.
+  {%- elif action == 'route_to_vp_finance_approval' -%}Get VP Finance sign-off before posting — the spend is above the original PO authorization.
+  {%- elif action == 'escalate_to_buyer_for_short_delivery' -%}Buyer needs to confirm what was actually received before we pay against a partial shipment.
+  {%- elif action == 'escalate_to_buyer_for_retroactive_po' -%}Goods received without a PO. Buyer decides whether to create a retroactive PO or reject the invoice.
+  {%- elif action == 'escalate_to_fraud' -%}Halt payment immediately and page the AP fraud team to investigate the duplicate / suspicious pattern.
+  {%- elif action == 'halt_require_supervisor' -%}Halt payment and have an AP supervisor review the case before any further action.
+  {%- elif action == 'escalate_for_fx_review' -%}Pause payment for Treasury to confirm the FX rate that should apply.
+  {%- elif action == 'notify_buyer_of_supplier_delay' -%}Notify the buyer's procurement liaison about the supplier's reported delay. No invoice action needed yet.
+  {%- elif action == 'hold_for_goods_receipt' -%}Hold the invoice and re-check in 7 days — once the warehouse posts the goods receipt, the case re-runs through 3-way match.
+  {%- else -%}Route to manual review for a non-standard case.
+  {%- endif -%}
+{% endmacro %}
+
+{# Lines with price/qty/total variance between invoice and PO/GR.
+   Returns a list of {line_no, sku, ...} dicts for use by the finding card. #}
+{% macro line_variances(extraction, po, gr) %}
+  {# We return data via inline rendering in the finding card; macro kept for parity. #}
+{% endmacro %}
+
+<!-- ============= Summary banner ============= -->
+<div class="card" style="background:var(--soft); border-color:#c4d3e6;">
+  <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:center;">
+    <div>
+      <div class="label" style="font-size:11px; color:var(--muted); text-transform:uppercase">Classification</div>
+      <div style="font-weight:600; color:var(--navy); margin-top:2px">{{ classification.class_label }}</div>
+    </div>
+    <div>
+      <div class="label" style="font-size:11px; color:var(--muted); text-transform:uppercase">Action</div>
+      <div style="font-weight:600; color:var(--navy); margin-top:2px">{{ recommendation.action if recommendation else '—' }}</div>
+    </div>
+    <div>
+      <div class="label" style="font-size:11px; color:var(--muted); text-transform:uppercase">Tier</div>
+      <div style="margin-top:2px">
+        {% if routing_decision %}<span class="chip t{{ routing_decision.tier }}">T{{ routing_decision.tier }}</span>{% else %}—{% endif %}
+      </div>
+    </div>
+    <div>
+      <div class="label" style="font-size:11px; color:var(--muted); text-transform:uppercase">Routed to</div>
+      <div style="margin-top:2px">
+        {% if routing_decision %}<span class="chip">{{ routing_decision.routed_to }}</span>{% else %}—{% endif %}
+      </div>
+    </div>
+    <div>
+      <div class="label" style="font-size:11px; color:var(--muted); text-transform:uppercase">In queue?</div>
+      <div style="margin-top:2px">
+        {% if run.hitl_item_id %}
+        <a href="/item/{{ run.hitl_item_id }}" style="font-weight:600">→ review in queue</a>
+        {% else %}
+        <span style="color:var(--green); font-weight:600">auto-pass (Tier 1)</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{# ============================================================
+   THE FINDING — plain-English summary of what the agent found
+   and what should happen next. This is the single most important
+   card on the page: it answers "what's wrong + why + who acts"
+   in 30 seconds without expecting the reader to know the enum
+   values or the data model.
+   ============================================================ #}
+{% set cat = classification.class_label %}
+{% set po = case_context.po_record if case_context else None %}
+{% set gr = case_context.goods_receipt if case_context else None %}
+{% set v = case_context.vendor_record if case_context else None %}
+{% set pps = case_context.po_payment_status if case_context else None %}
+{% set vc = case_context.vendor_recent_changes if case_context else [] %}
+{% set priors_supp = case_context.prior_invoices_same_supplier_number if case_context else [] %}
+{% set priors_po = case_context.prior_invoices_same_po if case_context else [] %}
+
+{# Severity color of the left border. #}
+{% if cat == 'none' %}
+  {% set sev_color = 'var(--green)' %}
+{% elif cat in ('fraud_signal',) or (recommendation and recommendation.action in ('escalate_to_fraud','halt_require_supervisor')) %}
+  {% set sev_color = 'var(--red)' %}
+{% else %}
+  {% set sev_color = '#B8860B' %}
+{% endif %}
+
+<div class="card finding-card" style="border-left:5px solid {{ sev_color }}; padding:18px 20px;">
+  <h3 style="margin:0 0 4px; font-size:17px">
+    {% if cat == 'none' %}
+      No exception — clean 3-way match
+    {% elif cat == 'three_way_match_price_variance' %}
+      Invoice unit price doesn't match the PO
+    {% elif cat == 'three_way_match_quantity_variance' %}
+      Invoice quantity doesn't match what was received
+    {% elif cat == 'missing_po' %}
+      No valid PO reference on this invoice
+    {% elif cat == 'missing_goods_receipt' %}
+      Invoice arrived before the goods receipt
+    {% elif cat == 'missing_approval' %}
+      Approver chain on the PO is incomplete
+    {% elif cat == 'duplicate_invoice' %}
+      Duplicate invoice — we've seen this one before
+    {% elif cat == 'fraud_signal' %}
+      Fraud signal — suspicious pattern detected
+    {% elif cat == 'vendor_master_gap' %}
+      Supplier is not in the vendor master file
+    {% elif cat == 'cross_currency_mismatch' %}
+      Invoice currency doesn't match the PO
+    {% elif cat == 'tax_field_mismatch' %}
+      Tax breakdown on the invoice is wrong or missing
+    {% elif cat == 'payment_term_mismatch' %}
+      Payment terms on the invoice don't match the PO
+    {% elif cat == 'other' %}
+      Non-standard case
+    {% else %}
+      {{ cat }}
+    {% endif %}
+  </h3>
+  <p style="margin:0 0 14px; color:var(--muted); font-size:12.5px">
+    Agent confidence: <strong>{{ "%.0f"|format((classification.confidence or 0) * 100) }}%</strong>
+    {% if recommendation %} · Action confidence: <strong>{{ "%.0f"|format((recommendation.confidence or 0) * 100) }}%</strong>{% endif %}
+  </p>
+
+  {# ----------- THE FINDING — specific values that differ ----------- #}
+  <div style="margin-bottom:14px">
+    <div style="text-transform:uppercase; font-size:11px; letter-spacing:0.5px; color:var(--muted); font-weight:700; margin-bottom:6px">
+      What we found
+    </div>
+
+    {% if cat == 'payment_term_mismatch' %}
+      <p style="margin:4px 0">The supplier billed on different terms than the PO authorized.</p>
+      <table style="max-width:520px">
+        <thead><tr><th>Source</th><th>Payment terms</th></tr></thead>
+        <tbody>
+          <tr><td>Invoice</td><td><strong style="color:var(--red)">{{ extraction.payment_terms or '(not specified)' }}</strong></td></tr>
+          <tr><td>PO {% if po %}<code>{{ po.id }}</code>{% endif %}</td><td><strong>{{ po.payment_terms if po else '—' }}</strong></td></tr>
+        </tbody>
+      </table>
+      <p style="margin:6px 0 0; font-size:12.5px; color:var(--muted)">
+        The PO is the contractual source of truth. The supplier needs to reissue the invoice using
+        the agreed terms before AP can pay it.
+      </p>
+
+    {% elif cat == 'cross_currency_mismatch' %}
+      <p style="margin:4px 0">The invoice was billed in a different currency than the PO authorized.</p>
+      <table style="max-width:520px">
+        <thead><tr><th>Source</th><th>Currency</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Invoice</td><td><strong style="color:var(--red)">{{ extraction.currency or '—' }}</strong></td><td>{{ fmt_money(extraction.total, extraction.currency) }}</td></tr>
+          <tr><td>PO {% if po %}<code>{{ po.id }}</code>{% endif %}</td><td><strong>{{ po.currency if po else '—' }}</strong></td><td>{{ fmt_money(po.total_authorized, po.currency) if po else '—' }}</td></tr>
+        </tbody>
+      </table>
+      <p style="margin:6px 0 0; font-size:12.5px; color:var(--muted)">
+        Either the PO needs an FX clause that covers this rate, or Treasury needs to confirm the conversion
+        before AP can post.
+      </p>
+
+    {% elif cat == 'three_way_match_price_variance' %}
+      <p style="margin:4px 0">The invoice billed at different unit prices than the PO authorized.</p>
+      {% if po and po.line_items and extraction.line_items %}
+        {% set po_by_line = {} %}
+        {% for pl in po.line_items %}{% set _ = po_by_line.update({pl.line_no: pl}) %}{% endfor %}
+        <table>
+          <thead><tr><th>Line</th><th>SKU</th><th>Invoice unit price</th><th>PO unit price</th><th>Variance</th></tr></thead>
+          <tbody>
+          {% for il in extraction.line_items %}
+            {% set pl = po_by_line.get(il.line_no) %}
+            {% if pl and (il.unit_price|float - pl.unit_price|float)|abs > 0.01 %}
+            <tr>
+              <td>{{ il.line_no }}</td>
+              <td><code>{{ il.sku }}</code></td>
+              <td><strong style="color:var(--red)">{{ fmt_money(il.unit_price, extraction.currency) }}</strong></td>
+              <td>{{ fmt_money(pl.unit_price, po.currency) }}</td>
+              <td><strong>{{ "%+.2f"|format(il.unit_price|float - pl.unit_price|float) }}</strong> ({{ "%+.0f%%"|format(100.0 * (il.unit_price|float - pl.unit_price|float) / pl.unit_price|float) }})</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+    {% elif cat == 'three_way_match_quantity_variance' %}
+      <p style="margin:4px 0">The invoice quantity doesn't match what the warehouse received.</p>
+      {% if gr and gr.line_items and extraction.line_items %}
+        {% set gr_by_line = {} %}
+        {% for gl in gr.line_items %}{% set _ = gr_by_line.update({gl.line_no: gl}) %}{% endfor %}
+        <table>
+          <thead><tr><th>Line</th><th>SKU</th><th>Invoice qty</th><th>Received qty (GR)</th><th>Variance</th></tr></thead>
+          <tbody>
+          {% for il in extraction.line_items %}
+            {% set gl = gr_by_line.get(il.line_no) %}
+            {% if gl and (il.quantity|float != gl.quantity_received|float) %}
+            <tr>
+              <td>{{ il.line_no }}</td><td><code>{{ il.sku }}</code></td>
+              <td><strong style="color:var(--red)">{{ il.quantity }}</strong></td>
+              <td>{{ gl.quantity_received }}</td>
+              <td><strong>{{ "%+.0f"|format(il.quantity|float - gl.quantity_received|float) }}</strong></td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+    {% elif cat == 'missing_po' %}
+      <p style="margin:4px 0">
+        {% if extraction.po_reference %}
+          The invoice references PO <code>{{ extraction.po_reference }}</code>, but that PO was
+          <strong style="color:var(--red)">not found</strong> in the master file. Either the supplier
+          mis-typed it, or no PO was ever created for this purchase.
+        {% else %}
+          The invoice has <strong style="color:var(--red)">no PO reference at all</strong> printed on it.
+          Without a PO we can't authorize the spend.
+        {% endif %}
+      </p>
+
+    {% elif cat == 'missing_goods_receipt' %}
+      <p style="margin:4px 0">
+        We have a valid PO (<code>{{ po.id if po else extraction.po_reference }}</code>) but the warehouse
+        has not yet posted a goods receipt for it. Paying an invoice before receiving the goods would
+        violate 3-way match.
+      </p>
+
+    {% elif cat == 'missing_approval' %}
+      <p style="margin:4px 0">
+        {% if po and po.approver_chain %}
+          The PO requires {{ po.approver_chain|length }}-step approval; some signers are still missing.
+          Until the chain completes, AP shouldn't post the invoice.
+        {% else %}
+          The PO's approver chain is incomplete or empty. Spend authorization is unconfirmed.
+        {% endif %}
+      </p>
+      {% if po and po.approver_chain %}
+        <table style="max-width:520px">
+          <thead><tr><th>Role</th><th>Name</th><th>Approved?</th></tr></thead>
+          <tbody>
+          {% for a in po.approver_chain %}
+            <tr>
+              <td>{{ a.role }}</td><td>{{ a.name }}</td>
+              <td>{% if a.approved %}<span style="color:var(--green); font-weight:600">✓ {{ a.approved_at or 'yes' }}</span>{% else %}<strong style="color:var(--red)">missing</strong>{% endif %}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+    {% elif cat == 'duplicate_invoice' %}
+      <p style="margin:4px 0">
+        We've already seen an invoice with this supplier invoice number on this PO. Paying it again
+        would double-pay the supplier.
+      </p>
+      {% if priors_supp %}
+        <table>
+          <thead><tr><th>Prior invoice</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody>
+          {% for p in priors_supp %}
+            <tr>
+              <td><code>{{ p.invoice_id }}</code></td>
+              <td>{{ p.invoice_date or '—' }}</td>
+              <td>{{ fmt_money(p.total, p.currency) }}</td>
+              <td><strong>{{ p.status }}</strong></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% elif pps and pps.total_paid is not none and pps.total_authorized and pps.total_paid >= pps.total_authorized * 0.999 %}
+        <p style="margin:6px 0 0">PO is already fully paid ({{ fmt_money(pps.total_paid, po.currency if po else None) }} of {{ fmt_money(pps.total_authorized, po.currency if po else None) }} authorized). Any new invoice on this PO is suspicious.</p>
+      {% endif %}
+
+    {% elif cat == 'fraud_signal' %}
+      <p style="margin:4px 0">A pattern matching one of our fraud-watch triggers fired on this case.</p>
+      {% if vc %}
+        <p style="margin:6px 0 4px"><strong>Recent vendor master change:</strong></p>
+        <table style="max-width:600px">
+          <thead><tr><th>Field changed</th><th>When</th><th>Note</th></tr></thead>
+          <tbody>
+          {% for c in vc %}
+            <tr><td><code>{{ c.field }}</code></td><td>{{ c.changed_on }}</td><td>{{ c.note or '—' }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        <p style="margin:6px 0 0; font-size:12.5px; color:var(--muted)">
+          A bank-account change immediately before a high-value invoice is the classic vendor-impersonation pattern.
+        </p>
+      {% endif %}
+      {% if priors_po|length >= 3 and po and po.total_authorized %}
+        {% set cumulative = priors_po|sum(attribute='total') %}
+        <p style="margin:6px 0 0">
+          <strong>Split-invoice pattern:</strong> {{ priors_po|length }} prior invoices on this PO totaling
+          {{ fmt_money(cumulative, po.currency) }} — that's
+          <strong>{{ "%.0f"|format(100.0 * cumulative / po.total_authorized) }}% of the {{ fmt_money(po.total_authorized, po.currency) }} authorization</strong>.
+          A new invoice here approaches a split-invoice fraud signature.
+        </p>
+      {% endif %}
+
+    {% elif cat == 'vendor_master_gap' %}
+      <p style="margin:4px 0">
+        Supplier <strong>{{ extraction.header_fields.vendor_name if extraction.header_fields else '—' }}</strong>
+        (tax ID <code>{{ extraction.header_fields.vendor_tax_id if extraction.header_fields else '—' }}</code>)
+        was not found in the vendor master file. Until they're onboarded, we can't run the standard
+        payment + tax + compliance checks against them.
+      </p>
+
+    {% elif cat == 'tax_field_mismatch' %}
+      <p style="margin:4px 0">
+        The tax breakdown on the invoice doesn't match what the buyer's tax rules expect for
+        {% if v %}a supplier in <strong>{{ v.country }}</strong>{% else %}this vendor{% endif %}.
+        {% if not extraction.tax %}
+          The invoice has <strong style="color:var(--red)">no tax line at all</strong>.
+        {% else %}
+          The tax line(s) are present but the jurisdiction codes or rates don't match the expected pattern
+          (e.g., India invoices need CGST + SGST split; EU cross-border needs reverse-charge note).
+        {% endif %}
+      </p>
+      {% if extraction.tax %}
+        <table style="max-width:520px">
+          <thead><tr><th>Jurisdiction</th><th>Rate</th><th>Amount</th></tr></thead>
+          <tbody>
+          {% for t in extraction.tax %}
+            <tr><td><code>{{ t.jurisdiction or '(empty)' }}</code></td><td>{{ "%.4f"|format(t.rate|float) if t.rate is not none else '—' }}</td><td>{{ fmt_money(t.amount, extraction.currency) }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+    {% elif cat == 'none' %}
+      <p style="margin:4px 0">
+        Invoice matches its PO and goods receipt cleanly. No actionable cross-case signal fired.
+        {% if v %}Supplier <strong>{{ v.name }}</strong> is active in the master ({{ v.tier }} tier, sanctions check passed).{% endif %}
+        {% if po %}PO <code>{{ po.id }}</code> is open with {{ fmt_money(po.total_authorized, po.currency) }} authorized.{% endif %}
+      </p>
+
+    {% else %}
+      <p style="margin:4px 0">{{ classification.rationale }}</p>
+    {% endif %}
+  </div>
+
+  {# ----------- WHAT HAPPENS NEXT — action + owner in plain English ----------- #}
+  <div style="margin-top:14px; padding-top:14px; border-top:1px solid #eef1f6">
+    <div style="text-transform:uppercase; font-size:11px; letter-spacing:0.5px; color:var(--muted); font-weight:700; margin-bottom:6px">
+      What needs to happen next
+    </div>
+    {% if recommendation %}
+      <p style="margin:4px 0; font-size:14px">{{ action_explanation(recommendation.action) }}</p>
+      <p style="margin:6px 0 0; font-size:12.5px">
+        <strong>Owner:</strong> {{ humanize_role(routing_decision.routed_to) if routing_decision else '—' }}
+        {% if routing_decision %}<span class="chip t{{ routing_decision.tier }}" style="margin-left:6px">Tier {{ routing_decision.tier }}</span>{% endif %}
+        {% if run.hitl_item_id %}
+          · <a href="/item/{{ run.hitl_item_id }}" style="font-weight:600">→ review in queue</a>
+        {% elif cat == 'none' %}
+          · auto-passed (no human review needed)
+        {% endif %}
+      </p>
+    {% else %}
+      <p style="color:var(--muted); margin:4px 0">No recommendation produced for this case.</p>
+    {% endif %}
+  </div>
+
+  {# ----------- Smart signals (collapsed by default) ----------- #}
+  {% if signals %}
+  <details style="margin-top:14px">
+    <summary style="cursor:pointer; font-size:12px; color:var(--muted)">
+      Show smart signals the lookups fired (raw)
+    </summary>
+    <div style="margin-top:8px; display:flex; flex-wrap:wrap; gap:6px;">
+      {% for sig in signals %}
+        {% if 'DUPLICATE' in sig or 'SPLIT WATCH' in sig or 'ALREADY FULLY PAID' in sig or 'VENDOR CHANGED' in sig %}
+          <span class="chip status-rejected" style="font-size:11.5px; padding:3px 8px;">{{ sig }}</span>
+        {% elif 'NOT in master' in sig or 'NOT found' in sig or 'no goods receipt' in sig %}
+          <span class="chip" style="font-size:11.5px; padding:3px 8px; background:#fff7e6; color:#9a6c00; border-color:#f3e1a8;">{{ sig }}</span>
+        {% else %}
+          <span class="chip" style="font-size:11.5px; padding:3px 8px;">{{ sig }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </details>
+  {% endif %}
+</div>
+
+<!-- ============= Per-step timeline ============= -->
+{% if steps %}
+<div class="card">
+  <h3>Pipeline timeline</h3>
+  <table>
+    <thead><tr><th>Step</th><th>Latency</th><th>Status</th></tr></thead>
+    <tbody>
+      {% for s in steps %}
+      <tr>
+        <td>{{ loop.index }}. {{ s.name }}</td>
+        <td>{{ s.latency_ms }} ms</td>
+        <td>
+          {% if s.status == 'skipped' %}
+            <span class="chip" style="background:#f2f4f8;color:var(--muted)">skipped</span>
+            {% if s.skip_reason %}<span style="color:var(--muted); font-size:11px; margin-left:6px">{{ s.skip_reason }}</span>{% endif %}
+          {% elif s.status == 'error' %}
+            <span class="chip status-rejected">error</span>
+          {% else %}
+            <span class="chip status-approved">ok</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{# ============================================================
+   3-WAY MATCH COMPARISON — Invoice vs PO vs GR side-by-side
+   The classic AP-clerk view. Only render when there's something
+   to compare (PO record present).
+   ============================================================ #}
+{% if case_context and case_context.po_record %}
+{% set po = case_context.po_record %}
+{% set gr = case_context.goods_receipt %}
+<div class="card" style="border-left:4px solid var(--green)">
+  <h3>3-way match — Invoice vs PO vs Goods Receipt</h3>
+  <p class="meta" style="color:var(--muted); margin-top:-2px">
+    Side-by-side comparison of the three sources of truth. Variance in any row is what drives
+    three-way-match exceptions.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Invoice (extracted)</th>
+        <th>PO (master)</th>
+        <th>GR (warehouse)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Reference</strong></td>
+        <td>{{ extraction.invoice_id or '—' }}</td>
+        <td>{{ po.id or '—' }}</td>
+        <td>{{ gr.id if gr else '—' }}</td>
+      </tr>
+      <tr>
+        <td><strong>Currency</strong></td>
+        <td>
+          {{ extraction.currency or '—' }}
+          {% if po.currency and extraction.currency and po.currency != extraction.currency %}
+          <span class="chip status-rejected" style="font-size:10px; margin-left:6px;">mismatch</span>
+          {% endif %}
+        </td>
+        <td>{{ po.currency or '—' }}</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Invoice total / PO authorization</strong></td>
+        <td>{{ fmt_money(extraction.total, extraction.currency) }}</td>
+        <td>
+          {{ fmt_money(po.total_authorized, po.currency) }}
+          {% set inv = (extraction.total|float) if extraction.total else 0.0 %}
+          {% set auth = (po.total_authorized|float) if po.total_authorized else 0.0 %}
+          {% set already = (case_context.po_payment_status.total_invoiced|float) if (case_context.po_payment_status and case_context.po_payment_status.total_invoiced) else 0.0 %}
+          {% set remaining = auth - already %}
+          {% if auth > 0 and inv > 0 %}
+            {% if inv > remaining + 0.01 %}
+              <span class="chip status-rejected" style="font-size:10px; margin-left:6px;">
+                over PO remaining ({{ fmt_money(remaining, po.currency) }} left)
+              </span>
+            {% elif inv > auth + 0.01 %}
+              <span class="chip status-rejected" style="font-size:10px; margin-left:6px;">
+                exceeds total authorization
+              </span>
+            {% else %}
+              <span class="chip" style="font-size:10px; margin-left:6px; background:#eef9f0; color:var(--green); border-color:#c4e6cd;">
+                {{ "{:.0f}".format(100.0 * inv / auth) }}% of PO authorization
+                {% if already > 0 %} · {{ fmt_money(already, po.currency) }} prior{% endif %}
+              </span>
+            {% endif %}
+          {% endif %}
+        </td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Payment terms</strong></td>
+        <td>
+          {{ extraction.payment_terms or '—' }}
+          {% if po.payment_terms and extraction.payment_terms and po.payment_terms != extraction.payment_terms %}
+          <span class="chip status-rejected" style="font-size:10px; margin-left:6px;">mismatch</span>
+          {% endif %}
+        </td>
+        <td>{{ po.payment_terms or '—' }}</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>PO status</strong></td>
+        <td>—</td>
+        <td>
+          <span class="chip">{{ po.status }}</span>
+          {% if po.is_emergency %}<span class="chip status-pending" style="margin-left:4px;">emergency</span>{% endif %}
+        </td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Line count</strong></td>
+        <td>{{ extraction.line_items|length if extraction.line_items else 0 }}</td>
+        <td>{{ po.line_items|length if po.line_items else 0 }}</td>
+        <td>{{ gr.line_items|length if gr and gr.line_items else 0 }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  {# Per-line breakdown — Invoice line × PO line × GR line — only if any has line items #}
+  {% if extraction.line_items or po.line_items or (gr and gr.line_items) %}
+  <details style="margin-top:10px">
+    <summary><strong>Line-level breakdown</strong> — match each invoice line against PO authorization and GR received</summary>
+    <table style="margin-top:8px">
+      <thead>
+        <tr>
+          <th>Line</th><th>SKU</th>
+          <th>Inv qty</th><th>PO auth qty</th><th>GR received qty</th>
+          <th>Inv unit price</th><th>PO unit price</th>
+          <th>Inv line total</th><th>PO line total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set po_by_line = {} %}
+        {% for pl in (po.line_items or []) %}{% set _ = po_by_line.update({pl.line_no: pl}) %}{% endfor %}
+        {% set gr_by_line = {} %}
+        {% if gr %}{% for gl in (gr.line_items or []) %}{% set _ = gr_by_line.update({gl.line_no: gl}) %}{% endfor %}{% endif %}
+        {% for il in (extraction.line_items or []) %}
+        {% set pl = po_by_line.get(il.line_no) %}
+        {% set gl = gr_by_line.get(il.line_no) %}
+        <tr>
+          <td>{{ il.line_no }}</td>
+          <td><code>{{ il.sku or '—' }}</code></td>
+          <td>{{ il.quantity }}</td>
+          <td>{{ pl.quantity_authorized if pl else '—' }}</td>
+          <td>{{ gl.quantity_received if gl else '—' }}</td>
+          <td>{{ fmt_money(il.unit_price, extraction.currency) }}</td>
+          <td>{{ fmt_money(pl.unit_price, po.currency) if pl else '—' }}</td>
+          <td>{{ fmt_money(il.line_total, extraction.currency) }}</td>
+          <td>{{ fmt_money(pl.line_total, po.currency) if pl else '—' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </details>
+  {% endif %}
+</div>
+{% endif %}
+
+<!-- ============= Step 1: extraction ============= -->
+<div class="card">
+  <h3>1. Extract — what the PDF says</h3>
+  <p class="meta" style="color:var(--muted)">
+    Reads the PDF text and produces structured fields. The original is downloadable above.
+  </p>
+  <table>
+    <tbody>
+      <tr><td><strong>Invoice ID</strong></td><td><code>{{ extraction.invoice_id or '—' }}</code></td></tr>
+      <tr><td><strong>PO reference</strong></td><td><code>{{ extraction.po_reference or '—' }}</code></td></tr>
+      <tr><td><strong>Invoice date</strong></td><td>{{ extraction.invoice_date or '—' }}</td></tr>
+      <tr><td><strong>Currency</strong></td><td>{{ extraction.currency or '—' }}</td></tr>
+      <tr><td><strong>Subtotal</strong></td><td>{{ fmt_money(extraction.subtotal, extraction.currency) }}</td></tr>
+      <tr><td><strong>Total</strong></td><td>{{ fmt_money(extraction.total, extraction.currency) }}</td></tr>
+      <tr><td><strong>Payment terms</strong></td><td>{{ extraction.payment_terms or '—' }}</td></tr>
+      {% if extraction.header_fields %}
+        <tr><td><strong>Vendor</strong></td><td>{{ extraction.header_fields.vendor_name or '—' }}</td></tr>
+        <tr><td><strong>Vendor tax ID</strong></td><td><code>{{ extraction.header_fields.vendor_tax_id or '—' }}</code></td></tr>
+        <tr><td><strong>Vendor address</strong></td><td style="font-size:12px; white-space:pre-line">{{ extraction.header_fields.vendor_address or '—' }}</td></tr>
+        <tr><td><strong>Buyer</strong></td><td>{{ extraction.header_fields.buyer_name or '—' }}</td></tr>
+        <tr><td><strong>Buyer PO contact</strong></td><td>{{ extraction.header_fields.buyer_po_contact or '—' }}</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+
+  {% if extraction.line_items %}
+  <h4 style="margin-top:14px; color:var(--navy)">Invoice line items ({{ extraction.line_items|length }})</h4>
+  <table>
+    <thead><tr><th>#</th><th>SKU</th><th>Description</th><th>Qty</th><th>Unit price</th><th>Line total</th></tr></thead>
+    <tbody>
+      {% for li in extraction.line_items %}
+      <tr>
+        <td>{{ li.line_no }}</td>
+        <td><code>{{ li.sku or '—' }}</code></td>
+        <td style="font-size:12px">{{ li.description or '—' }}</td>
+        <td>{{ li.quantity }}</td>
+        <td>{{ fmt_money(li.unit_price, extraction.currency) }}</td>
+        <td>{{ fmt_money(li.line_total, extraction.currency) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if extraction.tax %}
+  <h4 style="margin-top:14px; color:var(--navy)">Tax lines ({{ extraction.tax|length }})</h4>
+  <table>
+    <thead><tr><th>Jurisdiction</th><th>Rate</th><th>Amount</th></tr></thead>
+    <tbody>
+      {% for t in extraction.tax %}
+      <tr>
+        <td><code>{{ t.jurisdiction or '—' }}</code></td>
+        <td>{{ "%.4f"|format(t.rate|float) if t.rate is not none else '—' }}</td>
+        <td>{{ fmt_money(t.amount, extraction.currency) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  <details style="margin-top:10px"><summary>Raw extracted JSON</summary><pre>{{ extraction | pretty_json }}</pre></details>
+</div>
+
+{# ============================================================
+   2. CROSS-CASE CONTEXT — what the lookups returned
+   Now expanded into multiple sub-cards so each entity is
+   independently readable.
+   ============================================================ #}
+{% if case_context %}
+
+{# ---- 2a. PO record full detail ---- #}
+{% if case_context.po_record %}
+{% set po = case_context.po_record %}
+<div class="card">
+  <h3>2a. PO master — what was authorized</h3>
+  <p class="meta" style="color:var(--muted)">
+    Pulled from the PO master lookup. This is the buyer-side source of truth
+    that the invoice has to match for a clean three-way match.
+  </p>
+  <table>
+    <tbody>
+      <tr><td><strong>PO ID</strong></td><td><code>{{ po.id }}</code></td></tr>
+      <tr><td><strong>Vendor ID</strong></td><td><code>{{ po.vendor_id }}</code></td></tr>
+      <tr><td><strong>Total authorized</strong></td><td>{{ fmt_money(po.total_authorized, po.currency) }}</td></tr>
+      <tr><td><strong>Currency</strong></td><td>{{ po.currency }}</td></tr>
+      <tr><td><strong>Payment terms</strong></td><td>{{ po.payment_terms or '—' }}</td></tr>
+      <tr><td><strong>Status</strong></td><td><span class="chip">{{ po.status }}</span></td></tr>
+      <tr><td><strong>Created</strong></td><td>{{ po.created_date or '—' }}</td></tr>
+      <tr><td><strong>Department</strong></td><td>{{ po.department or '—' }}</td></tr>
+      <tr><td><strong>Emergency PO?</strong></td><td>{{ yesno(po.is_emergency) }}</td></tr>
+      <tr><td><strong>FX clause</strong></td><td>{{ po.fx_clause }}{% if po.fx_rate %} (fixed @ {{ po.fx_rate }}){% endif %}</td></tr>
+      <tr><td><strong>Lines authorized</strong></td><td>{{ po.line_items|length if po.line_items else 0 }}</td></tr>
+    </tbody>
+  </table>
+
+  {% if po.approver_chain %}
+  <h4 style="margin-top:14px; color:var(--navy)">Approver chain</h4>
+  <table>
+    <thead><tr><th>Role</th><th>Name</th><th>Approved?</th><th>When</th></tr></thead>
+    <tbody>
+      {% for a in po.approver_chain %}
+      <tr>
+        <td>{{ a.role }}</td>
+        <td>{{ a.name }}</td>
+        <td>{{ yesno(a.approved) }}</td>
+        <td>{{ a.approved_at or '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if po.line_items %}
+  <details style="margin-top:10px">
+    <summary><strong>PO line items ({{ po.line_items|length }})</strong></summary>
+    <table style="margin-top:8px">
+      <thead><tr><th>#</th><th>SKU</th><th>Description</th><th>Qty authorized</th><th>Unit price</th><th>Line total</th></tr></thead>
+      <tbody>
+        {% for pl in po.line_items %}
+        <tr>
+          <td>{{ pl.line_no }}</td>
+          <td><code>{{ pl.sku or '—' }}</code></td>
+          <td style="font-size:12px">{{ pl.description or '—' }}</td>
+          <td>{{ pl.quantity_authorized }}</td>
+          <td>{{ fmt_money(pl.unit_price, po.currency) }}</td>
+          <td>{{ fmt_money(pl.line_total, po.currency) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </details>
+  {% endif %}
+</div>
+{% else %}
+<div class="card" style="border-left:4px solid var(--red); background:#fff7e6">
+  <h3>2a. PO master — not found</h3>
+  <p class="meta">
+    No PO record matched the invoice's <code>{{ extraction.po_reference or '(empty)' }}</code> reference.
+    This is the trigger for <strong>missing_po</strong>.
+  </p>
+</div>
+{% endif %}
+
+{# ---- 2b. Goods receipt detail ---- #}
+{% if case_context.goods_receipt %}
+{% set gr = case_context.goods_receipt %}
+<div class="card">
+  <h3>2b. Goods receipt — what was actually delivered</h3>
+  <p class="meta" style="color:var(--muted)">
+    The third leg of the 3-way match. Confirms what physically arrived at the warehouse.
+  </p>
+  <table>
+    <tbody>
+      <tr><td><strong>GR ID</strong></td><td><code>{{ gr.id }}</code></td></tr>
+      <tr><td><strong>Linked PO</strong></td><td><code>{{ gr.po_id }}</code></td></tr>
+      <tr><td><strong>Receipt date</strong></td><td>{{ gr.receipt_date or '—' }}</td></tr>
+      <tr><td><strong>Warehouse</strong></td><td>{{ gr.warehouse or '—' }}</td></tr>
+      <tr><td><strong>Received by</strong></td><td>{{ gr.receiver or '—' }}</td></tr>
+      <tr><td><strong>Lines received</strong></td><td>{{ gr.line_items|length if gr.line_items else 0 }}</td></tr>
+    </tbody>
+  </table>
+  {% if gr.line_items %}
+  <details style="margin-top:10px">
+    <summary><strong>GR line items ({{ gr.line_items|length }})</strong></summary>
+    <table style="margin-top:8px">
+      <thead><tr><th>#</th><th>SKU</th><th>Qty received</th></tr></thead>
+      <tbody>
+        {% for gl in gr.line_items %}
+        <tr><td>{{ gl.line_no }}</td><td><code>{{ gl.sku or '—' }}</code></td><td>{{ gl.quantity_received }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </details>
+  {% endif %}
+</div>
+{% else %}
+<div class="card" style="background:#fff7e6; border-left:4px solid #9a6c00">
+  <h3>2b. Goods receipt — none on file</h3>
+  <p class="meta">
+    The PO has not yet been receipted in the warehouse system.
+    This is the trigger for <strong>missing_goods_receipt</strong> — typically resolved by holding the invoice
+    until the GR posts.
+  </p>
+</div>
+{% endif %}
+
+{# ---- 2c. Vendor master detail ---- #}
+{% if case_context.vendor_record %}
+{% set v = case_context.vendor_record %}
+<div class="card">
+  <h3>2c. Vendor master — who's billing us</h3>
+  <p class="meta" style="color:var(--muted)">
+    The vendor's record in our master file. Sanctions and tier flags drive fraud screening + approval routing.
+  </p>
+  <table>
+    <tbody>
+      <tr><td><strong>Vendor ID</strong></td><td><code>{{ v.id }}</code></td></tr>
+      <tr><td><strong>Name</strong></td><td>{{ v.name }}</td></tr>
+      <tr><td><strong>Tax ID</strong></td><td><code>{{ v.tax_id or '—' }}</code></td></tr>
+      <tr><td><strong>Country</strong></td><td>{{ v.country or '—' }}</td></tr>
+      <tr><td><strong>Tier</strong></td>
+          <td><span class="chip{% if v.tier == 'strategic' %} status-approved{% elif v.tier == 'new' %} status-pending{% endif %}">{{ v.tier }}</span></td></tr>
+      <tr><td><strong>Contract type</strong></td><td>{{ v.contract_type }}</td></tr>
+      <tr><td><strong>Status</strong></td>
+          <td>
+            <span class="chip{% if v.status == 'active' %} status-approved{% elif v.status == 'blocked' %} status-rejected{% endif %}">{{ v.status }}</span>
+          </td></tr>
+      <tr><td><strong>Sanctions check</strong></td>
+          <td>{{ yesno(v.sanctions_check_passed, "passed", "FAILED") }}</td></tr>
+      <tr><td><strong>Bank acct (last 4)</strong></td><td><code>•••• {{ v.bank_account_last4 or '—' }}</code></td></tr>
+      <tr><td><strong>Onboarded</strong></td><td>{{ v.onboarding_date or '—' }}</td></tr>
+      {% if v.sbe_classification %}<tr><td><strong>SBE classification</strong></td><td>{{ v.sbe_classification }}</td></tr>{% endif %}
+      {% if v.phi_access %}<tr><td><strong>PHI access</strong></td><td>{{ yesno(v.phi_access, "yes") }}</td></tr>{% endif %}
+      {% if v.notes %}<tr><td><strong>Notes</strong></td><td style="font-size:12px">{{ v.notes }}</td></tr>{% endif %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="card" style="border-left:4px solid var(--red); background:#fff7e6">
+  <h3>2c. Vendor master — not in file</h3>
+  <p class="meta">
+    Supplier name / tax ID didn't match any active vendor record. This is the trigger for
+    <strong>vendor_master_gap</strong>. Could be onboarding lag or a fraudulent supplier — vendor master team
+    investigates before payment.
+  </p>
+</div>
+{% endif %}
+
+{# ---- 2d. PO payment status ---- #}
+{% if case_context.po_payment_status %}
+{% set pps = case_context.po_payment_status %}
+<div class="card">
+  <h3>2d. PO payment status — what we've already paid</h3>
+  <p class="meta" style="color:var(--muted)">
+    Aggregated across all invoices booked against this PO.
+    "Fully paid" + a new invoice = strong duplicate signal.
+  </p>
+  <table>
+    <tbody>
+      <tr><td><strong>Total authorized</strong></td><td>{{ fmt_money(pps.total_authorized, po.currency if po else None) }}</td></tr>
+      <tr><td><strong>Total invoiced (incl. priors)</strong></td><td>{{ fmt_money(pps.total_invoiced, po.currency if po else None) }}</td></tr>
+      <tr><td><strong>Total paid</strong></td><td>{{ fmt_money(pps.total_paid, po.currency if po else None) }}</td></tr>
+      <tr><td><strong>Invoices booked</strong></td><td>{{ pps.n_invoices }}</td></tr>
+      <tr><td><strong>Last payment</strong></td><td>{{ pps.last_payment_date or '—' }}</td></tr>
+      <tr>
+        <td><strong>Fully paid?</strong></td>
+        <td>
+          {% if pps.total_paid is not none and pps.total_authorized and pps.total_paid >= pps.total_authorized * 0.999 %}
+            <span class="chip status-rejected">YES — new invoice is suspicious</span>
+          {% else %}
+            <span class="chip status-approved">no, still room on the PO</span>
+          {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{# ---- 2e. Prior invoices — same supplier number (duplicate watch) ---- #}
+{% if case_context.prior_invoices_same_supplier_number %}
+<div class="card">
+  <h3>2e. Prior invoices with the same supplier invoice number</h3>
+  <p class="meta" style="color:var(--muted)">
+    Suppliers don't reuse invoice numbers. Any match here means this is the SAME invoice we've already seen —
+    either a true duplicate or a re-submission. Drives <strong>duplicate_invoice</strong>.
+  </p>
+  <table>
+    <thead><tr><th>Invoice ID</th><th>Supplier #</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+    <tbody>
+      {% for pi in case_context.prior_invoices_same_supplier_number %}
+      <tr>
+        <td><code>{{ pi.invoice_id }}</code></td>
+        <td><code>{{ pi.supplier_invoice_number }}</code></td>
+        <td>{{ pi.invoice_date or '—' }}</td>
+        <td>{{ fmt_money(pi.total, pi.currency) }}</td>
+        <td><span class="chip{% if pi.status == 'paid' %} status-approved{% elif pi.status == 'duplicate_voided' %} status-rejected{% endif %}">{{ pi.status }}</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{# ---- 2f. Prior invoices — same PO (split-watch) ---- #}
+{% if case_context.prior_invoices_same_po %}
+<div class="card">
+  <h3>2f. Prior invoices on the same PO</h3>
+  <p class="meta" style="color:var(--muted)">
+    Multiple invoices against one PO can be legitimate (recurring services, partial shipments) — but ≥3 invoices
+    summing to ≥60% of PO authorization is the classic split-invoice fraud pattern.
+  </p>
+  <table>
+    <thead><tr><th>Invoice ID</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+    <tbody>
+      {% for pi in case_context.prior_invoices_same_po %}
+      <tr>
+        <td><code>{{ pi.invoice_id }}</code></td>
+        <td>{{ pi.invoice_date or '—' }}</td>
+        <td>{{ fmt_money(pi.total, pi.currency) }}</td>
+        <td><span class="chip{% if pi.status == 'paid' %} status-approved{% endif %}">{{ pi.status }}</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{# ---- 2g. Recent vendor changes (fraud signal source) ---- #}
+{% if case_context.vendor_recent_changes %}
+<div class="card" style="border-left:4px solid var(--red)">
+  <h3>2g. Recent vendor changes</h3>
+  <p class="meta" style="color:var(--muted)">
+    Master-data edits in the last 30 days. A <strong>bank_account</strong> change immediately before a high-value
+    invoice is the classic vendor-impersonation pattern — drives <strong>fraud_signal</strong>.
+  </p>
+  <table>
+    <thead><tr><th>Field</th><th>Changed on</th><th>Note</th></tr></thead>
+    <tbody>
+      {% for c in case_context.vendor_recent_changes %}
+      <tr>
+        <td><code>{{ c.field }}</code></td>
+        <td>{{ c.changed_on }}</td>
+        <td style="font-size:12px">{{ c.note or '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+{# ---- 2h. Any other aggregate signals ---- #}
+{% if case_context.aggregate_signals %}
+<div class="card">
+  <h3>2h. Other signals</h3>
+  <pre style="font-size:12px">{{ case_context.aggregate_signals | pretty_json }}</pre>
+</div>
+{% endif %}
+
+<details style="margin:8px 0 16px">
+  <summary>Raw cross-case context JSON</summary>
+  <pre>{{ case_context | pretty_json }}</pre>
+</details>
+{% endif %}
+
+<!-- ============= Step 3: classify ============= -->
+<div class="card" style="border-left:4px solid var(--navy)">
+  <h3>3. Classify — is there an exception?</h3>
+  <p class="meta" style="color:var(--muted)">
+    Picks one of 13 categories given the invoice + PO + GR + smart signals above.
+    Confidence is the model's self-reported certainty.
+  </p>
+  <p style="margin:6px 0">
+    <strong style="color:var(--navy)">{{ classification.class_label }}</strong>
+    · confidence {{ "%.2f"|format(classification.confidence or 0) }}
+  </p>
+  <p style="margin:6px 0">{{ classification.rationale }}</p>
+  {% if classification.evidence %}
+  <div>
+    {% for e in classification.evidence %}<span class="chip">{{ e }}</span>{% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<!-- ============= Step 4: retrieve ============= -->
+{% if retrieved_policies %}
+<div class="card">
+  <h3>4. Retrieve — relevant policy snippets</h3>
+  <p class="meta" style="color:var(--muted)">
+    Top {{ retrieved_policies|length }} matches from the 75-entry mock policy library, by vector similarity.
+    These give the decision step grounded rules to cite, not pull from training data.
+  </p>
+  <table>
+    <thead><tr><th>Policy</th><th>Score</th><th>Tags</th></tr></thead>
+    <tbody>
+      {% for p in retrieved_policies %}
+      <tr>
+        <td><strong>{{ p.id }}</strong> — {{ p.title }}</td>
+        <td>{{ "%.3f"|format(p.score or 0) }}</td>
+        <td>{% for t in (p.tags or [])[:4] %}<span class="chip">{{ t }}</span>{% endfor %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <details><summary>Full policy text</summary>
+    {% for p in retrieved_policies %}
+    <div style="margin-top:10px"><strong>{{ p.id }} — {{ p.title }}</strong>
+    <p style="margin:4px 0; font-size:13px">{{ p.text }}</p></div>
+    {% endfor %}
+  </details>
+</div>
+{% endif %}
+
+<!-- ============= Step 5: decide ============= -->
+{% if recommendation %}
+<div class="card" style="border-left:4px solid var(--green)">
+  <h3>5. Decide — recommended action + rationale</h3>
+  <p class="meta" style="color:var(--muted)">
+    Reasons over classification + invoice facts + retrieved policies. May override the classifier
+    when the case facts say a different action is right. This is the "what to do" answer.
+  </p>
+  <p style="margin:6px 0">
+    <strong style="color:var(--navy)">{{ recommendation.action }}</strong>
+    · confidence {{ "%.2f"|format(recommendation.confidence or 0) }}
+  </p>
+  <p style="margin:6px 0">{{ recommendation.rationale }}</p>
+  {% if recommendation.counterfactual %}
+  <p style="margin:6px 0; color:var(--muted)"><em>Counterfactual (what would change the answer):</em> {{ recommendation.counterfactual }}</p>
+  {% endif %}
+  {% if recommendation.cited_policy_ids %}
+  <div class="meta" style="margin-top:6px">Cited policies:
+    {% for p in recommendation.cited_policy_ids %}<span class="chip">{{ p }}</span>{% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+
+<!-- ============= Step 6: route ============= -->
+{% if routing_decision %}
+<div class="card">
+  <h3>6. Route — which human tier?</h3>
+  <p class="meta" style="color:var(--muted)">
+    Rule-based, deterministic. Tier 1 = auto-pass, Tier 2 = approver, Tier 3 = supervisor / fraud / treasury.
+  </p>
+  <p style="margin:6px 0">
+    <span class="chip t{{ routing_decision.tier }}">Tier {{ routing_decision.tier }}</span>
+    →
+    <span class="chip">{{ routing_decision.routed_to }}</span>
+  </p>
+  <p style="margin:6px 0">{{ routing_decision.reason }}</p>
+</div>
+{% endif %}
+
+<!-- ============= Step 7: draft ============= -->
+{% if draft %}
+<div class="card">
+  <h3>7. Draft — outbound communication ({{ draft.draft_type }})</h3>
+  <p class="meta" style="color:var(--muted)">
+    Never auto-sent. Held for HITL approval (Tier 2/3) before the action executor would deliver.
+  </p>
+  <div style="font-size:13px">
+    <p><strong>To:</strong> {{ draft.recipient }}{% if draft.cc %} · <strong>cc:</strong> {{ draft.cc | join(', ') }}{% endif %}</p>
+    <p><strong>Subject:</strong> {{ draft.subject }}</p>
+  </div>
+  <pre style="white-space:pre-wrap; margin-top:6px">{{ draft.body }}</pre>
+  {% if draft.references %}
+  <div class="meta" style="margin-top:6px">References: {{ draft.references | join(', ') }}</div>
+  {% endif %}
+</div>
+{% endif %}
+
+<details>
+  <summary>Raw PipelineResult JSON</summary>
+  <pre>{{ run.result_json | pretty_json }}</pre>
+</details>
+{% endif %}
+
+{% endblock %}

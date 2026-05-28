@@ -1,0 +1,159 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260114_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-14",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple St\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Midwest Manufacturing Inc.",
+      "buyer_address": "456 Oak Ave\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@midwestmfg.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "MLS-FRT-001", "description": "LTL Freight Service - 2 pallets", "quantity": 2, "unit_price": 150.00, "line_total": 300.00 },
+      { "line_no": 2, "sku": "MLS-STR-002", "description": "Storage fee per day", "quantity": 5, "unit_price": 25.00, "line_total": 125.00 },
+      { "line_no": 3, "sku": "MLS-HND-003", "description": "Handling fee per unit", "quantity": 3, "unit_price": 10.00, "line_total": 30.00 },
+      { "line_no": 4, "sku": "MLS-FUL-004", "description": "Fuel surcharge", "quantity": 1, "unit_price": 45.00, "line_total": 45.00 },
+      { "line_no": 5, "sku": "MLS-INS-005", "description": "Insurance", "quantity": 1, "unit_price": 20.00, "line_total": 20.00 },
+      { "line_no": 6, "sku": "MLS-LFT-006", "description": "Liftgate service", "quantity": 1, "unit_price": 35.00, "line_total": 35.00 },
+      { "line_no": 7, "sku": "MLS-RES-007", "description": "Residential delivery fee", "quantity": 1, "unit_price": 15.00, "line_total": 15.00 },
+      { "line_no": 8, "sku": "MLS-INS-008", "description": "Inside delivery fee", "quantity": 1, "unit_price": 25.00, "line_total": 25.00 }
+    ],
+    "subtotal": 595.00,
+    "tax": [
+      { "jurisdiction": "US-IL", "rate": 0.0625, "amount": 37.19 }
+    ],
+    "total": 633.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Extractor should capture all 8 line items, note the handwritten notes and inconsistent header placement as persona quirks, and apply rounding of total up to nearest dollar (subtotal 595 + tax 37.19 = 632.19 → total 633)."
+  },
+  {
+    "invoice_id": "P001_INV_20260315_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-15",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Dr\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "94-1234567",
+      "buyer_name": "DataSys Corp.",
+      "buyer_address": "200 Innovation Way\nAustin, TX 78701\nUSA",
+      "buyer_po_contact": "Alice Wang, alice.wang@datasys.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "GTC-1001", "description": "Microcontroller (shipped to TX)", "quantity": 100, "unit_price": 12.50, "line_total": 1250.00 },
+      { "line_no": 2, "sku": "GTC-2002", "description": "Sensor module (shipped to CA)", "quantity": 50, "unit_price": 25.00, "line_total": 1250.00 },
+      { "line_no": 3, "sku": "GTC-3003", "description": "Power supply (shipped to TX)", "quantity": 20, "unit_price": 45.00, "line_total": 900.00 },
+      { "line_no": 4, "sku": "GTC-4004", "description": "Connector kit (shipped to CA)", "quantity": 200, "unit_price": 3.50, "line_total": 700.00 },
+      { "line_no": 5, "sku": "GTC-5005", "description": "Cable assembly (shipped to TX)", "quantity": 30, "unit_price": 18.00, "line_total": 540.00 }
+    ],
+    "subtotal": 4640.00,
+    "tax": [
+      { "jurisdiction": "US-TX", "rate": 0.0825, "amount": 221.93 },
+      { "jurisdiction": "US-CA", "rate": 0.0725, "amount": 141.38 }
+    ],
+    "total": 5003.31,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. Extractor should capture multi-jurisdiction tax lines (TX and CA) and round totals to 2 decimals. Multi-currency note: some items originally priced in EUR but converted to USD for this invoice."
+  },
+  {
+    "invoice_id": "P004_INV_20260126_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-26",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "45 Industrial Estate\nAndheri East, Mumbai, Maharashtra 400093\nIndia",
+      "vendor_tax_id": "PAN: AABCM1234C, GSTIN: 27AABCM1234C1Z1",
+      "buyer_name": "BuildRight Construction Pvt. Ltd.",
+      "buyer_address": "12 MG Road\nPune, Maharashtra 411001\nIndia",
+      "buyer_po_contact": "Rajesh Kumar, rajesh.kumar@buildright.in"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "MMC-7208", "description": "Mild Steel Sheets (HSN 7208)", "quantity": 5, "unit_price": 12500.00, "line_total": 62500.00 }
+    ],
+    "subtotal": 62500.00,
+    "tax": [
+      { "jurisdiction": "IN-MH-CGST", "rate": 0.09, "amount": 5625.00 },
+      { "jurisdiction": "IN-MH-SGST", "rate": 0.09, "amount": 5625.00 }
+    ],
+    "total": 73750.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. Extractor should capture HSN code in line item description, GST split into CGST and SGST, and note PAN/GSTIN in vendor tax id. Cross-currency to USD is common but not present here."
+  },
+  {
+    "invoice_id": "P005_INV_20260322_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-22",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista, São Paulo, SP 01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "AutoPeças Brasil S.A.",
+      "buyer_address": "Rua das Flores, 500\nCentro, Rio de Janeiro, RJ 20040-002\nBrazil",
+      "buyer_po_contact": "Carlos Silva, carlos.silva@autopecas.com.br"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "SPC-001", "description": "Sensor module", "quantity": 10, "unit_price": 150.00, "line_total": 1500.00 },
+      { "line_no": 2, "sku": "SPC-002", "description": "Actuator", "quantity": 5, "unit_price": 320.00, "line_total": 1600.00 }
+    ],
+    "subtotal": 3100.00,
+    "tax": [
+      { "jurisdiction": "BR-SP-ICMS", "rate": 0.18, "amount": 558.00 },
+      { "jurisdiction": "BR-SP-IPI", "rate": 0.10, "amount": 310.00 },
+      { "jurisdiction": "BR-SP-PIS", "rate": 0.0165, "amount": 51.15 },
+      { "jurisdiction": "BR-SP-COFINS", "rate": 0.076, "amount": 235.60 }
+    ],
+    "total": 4254.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from São Paulo Componentes Ltda. Extractor should capture multiple Brazilian tax types (ICMS, IPI, PIS, COFINS) and note the boleto bancário reference (e.g., 1234567890) included in the PDF. NF-e structure is implicit."
+  },
+  {
+    "invoice_id": "P001_INV_20260208_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-45678",
+    "invoice_date": "2026-02-08",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Dr\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "94-1234567",
+      "buyer_name": "NextGen Devices LLC",
+      "buyer_address": "789 Tech Blvd\nPortland, OR 97201\nUSA",
+      "buyer_po_contact": "David Lee, david.lee@nextgendevices.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "GTC-1001", "description": "Microcontroller (shipped to CA)", "quantity": 200, "unit_price": 10.00, "line_total": 2000.00 },
+      { "line_no": 2, "sku": "GTC-2002", "description": "Sensor module (shipped to WA)", "quantity": 100, "unit_price": 22.50, "line_total": 2250.00 },
+      { "line_no": 3, "sku": "GTC-3003", "description": "Power supply (shipped to CA)", "quantity": 50, "unit_price": 38.00, "line_total": 1900.00 },
+      { "line_no": 4, "sku": "GTC-4004", "description": "Connector kit (shipped to OR)", "quantity": 500, "unit_price": 2.80, "line_total": 1400.00 },
+      { "line_no": 5, "sku": "GTC-5005", "description": "Cable assembly (shipped to CA)", "quantity": 80, "unit_price": 15.00, "line_total": 1200.00 },
+      { "line_no": 6, "sku": "GTC-6006", "description": "Display module (shipped to WA)", "quantity": 30, "unit_price": 65.00, "line_total": 1950.00 },
+      { "line_no": 7, "sku": "GTC-7007", "description": "RF module (shipped to CA)", "quantity": 25, "unit_price": 48.00, "line_total": 1200.00 },
+      { "line_no": 8, "sku": "GTC-8008", "description": "Heatsink (shipped to OR)", "quantity": 100, "unit_price": 5.50, "line_total": 550.00 }
+    ],
+    "subtotal": 12450.00,
+    "tax": [
+      { "jurisdiction": "US-CA", "rate": 0.0725, "amount": 456.75 },
+      { "jurisdiction": "US-WA", "rate": 0.065, "amount": 273.00 }
+    ],
+    "total": 13179.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. Extractor should capture multi-jurisdiction tax (CA and WA) and round totals to 2 decimals. Multi-currency note: some items originally priced in EUR but converted to USD for this invoice."
+  }
+]
+```

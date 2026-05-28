@@ -1,0 +1,154 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260217_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-17",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmeprocurement.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "GTC-CPU-001", "description": "Intel Xeon Platinum 8380 Processor", "quantity": 2, "unit_price": 5000.00, "line_total": 10000.00 },
+      { "line_no": 2, "sku": "GTC-RAM-256", "description": "256GB DDR4 ECC Memory Module", "quantity": 4, "unit_price": 800.00, "line_total": 3200.00 },
+      { "line_no": 3, "sku": "GTC-SSD-4T", "description": "4TB NVMe SSD", "quantity": 10, "unit_price": 600.00, "line_total": 6000.00 },
+      { "line_no": 4, "sku": "GTC-NIC-100", "description": "100GbE Network Interface Card", "quantity": 5, "unit_price": 1200.00, "line_total": 6000.00 },
+      { "line_no": 5, "sku": "GTC-PSU-2000", "description": "2000W Redundant Power Supply", "quantity": 3, "unit_price": 900.00, "line_total": 2700.00 },
+      { "line_no": 6, "sku": "GTC-FAN-80", "description": "80mm High-Performance Fan", "quantity": 20, "unit_price": 15.00, "line_total": 300.00 },
+      { "line_no": 7, "sku": "GTC-CBL-001", "description": "C13 to C14 Power Cable, 1m", "quantity": 50, "unit_price": 2.50, "line_total": 125.00 },
+      { "line_no": 8, "sku": "GTC-ACC-001", "description": "Server Rack Mounting Kit", "quantity": 10, "unit_price": 45.00, "line_total": 450.00 }
+    ],
+    "subtotal": 28775.00,
+    "tax": [
+      { "jurisdiction": "US-NY", "rate": 0.08875, "amount": 2554.28 },
+      { "jurisdiction": "US-NYC", "rate": 0.045, "amount": 1294.88 }
+    ],
+    "total": 32624.16,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should extract 8 line items, subtotal 28775.00, two tax lines (US-NY and US-NYC), total 32624.16. All values rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260125_002",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-25",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 100, 60327 Frankfurt am Main, Germany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "Jane Doe, j.doe@acmeprocurement.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "FIB-001", "description": "Hochleistungs-Industriemotor / High-Performance Industrial Motor", "quantity": 1, "unit_price": 15000.00, "line_total": 15000.00 }
+    ],
+    "subtotal": 15000.00,
+    "tax": [
+      { "jurisdiction": "EU-DE-VAT", "rate": 0.19, "amount": 2850.00 }
+    ],
+    "total": 17850.00,
+    "error_injected": "Cross-currency edge when buyer is in USD",
+    "ground_truth_note": "Invoice in EUR but buyer is USD-based. Extractor should not assume currency conversion; the total is 17850.00 EUR. The currency field is EUR, but the buyer's address is in the US, which may cause cross-currency confusion. No actual numeric error, but the context is intentionally mismatched."
+  },
+  {
+    "invoice_id": "P004_INV_20260324_003",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-24",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "45 Industrial Estate, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCB1234C1Z1, PAN: AABCB1234C",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "Raj Patel, r.patel@acmeprocurement.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "MMC-001", "description": "Steel Rods 12mm (HSN: 7214.20)", "quantity": 100, "unit_price": 500.00, "line_total": 50000.00 },
+      { "line_no": 2, "sku": "MMC-002", "description": "Copper Wire 2mm (HSN: 740811)", "quantity": 50, "unit_price": 1200.00, "line_total": 60000.00 },
+      { "line_no": 3, "sku": "MMC-003", "description": "Aluminium Sheets 1mm (HSN: 760611)", "quantity": 20, "unit_price": 3000.00, "line_total": 60000.00 },
+      { "line_no": 4, "sku": "MMC-004", "description": "Brass Fittings Set (HSN: 7412.20)", "quantity": 200, "unit_price": 150.00, "line_total": 30000.00 },
+      { "line_no": 5, "sku": "MMC-005", "description": "Stainless Steel Pipe 2 inch (HSN: 7304.11)", "quantity": 10, "unit_price": 8000.00, "line_total": 80000.00 },
+      { "line_no": 6, "sku": "MMC-006", "description": "Rubber Gasket Kit (HSN: 401693)", "quantity": 500, "unit_price": 50.00, "line_total": 25000.00 },
+      { "line_no": 7, "sku": "MMC-007", "description": "Industrial Lubricant 5L (HSN: 271019)", "quantity": 100, "unit_price": 200.00, "line_total": 20000.00 },
+      { "line_no": 8, "sku": "MMC-008", "description": "Safety Helmets (HSN: 650610)", "quantity": 300, "unit_price": 150.00, "line_total": 45000.00 }
+    ],
+    "subtotal": 370000.00,
+    "tax": [
+      { "jurisdiction": "IN-IGST", "rate": 0.00, "amount": 0.00 }
+    ],
+    "total": 370000.00,
+    "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+    "ground_truth_note": "HSN codes are inconsistently formatted: some have dashes (e.g., 7214.20) and some do not (e.g., 740811). Extractor should normalize or handle both formats. Invoice is export to US, so IGST is 0%."
+  },
+  {
+    "invoice_id": "P001_INV_20260201_004",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-11111",
+    "invoice_date": "2026-02-01",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmeprocurement.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "GTC-SRV-001", "description": "Server Chassis 2U", "quantity": 5, "unit_price": 2000.00, "line_total": 10000.00 },
+      { "line_no": 2, "sku": "GTC-RAID-001", "description": "RAID Controller Card (continued on next page)", "quantity": 10, "unit_price": 350.00, "line_total": 3500.00 }
+    ],
+    "subtotal": 13500.00,
+    "tax": [
+      { "jurisdiction": "US-NY", "rate": 0.08875, "amount": 1198.13 }
+    ],
+    "total": 14698.13,
+    "error_injected": "Multi-page invoices where line-items continue across pages",
+    "ground_truth_note": "Invoice is designed as multi-page; the second line item description indicates continuation. Extractor should handle page breaks and ensure all line items are captured. Only 2 line items are present, but the layout suggests more may be on a second page."
+  },
+  {
+    "invoice_id": "P005_INV_20260317_005",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-22222",
+    "invoice_date": "2026-03-17",
+    "currency": "BRL",
+    "payment_terms": "NET-30 / Boleto bancário",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "Maria Silva, m.silva@acmeprocurement.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "SPC-001", "description": "Componente Eletrônico A (ICMS, IPI, PIS, COFINS incluídos)", "quantity": 100, "unit_price": 50.00, "line_total": 5000.00 },
+      { "line_no": 2, "sku": "SPC-002", "description": "Módulo de Controle B", "quantity": 50, "unit_price": 200.00, "line_total": 10000.00 }
+    ],
+    "subtotal": 15000.00,
+    "tax": [
+      { "jurisdiction": "BR-ICMS", "rate": 0.18, "amount": 2700.00 },
+      { "jurisdiction": "BR-IPI", "rate": 0.05, "amount": 750.00 },
+      { "jurisdiction": "BR-PIS", "rate": 0.0165, "amount": 247.50 },
+      { "jurisdiction": "BR-COFINS", "rate": 0.076, "amount": 1140.00 }
+    ],
+    "total": 19837.50,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Invoice includes four separate tax lines (ICMS, IPI, PIS, COFINS) which may confuse extraction. Extractor should correctly sum all tax amounts and not miss any. Also includes Boleto bancário reference in payment terms (not captured in schema)."
+  }
+]
+```

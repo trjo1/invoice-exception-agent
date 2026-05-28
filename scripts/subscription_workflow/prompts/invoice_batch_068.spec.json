@@ -1,0 +1,96 @@
+{
+  "batch_no": 68,
+  "n_invoices": 5,
+  "specs": [
+    {
+      "spec_index": 335,
+      "persona_id": "P005",
+      "persona_name": "S\u00e3o Paulo Componentes Ltda.",
+      "persona_region": "LATAM-BR",
+      "persona_language": "pt",
+      "persona_currency": "BRL",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "NF-e (Brazil tax document) shape \u2014 invoice + tax receipt combined",
+        "Multiple tax types (ICMS, IPI, PIS, COFINS)",
+        "Boleto banc\u00e1rio payment slip referenced"
+      ],
+      "invoice_date_hint": "2026-01-15",
+      "line_item_count_hint": 3,
+      "error_injected": "Date format dd/mm/yyyy vs ISO"
+    },
+    {
+      "spec_index": 336,
+      "persona_id": "P005",
+      "persona_name": "S\u00e3o Paulo Componentes Ltda.",
+      "persona_region": "LATAM-BR",
+      "persona_language": "pt",
+      "persona_currency": "BRL",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "NF-e (Brazil tax document) shape \u2014 invoice + tax receipt combined",
+        "Multiple tax types (ICMS, IPI, PIS, COFINS)",
+        "Boleto banc\u00e1rio payment slip referenced"
+      ],
+      "invoice_date_hint": "2026-03-27",
+      "line_item_count_hint": 3,
+      "error_injected": null
+    },
+    {
+      "spec_index": 337,
+      "persona_id": "P001",
+      "persona_name": "Global Tech Components Inc.",
+      "persona_region": "US",
+      "persona_language": "en",
+      "persona_currency": "USD",
+      "persona_layout_style": "modern_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "Multi-currency invoicing when shipping abroad",
+        "Tax line itemized separately by jurisdiction",
+        "Round totals to 2 decimals"
+      ],
+      "invoice_date_hint": "2026-01-01",
+      "line_item_count_hint": 2,
+      "error_injected": "Occasional PO reference typo (one digit transposed)"
+    },
+    {
+      "spec_index": 338,
+      "persona_id": "P003",
+      "persona_name": "Frankfurt Industriebedarf GmbH",
+      "persona_region": "EU-DE",
+      "persona_language": "de",
+      "persona_currency": "EUR",
+      "persona_layout_style": "structured_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "DE VAT (19%) itemized; reverse-charge logic on intra-EU",
+        "Bilingual labels (German primary, English secondary)",
+        "SEPA bank details on every invoice"
+      ],
+      "invoice_date_hint": "2026-04-09",
+      "line_item_count_hint": 2,
+      "error_injected": null
+    },
+    {
+      "spec_index": 339,
+      "persona_id": "P003",
+      "persona_name": "Frankfurt Industriebedarf GmbH",
+      "persona_region": "EU-DE",
+      "persona_language": "de",
+      "persona_currency": "EUR",
+      "persona_layout_style": "structured_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "DE VAT (19%) itemized; reverse-charge logic on intra-EU",
+        "Bilingual labels (German primary, English secondary)",
+        "SEPA bank details on every invoice"
+      ],
+      "invoice_date_hint": "2026-01-01",
+      "line_item_count_hint": 5,
+      "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers"
+    }
+  ]
+}

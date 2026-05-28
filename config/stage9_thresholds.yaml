@@ -1,0 +1,91 @@
+# =============================================================================
+# Stage 9 alert thresholds
+# =============================================================================
+# Each signal has a healthy band and an alert threshold. Crossing the alert
+# threshold raises a notification before customer-visible failure.
+#
+# These are the TEST-PHASE thresholds. Production thresholds will be
+# tightened per engagement (the test-phase values are the floor).
+
+signals:
+
+  task_success_rate:
+    description: Full multi-step flow completed without escalation
+    units: fraction
+    healthy_min: 0.85
+    alert_below: 0.70
+    target: 0.95
+
+  escalation_rate_per_step:
+    description: Per-node escalation rate; flags concentrations at specific steps
+    units: fraction
+    healthy_max: 0.10
+    alert_above: 0.20
+
+  time_per_task_p95_seconds:
+    description: End-to-end time for an exception, excluding HITL wait
+    units: seconds
+    healthy_max: 300        # 5 minutes
+    alert_above: 600        # 10 minutes
+
+  cost_per_task_usd:
+    description: Model spend + infra per processed exception
+    units: usd
+    healthy_max: 0.50
+    alert_above: 1.00
+    target: 0.30
+
+  cross_system_error_rate:
+    description: Actions that succeeded in one system but produced inconsistent state in another
+    units: fraction
+    healthy_max: 0.01
+    alert_above: 0.03
+
+  audit_finding_count_weekly:
+    description: Findings raised by weekly cross-process audit
+    units: count
+    healthy_max: 5
+    alert_above: 10
+
+# -----------------------------------------------------------------------------
+# Per-archetype quality signals
+# -----------------------------------------------------------------------------
+
+extraction:
+  field_extraction_accuracy_min: 0.95
+  json_validity_min: 0.95
+  auto_pass_rate_target: 0.70    # 70% of invoices should auto-pass
+
+routing:
+  classification_accuracy_min: 0.90
+  override_rate_max: 0.15        # >15% override rate = retrain
+  time_to_route_p95_seconds_max: 30
+
+decision_support:
+  recommendation_acceptance_min: 0.70  # test phase
+  citation_accuracy_min: 0.95
+  retrieval_relevance_min: 0.80
+
+coordination:
+  task_success_rate_min: 0.85
+  cross_system_error_rate_max: 0.01
+
+drafting:
+  edit_distance_p50_max: 0.30    # 30% median edit; falling trend = converging on tone
+  send_without_review_external: 0.00  # MUST be zero; non-negotiable
+  citation_accuracy_min: 0.95
+
+# -----------------------------------------------------------------------------
+# Alert routing
+# -----------------------------------------------------------------------------
+
+alerting:
+  channel: slack       # slack | email | webhook
+  cooldown_minutes: 30 # suppress repeat alerts within window
+  escalation:
+    - level: warn
+      threshold: alert
+      to: engineering-channel
+    - level: severe
+      threshold: 2x_alert    # 2× the alert threshold value
+      to: tj@truvs           # paged

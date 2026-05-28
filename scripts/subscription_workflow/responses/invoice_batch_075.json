@@ -1,0 +1,324 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260410_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-00123",
+    "invoice_date": "2026-04-10",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45, 60327 Frankfurt, Germany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalSupply Corp.",
+      "buyer_address": "1234 Commerce Dr, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Hydraulikzylinder / Hydraulic Cylinder, Typ HC-200",
+        "quantity": 10,
+        "unit_price": 145.00,
+        "line_total": 1450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Dichtungssatz / Seal Kit, SK-45",
+        "quantity": 25,
+        "unit_price": 32.50,
+        "line_total": 812.50
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Filterelement / Filter Element, FE-10",
+        "quantity": 5,
+        "unit_price": 78.00,
+        "line_total": 390.00
+      }
+    ],
+    "subtotal": 2652.50,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 503.98
+      }
+    ],
+    "total": 3156.48,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with German VAT 19% itemized, bilingual line descriptions, SEPA bank details in vendor address."
+  },
+  {
+    "invoice_id": "P005_INV_20260109_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-00456",
+    "invoice_date": "09/01/2026",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100, Brazil\nNF-e: 35200612345678901234567890123456789012345678\nBoleto: 12345678901",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "GlobalSupply Corp.",
+      "buyer_address": "1234 Commerce Dr, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-100",
+        "description": "Parafuso de alta resistência / High-strength bolt, M12x80",
+        "quantity": 500,
+        "unit_price": 3.45,
+        "line_total": 1725.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-200",
+        "description": "Mola de compressão / Compression spring, CS-50",
+        "quantity": 200,
+        "unit_price": 8.90,
+        "line_total": 1780.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-300",
+        "description": "Rolamento de esferas / Ball bearing, BB-6204",
+        "quantity": 100,
+        "unit_price": 22.30,
+        "line_total": 2230.00
+      }
+    ],
+    "subtotal": 5735.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 1032.30
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 286.75
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 94.63
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 435.86
+      }
+    ],
+    "total": 7584.54,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "Invoice date is in Brazilian dd/mm/yyyy format (09/01/2026) instead of ISO. Tax lines include ICMS, IPI, PIS, COFINS. NF-e and Boleto references included."
+  },
+  {
+    "invoice_id": "P001_INV_20260219_003",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-00789",
+    "invoice_date": "2026-02-19",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "500 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "GlobalSupply Corp.",
+      "buyer_address": "1234 Commerce Dr, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-100",
+        "description": "Microcontroller Module, MCM-32",
+        "quantity": 50,
+        "unit_price": 125.00,
+        "line_total": 6250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-200",
+        "description": "Power Supply Unit, PSU-500",
+        "quantity": 20,
+        "unit_price": 340.00,
+        "line_total": 6800.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-300",
+        "description": "Temperature Sensor, TS-100",
+        "quantity": 100,
+        "unit_price": 18.50,
+        "line_total": 1850.00
+      }
+    ],
+    "subtotal": 14900.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 1080.25
+      }
+    ],
+    "total": 15980.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with California sales tax itemized. All totals rounded to two decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260326_004",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-00234",
+    "invoice_date": "2026-03-26",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45, 60327 Frankfurt, Germany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalSupply Corp.",
+      "buyer_address": "1234 Commerce Dr, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-004",
+        "description": "Schlauchleitung / Hose Assembly, HA-12",
+        "quantity": 30,
+        "unit_price": 22.00,
+        "line_total": 660.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-005",
+        "description": "Kugelhahn / Ball Valve, BV-2",
+        "quantity": 15,
+        "unit_price": 65.00,
+        "line_total": 975.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-006",
+        "description": "Druckregler / Pressure Regulator, PR-5",
+        "quantity": 8,
+        "unit_price": 180.00,
+        "line_total": 1440.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-007",
+        "description": "Manometer / Pressure Gauge, PG-100",
+        "quantity": 20,
+        "unit_price": 45.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-008",
+        "description": "Rückschlagventil / Check Valve, CV-1",
+        "quantity": 12,
+        "unit_price": 55.00,
+        "line_total": 660.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-009",
+        "description": "Zylinderstange / Cylinder Rod, CR-50",
+        "quantity": 6,
+        "unit_price": 210.00,
+        "line_total": 1260.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-010",
+        "description": "O-Ring Satz / O-Ring Kit, OR-10",
+        "quantity": 40,
+        "unit_price": 8.50,
+        "line_total": 340.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-011",
+        "description": "Kupplung / Coupling, KC-3/4",
+        "quantity": 25,
+        "unit_price": 14.00,
+        "line_total": 350.00
+      }
+    ],
+    "subtotal": 6585.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 1251.15
+      }
+    ],
+    "total": 7836.15,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with 8 line items, German VAT 19%, bilingual descriptions, SEPA bank details. Totals rounded to two decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260428_005",
+    "persona_id": "P002",
+    "po_reference": "",
+    "invoice_date": "2026-04-28",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1500 Industrial Blvd, Detroit, MI 48201, USA\nHandwritten: Please expedite",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "GlobalSupply Corp.",
+      "buyer_address": "1234 Commerce Dr, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Pallet Jack, PJ-2000",
+        "quantity": 4,
+        "unit_price": 450.00,
+        "line_total": 1800.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Shipping Labels, SL-500 (box of 500)",
+        "quantity": 10,
+        "unit_price": 25.00,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "description": "Stretch Wrap, SW-18 (roll)",
+        "quantity": 20,
+        "unit_price": 15.00,
+        "line_total": 300.00
+      }
+    ],
+    "subtotal": 2350.00,
+    "tax": [
+      {
+        "jurisdiction": "US-MI",
+        "rate": 0.06,
+        "amount": 141.00
+      }
+    ],
+    "total": 2491.00,
+    "error_injected": "Missing PO reference (must be inferred from delivery note)",
+    "ground_truth_note": "PO reference is deliberately missing. The extractor should infer it from a delivery note or other context. Total is rounded up to nearest dollar (2491 instead of 2491.00). Handwritten note added in vendor address."
+  }
+]
+```

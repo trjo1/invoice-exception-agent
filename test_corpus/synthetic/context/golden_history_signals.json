@@ -1,0 +1,252 @@
+[
+  {
+    "invoice_id": "P001_idx0358_PRIOR",
+    "supplier_invoice_number": "P001_INV_20260322_001",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-03-98765",
+    "total": 12017.03,
+    "currency": "USD",
+    "invoice_date": "2026-02-20",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "P004_idx0488_PRIOR",
+    "supplier_invoice_number": "P004_INV_20260404_001",
+    "vendor_id": "VEN-P004",
+    "po_id": "PO-2026-04-98765",
+    "total": 24780.0,
+    "currency": "INR",
+    "invoice_date": "2026-03-05",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "P001_idx0279_PRIOR",
+    "supplier_invoice_number": "P001_INV_20260302_001",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-03-12345",
+    "total": 26937.5,
+    "currency": "USD",
+    "invoice_date": "2026-01-31",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "P004_idx0275_PRIOR",
+    "supplier_invoice_number": "P004_INV_20260413_001",
+    "vendor_id": "VEN-P004",
+    "po_id": "PO-2026-04-12345",
+    "total": 8035.0,
+    "currency": "INR",
+    "invoice_date": "2026-03-14",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "P005_idx0004_PRIOR",
+    "supplier_invoice_number": "P005_INV_20260227_001",
+    "vendor_id": "VEN-P005",
+    "po_id": "PO-2026-02-98765",
+    "total": 3782.35,
+    "currency": "BRL",
+    "invoice_date": "2026-01-28",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "P005_idx0362_PRIOR",
+    "supplier_invoice_number": "P005_INV_20260219_001",
+    "vendor_id": "VEN-P005",
+    "po_id": "PO-2026-02-54321",
+    "total": 3211.65,
+    "currency": "BRL",
+    "invoice_date": "2026-01-20",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "P003_idx0464_PRIOR",
+    "supplier_invoice_number": "P003_INV_20260308_002",
+    "vendor_id": "VEN-P003",
+    "po_id": "PO-2026-03-11111",
+    "total": 285.6,
+    "currency": "EUR",
+    "invoice_date": "2026-02-06",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "P001_idx0230_PRIOR",
+    "supplier_invoice_number": "P001_INV_20260213_001",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-02-12345",
+    "total": 1588.14,
+    "currency": "USD",
+    "invoice_date": "2026-01-14",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "P004_idx0114_PRIOR",
+    "supplier_invoice_number": "P004_INV_20260307_001",
+    "vendor_id": "VEN-P004",
+    "po_id": "PO-2026-03-98765",
+    "total": 12909.2,
+    "currency": "INR",
+    "invoice_date": "2026-02-05",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "P003_idx0182_PRIOR",
+    "supplier_invoice_number": "P003_INV_20260403_003",
+    "vendor_id": "VEN-P003",
+    "po_id": "PO-2026-04-11111",
+    "total": 1680.0,
+    "currency": "EUR",
+    "invoice_date": "2026-03-04",
+    "status": "paid"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-03-54321-1",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-03-54321-1",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-03-54321",
+    "total": 228.75,
+    "currency": "USD",
+    "invoice_date": "2026-05-03",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-03-54321-2",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-03-54321-2",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-03-54321",
+    "total": 228.75,
+    "currency": "USD",
+    "invoice_date": "2026-05-02",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-03-54321-3",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-03-54321-3",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-03-54321",
+    "total": 228.75,
+    "currency": "USD",
+    "invoice_date": "2026-05-11",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-04-12345-1",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-04-12345-1",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-04-12345",
+    "total": 241.47,
+    "currency": "USD",
+    "invoice_date": "2026-05-03",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-04-12345-2",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-04-12345-2",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-04-12345",
+    "total": 241.47,
+    "currency": "USD",
+    "invoice_date": "2026-05-08",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-04-12345-3",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-04-12345-3",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-04-12345",
+    "total": 241.47,
+    "currency": "USD",
+    "invoice_date": "2026-04-30",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-02-13254-1",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-02-13254-1",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-02-13254",
+    "total": 435.75,
+    "currency": "USD",
+    "invoice_date": "2026-05-01",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-02-13254-2",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-02-13254-2",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-02-13254",
+    "total": 435.75,
+    "currency": "USD",
+    "invoice_date": "2026-04-30",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-02-13254-3",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-02-13254-3",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-02-13254",
+    "total": 435.75,
+    "currency": "USD",
+    "invoice_date": "2026-05-03",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-02-23456-1",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-02-23456-1",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-02-23456",
+    "total": 133.5,
+    "currency": "USD",
+    "invoice_date": "2026-05-05",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-02-23456-2",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-02-23456-2",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-02-23456",
+    "total": 133.5,
+    "currency": "USD",
+    "invoice_date": "2026-05-08",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-02-23456-3",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-02-23456-3",
+    "vendor_id": "VEN-P001",
+    "po_id": "PO-2026-02-23456",
+    "total": 133.5,
+    "currency": "USD",
+    "invoice_date": "2026-05-04",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-01-00089-1",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-01-00089-1",
+    "vendor_id": "VEN-P002",
+    "po_id": "PO-2026-01-00089",
+    "total": 555.0,
+    "currency": "USD",
+    "invoice_date": "2026-05-02",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-01-00089-2",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-01-00089-2",
+    "vendor_id": "VEN-P002",
+    "po_id": "PO-2026-01-00089",
+    "total": 555.0,
+    "currency": "USD",
+    "invoice_date": "2026-05-07",
+    "status": "pending"
+  },
+  {
+    "invoice_id": "SPLIT-PO-2026-01-00089-3",
+    "supplier_invoice_number": "INV-SPLIT-PO-2026-01-00089-3",
+    "vendor_id": "VEN-P002",
+    "po_id": "PO-2026-01-00089",
+    "total": 555.0,
+    "currency": "USD",
+    "invoice_date": "2026-04-29",
+    "status": "pending"
+  }
+]

@@ -1,0 +1,105 @@
+# Golden test case GTC-001
+# Scenario: Standard 3-way match passes; invoice posts cleanly.
+# Expected: AUTO-PASS (Tier 1). No HITL.
+
+id: GTC-001
+title: Standard 3-way match passes; invoice posts cleanly
+exception_category: none  # anchor case — not actually an exception
+difficulty: easy
+created: 2026-05-10
+notes: |
+  The auto-pass anchor. Tests that the agent correctly identifies a clean
+  invoice + matches PO + matches goods receipt and routes to Tier 1 auto-pass.
+  Most-common scenario in production at scale (~70-85% of invoices should
+  end up here once the agent is tuned).
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-05T09:30:00Z
+      payload:
+        po_id: PO-2026-04-00210
+        vendor_id: P001
+        line_items:
+          - sku: SKU-B112
+            description: Industrial relay 24V
+            quantity: 50
+            unit_price_usd: 18.40
+            line_total_usd: 920.00
+        currency: USD
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-04-12T11:15:00Z
+      payload:
+        po_id: PO-2026-04-00210
+        gr_id: GR-2026-04-00845
+        line_items:
+          - sku: SKU-B112
+            quantity_received: 50
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-04-17T10:00:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-04-17_001.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-04-17_001.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-04-17-001
+        po_reference: PO-2026-04-00210
+        vendor_id: P001
+        line_items:
+          - sku: SKU-B112
+            quantity: 50
+            unit_price_usd: 18.40
+            line_total_usd: 920.00
+        total_usd: 920.00
+        currency: USD
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: none
+    min_confidence: 0.90
+    must_contain_evidence:
+      - three_way_match_clean
+      - po_qty_matches_gr_qty_matches_invoice_qty
+      - po_unit_price_matches_invoice_unit_price
+
+  recommendation:
+    action: auto_resolve
+    rationale_must_mention:
+      - 3-way match
+      - within tolerance
+      - clean
+    counterfactual_should_exist: false
+
+  hitl:
+    tier: 1
+    routed_to: none
+
+  drafting:
+    must_produce_draft: false
+
+  execution:
+    must_post_invoice: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: true
+    cost_per_case_usd_max: 0.15
+    time_to_recommendation_p95_seconds_max: 30
+
+pass_criteria:
+  - classification.class_label == none
+  - recommendation.action == auto_resolve
+  - hitl.tier == 1
+  - drafting.draft_produced == false
+  - execution.invoice_posted == true
+  - stage9.cost_per_case_usd <= 0.15

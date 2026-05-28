@@ -1,0 +1,275 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260403_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-03",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Industrial Blvd, Suite 200\nChicago, IL 60607\nUSA",
+      "vendor_tax_id": "36-1234567",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Acme Plaza\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-FRT-001",
+        "description": "Freight service - full truckload",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-PLT-003",
+        "description": "Pallet rental (per pallet)",
+        "quantity": 10,
+        "unit_price": 15.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-FSC-002",
+        "description": "Fuel surcharge (12%)",
+        "quantity": 1,
+        "unit_price": 162.00,
+        "line_total": 162.00
+      }
+    ],
+    "subtotal": 1512.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 94.50
+      }
+    ],
+    "total": 1607.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Handwritten note 'Received OK' appears in margin. Header placement is slightly shifted left. Total is rounded up to nearest dollar (1606.50 → 1607.00). All fields are accurate."
+  },
+  {
+    "invoice_id": "P005_INV_20260424_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-24",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Sala 501\nSão Paulo, SP 01310-100\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Acme Plaza\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-001",
+        "description": "Componente eletrônico - resistor 10k ohm",
+        "quantity": 500,
+        "unit_price": 1.50,
+        "line_total": 750.00
+      }
+    ],
+    "subtotal": 750.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 135.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 37.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 12.38
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 57.00
+      }
+    ],
+    "total": 991.88,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e invoice from São Paulo Componentes Ltda. Includes ICMS, IPI, PIS, COFINS taxes. Boleto bancário reference: 34191.23456 67890.123456 78901.234567 1 12345678901234. All fields accurate."
+  },
+  {
+    "invoice_id": "P002_INV_20260328_001",
+    "persona_id": "P002",
+    "po_reference": "",
+    "invoice_date": "2026-03-28",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Industrial Blvd, Suite 200\nChicago, IL 60607\nUSA",
+      "vendor_tax_id": "36-1234567",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Acme Plaza\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHIP-001",
+        "description": "Freight service - LTL shipment",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 450.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 28.13
+      }
+    ],
+    "total": 479.00,
+    "error_injected": "Missing PO reference (must be inferred from delivery note)",
+    "ground_truth_note": "Invoice from Maple Logistics SMB with missing PO reference. The PO number is not provided; it must be inferred from the delivery note. Handwritten note 'Confirm delivery' in margin. Total rounded up to nearest dollar (478.13 → 479.00)."
+  },
+  {
+    "invoice_id": "P003_INV_20260224_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-24",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 15\n60327 Frankfurt am Main\nDeutschland\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Acme Plaza\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-1001",
+        "description": "Kugellager (Ball bearing) - Typ 6205",
+        "quantity": 20,
+        "unit_price": 25.00,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-2003",
+        "description": "Zahnrad (Gear) - Modul 2, 30 Zähne",
+        "quantity": 10,
+        "unit_price": 80.00,
+        "line_total": 800.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-3012",
+        "description": "Dichtung (Seal) - Wellendichtring 40x62x8",
+        "quantity": 50,
+        "unit_price": 4.50,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-4020",
+        "description": "Schmiermittel (Lubricant) - Hochtemperaturfett 1kg",
+        "quantity": 15,
+        "unit_price": 18.00,
+        "line_total": 270.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-5050",
+        "description": "Werkzeug (Tool) - Inbusschlüssel-Set 1.5-10mm",
+        "quantity": 5,
+        "unit_price": 141.00,
+        "line_total": 705.00
+      }
+    ],
+    "subtotal": 2500.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 2500.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. German primary with English secondary labels. VAT at 19% is reverse-charged (amount 0.00). SEPA bank details provided. All fields accurate."
+  },
+  {
+    "invoice_id": "P005_INV_20260204_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-11111",
+    "invoice_date": "2026-02-04",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Sala 501\nSão Paulo, SP 01310-100\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Acme Plaza\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-010",
+        "description": "Parafuso M8 (Screw M8) - Aço inox",
+        "quantity": 200,
+        "unit_price": 0.50,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-011",
+        "description": "Porca M8 (Nut M8) - Aço inox",
+        "quantity": 200,
+        "unit_price": 0.30,
+        "line_total": 60.00
+      }
+    ],
+    "subtotal": 160.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 28.80
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 8.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 2.64
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 12.16
+      }
+    ],
+    "total": 211.60,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e invoice from São Paulo Componentes Ltda. Two line items. Includes ICMS, IPI, PIS, COFINS taxes. Boleto bancário reference: 34191.23456 67890.123456 78901.234567 1 12345678901234. All fields accurate."
+  }
+]
+```

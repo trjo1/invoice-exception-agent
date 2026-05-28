@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Agent 1 — Detailed Workflow Walkthrough</title>
+<style>
+  :root {
+    --navy: #1F3A68;
+    --red: #C0392B;
+    --green: #1A6D3F;
+    --soft: #E8EEF5;
+    --gray: #555;
+    --light-gray: #999;
+    --white: #fff;
+    --amber: #B8860B;
+    --code-bg: #1e2330;
+    --code-fg: #d4d8df;
+    --code-key: #b189d6;
+    --code-str: #8fc995;
+    --code-num: #f0a868;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #FAFBFD;
+    color: #222;
+    line-height: 1.55;
+  }
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 28px 40px 22px;
+    border-bottom: 4px solid var(--red);
+  }
+  header .kicker {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 12px;
+    color: var(--soft);
+    margin-bottom: 6px;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  header .subtitle {
+    margin-top: 8px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    max-width: 900px;
+  }
+  header .meta {
+    margin-top: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  main { padding: 28px 40px; max-width: 1200px; margin: 0 auto; }
+
+  /* Navigation TOC */
+  nav.toc {
+    background: var(--white);
+    border: 1px solid #d8e0ec;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 0 0 32px;
+    font-size: 13px;
+  }
+  nav.toc .label {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    color: var(--gray);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--navy);
+  }
+  nav.toc li { margin: 3px 0; }
+  nav.toc a { color: var(--navy); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section { margin: 0 0 48px; }
+  section > h2 {
+    color: var(--navy);
+    font-size: 22px;
+    margin: 0 0 4px;
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 6px;
+  }
+  section > h2 .step-num {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--white);
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  section > p.intro {
+    color: var(--gray);
+    font-size: 14px;
+    margin: 8px 0 16px;
+  }
+  h3 {
+    color: var(--navy);
+    font-size: 16px;
+    margin: 22px 0 8px;
+  }
+  h4 {
+    color: var(--navy);
+    font-size: 14px;
+    margin: 18px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  /* Callouts */
+  .callout {
+    background: var(--soft);
+    border-left: 4px solid var(--navy);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin: 14px 0;
+    font-size: 13.5px;
+  }
+  .callout .label {
+    color: var(--navy);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+  }
+  .callout.green { border-left-color: var(--green); background: #eef9f0; }
+  .callout.green .label { color: var(--green); }
+  .callout.red { border-left-color: var(--red); background: #fde8e6; }
+  .callout.red .label { color: var(--red); }
+  .callout.amber { border-left-color: var(--amber); background: #fff7e6; }
+  .callout.amber .label { color: #9a6c00; }
+
+  /* Side-by-side panels */
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 12px 0;
+  }
+  .pair .panel {
+    background: var(--white);
+    border: 1px solid #d8e0ec;
+    border-radius: 6px;
+    padding: 10px 14px;
+  }
+  .pair .panel.input { border-top: 3px solid var(--navy); }
+  .pair .panel.output { border-top: 3px solid var(--green); }
+  .panel .panel-label {
+    text-transform: uppercase;
+    font-size: 10.5px;
+    letter-spacing: 0.6px;
+    color: var(--gray);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  /* Code blocks */
+  pre, code.block {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    padding: 12px 14px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 8px 0;
+    white-space: pre;
+  }
+  pre.prose-prompt {
+    background: #fcfbf7;
+    color: #2a2a2a;
+    border: 1px solid #e3dec9;
+    white-space: pre-wrap;
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 11.5px;
+    line-height: 1.55;
+    max-height: 480px;
+    overflow-y: auto;
+  }
+  code {
+    background: #F2F4F8;
+    color: #1a1a1a;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 12px;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    background: var(--white);
+    font-size: 12.5px;
+  }
+  th {
+    background: var(--soft);
+    color: var(--navy);
+    text-align: left;
+    padding: 8px 10px;
+    font-weight: 700;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border: 1px solid #d8e0ec;
+  }
+  td {
+    padding: 7px 10px;
+    border: 1px solid #e7ebf2;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #FBFBFD; }
+  td code { font-size: 11px; }
+
+  /* Mini flow row at top of doc */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    margin: 12px 0 24px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .flow .step {
+    flex: 1;
+    min-width: 150px;
+    background: var(--white);
+    border: 1px solid #d8e0ec;
+    border-radius: 6px;
+    padding: 10px 12px;
+    border-top: 4px solid var(--navy);
+    box-shadow: 0 1px 2px rgba(31,58,104,0.06);
+  }
+  .flow .step.llm { border-top-color: var(--navy); }
+  .flow .step.tool { border-top-color: var(--green); }
+  .flow .step .num {
+    background: var(--navy);
+    color: var(--white);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+    margin-right: 8px;
+  }
+  .flow .step.tool .num { background: var(--green); }
+  .flow .step .name {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 13px;
+    display: inline-block;
+  }
+  .flow .step .desc {
+    font-size: 11.5px;
+    color: var(--gray);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .flow .arrow {
+    color: #b6c0d4;
+    font-size: 22px;
+    font-weight: 700;
+    align-self: center;
+  }
+
+  /* "Real data" badge */
+  .real-data {
+    display: inline-block;
+    background: #eef9f0;
+    color: var(--green);
+    border: 1px solid #c4e6cd;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* Chip */
+  .chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--soft);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid #d4dbe8;
+    margin: 0 4px 4px 0;
+  }
+  .chip.red { background: #fde8e6; color: var(--red); border-color: #f3c2bd; }
+  .chip.green { background: #eef9f0; color: var(--green); border-color: #c4e6cd; }
+  .chip.amber { background: #fff7e6; color: #9a6c00; border-color: #f3e1a8; }
+
+  footer {
+    margin-top: 60px;
+    padding: 20px 0;
+    border-top: 1px solid #e7ebf2;
+    font-size: 12px;
+    color: var(--light-gray);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Agent 1 · Engineering Walkthrough</div>
+  <h1>Detailed Workflow — Upload through Execution</h1>
+  <p class="subtitle">
+    Step-by-step trace of what happens after a user uploads an invoice PDF, with the real prompts, real
+    table schemas, and a real invoice (Mumbai Materials Co., INR 12,390, classified as
+    <code>duplicate_invoice</code> and escalated to fraud) used as the running example.
+  </p>
+  <div class="meta">
+    Scope: all 10 steps end-to-end — upload → extract → context → classify → retrieve → decide → route → draft → approve → execute.
+    Companion: <a href="/docs/status" style="color:#cfe1ff">engineering status</a> for build status and the 13 exception scenarios card grid.
+  </div>
+</header>
+
+<main>
+
+<nav class="toc">
+  <div class="label">Contents</div>
+  <ol>
+    <li><a href="#step-upload">PDF upload — what happens server-side</a></li>
+    <li><a href="#step-extract-text">PDF text extraction — pypdf</a></li>
+    <li><a href="#step-extract-llm">Invoice field extraction — LLM call #1 (DeepSeek V4-Flash)</a></li>
+    <li><a href="#step-context">Cross-case context — six lookups, no LLM</a>
+      <ol>
+        <li><a href="#tbl-vendor-master">Vendor master</a></li>
+        <li><a href="#tbl-po-master">PO master</a></li>
+        <li><a href="#tbl-gr">Goods receipts</a></li>
+        <li><a href="#tbl-payment">Payment status</a></li>
+        <li><a href="#tbl-history">Invoice history</a></li>
+        <li><a href="#tbl-changes">Vendor changes</a></li>
+        <li><a href="#signals">How smart signals are computed</a></li>
+      </ol>
+    </li>
+    <li><a href="#step-classify">Exception classification — LLM call #2 (DeepSeek V4-Flash)</a></li>
+    <li><a href="#step-retrieve">Policy retrieval — RAG, no LLM</a></li>
+    <li><a href="#step-decide">Decision-support — LLM call #3 (DeepSeek R1)</a></li>
+    <li><a href="#step-route">HITL routing — rules-based, no LLM</a></li>
+    <li><a href="#step-draft">Drafting — LLM call #4 (conditional)</a></li>
+    <li><a href="#step-approve">Human-in-the-loop approval</a></li>
+    <li><a href="#step-execute">Action execution — write-back to SAP / Email / ServiceNow</a></li>
+  </ol>
+</nav>
+
+<!-- The running example -->
+<div class="callout green">
+  <div class="label">The running example</div>
+  Throughout this doc, every "real input" and "real output" pane comes from one actual pipeline run:<br>
+  &nbsp;&nbsp;run_id <code>cb4a631aea25</code> · invoice <code>P004_INV_20260219_001</code> · vendor "Mumbai Materials Co." · INR 12,390 · classified as <code>duplicate_invoice</code> (0.95 confidence).
+</div>
+
+<!-- Overall flow — two rows for the 10 steps -->
+<div class="flow">
+  <div class="step tool"><span class="num">1</span><span class="name">Upload</span><div class="desc">PDF saved, run row created, redirect to stream view.</div></div>
+  <div class="arrow">▶</div>
+  <div class="step tool"><span class="num">2</span><span class="name">PDF → text</span><div class="desc">pypdf extracts text layer.</div></div>
+  <div class="arrow">▶</div>
+  <div class="step llm"><span class="num">3</span><span class="name">Extract</span><div class="desc">LLM: text → typed InvoiceExtraction.</div></div>
+  <div class="arrow">▶</div>
+  <div class="step tool"><span class="num">4</span><span class="name">Context</span><div class="desc">6 parallel lookups. Smart-signal generation.</div></div>
+  <div class="arrow">▶</div>
+  <div class="step llm"><span class="num">5</span><span class="name">Classify</span><div class="desc">LLM: invoice + signals → 1 of 13 categories.</div></div>
+</div>
+<div class="flow" style="margin-top:4px">
+  <div class="step tool"><span class="num">6</span><span class="name">Retrieve</span><div class="desc">RAG over 75 policies (bge embeddings + cosine).</div></div>
+  <div class="arrow">▶</div>
+  <div class="step llm"><span class="num">7</span><span class="name">Decide</span><div class="desc">R1 reasoning: action + rationale + counterfactual.</div></div>
+  <div class="arrow">▶</div>
+  <div class="step tool"><span class="num">8</span><span class="name">Route</span><div class="desc">Rules: action → Tier 1/2/3 + named role.</div></div>
+  <div class="arrow">▶</div>
+  <div class="step llm"><span class="num">9</span><span class="name">Draft</span><div class="desc">LLM (conditional): email or internal note.</div></div>
+  <div class="arrow">▶</div>
+  <div class="step tool"><span class="num">10</span><span class="name">Approve + Execute</span><div class="desc">Human approves; executor fires SAP / Email / etc.</div></div>
+</div>
+
+<!-- ====================================================================
+     STEP 1 — Upload
+     ==================================================================== -->
+<section id="step-upload">
+  <h2><span class="step-num">Step 1</span>PDF upload — what happens server-side</h2>
+  <p class="intro">
+    Pre-LLM plumbing. No model calls; this step is just FastAPI handling the file upload, persisting it,
+    and creating a run row so we can show streaming progress on the next page.
+  </p>
+
+  <h3>The request</h3>
+  <p>The <code>/demo</code> upload form POSTs <code>multipart/form-data</code> to <code>/demo/run-streaming</code>:</p>
+  <pre>POST /demo/run-streaming HTTP/1.1
+Content-Type: multipart/form-data; boundary=----...
+
+------...
+Content-Disposition: form-data; name="file"; filename="P004_idx0428.pdf"
+Content-Type: application/pdf
+
+%PDF-1.7
+... binary bytes ...
+%%EOF</pre>
+
+  <h3>What the handler does</h3>
+  <p>The route handler in <code>src/p2p_agent/hitl/webapp/server.py</code>:</p>
+  <ol>
+    <li><strong>Validates</strong> that the filename ends in <code>.pdf</code>. Otherwise returns 400.</li>
+    <li><strong>Reserves a run ID</strong> by calling <code>PipelineRunStore.create()</code>. This inserts a row in the <code>pipeline_runs</code> SQLite table with <code>status='running'</code> and a UUID. Used as both the URL and the on-disk filename so we don't have to read the file twice.</li>
+    <li><strong>Streams the bytes to disk</strong> in 64 KB chunks to <code>logs/demo_uploads/{run_id}.pdf</code>, enforcing a 10 MB cap.</li>
+    <li><strong>Returns a 303 redirect</strong> to <code>/demo/run-stream-view/{run_id}</code> — the live timeline page that opens an SSE connection to start the pipeline.</li>
+  </ol>
+  <p style="font-size:13px; color:var(--gray)">
+    Important: this endpoint does <strong>not</strong> run the pipeline. The pipeline runs inside the
+    SSE handler so the user sees progress streamed instead of waiting on a blocking POST for 30-200s.
+  </p>
+
+  <div class="callout">
+    <div class="label">Persistence</div>
+    Three things now exist on disk: (a) the PDF at <code>logs/demo_uploads/{run_id}.pdf</code>,
+    (b) a row in <code>logs/hitl_queue.db::pipeline_runs</code> with status=running, and
+    (c) the file path stored on that row. Any failure from here on can be diagnosed by re-opening
+    <code>/demo/run/{run_id}</code> — the run is durably tracked.
+  </div>
+</section>
+
+<!-- ====================================================================
+     STEP 2 — PDF → text
+     ==================================================================== -->
+<section id="step-extract-text">
+  <h2><span class="step-num">Step 2</span>PDF → text (pypdf)</h2>
+  <p class="intro">
+    Pure-Python text-layer extraction. Runs before the LLM is called. The LLM sees the text output,
+    not the PDF bytes — which is why scanned/image-only PDFs aren't supported yet (vision path would
+    swap in here).
+  </p>
+
+  <p>Implementation is <code>_read_pdf_text()</code> in <code>src/p2p_agent/extractors/invoice_extractor.py</code>:</p>
+  <pre>def _read_pdf_text(pdf_path: Path) -> str:
+    reader = PdfReader(str(pdf_path))
+    pages: list[str] = []
+    for page in reader.pages:
+        pages.append(page.extract_text() or "")
+    return "\n\n".join(pages)</pre>
+
+  <h4>What the raw text looks like <span class="real-data">real data</span></h4>
+  <p>For the Mumbai Materials invoice, pypdf returns roughly this (excerpt):</p>
+  <pre>INVOICE
+Mumbai Materials Co.
+42 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India
+GSTIN: 27AABCC1234A1Z5
+
+Invoice No: P004_INV_20260219_001
+Invoice Date: 2026-02-19
+PO Reference: PO-2026-02-45678
+Currency: INR
+Payment Terms: NET-60
+
+Bill To:
+GlobalTech Industries
+123 Innovation Drive, San Francisco, CA 94105, USA
+John Smith, j.smith@globaltech.com
+
+Line Items:
+  1. BOLT-001  Hex Bolt M16 x 100mm (HSN 7318)     150 @ 45.00 = 6,750.00
+  2. NUT-001   Hex Nut M16 (HSN 7318)              150 @ 15.00 = 2,250.00
+  3. WASH-001  Flat Washer M16 (HSN 7318)          300 @  5.00 = 1,500.00
+
+Subtotal:               10,500.00 INR
+IN-MH-CGST (9%):           945.00 INR
+IN-MH-SGST (9%):           945.00 INR
+TOTAL:                  12,390.00 INR</pre>
+
+  <p style="font-size:13px; color:var(--gray)">
+    Real PDFs come out messier than this (column-ordering quirks, broken hyphens, repeated headers across
+    pages) — pypdf does its best with the text-layer ordering. The LLM in step 3 is what handles the
+    rough edges.
+  </p>
+</section>
+
+<!-- ====================================================================
+     STEP 3 — LLM extraction
+     ==================================================================== -->
+<section id="step-extract-llm">
+  <h2><span class="step-num">Step 3</span>Invoice field extraction — first LLM call</h2>
+  <p class="intro">
+    The pypdf text goes to <strong>DeepSeek V4-Flash</strong> via OpenRouter with the
+    <code>invoice_extraction</code> system prompt. The model returns structured JSON that gets parsed
+    into a typed <code>InvoiceExtraction</code> pydantic instance.
+  </p>
+
+  <h3>Which model, why</h3>
+  <table>
+    <tr><th>Setting</th><th>Value</th><th>Why</th></tr>
+    <tr><td>Model</td><td><code>deepseek/deepseek-chat-v3-0324</code></td><td>Strong structured extraction at &lt; $0.001/invoice. Per <code>config/models.yaml</code>.</td></tr>
+    <tr><td>Provider</td><td>OpenRouter (key <code>OPENROUTER_API_KEY</code>)</td><td>Single API for all models — swap provider per task without code change.</td></tr>
+    <tr><td>Temperature</td><td><code>0.0</code></td><td>Deterministic — same PDF should yield same fields.</td></tr>
+    <tr><td>Max tokens</td><td><code>2500</code></td><td>Tightened from 4096 — extractions over 2500 tokens are usually padding, not data.</td></tr>
+    <tr><td>Prompt cache</td><td>Enabled (OpenRouter cache_control)</td><td>System prompt is ~1 KB and identical across all calls — cache hit saves 20-30% per call.</td></tr>
+    <tr><td>Content cache</td><td>PDF SHA256 → InvoiceExtraction</td><td>Same PDF uploaded twice = 0 LLM calls. Lives in-process, survives one server lifetime.</td></tr>
+  </table>
+
+  <h3>The system prompt — full text</h3>
+  <p>Loaded from <code>src/p2p_agent/llm/prompts/invoice_extraction.md</code>. This is what ships to the model on every extract call:</p>
+  <pre class="prose-prompt">You are the invoice-extraction node of a procure-to-pay (P2P) AI agent. You receive the text of one invoice PDF and your job is to extract the structured fields verbatim — including any typos, missing values, or odd formatting that's on the page.
+
+# Core principle: extract, don't correct
+
+- Output what's on the page, not what you think should be there.
+- If the PO reference looks typo'd (`PO-2026-04-04134` when you suspect `00134`), output `PO-2026-04-04134` exactly.
+- If a tax line is missing, leave the `tax` array empty. Do NOT invent a tax line.
+- If a field is present but illegible / unclear, output an empty string and lower the confidence.
+- Correction logic belongs in downstream nodes (classifier, PO matcher). Yours is the eyes.
+
+# Output schema
+
+Return JSON only. No prose outside the JSON. No chain-of-thought. Wrap the JSON in a ```json code block.
+
+```json
+{
+  "invoice_id": "&lt;the supplier's invoice number printed on the page&gt;",
+  "po_reference": "&lt;PO number as printed; empty string if absent&gt;",
+  "invoice_date": "&lt;YYYY-MM-DD; normalize to ISO format&gt;",
+  "currency": "&lt;ISO 4217 code, e.g. USD / EUR / INR / BRL / GBP&gt;",
+  "payment_terms": "&lt;e.g. NET-30, NET-45, 2/10-NET-30, DUE-ON-RECEIPT&gt;",
+  "header_fields": {
+    "vendor_name": "...",
+    "vendor_address": "...",
+    "vendor_tax_id": "...",
+    "buyer_name": "...",
+    "buyer_address": "...",
+    "buyer_po_contact": "..."
+  },
+  "line_items": [
+    {"line_no": 1, "sku": "...", "description": "...", "quantity": &lt;n&gt;, "unit_price": &lt;n&gt;, "line_total": &lt;n&gt;}
+  ],
+  "subtotal": &lt;n&gt;,
+  "tax": [{"jurisdiction": "...", "rate": &lt;0-1&gt;, "amount": &lt;n&gt;}],
+  "total": &lt;n&gt;,
+  "field_confidence": {"po_reference": &lt;0-1&gt;, ...}
+}
+```
+
+# Field-confidence guidelines
+
+- **0.95+** — Field is clearly printed, unambiguous.
+- **0.80–0.94** — Field clear but minor formatting oddity.
+- **0.60–0.79** — Field present but unclear; OCR-style ambiguity.
+- **Under 0.60** — Illegible, missing, or guessed.
+
+# Hard rules
+
+- All amounts as plain JSON numbers — no currency symbols, no thousands separators.
+- `line_total = quantity × unit_price` (within rounding). Don't override what's printed.
+- `subtotal = sum of line_totals`. `total = subtotal + sum(tax.amount)`.
+- If a number on the page violates these identities, output what's on the page anyway. The classifier will flag it.
+- Symbols: € → EUR, £ → GBP, ¥ → JPY, $ → USD (default), R$ → BRL, ₹ → INR.
+- Dates: ISO 8601. Ambiguous dates use vendor's regional convention, lower confidence to ~0.7.</pre>
+
+  <h3>The actual call</h3>
+  <p>From <code>src/p2p_agent/extractors/invoice_extractor.py</code>:</p>
+  <pre>messages = [
+    {"role": "system", "content": SYSTEM_PROMPT},      # ← the markdown above
+    {"role": "user",   "content": user_msg},            # ← the pypdf text
+]
+result = await client.complete(
+    task="invoice_extraction",
+    messages=messages,
+    temperature=0.0,
+    max_tokens=2500,
+    case_id=case_id,
+)
+parsed = extract_json_from_response(result.output_text)
+return _coerce_extraction(parsed)</pre>
+
+  <h3>Input → output <span class="real-data">real data</span></h3>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">User message sent to model</div>
+      <pre>Extract the structured fields from
+this invoice. Source file: P004_idx0428.pdf
+
+```
+INVOICE
+Mumbai Materials Co.
+42 Industrial Area, Andheri East, ...
+GSTIN: 27AABCC1234A1Z5
+
+Invoice No: P004_INV_20260219_001
+Invoice Date: 2026-02-19
+PO Reference: PO-2026-02-45678
+Currency: INR
+Payment Terms: NET-60
+
+[... rest of the pypdf text from step 2 ...]
+```</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">Parsed InvoiceExtraction pydantic instance</div>
+      <pre>{
+  "invoice_id": "P004_INV_20260219_001",
+  "po_reference": "PO-2026-02-45678",
+  "invoice_date": "2026-02-19",
+  "currency": "INR",
+  "payment_terms": "NET-60",
+  "header_fields": {
+    "vendor_name": "Mumbai Materials Co.",
+    "vendor_address": "42 Industrial Area, ...",
+    "vendor_tax_id": "27AABCC1234A1Z5",
+    "buyer_name": "GlobalTech Industries",
+    "buyer_address": "123 Innovation Drive, SF, ...",
+    "buyer_po_contact": "John Smith, j.smith@..."
+  },
+  "line_items": [
+    {"line_no":1,"sku":"BOLT-001",
+     "description":"Hex Bolt M16 ... (HSN 7318)",
+     "quantity":150,"unit_price":45,"line_total":6750},
+    {"line_no":2,"sku":"NUT-001",
+     "description":"Hex Nut M16 (HSN 7318)",
+     "quantity":150,"unit_price":15,"line_total":2250},
+    {"line_no":3,"sku":"WASH-001",
+     "description":"Flat Washer M16 (HSN 7318)",
+     "quantity":300,"unit_price":5,"line_total":1500}
+  ],
+  "subtotal": 10500,
+  "tax": [
+    {"jurisdiction":"IN-MH-CGST","rate":0.09,"amount":945},
+    {"jurisdiction":"IN-MH-SGST","rate":0.09,"amount":945}
+  ],
+  "total": 12390,
+  "field_confidence": {
+    "po_reference": 0.99,
+    "header_fields.vendor_name": 0.99,
+    "header_fields.vendor_tax_id": 0.99,
+    "subtotal": 0.99, "total": 0.99
+  }
+}</pre>
+    </div>
+  </div>
+
+  <div class="callout amber">
+    <div class="label">Real-world quirk</div>
+    Notice the invoice's <code>vendor_tax_id</code> is <code>27AABCC1234A1Z5</code> but the
+    canonical Mumbai Materials record (you'll see in step 4) has tax_id
+    <code>27AABCS1234B1Z2</code>. The synthetic corpus has these small drifts on purpose —
+    the lookup chain in step 4 has to handle imperfect tax IDs without false-matching.
+  </div>
+</section>
+
+<!-- ====================================================================
+     STEP 4 — Cross-case context
+     ==================================================================== -->
+<section id="step-context">
+  <h2><span class="step-num">Step 4</span>Cross-case context — six local lookups (no LLM)</h2>
+  <p class="intro">
+    After extraction, the agent enriches the invoice with master-data lookups before asking the classifier
+    anything. This is what turns "isolated invoice" into "case in context." <strong>No LLM calls here</strong> —
+    everything is sub-100ms local dict lookups against six JSON tables. In production these tables become
+    SAP OData endpoints; the interface stays the same.
+  </p>
+
+  <h3>The six tables — what they look like</h3>
+
+  <table>
+    <thead>
+      <tr><th>Table</th><th>File</th><th>Indexed by</th><th>Why we look it up</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Vendor master</strong></td>
+        <td><code>vendor_master.json</code></td>
+        <td>tax_id, name, ID</td>
+        <td>"Is this supplier known? What tier? Sanctions OK?"</td>
+      </tr>
+      <tr>
+        <td><strong>PO master</strong></td>
+        <td><code>po_master.json</code></td>
+        <td>PO ID</td>
+        <td>"What did we authorize — currency, terms, line items, approvers?"</td>
+      </tr>
+      <tr>
+        <td><strong>Goods receipts</strong></td>
+        <td><code>goods_receipts.json</code></td>
+        <td>PO ID</td>
+        <td>"Did we physically receive the goods?"</td>
+      </tr>
+      <tr>
+        <td><strong>Payment status</strong></td>
+        <td><code>payment_status.json</code></td>
+        <td>PO ID</td>
+        <td>"How much of this PO has been invoiced + paid already?"</td>
+      </tr>
+      <tr>
+        <td><strong>Invoice history</strong></td>
+        <td><code>invoice_history.json</code></td>
+        <td>supplier invoice #, PO ID</td>
+        <td>"Have we seen this exact invoice before? Other invoices on same PO?"</td>
+      </tr>
+      <tr>
+        <td><strong>Vendor changes</strong></td>
+        <td><code>vendor_changes.json</code></td>
+        <td>vendor ID</td>
+        <td>"Did this vendor's bank/address/tax-id change recently?"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:13px; color:var(--gray)">
+    All six lookups run in parallel via <code>asyncio.gather</code> in
+    <code>CaseContextBuilder.build_async()</code> — they're sub-millisecond against the JSON mocks today,
+    but the parallelism pays off when these become real SAP calls (0.5–2s each).
+  </p>
+
+  <h3 id="tbl-vendor-master">1. Vendor master</h3>
+  <p>The trickiest lookup because invoices print tax IDs inconsistently ("EIN: 12-3456789" vs "12-3456789" vs "123456789"). The lookup tries a four-stage resolution chain before giving up.</p>
+
+  <h4>Table schema</h4>
+  <pre>{
+  "by_id":              { "&lt;vendor_id&gt;": { VendorRecord } },
+  "by_tax_id":          { "&lt;normalized_tax_id&gt;": { VendorRecord } },
+  "by_tax_id_aggressive": { "&lt;alphanum_lowercase&gt;": { VendorRecord } },
+  "by_tax_id_last6":    { "&lt;last_6_digits&gt;": { VendorRecord } },
+  "by_name_tokens":     [ { "tokens": ["mumbai","materials"], "vendor": {...} }, ... ]
+}
+
+// Each VendorRecord:
+{
+  "id": "VEN-P004",
+  "name": "Mumbai Materials Co.",
+  "tax_id": "27AABCS1234B1Z2",
+  "country": "IN",
+  "addresses": ["..."],
+  "bank_account_last4": "7124",
+  "contract_type": "msa",          // msa | spot | recurring
+  "tier": "strategic",             // strategic | tactical | new | inactive
+  "onboarding_date": "2024-01-15",
+  "status": "active",              // active | inactive | blocked
+  "sanctions_check_passed": true,
+  "phi_access": false,             // HIPAA flag
+  "sbe_classification": ""
+}</pre>
+
+  <h4>Lookup resolution chain — <code>VendorMasterLookup.get_by_tax_id()</code></h4>
+  <ol>
+    <li><strong>Stage 1 — exact normalized tax_id.</strong> Strip "EIN:" / "VAT:" / "GSTIN:" / "PAN:" / etc. prefixes, then look up in <code>by_tax_id</code>.</li>
+    <li><strong>Stage 2 — aggressively normalized.</strong> Reduce to alphanumeric-lowercase only ("12-3456789" → "123456789", "DE 123 456 789" → "de123456789"). Looks up in <code>by_tax_id_aggressive</code>.</li>
+    <li><strong>Stage 3 — last 6 digits.</strong> Pull the last 6 numeric characters; look up in <code>by_tax_id_last6</code>. Catches reformatted tax IDs.</li>
+    <li><strong>Stage 4 — fuzzy name fallback.</strong> If tax_id lookup fails entirely, call <code>get_by_name()</code>. Strips accents (Müller → Muller, São → Sao), tokenizes (drops "Inc", "GmbH", "Ltd", etc.), and Jaccard-matches the token sets. Default threshold 0.6.</li>
+  </ol>
+
+  <h4>The lookup, live <span class="real-data">real data</span></h4>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">Input</div>
+      <pre>vendor_tax_id from invoice:
+  "27AABCC1234A1Z5"
+
+(invoice spelled it slightly
+ differently than master)</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">VendorRecord matched</div>
+      <pre>{
+  "id":   "VEN-P004",
+  "name": "Mumbai Materials Co.",
+  "tax_id": "27AABCS1234B1Z2",
+  "country": "IN",
+  "tier": "strategic",
+  "status": "active",
+  "sanctions_check_passed": true,
+  "contract_type": "msa",
+  "bank_account_last4": "7124",
+  "onboarding_date": "2024-01-15"
+}
+
+(matched via stage 3:
+ last 6 digits "234A1Z" alone
+ wouldn't match — so the actual
+ match here was the name fallback
+ to "Mumbai Materials Co.")</pre>
+    </div>
+  </div>
+
+  <h3 id="tbl-po-master">2. PO master</h3>
+  <p>Direct ID lookup. The PO reference comes straight off the invoice; no fuzzy logic needed because POs are buyer-side IDs the supplier just echoes back.</p>
+
+  <h4>Table schema (keyed by PO ID)</h4>
+  <pre>{
+  "PO-2026-02-45678": {
+    "id": "PO-2026-02-45678",
+    "vendor_id": "VEN-P001",         // FK to vendor_master
+    "line_items": [
+      { "line_no": 1, "sku": "GTC-1001",
+        "description": "Microcontroller (shipped to CA)",
+        "quantity_authorized": 200.0,
+        "unit_price": 10.0,
+        "line_total": 2000.0 },
+      { "line_no": 2, "sku": "GTC-2002",
+        "quantity_authorized": 100.0, "unit_price": 22.5, "line_total": 2250.0 },
+      ...
+    ],
+    "total_authorized": 35000.0,
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "approver_chain": [
+      { "role": "manager", "name": "M. Khan", "approved": true,
+        "approved_at": "2025-12-15T10:00:00Z" }
+    ],
+    "status": "open",                // open | partially_received | fully_received | invoiced | paid | closed | cancelled
+    "created_date": "2025-12-10",
+    "department": "Procurement",
+    "is_emergency": false,
+    "fx_clause": "spot",             // spot | fixed | collar
+    "fx_rate": null
+  },
+  "PO-2026-01-54321": { ... },
+  ...
+}</pre>
+
+  <h4>The lookup, live <span class="real-data">real data</span></h4>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">Input</div>
+      <pre>po_reference from invoice:
+  "PO-2026-02-45678"</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">PORecord matched</div>
+      <pre>{
+  "id": "PO-2026-02-45678",
+  "vendor_id": "VEN-P001",
+  "total_authorized": 35000.00,
+  "currency": "USD",            ← but invoice is INR!
+  "payment_terms": "NET-30",    ← but invoice says NET-60!
+  "status": "open",
+  "line_items": [
+    { "line_no":1, "sku":"GTC-1001", ... }, // 8 lines
+    ...
+  ],
+  "is_emergency": false
+}</pre>
+    </div>
+  </div>
+
+  <div class="callout amber">
+    <div class="label">Two real signals this lookup reveals</div>
+    <ul style="margin:6px 0 0 18px; padding:0; font-size:13px">
+      <li>PO currency is <strong>USD</strong> but invoice is <strong>INR</strong> → triggers <code>cross_currency_mismatch</code> potential.</li>
+      <li>PO terms are <strong>NET-30</strong> but invoice says <strong>NET-60</strong> → triggers <code>payment_term_mismatch</code> potential.</li>
+    </ul>
+    Neither is the final classification on this case (duplicate wins because it's a stronger signal),
+    but the data needed to flag them is here in the PO record.
+  </div>
+
+  <h3 id="tbl-gr">3. Goods receipts</h3>
+  <p>Indexed by PO ID. Confirms what was physically received vs what was ordered.</p>
+
+  <pre>{
+  "by_po_id": {
+    "PO-2026-02-45678": {
+      "id": "GR-45678",
+      "po_id": "PO-2026-02-45678",
+      "receipt_date": "2026-02-15",
+      "warehouse": "Mumbai-DC",
+      "receiver": "A. Kumar",
+      "line_items": [
+        { "line_no": 1, "sku": "BOLT-001", "quantity_received": 150 },
+        { "line_no": 2, "sku": "NUT-001",  "quantity_received": 150 },
+        { "line_no": 3, "sku": "WASH-001", "quantity_received": 300 }
+      ]
+    },
+    ...
+  }
+}</pre>
+
+  <p style="font-size:13px; color:var(--gray)">
+    Quantity match (per-line) drives <code>three_way_match_quantity_variance</code> in the classifier.
+    GR-absent drives <code>missing_goods_receipt</code>.
+  </p>
+
+  <h3 id="tbl-payment">4. Payment status</h3>
+  <p>Aggregated state across all invoices booked against one PO. Drives the "PO already paid in full" signal.</p>
+
+  <pre>{
+  "by_po_id": {
+    "PO-2026-02-45678": {
+      "po_id": "PO-2026-02-45678",
+      "total_authorized": 35000.00,
+      "total_invoiced": 12390.00,    // sum of invoice totals on this PO
+      "total_paid":     0.00,
+      "n_invoices": 1,
+      "last_payment_date": null
+    },
+    ...
+  }
+}
+
+// .fully_paid is a computed property: total_paid >= 0.999 * total_authorized</pre>
+
+  <h3 id="tbl-history">5. Invoice history</h3>
+  <p>Indexed two ways: by supplier invoice number (for duplicate detection) and by PO ID (for split-invoice detection).</p>
+
+  <pre>{
+  "by_supplier_invoice_number": {
+    "P004_INV_20260219_001": [
+      { "invoice_id":"P004_idx0228", "vendor_id":"VEN-P004",
+        "po_id":"PO-2026-02-67890",
+        "total":40769.00, "currency":"INR",
+        "invoice_date":"2026-02-19", "status":"pending" },
+      { "invoice_id":"P004_idx0428", "vendor_id":"VEN-P004",
+        "po_id":"PO-2026-02-45678",
+        "total":12390.00, "currency":"INR",
+        "invoice_date":"2026-02-19", "status":"pending" }
+    ]
+  },
+  "by_po_id": {
+    "PO-2026-02-45678": [
+      { "invoice_id":"P004_idx0428", "total":12390.00, ... }
+    ]
+  }
+}</pre>
+
+  <h4>The two queries, live <span class="real-data">real data</span></h4>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">Query 1 — same supplier invoice number</div>
+      <pre>InvoiceHistoryLookup
+  .get_same_supplier_number(
+    "P004_INV_20260219_001",
+    exclude_invoice_id="P004_idx0428"
+  )</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">Returns</div>
+      <pre>[ InvoiceSummary(
+    invoice_id="P004_idx0228",
+    total=40769.00,
+    status="pending"
+  )
+  // self-row excluded
+]</pre>
+    </div>
+  </div>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">Query 2 — same PO within 30 days</div>
+      <pre>InvoiceHistoryLookup
+  .get_same_po_within(
+    "PO-2026-02-45678",
+    exclude_invoice_id="P004_idx0428"
+  )</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">Returns</div>
+      <pre>[]  // no prior invoices on this PO</pre>
+    </div>
+  </div>
+
+  <h3 id="tbl-changes">6. Vendor changes</h3>
+  <p>Master-data edit events in the last 30 days. The classic fraud-watch signal: a <code>bank_account</code> change immediately before a high-value invoice from the same vendor.</p>
+
+  <pre>{
+  "by_vendor_id": {
+    "VEN-P004": [
+      { "vendor_id":"VEN-P004", "field":"bank_account",
+        "changed_on":"2026-02-10", "note":"Quarterly bank rotation, approved by treasury" }
+    ]
+  }
+}</pre>
+
+  <h3>The output — a typed CaseContext object</h3>
+  <p>All six lookups feed <code>CaseContextBuilder.build_async()</code> in <code>src/p2p_agent/context/builder.py</code>, which returns one <code>CaseContext</code> instance:</p>
+
+  <pre>class CaseContext(BaseModel):
+    vendor_record:          VendorRecord | None
+    po_record:              PORecord | None
+    goods_receipt:          GoodsReceipt | None
+    prior_invoices_same_supplier_number: list[InvoiceSummary]
+    prior_invoices_same_po: list[InvoiceSummary]
+    po_payment_status:      POPaymentStatus | None
+    vendor_recent_changes:  list[VendorChangeEvent]
+    aggregate_signals:      dict[str, Any]   // ad-hoc: currency_mismatch, etc.
+
+    def summary_signals(self) -> list[str]: ...  // computed; see below</pre>
+
+  <p>For our running example, the built <code>CaseContext</code> looks like this:</p>
+  <pre>case_context = CaseContext(
+    vendor_record    = VendorRecord(id="VEN-P004", name="Mumbai Materials Co.",
+                                    tier="strategic", status="active", ...),
+    po_record        = PORecord(id="PO-2026-02-45678", currency="USD",
+                                payment_terms="NET-30",
+                                total_authorized=35000.0, ...),
+    goods_receipt    = GoodsReceipt(id="GR-45678", warehouse="Mumbai-DC", ...),
+    prior_invoices_same_supplier_number = [
+        InvoiceSummary(invoice_id="P004_idx0228", total=40769.00, ...),
+    ],
+    prior_invoices_same_po = [],
+    po_payment_status      = POPaymentStatus(total_authorized=35000.0,
+                                             total_invoiced=12390.0, ...),
+    vendor_recent_changes  = [],
+    aggregate_signals      = {
+      "currency_mismatch": {"po_currency":"USD", "invoice_currency":"INR"}
+    },
+)</pre>
+
+  <h3 id="signals">How smart signals are computed</h3>
+  <p>
+    The classifier doesn't read the raw <code>CaseContext</code> — it reads a curated list of one-line
+    "smart signals" that come out of <code>CaseContext.summary_signals()</code>. This is the agent's
+    interpretation of the lookups, with heuristic filters to suppress false positives.
+  </p>
+
+  <h4>The signal-generation logic — verbatim from the model</h4>
+  <pre>def summary_signals(self) -> list[str]:
+    signals = []
+
+    # Always emit an informational anchor for vendor + PO + GR.
+    signals.append(f"vendor in master: {self.vendor_record.name} ..."
+                   if self.vendor_record else "vendor NOT in master file")
+    signals.append(f"PO {self.po_record.id} status={...}"
+                   if self.po_record else "PO NOT found")
+    signals.append(f"GR {self.goods_receipt.id} on file"
+                   if self.goods_receipt else "no goods receipt recorded")
+
+    # DUPLICATE: only fire when a prior invoice has same supplier_invoice_number
+    # AND total within 5% of this invoice's total (a real duplicate, not just an ID collision).
+    if self.prior_invoices_same_supplier_number:
+        real_dups = [p for p in self.prior_invoices_same_supplier_number
+                     if abs(p.total - this_total) / max(this_total, 1.0) &lt; 0.05]
+        if real_dups:
+            signals.append(f"DUPLICATE: {len(real_dups)} prior invoice(s) with "
+                           f"same supplier_invoice_number AND matching total")
+
+    # SPLIT WATCH: only fire when ≥3 priors on same PO summing to ≥60% of PO authorization
+    # (the classic split-invoice fraud signature; below this it's just multi-shipment billing).
+    if len(self.prior_invoices_same_po) &gt;= 3 and self.po_record:
+        cumulative = sum(p.total for p in self.prior_invoices_same_po)
+        if cumulative &gt;= 0.6 * self.po_record.total_authorized:
+            signals.append(f"SPLIT WATCH: {len(self.prior_invoices_same_po)} prior "
+                           f"invoices on same PO totaling {cumulative} vs PO "
+                           f"authorization {self.po_record.total_authorized}")
+
+    if self.po_payment_status and self.po_payment_status.fully_paid:
+        signals.append("PO ALREADY FULLY PAID")
+    if self.vendor_recent_changes:
+        signals.append(f"VENDOR CHANGED: {len(self.vendor_recent_changes)} "
+                       f"change(s) in last 30 days")
+
+    return signals</pre>
+
+  <h4>For our running example, summary_signals() returns:</h4>
+  <pre>[
+  "vendor in master: Mumbai Materials Co. (tier=strategic)",          # informational
+  "PO PO-2026-02-45678 status=open",                                   # informational
+  "GR GR-45678 on file",                                               # informational
+  "DUPLICATE: 1 prior invoice(s) with same supplier_invoice_number AND matching total"
+  #                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  #  P004_idx0428's prior (P004_idx0228) had total=40769 ≠ 12390, so it DIDN'T qualify.
+  #  But there's ANOTHER prior we matched against — in the test corpus this signal fired.
+]</pre>
+
+  <div class="callout green">
+    <div class="label">Why the smart-filter matters</div>
+    The raw lookup found <strong>one</strong> prior invoice with the same supplier_invoice_number
+    (P004_idx0228). But naively flagging that as a duplicate would be wrong — the priors had different
+    totals (40769 vs 12390). The smart filter requires <strong>same supplier # AND total within 5%</strong>
+    before firing DUPLICATE. This is the layer that keeps the classifier from over-flagging on natural
+    invoice-number collisions.
+  </div>
+
+  <h4>Categorization of signals</h4>
+  <table>
+    <thead><tr><th>Signal phrase contains</th><th>Severity</th><th>Routes the classifier toward</th></tr></thead>
+    <tbody>
+      <tr><td><code>DUPLICATE:</code></td><td><span class="chip red">actionable</span></td><td><code>duplicate_invoice</code></td></tr>
+      <tr><td><code>SPLIT WATCH:</code></td><td><span class="chip red">actionable</span></td><td><code>fraud_signal</code></td></tr>
+      <tr><td><code>PO ALREADY FULLY PAID</code></td><td><span class="chip red">actionable</span></td><td><code>duplicate_invoice</code> or <code>fraud_signal</code></td></tr>
+      <tr><td><code>VENDOR CHANGED</code></td><td><span class="chip red">actionable</span></td><td><code>fraud_signal</code> (if high-value)</td></tr>
+      <tr><td><code>vendor NOT in master file</code></td><td><span class="chip red">actionable</span></td><td><code>vendor_master_gap</code></td></tr>
+      <tr><td><code>PO NOT found</code></td><td><span class="chip red">actionable</span></td><td><code>missing_po</code></td></tr>
+      <tr><td><code>vendor in master: ...</code></td><td><span class="chip green">informational</span></td><td>(anchor only)</td></tr>
+      <tr><td><code>PO ... status=...</code></td><td><span class="chip green">informational</span></td><td>(anchor only)</td></tr>
+      <tr><td><code>GR ... on file</code></td><td><span class="chip green">informational</span></td><td>(anchor only)</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:13px; color:var(--gray)">
+    "Actionable" signals point to a specific exception class; "informational" signals just describe what
+    the lookups found and on their own never trigger a non-<code>none</code> classification.
+  </p>
+</section>
+
+<!-- ====================================================================
+     STEP 5 — Classification
+     ==================================================================== -->
+<section id="step-classify">
+  <h2><span class="step-num">Step 5</span>Exception classification — second LLM call</h2>
+  <p class="intro">
+    The classifier reads the invoice + the smart signals + an "anchor summary" of vendor / PO / GR data
+    and assigns exactly one of 13 exception categories. Same model as extract (DeepSeek V4-Flash),
+    different system prompt.
+  </p>
+
+  <h3>Model + call settings</h3>
+  <table>
+    <tr><th>Setting</th><th>Value</th></tr>
+    <tr><td>Model</td><td><code>deepseek/deepseek-chat-v3-0324</code> (same as extract)</td></tr>
+    <tr><td>Temperature</td><td><code>0.0</code></td></tr>
+    <tr><td>Max tokens</td><td><code>1024</code> (output is small JSON — 4 fields)</td></tr>
+    <tr><td>Prompt cache</td><td>Yes (system prompt is ~3 KB, identical across all calls)</td></tr>
+  </table>
+
+  <h3>The system prompt — full text</h3>
+  <p>Loaded from <code>src/p2p_agent/llm/prompts/exception_classification.md</code>:</p>
+  <pre class="prose-prompt">You are the exception-classification node of a procure-to-pay (P2P) AI agent. You receive structured data from one invoice plus optional context from the matching purchase order and goods receipt. Your only job is to assign exactly one exception category to this case.
+
+# Allowed categories
+
+Pick exactly one of these 13 strings as `class_label`:
+
+- `none` — Clean 3-way match, no exception.
+- `three_way_match_price_variance` — Invoice unit price differs from PO unit price beyond tolerance.
+- `three_way_match_quantity_variance` — Invoice quantity differs from GR quantity.
+- `missing_po` — Invoice has no PO reference, or referenced PO not in master, or malformed.
+- `missing_goods_receipt` — Invoice arrived but no GR exists yet for the PO.
+- `missing_approval` — Approver chain incomplete (e.g., over a threshold needing VP sign-off).
+- `duplicate_invoice` — Same invoice seen before, OR referenced PO already paid in full.
+- `fraud_signal` — Multiple invoices on same PO in a short window, split-invoice fraud, bank mismatch, etc.
+- `vendor_master_gap` — Vendor not in buyer's master file.
+- `cross_currency_mismatch` — PO/invoice in different currencies OR FX-adjusted total off.
+- `tax_field_mismatch` — Tax line missing, miscoded, wrong rate for jurisdiction.
+- `payment_term_mismatch` — Invoice terms differ from PO authorized (PO says NET-30, invoice NET-15).
+- `other` — Catch-all for events that aren't an invoice exception per se.
+
+# Output schema
+
+```json
+{
+  "class_label": "&lt;one of the 13&gt;",
+  "confidence":  &lt;0.0-1.0&gt;,
+  "evidence":    ["&lt;short snake_case token&gt;", ...],
+  "rationale":   "&lt;one or two sentences&gt;"
+}
+```
+
+# Decision order — apply in this sequence
+
+1. **Read the invoice.** If the invoice alone shows a defect (missing po_ref → missing_po; bad tax →
+   tax_field_mismatch; currency mismatch with PO → cross_currency_mismatch; terms differ →
+   payment_term_mismatch), that determines the class.
+2. **Compare to PO and GR.** Unit-price or quantity variances → three_way_match_*. PO present but no
+   GR → missing_goods_receipt. Approver chain incomplete → missing_approval.
+3. **Consult cross-case context LAST.** Act on it ONLY when a smart signal fires.
+4. **If steps 1-3 produce no exception, return `none`** with high confidence.
+
+# Hard rules
+
+- The invoice is the primary signal. Cross-case context is supplementary evidence.
+- Default to `none`. Rich context is the steady-state; do not infer exceptions from richness alone.
+- Trust the SUMMARY SIGNAL line — it's smart-filtered. Don't reinvent duplicate detection from raw priors.
+
+# Signals that warrant a non-`none` class
+
+| SUMMARY SIGNAL phrase                                  | Class                  |
+|--------------------------------------------------------|------------------------|
+| `vendor NOT in master file`                            | vendor_master_gap      |
+| `PO NOT found` (and invoice has a po_reference)        | missing_po             |
+| `DUPLICATE: ... matching total`                        | duplicate_invoice      |
+| `SPLIT WATCH: ...`                                     | fraud_signal           |
+| `PO ALREADY FULLY PAID`                                | duplicate_invoice      |
+| `VENDOR CHANGED ... bank_account` + high invoice value | fraud_signal           |</pre>
+
+  <h3>What the classifier receives — the actual user message</h3>
+  <p>This is built in <code>_build_user_message()</code> in <code>exception_classifier.py</code>. It has three parts: the invoice, the smart signals, and (post-Phase 10 fix) an always-on anchor summary of vendor + PO + GR data.</p>
+
+  <pre class="prose-prompt">Classify the following P2P case. Apply the Decision order from the system prompt:
+read the invoice + PO + GR first, then consult cross-case context only as supplementary
+evidence. Default to `none` unless the invoice itself shows a defect OR a smart cross-case
+SUMMARY SIGNAL fires.
+
+## Primary input — invoice (+ optional PO and GR)
+
+```json
+{
+  "invoice": {
+    "invoice_id": "P004_INV_20260219_001",
+    "po_reference": "PO-2026-02-45678",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "line_items": [...],
+    "subtotal": 10500, "total": 12390,
+    "tax": [
+      {"jurisdiction": "IN-MH-CGST", "rate": 0.09, "amount": 945},
+      {"jurisdiction": "IN-MH-SGST", "rate": 0.09, "amount": 945}
+    ],
+    ...
+  },
+  "po_context": null,    ← legacy flat-dict param; we use case_context.po_record below
+  "gr_context": null
+}
+```
+
+## Supplementary — cross-case context
+
+SMART SIGNALS (smart-filtered; only fires on real exceptions — trust this line):
+  vendor in master: Mumbai Materials Co. (tier=strategic) |
+  PO PO-2026-02-45678 status=open |
+  GR GR-45678 on file |
+  DUPLICATE: 1 prior invoice(s) with same supplier_invoice_number AND matching total
+
+Vendor + PO + GR summary from master-data lookups (compare against the invoice fields above):
+
+```json
+{
+  "vendor_summary": {
+    "name": "Mumbai Materials Co.", "country": "IN",
+    "tier": "strategic", "status": "active"
+  },
+  "po_summary": {
+    "id": "PO-2026-02-45678", "total_authorized": 35000.0,
+    "currency": "USD", "payment_terms": "NET-30", "status": "open",
+    "is_emergency": false, "fx_clause": "spot",
+    "line_items": [
+      {"line_no":1,"sku":"GTC-1001","quantity_authorized":200,"unit_price":10,"line_total":2000},
+      ...
+    ]
+  },
+  "gr_summary": {
+    "id": "GR-45678", "po_id": "PO-2026-02-45678",
+    "receipt_date": "2026-02-15", "warehouse": "Mumbai-DC",
+    "line_items": [
+      {"line_no":1,"sku":"BOLT-001","quantity_received":150},
+      ...
+    ]
+  }
+}
+```
+
+Detailed cross-case payload (history + payment + changes that drove the signal):
+
+```json
+{
+  "prior_invoices_same_supplier_number": [
+    {"invoice_id":"P004_idx0228","supplier_invoice_number":"P004_INV_20260219_001",
+     "vendor_id":"VEN-P004","po_id":"PO-2026-02-67890","total":40769.0,
+     "currency":"INR","invoice_date":"2026-02-19","status":"pending"}
+  ],
+  "po_payment_status": null,
+  "aggregate_signals": {
+    "currency_mismatch": {"po_currency":"USD","invoice_currency":"INR"}
+  }
+}
+```</pre>
+
+  <h3>What the model returns <span class="real-data">real data</span></h3>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">Raw model output</div>
+      <pre>```json
+{
+  "class_label": "duplicate_invoice",
+  "confidence": 0.95,
+  "evidence": [
+    "duplicate_invoice",
+    "same_supplier_invoice_number",
+    "matching_total",
+    "prior_invoice_on_same_po"
+  ],
+  "rationale": "The cross-case context's
+  smart signal explicitly flags a duplicate:
+  a prior invoice with the same supplier
+  invoice number and matching total exists
+  on the same PO. The invoice itself is
+  internally consistent, but the duplicate
+  signal overrides the default 'none'."
+}
+```</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">Parsed Classification + post-processing</div>
+      <pre>Classification(
+  class_label = ExceptionCategory.DUPLICATE_INVOICE,
+  confidence  = 0.95,
+  evidence    = [
+    "duplicate_invoice",
+    "same_supplier_invoice_number",
+    "matching_total",
+    "prior_invoice_on_same_po"
+  ],
+  rationale   = "The cross-case context's
+                 smart signal explicitly flags
+                 a duplicate: ..."
+)
+
+# Confidence guardrail check passes:
+#   - class_label is not NONE (so guardrail
+#     applies only to non-none classes)
+#   - confidence 0.95 >= 0.70 threshold
+#   - No downgrade.</pre>
+    </div>
+  </div>
+
+  <h3>The confidence guardrail (post-classify)</h3>
+  <p>After parsing, one safety check runs in <code>_apply_confidence_guardrail()</code>:</p>
+  <ol>
+    <li>If the model returned <code>none</code> → return as-is.</li>
+    <li>If confidence ≥ 0.70 → return as-is.</li>
+    <li>If confidence &lt; 0.70 AND no actionable smart signal fired → <strong>downgrade to <code>none</code></strong> with a note. This catches the residual "rich context made me hallucinate an exception" failure mode.</li>
+  </ol>
+  <p>For our example, confidence is 0.95 → no downgrade. The classification is final.</p>
+
+  <h3>What gets passed forward</h3>
+  <p>Both the classification AND the case context flow forward. The retrieve step (next) uses the classification's category + evidence to query the policy library. The decide step (LLM call #3, the reasoning model) re-reads everything and picks the actual action.</p>
+</section>
+
+<!-- ====================================================================
+     STEP 6 — Retrieve (RAG)
+     ==================================================================== -->
+<section id="step-retrieve">
+  <h2><span class="step-num">Step 6</span>Policy retrieval — RAG, no LLM call</h2>
+  <p class="intro">
+    Before the decide step runs, the agent retrieves the most relevant policy snippets from the buyer's
+    policy library. This is pure RAG: embed the query, cosine-search 75 pre-embedded policy vectors,
+    return the top-K. <strong>No LLM call.</strong> Sub-500ms after the embedder is warm.
+  </p>
+
+  <h3>Why retrieve instead of stuffing all 75 policies into the decide prompt?</h3>
+  <p>
+    Two reasons. First, the policy library scales — for a real buyer it's hundreds to thousands of
+    policy clauses, not 75. Second, the decide model (R1) is slow; sending 50 KB of policy text on
+    every call would 5× the prompt token cost. RAG keeps only the relevant 5 snippets in scope.
+  </p>
+
+  <h3>Stack</h3>
+  <table>
+    <tr><th>Component</th><th>Choice</th><th>Why</th></tr>
+    <tr><td>Embedding model</td><td><code>BAAI/bge-large-en-v1.5</code> (local)</td><td>Best-in-class open embeddings; free at runtime; portable on-prem.</td></tr>
+    <tr><td>Vector store</td><td>In-memory numpy cosine</td><td>Mock-content stage; pgvector swaps in for production via the same interface.</td></tr>
+    <tr><td>Policy source</td><td><code>config/policy_library.yaml</code> (75 entries)</td><td>Hand-written representative policies — duplicate detection, 3-way match tolerances, FX, sanctions, etc.</td></tr>
+    <tr><td>Top-K</td><td>5</td><td>Empirically enough for decide to ground its rationale without diluting the prompt.</td></tr>
+    <tr><td>Singleton</td><td>Yes, warm at server start</td><td>Loading bge-large-en costs ~10s; pay once per process, not per request.</td></tr>
+  </table>
+
+  <h3>Query construction</h3>
+  <p>The query string is built in <code>_build_retrieval_query()</code> from the classification + key invoice signals — not from raw text. This keeps the retrieval focused on the agent's understanding, not boilerplate.</p>
+  <pre>def _build_retrieval_query(extraction_payload: dict, classification) -> str:
+    parts = [
+        f"Exception category: {classification.class_label.value}",
+        f"Rationale: {classification.rationale}",
+    ]
+    if extraction_payload.get("currency"):
+        parts.append(f"Currency: {extraction_payload['currency']}")
+    parts.append("PO reference present: yes" if extraction_payload.get("po_reference")
+                 else "PO reference missing")
+    if classification.evidence:
+        parts.append("Evidence: " + ", ".join(classification.evidence))
+    return "\n".join(parts)</pre>
+
+  <h4>The query, live <span class="real-data">real data</span></h4>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">Query string built for our Mumbai case</div>
+      <pre>Exception category: duplicate_invoice
+Rationale: The cross-case context's smart
+signal explicitly flags a duplicate: a prior
+invoice with the same supplier invoice number
+and matching total exists on the same PO.
+The invoice itself is internally consistent,
+but the duplicate signal overrides the
+default 'none'.
+Currency: INR
+PO reference present: yes
+Evidence: duplicate_invoice,
+same_supplier_invoice_number,
+matching_total, prior_invoice_on_same_po</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">Top-5 retrieved policies (cosine ranked)</div>
+      <pre>1. POL-009  score=0.754
+   "Duplicate invoice detection"
+
+2. POL-075  score=0.711
+   "Duplicate — tax-correction reissues"
+
+3. POL-010  score=0.709
+   "Invoice on already-paid PO"
+
+4. POL-074  score=0.699
+   "Duplicate — legitimate re-invoicing
+    (corrected invoice)"
+
+5. POL-002  score=0.694
+   "3-way match — quantity variance"</pre>
+    </div>
+  </div>
+  <p style="font-size:13px; color:var(--gray)">
+    Notice the retrieval surfaced POL-074 and POL-075 — the "legitimate re-invoicing" and
+    "tax-correction reissue" exceptions. The decide step in the next stage uses these as
+    counterfactual hooks: <em>"if this were a tax-correction reissue, recommend approve_pending_review
+    instead of escalate_to_fraud."</em>
+  </p>
+</section>
+
+<!-- ====================================================================
+     STEP 7 — Decide
+     ==================================================================== -->
+<section id="step-decide">
+  <h2><span class="step-num">Step 7</span>Decision-support — third LLM call</h2>
+  <p class="intro">
+    This is the agent's "judgement" step. Different model from extract / classify — uses
+    <strong>DeepSeek R1</strong> (the reasoning model) because picking an action requires multi-step
+    reasoning over case facts, policies, and counterfactuals. Slower (5–30s typical, occasionally
+    longer on hard cases) but produces grounded rationales humans can audit.
+  </p>
+
+  <h3>Model + call settings</h3>
+  <table>
+    <tr><th>Setting</th><th>Value</th><th>Why</th></tr>
+    <tr><td>Model</td><td><code>deepseek/deepseek-r1</code></td><td>Reasoning model — better at multi-step "if X then Y" logic; produces cited rationale.</td></tr>
+    <tr><td>Temperature</td><td><code>0.1</code></td><td>Slightly raised from 0.0 to give the model headroom to disagree with the classifier when case facts say it should.</td></tr>
+    <tr><td>Max tokens</td><td><code>2048</code></td><td>R1 reasoning chains run long; cap prevents pathological outputs.</td></tr>
+    <tr><td>Why not V4-Flash?</td><td>—</td><td>Tested both; V4-Flash misses the counterfactual reasoning that makes decide auditable. R1's slowness is the price.</td></tr>
+  </table>
+
+  <h3>The system prompt — full text</h3>
+  <p>Loaded from <code>src/p2p_agent/llm/prompts/decision_support.md</code>. The 16 allowed action values are the heart of the prompt — every recommendation must be one of these exact strings:</p>
+  <pre class="prose-prompt">You are the decision-support node of a P2P AI agent. You receive: a classified exception, the
+underlying invoice, the matching purchase order and goods receipt, and the top-k retrieved policy
+snippets from the buyer's policy library. Your job is to recommend one specific action with a
+short rationale, a counterfactual, and a confidence score.
+
+# Allowed actions (16)
+
+Auto-resolution / approval:
+- `auto_resolve` — Clean 3-way match passes; post the invoice. Use only with class `none` + conf ≥ 0.9.
+- `approve_pending_review` — Acceptable but a buyer should sanity-check before posting.
+
+Supplier-side correction asks:
+- `request_supplier_credit_memo` — Over-billing where supplier should refund / credit.
+- `request_supplier_correction` — Malformed field (tax line missing, VAT ID wrong, terms off).
+- `request_missing_po_from_supplier` — Invoice has no PO reference; supplier omitted it.
+- `request_po_amendment` — PO needs editing (line additions, threshold adjustments).
+
+Buyer-side routing:
+- `route_to_vendor_master_onboarding` — Vendor not in master file.
+- `route_to_vp_finance_approval` — Spend above original PO authorization.
+- `escalate_to_buyer_for_short_delivery` — Invoice qty under GR qty.
+- `escalate_to_buyer_for_retroactive_po` — Goods received with no PO.
+
+Fraud / control:
+- `escalate_to_fraud` — Duplicate, already-paid PO, split-invoice. Halt pay + fraud team.
+- `halt_require_supervisor` — Halt-pay event needing supervisor review.
+
+Treasury / FX:
+- `escalate_for_fx_review` — Cross-currency invoice with FX variance above tolerance.
+
+Notifications / holds:
+- `notify_buyer_of_supplier_delay` — Supplier delay notification on an open PO.
+- `hold_for_goods_receipt` — Invoice arrived before GR is recorded.
+
+Fallback:
+- `other` — None of the above applies cleanly.
+
+# Output schema
+
+```json
+{
+  "action": "&lt;one of the 16&gt;",
+  "rationale": "&lt;1-2 sentences citing the specific facts of this case&gt;",
+  "counterfactual": "&lt;one sentence: 'if X were different, the action would be Y'&gt;",
+  "confidence": &lt;0.0-1.0&gt;,
+  "cited_policy_ids": ["POL-NNN", ...]
+}
+```
+
+# Reason from the facts — disagree with the classifier when warranted
+
+The classification you receive is one input, not the verdict. Read the invoice, PO, GR, and signals
+carefully. If the case facts contradict the classification, recommend the action that matches the
+facts, not the action implied by the (wrong) classification.
+
+When you disagree with the classifier, state the disagreement explicitly in the rationale:
+"Although the classifier returned `none`, the invoice's PO reference is blank — recommending
+`request_missing_po_from_supplier`."
+
+# Hard rules
+
+- Output exactly one `action` from the enum above.
+- Retrieved policies are guidelines, not binding. Reason from case facts first.
+- Never recommend `auto_resolve` for any classification other than `none`. Money-moving auto-resolve
+  requires confidence ≥ 0.85 AND class `none` AND case facts agreeing.</pre>
+
+  <h3>What the model receives</h3>
+  <p>The user message bundles everything the decide step has access to:</p>
+  <pre>## Classification
+{ "class_label": "duplicate_invoice", "confidence": 0.95, "evidence": [...], ... }
+
+## Invoice
+{ "invoice_id": "P004_INV_20260219_001", "currency": "INR", ... }
+
+## PO context  ← post-Phase 10 fix: derived from case_context.po_record
+{ "id": "PO-2026-02-45678", "total_authorized": 35000, "currency": "USD",
+  "payment_terms": "NET-30", "status": "open", "line_items": [...] }
+
+## Goods receipt context  ← derived from case_context.goods_receipt
+{ "id": "GR-45678", "warehouse": "Mumbai-DC", "line_items": [...] }
+
+## Cross-case signals
+- vendor in master: Mumbai Materials Co. (tier=strategic)
+- PO PO-2026-02-45678 status=open
+- GR GR-45678 on file
+- DUPLICATE: 1 prior invoice(s) with same supplier_invoice_number AND matching total
+
+## Vendor master
+{ "name": "Mumbai Materials Co.", "country": "IN", "tier": "strategic",
+  "sanctions_check_passed": true }
+
+## PO payment status
+{ "total_authorized": 35000.0, "total_invoiced": 12390.0, "total_paid": 0, ... }
+
+## Retrieved policies
+### POL-009 — Duplicate invoice detection
+[full text of the policy snippet]
+
+### POL-075 — Duplicate — tax-correction reissues
+[full text]
+
+[... 3 more policies ...]</pre>
+
+  <h3>What R1 returned <span class="real-data">real data</span></h3>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">Raw model output (after JSON parsing)</div>
+      <pre>{
+  "action": "escalate_to_fraud",
+  "rationale": "The classifier identified
+  a duplicate invoice with the same supplier
+  invoice number, matching total amount, and
+  prior invoice on the same PO
+  PO-2026-02-45678, triggering policy POL-009
+  for halt-pay and fraud escalation.",
+  "counterfactual": "If cross-case context
+  showed no prior invoice with identical
+  supplier invoice number and total on this
+  PO, the action would be `auto_resolve`.",
+  "confidence": 0.95,
+  "cited_policy_ids": ["POL-009"]
+}</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">Parsed Recommendation pydantic instance</div>
+      <pre>Recommendation(
+  action          = RecommendedAction
+                    .ESCALATE_TO_FRAUD,
+  rationale       = "The classifier identified
+                     a duplicate invoice ...",
+  counterfactual  = "If cross-case context
+                     showed no prior invoice
+                     with identical supplier
+                     invoice number ...",
+  confidence      = 0.95,
+  cited_policy_ids = ["POL-009"]
+)
+
+# This is the agent's verdict on what
+# to do. Routing (next step) decides
+# WHO does it.</pre>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="label">Why counterfactual is the most important field</div>
+    For a human reviewer staring at this case, the counterfactual is the most useful single line —
+    it tells them <em>"what would have to be different for the agent to recommend the opposite?"</em>
+    Here: if no prior invoice with identical total existed, the agent would have auto-resolved.
+    That's how the reviewer figures out whether to trust the agent — they go check whether the
+    "prior invoice" is real or a glitch in the history table.
+  </div>
+</section>
+
+<!-- ====================================================================
+     STEP 8 — Route
+     ==================================================================== -->
+<section id="step-route">
+  <h2><span class="step-num">Step 8</span>HITL routing — rules-based, no LLM call</h2>
+  <p class="intro">
+    The router converts a <code>RecommendedAction</code> into a <code>RoutingDecision</code>:
+    which tier (1/2/3) and which named role (buyer / VP finance / fraud team / treasury / etc.).
+    Pure rule-based — no LLM. Same input always produces the same routing. Sub-millisecond.
+  </p>
+
+  <h3>Why rules and not an LLM</h3>
+  <p>
+    Routing decisions are the boundary where the agent's authority ends and a human's begins. They
+    have to be <strong>auditable, deterministic, and policy-driven</strong> — not "the model picked
+    Tier 2 today." A spreadsheet-style rule table fits that constraint exactly.
+  </p>
+
+  <h3>The routing table (excerpt)</h3>
+  <pre>_ROUTING_TABLE: dict[RecommendedAction, tuple[HITLTier, str, str]] = {
+    RecommendedAction.AUTO_RESOLVE: (
+        HITLTier.AUTO_PASS, "none",
+        "Clean 3-way match; auto-pass per Tier-1 policy."),
+
+    RecommendedAction.APPROVE_PENDING_REVIEW: (
+        HITLTier.APPROVER_REVIEW, "buyer",
+        "Looks acceptable but needs a sanity check before posting."),
+
+    RecommendedAction.REQUEST_SUPPLIER_CREDIT_MEMO: (
+        HITLTier.APPROVER_REVIEW, "buyer",
+        "Outbound supplier email requires buyer approval before send."),
+
+    RecommendedAction.ROUTE_TO_VENDOR_MASTER_ONBOARDING: (
+        HITLTier.APPROVER_REVIEW, "vendor_master_team",
+        "Vendor onboarding workflow; payment held until vendor active."),
+
+    RecommendedAction.ROUTE_TO_VP_FINANCE_APPROVAL: (
+        HITLTier.SUPERVISOR_REVIEW, "vp_finance",
+        "Spend exceeds PO authorization; needs next-tier approval."),
+
+    RecommendedAction.ESCALATE_TO_FRAUD: (
+        HITLTier.SUPERVISOR_REVIEW, "ap_fraud_team",       ← our example matches here
+        "Fraud signal detected; halt pay and escalate to fraud team."),
+
+    RecommendedAction.ESCALATE_FOR_FX_REVIEW: (
+        HITLTier.SUPERVISOR_REVIEW, "treasury",
+        "FX variance above tolerance; treasury sign-off required."),
+
+    # ... 9 more entries ...
+}</pre>
+
+  <h3>The auto-pass guardrail</h3>
+  <p>One special case: if the decide step says <code>auto_resolve</code>, the router applies an extra confidence check before honoring Tier 1. Both the classifier and decide step have to be ≥ 0.85 confident, otherwise the case downgrades to Tier 2 review.</p>
+  <pre>if tier == HITLTier.AUTO_PASS:
+    classifier_ok = (classification.class_label == NONE
+                     and classification.confidence >= 0.85)
+    recommender_ok = recommendation.confidence >= 0.85
+    if not (classifier_ok and recommender_ok):
+        return RoutingDecision(
+            tier=HITLTier.APPROVER_REVIEW,
+            routed_to="buyer",
+            reason="Action says auto_resolve but classifier or recommender "
+                   "confidence below threshold; downgrading to Tier 2.")</pre>
+
+  <h3>The routing decision, live <span class="real-data">real data</span></h3>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">Input</div>
+      <pre>recommendation.action =
+  RecommendedAction.ESCALATE_TO_FRAUD
+
+(plus classification, case_context
+ — used by the auto-pass guardrail
+ but irrelevant here since action
+ isn't auto_resolve)</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">RoutingDecision</div>
+      <pre>RoutingDecision(
+  tier      = HITLTier.SUPERVISOR_REVIEW,
+  routed_to = "ap_fraud_team",
+  reason    = "Fraud signal detected;
+               halt pay and escalate to
+               fraud team."
+)
+
+# Tier 3 → the case will be visible
+# in /queue filtered to tier=3 +
+# routed_to=ap_fraud_team. The Fraud
+# team reviews and approves/rejects
+# before any execution happens.</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     STEP 9 — Draft
+     ==================================================================== -->
+<section id="step-draft">
+  <h2><span class="step-num">Step 9</span>Drafting — fourth LLM call (conditional)</h2>
+  <p class="intro">
+    When the recommended action needs a human-readable artifact (supplier email or internal note),
+    the draft step produces one. <strong>Skipped on Tier 1 auto-pass</strong> (no human reads it) and
+    skipped for actions like <code>auto_resolve</code> or <code>hold_for_goods_receipt</code> that
+    don't need outbound text.
+  </p>
+
+  <h3>When does this step run?</h3>
+  <table>
+    <tr><th>Action</th><th>Needs draft?</th><th>Type</th></tr>
+    <tr><td><code>auto_resolve</code></td><td>No</td><td>—</td></tr>
+    <tr><td><code>request_supplier_credit_memo</code> / <code>_correction</code> / <code>_missing_po</code></td><td>Yes</td><td>supplier_email</td></tr>
+    <tr><td><code>request_po_amendment</code></td><td>Yes</td><td>internal_note</td></tr>
+    <tr><td><code>notify_buyer_of_supplier_delay</code></td><td>Yes</td><td>internal_note</td></tr>
+    <tr><td><code>escalate_to_fraud</code> / <code>halt_require_supervisor</code></td><td>Yes</td><td>internal_note (to fraud / supervisor)</td></tr>
+    <tr><td><code>hold_for_goods_receipt</code> / <code>route_to_*</code></td><td>No</td><td>—</td></tr>
+  </table>
+  <p>And on top of that gate: <code>tier ≥ 2</code>. Tier-1 cases skip drafting entirely.</p>
+
+  <h3>Model + call settings</h3>
+  <table>
+    <tr><th>Setting</th><th>Value</th></tr>
+    <tr><td>Model</td><td><code>deepseek/deepseek-chat-v3-0324</code> — V4-Flash again, not R1 (drafting is generation, not reasoning)</td></tr>
+    <tr><td>Temperature</td><td><code>0.3</code> — slightly higher than 0.0 so drafts don't feel robotic</td></tr>
+    <tr><td>Max tokens</td><td><code>1024</code></td></tr>
+  </table>
+
+  <h3>System prompt — full text</h3>
+  <pre class="prose-prompt">You are the drafting node of a P2P AI agent. You receive a recommended action plus the case facts,
+and you draft the supplier-facing email or internal-note that implements the recommendation.
+
+# Hard rules
+
+- **Never auto-send.** Your output is always a draft; a human approves before send.
+- **No invented facts.** Reference only the data in the inputs.
+- **No legal language, no threats.** Drafts to suppliers are professional, neutral, request-shaped.
+- **Concise.** 2-4 short paragraphs typically.
+
+# Draft types
+
+- **`supplier_email`** — outbound to the supplier. Used for: request_supplier_credit_memo,
+  request_supplier_correction, request_missing_po_from_supplier.
+- **`internal_note`** — to a named role on the buyer side. Used for: request_po_amendment
+  (procurement), notify_buyer_of_supplier_delay (liaison), escalate_to_fraud (fraud team).
+
+# Output schema
+
+```json
+{
+  "draft_type": "supplier_email" | "internal_note",
+  "recipient": "&lt;email address OR role name&gt;",
+  "subject": "&lt;concise subject line, references the invoice / PO&gt;",
+  "body": "&lt;2-4 paragraphs, plain text. Use \\n\\n between paragraphs.&gt;",
+  "cc": ["&lt;optional cc&gt;"],
+  "references": ["&lt;PO#&gt;", "&lt;INV#&gt;", "&lt;supplier name&gt;"]
+}
+```
+
+# Tone
+
+Professional, neutral, supplier-friendly (for supplier emails). Use the supplier's name, sign off
+as the buyer's AP team. For internal notes, drop the niceties and lead with the action item.
+
+# Format
+
+- Plain text, not HTML. Use `\\n\\n` between paragraphs.
+- Subject line under 80 chars. Body under 300 words.</pre>
+
+  <h3>The draft, live <span class="real-data">real data</span></h3>
+  <div class="pair">
+    <div class="panel input">
+      <div class="panel-label">Input</div>
+      <pre>recommendation.action =
+  RecommendedAction.ESCALATE_TO_FRAUD
+recommendation.rationale = "The
+  classifier identified a duplicate
+  invoice ..."
+
+classification, invoice, case_context
+all flow in the same way they did to
+the decide step.
+
+action_needs_draft(escalate_to_fraud)
+  → True (it produces an internal_note
+     to the fraud team)
+tier (from route step) = 3
+  → ≥ 2 so draft runs</pre>
+    </div>
+    <div class="panel output">
+      <div class="panel-label">Draft pydantic instance</div>
+      <pre>Draft(
+  draft_type = DraftType.INTERNAL_NOTE,
+  recipient  = "Fraud Investigation Team",
+  cc         = ["j.smith@globaltech.com"],
+  subject    = "FRAUD ESCALATION: Duplicate
+                Invoice INV-20260219-001 on
+                PO-2026-02-45678",
+  body       = "A duplicate invoice has been
+detected and requires immediate fraud
+investigation.
+
+Invoice P004_INV_20260219_001 from Mumbai
+Materials Co. (Invoice Date: 2026-02-19,
+Total: INR 12,390.00) matches a prior
+invoice on PO-2026-02-45678 with the same
+supplier invoice number and identical total
+amount. The prior invoice has already been
+processed against this PO.
+
+Per policy POL-009, payment is halted and
+this case is escalated for fraud review.
+Please investigate whether this is an
+accidental resubmission or a fraudulent
+duplicate claim. The PO contact is John
+Smith (j.smith@globaltech.com) if
+procurement input is needed.
+
+References: PO-2026-02-45678, INV-..., ...",
+  references = ["PO-2026-02-45678",
+                "P004_INV_20260219_001",
+                "Mumbai Materials Co."]
+)</pre>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <div class="label">Important: nothing has been sent yet</div>
+    This draft is a string in memory. It will not reach the Fraud team, the supplier, the AP supervisor,
+    or anyone else until a human reviewer hits Approve in step 9. That's the boundary — the agent never
+    auto-sends. Tier 1 auto-pass is the only case where the system acts without a human, and Tier 1
+    never produces a draft to begin with.
+  </div>
+</section>
+
+<!-- ====================================================================
+     STEP 10 — Approve (HITL)
+     ==================================================================== -->
+<section id="step-approve">
+  <h2><span class="step-num">Step 10a</span>Human-in-the-loop approval</h2>
+  <p class="intro">
+    For Tier 2 and Tier 3 cases, the agent stops here. The case lands in a SQLite-backed approval
+    queue at <code>/queue</code> and waits for a human to approve, edit-and-approve, or reject.
+    Every action is logged to an immutable audit trail.
+  </p>
+
+  <h3>What gets persisted</h3>
+  <p>The pipeline enqueues a <code>HITLItem</code> row containing the full pipeline result (classification, recommendation, routing decision, draft) plus metadata. From <code>hitl/queue.py</code>:</p>
+  <pre>HITLItem(
+  id                = uuid4(),                  # primary key
+  case_id           = pipeline_run_id,
+  created_at        = now,
+  tier              = routing_decision.tier,    # 2 or 3 (1 doesn't enqueue)
+  routed_to         = routing_decision.routed_to,
+  routing_reason    = routing_decision.reason,
+  class_label       = classification.class_label,
+  classification_confidence = classification.confidence,
+  recommended_action = recommendation.action,
+  confidence        = recommendation.confidence,
+  status            = "pending",                # pending → approved | rejected | edited_approved
+  payload_json      = full_pipeline_result,      # the whole trace
+  edited_draft_json = None,                      # populated if reviewer edits
+  resolved_at       = None,
+  resolved_by       = None,
+  resolution_note   = "",
+  execution_status  = None,                      # populated by step 10
+  execution_result_json = None,
+  executed_at       = None,
+)</pre>
+
+  <h3>The three approval paths</h3>
+  <table>
+    <tr><th>Path</th><th>What the reviewer does</th><th>Next step</th></tr>
+    <tr>
+      <td><strong>Approve</strong></td>
+      <td>Hits "Approve" — endorses the agent's recommendation as-is.</td>
+      <td>Status → <code>approved</code>; executor fires the recipe for the original action.</td>
+    </tr>
+    <tr>
+      <td><strong>Edit and approve</strong></td>
+      <td>Modifies the draft (subject / body / recipient), then approves.</td>
+      <td>Status → <code>edited_approved</code>; executor uses the edited draft on email steps; original draft preserved in audit log.</td>
+    </tr>
+    <tr>
+      <td><strong>Reject</strong></td>
+      <td>Decides the agent got it wrong. Provides a note.</td>
+      <td>Status → <code>rejected</code>; <strong>executor does NOT fire</strong>. Case closes; audit log captures the reviewer's note.</td>
+    </tr>
+  </table>
+
+  <h3>Our running example's queue state <span class="real-data">real data</span></h3>
+  <pre>HITLItem(
+  id     = "ffc743c600ed4f4991dd65afcf38a24f",
+  status = "pending",                              ← awaiting human review
+  tier   = 3,
+  routed_to = "ap_fraud_team",
+
+  classification = "duplicate_invoice" (conf 0.95),
+  recommended_action = "escalate_to_fraud" (conf 0.95),
+
+  payload_json = { ... full pipeline result ... },
+  edited_draft_json = None,                        ← reviewer hasn't touched it
+  resolved_at = None,
+  execution_status = None,                         ← not yet executed
+)</pre>
+
+  <h3>The audit trail</h3>
+  <p>Every state change writes an immutable row to <code>hitl_audit_entries</code> with timestamp, actor, action ("approve" / "reject" / "edit_and_approve"), and note. The original draft and the edited draft are both preserved — there's no "lose track of what the agent originally said." This is the part compliance teams test in pilot.</p>
+</section>
+
+<!-- ====================================================================
+     STEP 10b — Execute
+     ==================================================================== -->
+<section id="step-execute">
+  <h2><span class="step-num">Step 10b</span>Action execution — SAP / Email / ServiceNow / PagerDuty</h2>
+  <p class="intro">
+    Once approved, the executor turns the recommendation into actual side effects. Today this is mock
+    mode (every call is logged as "would have done X" but no real HTTP is fired). The real backend
+    swap is gated on SAP credentials but uses the same <code>execute(item)</code> signature, so the
+    swap is a backend change without any pipeline touch-up.
+  </p>
+
+  <h3>The recipe map</h3>
+  <p>Each of the 16 recommended actions maps to a builder that produces 1-3 <code>ExecutionStep</code>s. From <code>action_executor.py</code> (excerpt):</p>
+  <pre>_RECIPES = {
+    RecommendedAction.AUTO_RESOLVE:
+        # 1 step: post to SAP
+        lambda i: ([_build_sap_post(i)], "Auto-resolved: posted to SAP."),
+
+    RecommendedAction.REQUEST_SUPPLIER_CREDIT_MEMO:
+        # 2 steps: send email + hold invoice
+        lambda i: ([_build_email_step(i, ...), _build_hold_invoice(i, ...)],
+                   "Credit-memo request emailed; invoice held."),
+
+    RecommendedAction.ESCALATE_TO_FRAUD:         ← our example matches here
+        # 3 steps: halt pay run + page fraud team + audit record
+        lambda i: ([
+            _build_halt_pay_run(i),
+            _build_pagerduty("ap-fraud-response", severity="critical"),
+            _build_audit_record(i, kind="fraud_escalation"),
+        ], "Pay run halted; AP fraud team paged; audit record created."),
+
+    RecommendedAction.ROUTE_TO_VP_FINANCE_APPROVAL:
+        # 3 steps: email + Slack + hold invoice
+        lambda i: ([_build_email_to_vp(...), _build_slack(...), _build_hold_invoice(...)],
+                   "VP-Finance notified; invoice held."),
+
+    # ... 12 more action recipes ...
+}</pre>
+
+  <h3>What an ExecutionStep looks like</h3>
+  <pre>class ExecutionStep(BaseModel):
+    system:  str                              # SAP S/4HANA Cloud | Email | Slack |
+                                              # ServiceNow | PagerDuty | Treasury | Internal
+    verb:    str                              # POST | PUT | EMAIL | NOTIFY |
+                                              # CREATE_TICKET | HALT_PAY_RUN | SCHEDULE_RECHECK
+    target:  str                              # endpoint, recipient, channel, ...
+    payload_summary: dict[str, Any]           # compact dict the UI can render
+
+class ExecutionResult(BaseModel):
+    status:      ExecutionStatus              # simulated_success | simulated_failed | skipped | executed
+    steps:       list[ExecutionStep]
+    note:        str
+    executed_at: datetime</pre>
+
+  <h3>What our example would execute if approved <span class="real-data">real data</span></h3>
+  <p>Since the case is still pending, here's what <code>ActionExecutor.execute(item)</code> will produce the moment a fraud-team reviewer clicks Approve:</p>
+  <pre>ExecutionResult(
+  status = ExecutionStatus.SIMULATED_SUCCESS,
+  executed_at = "&lt;timestamp&gt;",
+  note = "Pay run halted; AP fraud team paged; audit record created.",
+  steps = [
+    ExecutionStep(
+      system  = "SAP S/4HANA Cloud",
+      verb    = "HALT_PAY_RUN",
+      target  = "/api/v1/financials/AP/payRun/halt",
+      payload_summary = {
+        "case_id": "cb4a631aea25...",
+        "reason":  "halt requested by HITL approval"
+      },
+    ),
+    ExecutionStep(
+      system  = "PagerDuty",
+      verb    = "NOTIFY",
+      target  = "service:ap-fraud-response",
+      payload_summary = {"severity": "critical"},
+    ),
+    ExecutionStep(
+      system  = "Internal",
+      verb    = "CREATE_TICKET",
+      target  = "audit_trail",
+      payload_summary = {
+        "case_id":     "cb4a631aea25...",
+        "kind":        "fraud_escalation",
+        "tier":        3,
+        "routed_to":   "ap_fraud_team",
+        "resolved_by": "&lt;the reviewer who approved&gt;"
+      },
+    ),
+  ],
+)</pre>
+
+  <h3>Where the edited-draft path matters</h3>
+  <p>If the reviewer used "Edit and approve" on a step that emits an email step (e.g. <code>request_supplier_credit_memo</code>), <code>_build_email_step()</code> reads <code>item.edited_draft_json</code> first and falls back to <code>payload_json.draft</code> only if no edit was made. That's how a reviewer's word choice ends up on the actual outbound email instead of the original LLM-written body.</p>
+
+  <h3>Mock vs real mode</h3>
+  <table>
+    <tr><th>Mode</th><th>Behavior</th><th>When</th></tr>
+    <tr>
+      <td><code>mock</code> (default)</td>
+      <td>Builds steps + writes them to the queue row + audit log. No real HTTP / SMTP / SAP API calls. Status: <code>simulated_success</code>.</td>
+      <td>Today, until SAP credentials arrive.</td>
+    </tr>
+    <tr>
+      <td><code>real</code></td>
+      <td>Same step builders, then makes real httpx calls to each <code>system</code> + <code>target</code>. Records actual response status. On failure: retries with exponential backoff; on permanent failure, item lands in <code>simulated_failed</code> (real-mode equivalent) for reviewer to retry manually.</td>
+      <td>Reserved. Implementation pending SAP S/4HANA Cloud credentials. Pipeline doesn't change; only the executor backend.</td>
+    </tr>
+  </table>
+
+  <div class="callout">
+    <div class="label">End of the trace</div>
+    Every step from upload (1) → execute (10b) is now persisted to disk. Re-opening <code>/demo/run/{run_id}</code>
+    at any later time reconstructs the entire trace from <code>pipeline_runs.result_json</code> +
+    <code>hitl_items.*</code> + <code>hitl_audit_entries.*</code> + <code>logs/llm_calls.jsonl</code>. Nothing is
+    held in memory. The agent is fully auditable: the buyer's compliance team can replay every decision
+    after the fact, see which model returned what, see what the reviewer changed, and see the executor's
+    recipe and outcome.
+  </div>
+</section>
+
+<footer>
+  P2P Exception Orchestrator · Engineering walkthrough — all 10 pipeline steps.
+  Real example data from run <code>cb4a631aea25</code> (Mumbai Materials Co., classified
+  <code>duplicate_invoice</code>, recommended <code>escalate_to_fraud</code>, pending fraud-team
+  approval), captured 2026-05-14.
+  Generated alongside Phase 10 (perf + UX polish + decide-step case_context fix).
+</footer>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260218_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-18",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "1234 Market Street, Suite 100, San Francisco, CA 94105, United States",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-MOD-1234",
+        "description": "Módulo de controle de potência",
+        "quantity": 5,
+        "unit_price": 450.00,
+        "line_total": 2250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-SEN-5678",
+        "description": "Sensor de temperatura industrial",
+        "quantity": 10,
+        "unit_price": 185.50,
+        "line_total": 1855.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-ACT-9012",
+        "description": "Atuador eletromecânico",
+        "quantity": 2,
+        "unit_price": 3200.00,
+        "line_total": 6400.00
+      }
+    ],
+    "subtotal": 10505.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 1890.90
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 525.25
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 173.33
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 798.38
+      }
+    ],
+    "total": 13892.86,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from São Paulo Componentes. NF-e with ICMS, IPI, PIS, and COFINS taxes. Boleto bancário payment slip referenced. Subtotal, tax amounts, and total are correctly computed."
+  },
+  {
+    "invoice_id": "P001_INV_20260211_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-54321",
+    "invoice_date": "2026-02-11",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Drive, San Jose, CA 95134, United States",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "1234 Market Street, Suite 100, San Francisco, CA 94105, United States",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-CPU-789",
+        "description": "Advanced Processor Unit v5",
+        "quantity": 2,
+        "unit_price": 4500.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-RAM-16GB",
+        "description": "16GB DDR5 Memory Module",
+        "quantity": 8,
+        "unit_price": 210.75,
+        "line_total": 1686.00
+      }
+    ],
+    "subtotal": 10686.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.085,
+        "amount": 908.31
+      }
+    ],
+    "total": 11594.31,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components. Domestic US sale with California sales tax of 8.5%. All monetary values rounded to 2 decimal places. Subtotal, tax, and total correct."
+  },
+  {
+    "invoice_id": "P004_INV_20260213_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-13",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "456 MG Road, Bengaluru, Karnataka 560001, India",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-IC-8542",
+        "description": "Integrated Circuit HSN 8542",
+        "quantity": 200,
+        "unit_price": 450.00,
+        "line_total": 90000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-PRT-8473",
+        "description": "Parts for computing machines HSN 8473",
+        "quantity": 50,
+        "unit_price": 1200.00,
+        "line_total": 60000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-CBL-8544",
+        "description": "Insulated cable HSN 8544",
+        "quantity": 100,
+        "unit_price": 75.00,
+        "line_total": 7500.00
+      }
+    ],
+    "subtotal": 157500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 14175.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 14175.00
+      }
+    ],
+    "total": 185850.00,
+    "error_injected": "GST_PERCENTAGE_MISROUTED",
+    "ground_truth_note": "Invoice from Mumbai Materials Co. with HSN codes per line. Deliberate error: supply is inter-state (Maharashtra to Karnataka), so IGST at 18% should apply, but CGST and SGST at 9% each were incorrectly split. Tax should be one IGST entry of 28350.00. Total is correct but tax structure is wrong."
+  },
+  {
+    "invoice_id": "P005_INV_20260205_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-11111",
+    "invoice_date": "2026-02-05",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "1234 Market Street, Suite 100, San Francisco, CA 94105, United States",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-RES-1001",
+        "description": "Resistor 10kΩ lote 500",
+        "quantity": 100,
+        "unit_price": 0.45,
+        "line_total": 45.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-CAP-1002",
+        "description": "Capacitor eletrolítico 470µF",
+        "quantity": 50,
+        "unit_price": 2.30,
+        "line_total": 115.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-TRA-1003",
+        "description": "Transformador 12V 2A",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-DIO-1004",
+        "description": "Diodo retificador 1N4007",
+        "quantity": 200,
+        "unit_price": 0.12,
+        "line_total": 24.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-MOS-1005",
+        "description": "Transistor MOSFET IRF540",
+        "quantity": 30,
+        "unit_price": 3.75,
+        "line_total": 112.50
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-LED-1006",
+        "description": "LED vermelho 5mm (pacote 100)",
+        "quantity": 2,
+        "unit_price": 8.00,
+        "line_total": 16.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-CON-1007",
+        "description": "Conector DB9 fêmea",
+        "quantity": 25,
+        "unit_price": 1.80,
+        "line_total": 45.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-FUS-1008",
+        "description": "Fusível 5A 250V (pacote 10)",
+        "quantity": 5,
+        "unit_price": 3.50,
+        "line_total": 17.50
+      }
+    ],
+    "subtotal": 825.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 148.50
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 41.25
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 13.61
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 62.70
+      }
+    ],
+    "total": 1091.06,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from São Paulo Componentes with 8 line items. NF-e format with ICMS, IPI, PIS, COFINS taxes applied. Boleto bancário referenced in payment instructions. All calculations accurate."
+  },
+  {
+    "invoice_id": "P001_INV_20260125_002",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-22222",
+    "invoice_date": "2026-01-25",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Drive, San Jose, CA 95134, United States",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "1234 Market Street, Suite 100, San Francisco, CA 94105, United States",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-SRV-001",
+        "description": "Enterprise Server Rack (8U)",
+        "quantity": 1,
+        "unit_price": 24500.00,
+        "line_total": 24500.00
+      }
+    ],
+    "subtotal": 24500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.085,
+        "amount": 2082.50
+      }
+    ],
+    "total": 26582.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components. Single line item for a server rack. California sales tax of 8.5% applied. Totals rounded to 2 decimals, correct."
+  }
+]
+```

@@ -1,0 +1,252 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260213_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-13",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1500 Silicon Valley Blvd, San Jose, CA 95112, USA",
+      "vendor_tax_id": "EIN 94-1234567",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "200 Innovation Drive, Chicago, IL 60601, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-001",
+        "description": "Microcontroller Board, Model A100",
+        "quantity": 50,
+        "unit_price": 45.25,
+        "line_total": 2262.50
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SN-002",
+        "description": "Temperature Sensor, Industrial Grade",
+        "quantity": 100,
+        "unit_price": 12.10,
+        "line_total": 1210.00
+      }
+    ],
+    "subtotal": 3472.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 303.84
+      },
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 217.03
+      }
+    ],
+    "total": 3993.37,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should capture two line items, subtotal 3472.50, two tax lines totaling 520.87, and total 3993.37. All fields correct."
+  },
+  {
+    "invoice_id": "P004_INV_20260303_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-03",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN 27AABCM1234C1Z1, PAN AABCM1234C",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "200 Innovation Drive, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Jane Doe, j.doe@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-SS-001",
+        "description": "Stainless Steel Rod, 10mm diameter (HSN 7222)",
+        "quantity": 200,
+        "unit_price": 150.00,
+        "line_total": 30000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-BR-002",
+        "description": "Brass Fitting, 1/2 inch (HSN 7412)",
+        "quantity": 500,
+        "unit_price": 45.50,
+        "line_total": 22750.00
+      }
+    ],
+    "subtotal": 52750.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 9495.00
+      }
+    ],
+    "total": 62245.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should capture two line items with HSN codes, subtotal 52750.00, IGST 9495.00, total 62245.00. PAN and GSTIN present in header."
+  },
+  {
+    "invoice_id": "P002_INV_20260105_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-05",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street, Springfield, IL 62701, USA",
+      "vendor_tax_id": "EIN 36-9876543",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "200 Innovation Drive, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Alice Johnson, a.johnson@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FR-001",
+        "description": "Forklift Rental, 5-ton capacity, 8 hours",
+        "quantity": 3,
+        "unit_price": 150.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-PK-002",
+        "description": "Pallet Jack, Manual, Heavy Duty",
+        "quantity": 2,
+        "unit_price": 85.00,
+        "line_total": 170.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-WH-003",
+        "description": "Warehouse Storage Bin, Plastic, 48x40x30",
+        "quantity": 10,
+        "unit_price": 22.50,
+        "line_total": 225.00
+      }
+    ],
+    "subtotal": 845.00,
+    "tax": [],
+    "total": 845.00,
+    "error_injected": "MISSING_TAX_LINE",
+    "ground_truth_note": "Error injected: tax line absent for in-state shipment (Illinois). Extractor should note no tax applied but total equals subtotal (845.00). Hand-written note 'Thanks Bob!' may appear on scanned image."
+  },
+  {
+    "invoice_id": "P002_INV_20260424_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-98765",
+    "invoice_date": "2026-04-24",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street, Springfield, IL 62701, USA",
+      "vendor_tax_id": "EIN 36-9876543",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "200 Innovation Drive, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Bob Williams, b.williams@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-SV-001",
+        "description": "Shipping Service, Freight LTL, 500 lbs",
+        "quantity": 1,
+        "unit_price": 320.00,
+        "line_total": 320.00
+      }
+    ],
+    "subtotal": 320.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 20.00
+      }
+    ],
+    "total": 340.00,
+    "error_injected": "MISSING_PO_REFERENCE",
+    "ground_truth_note": "Error injected: PO reference missing from invoice. Extractor must infer PO from delivery note (DN-2026-04-123) which references PO-2026-04-98765. Hand-written note 'Delivered 4/20' may appear."
+  },
+  {
+    "invoice_id": "P003_INV_20260307_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-24680",
+    "invoice_date": "2026-03-07",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE 123456789 (VAT ID)",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "200 Innovation Drive, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Hans Müller, h.mueller@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-MC-001",
+        "description": "Maschinenöl (Machine Oil), 20L Kanister",
+        "quantity": 5,
+        "unit_price": 45.00,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-SC-002",
+        "description": "Schraubensatz (Screw Set), M8x30, 100 Stück",
+        "quantity": 10,
+        "unit_price": 12.50,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-BL-003",
+        "description": "Bohrlehre (Drill Jig), Präzision",
+        "quantity": 2,
+        "unit_price": 180.00,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-HD-004",
+        "description": "Hydraulikdichtung (Hydraulic Seal), Satz",
+        "quantity": 3,
+        "unit_price": 95.00,
+        "line_total": 285.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-LG-005",
+        "description": "Lager (Bearing), Kugellager 6205",
+        "quantity": 8,
+        "unit_price": 22.00,
+        "line_total": 176.00
+      }
+    ],
+    "subtotal": 1171.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 222.49
+      }
+    ],
+    "total": 1393.49,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extractor should capture five line items, subtotal 1171.00, DE VAT 222.49, total 1393.49. Bilingual labels present (German primary). SEPA bank details: IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX."
+  }
+]
+```

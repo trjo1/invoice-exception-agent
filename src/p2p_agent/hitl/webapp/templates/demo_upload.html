@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %}Run an invoice{% endblock %}
+{% block content %}
+
+<h2>Upload an invoice PDF</h2>
+<p style="color:var(--muted); margin-top:4px">
+  The agent will extract fields, classify any exception, retrieve relevant policies,
+  recommend an action with rationale and counterfactual, route to the right human tier,
+  and draft outbound communication if needed. You'll see each step land live on the next page.
+</p>
+
+{% if cost_estimate and cost_estimate.sample_size > 0 %}
+<div class="card" style="background:#eef9f0; border-color:#c4e6cd; padding:10px 14px; margin:14px 0; display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+  <div>
+    <strong style="color:var(--green); font-size:13px;">Est. cost per run</strong>
+    <span style="font-variant-numeric:tabular-nums; margin-left:8px; font-size:14px;">
+      <strong>${{ "%.4f"|format(cost_estimate.avg_usd) }}</strong>
+    </span>
+    <span style="color:var(--muted); font-size:12px; margin-left:6px;">
+      avg of last {{ cost_estimate.sample_size }} run{{ "s" if cost_estimate.sample_size != 1 else "" }}
+      · range ${{ "%.4f"|format(cost_estimate.min_usd) }}–${{ "%.4f"|format(cost_estimate.max_usd) }}
+    </span>
+  </div>
+  <div style="color:var(--muted); font-size:11px; border-left:1px solid #c4e6cd; padding-left:14px;">
+    Open-source models (DeepSeek V4-Flash + R1) via OpenRouter.
+    Local embeddings (bge-large-en) are free at runtime.
+  </div>
+</div>
+{% elif cost_estimate and cost_estimate.total_runs_seen == 0 %}
+<div class="card" style="background:var(--soft); border-color:#c4d3e6; padding:8px 14px; margin:14px 0; font-size:12px; color:var(--muted);">
+  No completed runs yet — cost estimate will appear once you've run an invoice.
+  Typical: $0.005–0.010 per invoice on DeepSeek V4-Flash + R1.
+</div>
+{% endif %}
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+
+  <form id="upload-form" method="post" action="/demo/run-streaming" enctype="multipart/form-data"
+        class="card" style="background:var(--soft); border-color:#c4d3e6;">
+    <p><strong>Upload your own PDF</strong> (max 10 MB)</p>
+    <p><input type="file" name="file" accept="application/pdf" required></p>
+    <p style="margin-top:14px">
+      <button type="submit" id="run-btn">Run pipeline</button>
+      <span id="spinner-upload" style="display:none; margin-left:14px; color:var(--muted)">Uploading…</span>
+    </p>
+  </form>
+
+  <form id="sample-form" method="post" action="/demo/run-sample-streaming"
+        class="card" style="border-color:#c4d3e6;">
+    <p><strong>Or run a curated sample</strong></p>
+    <p>
+      <select name="sample_id" id="sample-select" style="width:100%; padding:6px 8px; font:inherit; border:1px solid var(--line); border-radius:4px;">
+        {% for s in samples %}
+        <option value="{{ s.sample_id }}">{{ s.label }}</option>
+        {% endfor %}
+      </select>
+    </p>
+    <p id="sample-desc" style="font-size:12px; color:var(--muted); margin-top:6px; min-height:32px;">
+      {% if samples %}{{ samples[0].expected_signal }}{% endif %}
+    </p>
+    <p style="margin-top:14px">
+      <button type="submit" id="sample-btn" class="secondary">Run sample</button>
+      <span id="spinner-sample" style="display:none; margin-left:14px; color:var(--muted)">Loading…</span>
+    </p>
+  </form>
+
+</div>
+
+<p style="font-size:12px; color:var(--muted); margin-top:8px;">
+  Pipeline runs extract → classify → retrieve → decide → route → draft. Typically 30s–2 min end-to-end —
+  the next page streams each node as it lands, so you'll see progress immediately.
+  Curated samples cover the most common error patterns plus a clean baseline.
+</p>
+
+<div class="summary-row">
+  <div class="summary-tile">
+    <div class="label">Past runs</div>
+    <div class="value">{{ recent_runs|length }}{% if recent_runs|length >= 10 %}+{% endif %}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Approval queue · pending</div>
+    <div class="value">{{ queue_stats.by_status.get('pending', 0) }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Approval queue · resolved</div>
+    <div class="value">{{ queue_stats.by_status.get('approved', 0) + queue_stats.by_status.get('rejected', 0) + queue_stats.by_status.get('edited_approved', 0) }}</div>
+  </div>
+</div>
+
+<h3 style="color:var(--navy); margin-top:24px">Recent runs</h3>
+{% if recent_runs %}
+<table>
+  <thead>
+    <tr>
+      <th>When</th>
+      <th>File</th>
+      <th>Class</th>
+      <th>Action</th>
+      <th>Tier</th>
+      <th>Routed</th>
+      <th>Latency</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for run in recent_runs %}
+    <tr>
+      <td>{{ run.uploaded_at.strftime('%m-%d %H:%M') if run.uploaded_at else '' }}</td>
+      <td><a href="/demo/run/{{ run.id }}">{{ run.uploaded_filename }}</a></td>
+      <td>{{ run.class_label or '—' }}</td>
+      <td>{{ run.recommended_action or '—' }}</td>
+      <td>
+        {% if run.tier %}<span class="chip t{{ run.tier }}">T{{ run.tier }}</span>{% else %}—{% endif %}
+      </td>
+      <td>{% if run.routed_to %}<span class="chip">{{ run.routed_to }}</span>{% else %}—{% endif %}</td>
+      <td>{{ (run.latency_ms or 0) // 1000 }}s</td>
+      <td>
+        {% if run.status == 'completed' %}<span class="chip status-approved">done</span>
+        {% elif run.status == 'failed' %}<span class="chip status-rejected">failed</span>
+        {% else %}<span class="chip status-pending">{{ run.status }}</span>{% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p style="margin-top:8px"><a href="/demo/runs">See all runs →</a></p>
+{% else %}
+<p style="color:var(--muted)">No runs yet. Upload your first invoice above.</p>
+{% endif %}
+
+<script>
+  // Shared spinner-on-submit + double-submit guard.
+  function arm(formId, btnId, spinnerId, runningLabel) {
+    document.getElementById(formId).addEventListener('submit', function() {
+      const btn = document.getElementById(btnId);
+      btn.disabled = true;
+      btn.textContent = runningLabel;
+      document.getElementById(spinnerId).style.display = 'inline';
+    });
+  }
+  arm('upload-form', 'run-btn', 'spinner-upload', 'Running…');
+  arm('sample-form', 'sample-btn', 'spinner-sample', 'Running…');
+
+  // Update the sample description when the dropdown changes.
+  const SAMPLE_DESCRIPTIONS = {
+    {% for s in samples %}{{ s.sample_id|tojson }}: {{ s.expected_signal|tojson }}{% if not loop.last %},{% endif %}
+    {% endfor %}
+  };
+  const select = document.getElementById('sample-select');
+  const desc = document.getElementById('sample-desc');
+  if (select && desc) {
+    select.addEventListener('change', function() {
+      desc.textContent = SAMPLE_DESCRIPTIONS[select.value] || '';
+    });
+  }
+</script>
+
+{% endblock %}

@@ -1,0 +1,396 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260216_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-16",
+    "currency": "BRL",
+    "payment_terms": "NET-30 via Boleto Bancário",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista, São Paulo - SP\n01310-100\nCNPJ: 12.345.678/0001-99\nBoleto: 34191.23456 67890.123456 78901.234567 1 12345678901234",
+      "vendor_tax_id": "12.345.678/0001-99",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "450 Innovation Drive\nSan Jose, CA 95134\nUnited States",
+      "buyer_po_contact": "Maria Santos / maria.santos@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Resistor 10kΩ 1/4W 5% - lote 1000 unidades",
+        "quantity": 10,
+        "unit_price": 1.50,
+        "line_total": 15.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Capacitor eletrolítico 100µF 25V - lote 500 unidades",
+        "quantity": 5,
+        "unit_price": 3.20,
+        "line_total": 16.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Transistor BC547 - lote 200 unidades",
+        "quantity": 200,
+        "unit_price": 0.45,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "Diodo 1N4007 - lote 1000 unidades",
+        "quantity": 1,
+        "unit_price": 25.00,
+        "line_total": 25.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "Conector USB-C fêmea - lote 100 peças",
+        "quantity": 3,
+        "unit_price": 8.90,
+        "line_total": 26.70
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-006",
+        "description": "Display LCD 16x2 - lote 50 unidades",
+        "quantity": 2,
+        "unit_price": 35.00,
+        "line_total": 70.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-007",
+        "description": "Sensor de temperatura LM35 - lote 100 unidades",
+        "quantity": 4,
+        "unit_price": 12.50,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-008",
+        "description": "Microcontrolador ESP32 - lote 50 unidades",
+        "quantity": 2,
+        "unit_price": 45.00,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 382.70,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 68.89
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 19.14
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 6.31
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 29.09
+      }
+    ],
+    "total": 506.13,
+    "error_injected": null,
+    "ground_truth_note": "Clean Brazilian invoice (NF-e style) with multiple taxes (ICMS, IPI, PIS, COFINS) and Boleto bancário reference. Extractor should capture all line items, taxes, and total in BRL."
+  },
+  {
+    "invoice_id": "P003_INV_20260408_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-23456",
+    "invoice_date": "2026-04-08",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 50\n60327 Frankfurt am Main\nDeutschland\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "American Manufacturing Corp.",
+      "buyer_address": "200 Industrial Blvd\nDetroit, MI 48226\nUnited States",
+      "buyer_po_contact": "John Miller / j.miller@amcorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-101",
+        "description": "Hydraulikzylinder (Hydraulic cylinder) 50mm Hub",
+        "quantity": 4,
+        "unit_price": 245.00,
+        "line_total": 980.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-102",
+        "description": "Dichtungssatz (Seal kit) für Zylinder Serie H",
+        "quantity": 10,
+        "unit_price": 32.50,
+        "line_total": 325.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-103",
+        "description": "Pneumatikventil (Pneumatic valve) 5/2-Wege",
+        "quantity": 6,
+        "unit_price": 118.00,
+        "line_total": 708.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-104",
+        "description": "Filterelement (Filter element) 10µm",
+        "quantity": 20,
+        "unit_price": 8.90,
+        "line_total": 178.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-105",
+        "description": "Kugellager (Ball bearing) 6205-2RS",
+        "quantity": 50,
+        "unit_price": 4.20,
+        "line_total": 210.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FI-106",
+        "description": "Edelstahlschraube M8x30 (Stainless steel screw) A2",
+        "quantity": 200,
+        "unit_price": 0.35,
+        "line_total": 70.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FI-107",
+        "description": "Ölschlauch (Oil hose) DN10 1m",
+        "quantity": 15,
+        "unit_price": 12.60,
+        "line_total": 189.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FI-108",
+        "description": "Druckregler (Pressure regulator) 0-10 bar",
+        "quantity": 3,
+        "unit_price": 95.00,
+        "line_total": 285.00
+      }
+    ],
+    "subtotal": 2945.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 2945.00,
+    "error_injected": "CROSS_CURRENCY_EDGE",
+    "ground_truth_note": "Invoice is in EUR but buyer is in USD (cross-currency). Tax line shows reverse-charge (VAT 0% with rate 0.19). Extractor should detect currency mismatch and note reverse-charge. Bilingual labels and SEPA details present."
+  },
+  {
+    "invoice_id": "P003_INV_20260321_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-34567",
+    "invoice_date": "2026-03-21",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 50\n60327 Frankfurt am Main\nDeutschland\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroTech GmbH",
+      "buyer_address": "Musterstraße 10\n80331 München\nDeutschland",
+      "buyer_po_contact": "Hans Weber / h.weber@eurotech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-201",
+        "description": "Schaltschrank (Control cabinet) 800x600x300mm",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-202",
+        "description": "Sicherungshalter (Fuse holder) 10x38",
+        "quantity": 25,
+        "unit_price": 3.80,
+        "line_total": 95.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-203",
+        "description": "Kabelverschraubung (Cable gland) M20",
+        "quantity": 100,
+        "unit_price": 1.20,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-204",
+        "description": "Relais (Relay) 24V DC 2 Wechsler",
+        "quantity": 30,
+        "unit_price": 7.50,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-205",
+        "description": "Netzteil (Power supply) 24V/5A",
+        "quantity": 5,
+        "unit_price": 68.00,
+        "line_total": 340.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FI-206",
+        "description": "Taster (Push button) grün, beleuchtet",
+        "quantity": 20,
+        "unit_price": 4.90,
+        "line_total": 98.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FI-207",
+        "description": "Leitungsschutzschalter (MCB) B16A 1-polig",
+        "quantity": 12,
+        "unit_price": 9.20,
+        "line_total": 110.40
+      },
+      {
+        "line_no": 8,
+        "sku": "FI-208",
+        "description": "Durchgangsprüfer (Continuity tester) digital",
+        "quantity": 4,
+        "unit_price": 22.50,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 1978.40,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 375.90
+      }
+    ],
+    "total": 2354.30,
+    "error_injected": null,
+    "ground_truth_note": "Clean German invoice with 19% VAT itemized, bilingual descriptions, SEPA bank data. Intra-EU transaction (buyer in Germany) so reverse-charge not applied; VAT is charged normally."
+  },
+  {
+    "invoice_id": "P001_INV_20260220_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-12354",
+    "invoice_date": "2026-02-20",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1234 Silicon Valley Blvd\nSan Jose, CA 95134\nUnited States\nEIN: 98-7654321",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "1 Acme Way\nSpringfield, IL 62701\nUnited States",
+      "buyer_po_contact": "Jane Doe / jane.doe@acme.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-100",
+        "description": "Microprocessor chip i7-12700K",
+        "quantity": 50,
+        "unit_price": 320.00,
+        "line_total": 16000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-200",
+        "description": "Solid state drive 1TB NVMe",
+        "quantity": 100,
+        "unit_price": 89.50,
+        "line_total": 8950.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-300",
+        "description": "DDR5 RAM module 32GB",
+        "quantity": 80,
+        "unit_price": 145.00,
+        "line_total": 11600.00
+      }
+    ],
+    "subtotal": 36550.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 3198.13
+      }
+    ],
+    "total": 39748.13,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference has a transposed digit (should be PO-2026-02-12345 but written as PO-2026-02-12354). Extractor should flag the mismatch. Tax line itemized for California jurisdiction. All totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260216_002",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-45678",
+    "invoice_date": "2026-02-16",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 50\n60327 Frankfurt am Main\nDeutschland\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroTech GmbH",
+      "buyer_address": "Musterstraße 10\n80331 München\nDeutschland",
+      "buyer_po_contact": "Hans Weber / h.weber@eurotech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-301",
+        "description": "Schweißgerät (Welding machine) 200A",
+        "quantity": 1,
+        "unit_price": 1250.00,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-302",
+        "description": "Schweißdraht (Welding wire) 0.8mm 5kg",
+        "quantity": 5,
+        "unit_price": 18.00,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 1340.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 254.60
+      }
+    ],
+    "total": 1594.60,
+    "error_injected": null,
+    "ground_truth_note": "Clean German invoice with 2 line items. 19% VAT applied, bilingual descriptions, SEPA bank details. No errors."
+  }
+]
+```

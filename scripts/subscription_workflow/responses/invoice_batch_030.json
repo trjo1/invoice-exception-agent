@@ -1,0 +1,278 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260124_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-24",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1ZP | PAN: AABCM1234C",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-SS-2024",
+        "description": "Stainless Steel Sheet, 2mm thickness, Grade 304, Size 4x8 ft",
+        "quantity": 10,
+        "unit_price": 2500.00,
+        "line_total": 25000.00
+      }
+    ],
+    "subtotal": 25000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.09,
+        "amount": 2250.00
+      },
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 2250.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 2250.00
+      }
+    ],
+    "total": 29500.00,
+    "error_injected": "GST percentage occasionally misrouted between IGST and CGST/SGST",
+    "ground_truth_note": "The invoice has IGST, CGST, and SGST all at 9% each, but the correct split should be IGST at 0% (since it's domestic) and CGST+SGST each at 9% for a total of 18%. The extractor should flag the IGST as erroneous and note the total tax is overstated. HSN code 7219.32 used for line item."
+  },
+  {
+    "invoice_id": "P003_INV_20260128_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-01-28",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 15, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001-2024",
+        "description": "Hydraulic Cylinder, 50mm bore, 300mm stroke (German: Hydraulikzylinder)",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002-2024",
+        "description": "Industrial Seal Kit for Hydraulic Pump (German: Dichtungssatz für Hydraulikpumpe)",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003-2024",
+        "description": "Pressure Relief Valve, DN10 (German: Druckbegrenzungsventil)",
+        "quantity": 3,
+        "unit_price": 210.00,
+        "line_total": 630.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-004-2024",
+        "description": "Steel Pipe, 1m length, 25mm diameter (German: Stahlrohr)",
+        "quantity": 20,
+        "unit_price": 15.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-005-2024",
+        "description": "Lubrication Oil, 20L drum (German: Schmieröl)",
+        "quantity": 4,
+        "unit_price": 85.00,
+        "line_total": 340.00
+      }
+    ],
+    "subtotal": 2770.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 526.30
+      }
+    ],
+    "total": 3296.30,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. VAT at 19% correctly applied. Reverse-charge not applicable as buyer is outside EU. SEPA bank details: IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX. Bilingual labels used (German primary, English secondary). All line items total correctly."
+  },
+  {
+    "invoice_id": "P003_INV_20260205_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-13579",
+    "invoice_date": "2026-02-05",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 15, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-006-2024",
+        "description": "High-Pressure Hose, 1/2 inch, 10m (German: Hochdruckschlauch)",
+        "quantity": 5,
+        "unit_price": 65.00,
+        "line_total": 325.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-007-2024",
+        "description": "Brass Fitting, 3/4 inch (German: Messingverschraubung)",
+        "quantity": 10,
+        "unit_price": 8.50,
+        "line_total": 85.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-008-2024",
+        "description": "Flow Meter, 0-100 L/min (German: Durchflussmesser)",
+        "quantity": 1,
+        "unit_price": 320.00,
+        "line_total": 320.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-009-2024",
+        "description": "Filter Cartridge, 10 micron (German: Filterpatrone)",
+        "quantity": 8,
+        "unit_price": 22.00,
+        "line_total": 176.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-010-2024",
+        "description": "Pressure Gauge, 0-250 bar (German: Manometer)",
+        "quantity": 3,
+        "unit_price": 45.00,
+        "line_total": 135.00
+      }
+    ],
+    "subtotal": 1041.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 197.79
+      }
+    ],
+    "total": 1238.79,
+    "error_injected": "Cross-currency edge when buyer is in USD",
+    "ground_truth_note": "Invoice is in EUR but buyer is in USD. The total is 1238.79 EUR. The extractor should note that the currency mismatch may require conversion. No VAT error; clean tax calculation. SEPA details: IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX."
+  },
+  {
+    "invoice_id": "P003_INV_20260302_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-24680",
+    "invoice_date": "2026-03-02",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 15, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-011-2024",
+        "description": "Industrial Gearbox, ratio 10:1 (German: Industriegetriebe)",
+        "quantity": 1,
+        "unit_price": 1250.00,
+        "line_total": 1250.00
+      }
+    ],
+    "subtotal": 1250.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 237.50
+      }
+    ],
+    "total": 1487.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Single line item with correct 19% VAT. SEPA details: IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX. Bilingual labels present."
+  },
+  {
+    "invoice_id": "P005_INV_20260129_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-98765",
+    "invoice_date": "2026-01-29",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Indústrias, 500, Jardim Paulista, São Paulo, SP 01310-000, Brasil",
+      "vendor_tax_id": "CNPJ: 00.000.000/0001-91",
+      "buyer_name": "GlobalTech Solutions Inc.",
+      "buyer_address": "456 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "John Smith, john.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001-2024",
+        "description": "Servo Motor, 2kW, 230V (Portuguese: Motor Servo, 2kW, 230V)",
+        "quantity": 1,
+        "unit_price": 3450.00,
+        "line_total": 3450.00
+      }
+    ],
+    "subtotal": 3450.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 621.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 172.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 56.93
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 262.20
+      }
+    ],
+    "total": 4512.63,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "The invoice date is given as 29/01/2026 (dd/mm/yyyy) on the document but the JSON field uses ISO format 2026-01-29. The extractor must correctly parse the Brazilian date format. NF-e reference: NFe 35200600000000000000000000000000000000000001. Boleto bancário code: 34191.09012 34567.890123 45678.901234 5 12345678901."
+  }
+]
+```

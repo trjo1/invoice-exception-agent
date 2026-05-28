@@ -1,0 +1,14 @@
+[
+  {
+    "vendor_id": "VEN-P001",
+    "field": "bank_account",
+    "changed_on": "2026-04-19",
+    "note": "Bank account updated by supplier email request."
+  },
+  {
+    "vendor_id": "VEN-P002",
+    "field": "bank_account",
+    "changed_on": "2026-04-28",
+    "note": "Bank account updated by supplier email request."
+  }
+]

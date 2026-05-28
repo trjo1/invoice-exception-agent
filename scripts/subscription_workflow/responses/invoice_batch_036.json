@@ -1,0 +1,385 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260304_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-04",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nSpringfield, IL 62701\nUnited States",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "GlobalTech International",
+      "buyer_address": "456 Tech Avenue\nNew York, NY 10001\nUnited States",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FR-001",
+        "description": "Freight service - standard LTL shipment",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-003",
+        "description": "Warehousing - pallet storage (30 days)",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "PK-007",
+        "description": "Packaging materials - corrugated boxes (per 100)",
+        "quantity": 2,
+        "unit_price": 85.50,
+        "line_total": 171.00
+      },
+      {
+        "line_no": 4,
+        "sku": "LD-002",
+        "description": "Loading/unloading labor (per hour)",
+        "quantity": 8,
+        "unit_price": 45.00,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 5,
+        "sku": "TR-005",
+        "description": "Transportation - expedited delivery",
+        "quantity": 1,
+        "unit_price": 275.00,
+        "line_total": 275.00
+      },
+      {
+        "line_no": 6,
+        "sku": "IN-009",
+        "description": "Insurance - cargo coverage (0.5% of value)",
+        "quantity": 1,
+        "unit_price": 95.00,
+        "line_total": 95.00
+      },
+      {
+        "line_no": 7,
+        "sku": "CL-001",
+        "description": "Customs clearance documentation fee",
+        "quantity": 1,
+        "unit_price": 150.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MI-004",
+        "description": "Miscellaneous handling fee",
+        "quantity": 1,
+        "unit_price": 35.00,
+        "line_total": 35.00
+      }
+    ],
+    "subtotal": 2136.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 133.50
+      }
+    ],
+    "total": 2270.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Handwritten note 'Please expedite' appears in margin. Rounding applied: subtotal 2136.00, tax 133.50, total rounded up to 2270.00. Extractor should capture all 8 line items and standard header fields."
+  },
+  {
+    "invoice_id": "P002_INV_20260324_002",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-12346",
+    "invoice_date": "2026-03-24",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nSpringfield, IL 62701\nUnited States",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "GlobalTech International",
+      "buyer_address": "456 Tech Avenue\nNew York, NY 10001\nUnited States",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FR-010",
+        "description": "Freight service - full truckload (FTL)",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-005",
+        "description": "Warehousing - climate controlled storage (30 days)",
+        "quantity": 3,
+        "unit_price": 200.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "PK-012",
+        "description": "Packaging - custom crating",
+        "quantity": 2,
+        "unit_price": 175.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 4,
+        "sku": "LD-003",
+        "description": "Loading/unloading with forklift (per hour)",
+        "quantity": 4,
+        "unit_price": 65.00,
+        "line_total": 260.00
+      },
+      {
+        "line_no": 5,
+        "sku": "IN-010",
+        "description": "Insurance - full value coverage",
+        "quantity": 1,
+        "unit_price": 180.00,
+        "line_total": 180.00
+      }
+    ],
+    "subtotal": 2590.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 161.88
+      }
+    ],
+    "total": 2752.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Handwritten note 'Received OK' at bottom. Header placement slightly shifted left. Rounding applied: subtotal 2590.00, tax 161.88, total rounded up to 2752.00. Extractor should capture 5 line items."
+  },
+  {
+    "invoice_id": "P004_INV_20260112_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-12347",
+    "invoice_date": "2026-01-12",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "45 Industrial Area\nMumbai, Maharashtra 400001\nIndia",
+      "vendor_tax_id": "GSTIN 27AABCB1234C1Z1, PAN AABCB1234C",
+      "buyer_name": "GlobalTech International",
+      "buyer_address": "456 Tech Avenue\nNew York, NY 10001\nUnited States",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HSN 7208",
+        "description": "Hot rolled steel sheets, grade IS 2062, thickness 3mm",
+        "quantity": 500,
+        "unit_price": 45.00,
+        "line_total": 22500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "HSN 7310",
+        "description": "Steel drums, capacity 200 litres",
+        "quantity": 100,
+        "unit_price": 850.00,
+        "line_total": 85000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "HSN 3926",
+        "description": "Plastic pallets, 1200x1000mm, heavy duty",
+        "quantity": 50,
+        "unit_price": 1200.00,
+        "line_total": 60000.00
+      }
+    ],
+    "subtotal": 167500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 15075.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 15075.00
+      }
+    ],
+    "total": 197650.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. GSTIN and PAN displayed in header. HSN codes used as SKUs. CGST and SGST each at 9%. Total in INR. Extractor should capture 3 line items and two tax lines. Note: cross-currency to USD is common but not reflected here."
+  },
+  {
+    "invoice_id": "P002_INV_20260201_003",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-12348",
+    "invoice_date": "2026-02-01",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nSpringfield, IL 62701\nUnited States",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "GlobalTech International",
+      "buyer_address": "456 Tech Avenue\nNew York, NY 10001\nUnited States",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FR-020",
+        "description": "Freight service - intermodal rail/truck",
+        "quantity": 1,
+        "unit_price": 3200.00,
+        "line_total": 3200.00
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-008",
+        "description": "Warehousing - short term storage (15 days)",
+        "quantity": 2,
+        "unit_price": 400.00,
+        "line_total": 800.00
+      },
+      {
+        "line_no": 3,
+        "sku": "IN-012",
+        "description": "Insurance - liability coverage",
+        "quantity": 1,
+        "unit_price": 250.00,
+        "line_total": 250.00
+      }
+    ],
+    "subtotal": 4250.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 265.63
+      }
+    ],
+    "total": 4516.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Handwritten note 'Thanks!' in top corner. Rounding applied: subtotal 4250.00, tax 265.63, total rounded up to 4516.00. Extractor should capture 3 line items."
+  },
+  {
+    "invoice_id": "P005_INV_20260312_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-12349",
+    "invoice_date": "2026-03-12",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Peças, 1000\nSão Paulo, SP 01000-000\nBrazil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "GlobalTech International",
+      "buyer_address": "456 Tech Avenue\nNew York, NY 10001\nUnited States",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "RES-1001",
+        "description": "Resistor 10k ohm, 1/4W, 1% tolerance (pack of 100)",
+        "quantity": 50,
+        "unit_price": 12.50,
+        "line_total": 625.00
+      },
+      {
+        "line_no": 2,
+        "sku": "CAP-2200",
+        "description": "Capacitor 2200µF, 25V, electrolytic (pack of 10)",
+        "quantity": 30,
+        "unit_price": 45.00,
+        "line_total": 1350.00
+      },
+      {
+        "line_no": 3,
+        "sku": "DIO-4004",
+        "description": "Diode 1N4004, 1A, 400V (pack of 50)",
+        "quantity": 20,
+        "unit_price": 18.00,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 4,
+        "sku": "TRANS-2N2222",
+        "description": "Transistor 2N2222 NPN (pack of 10)",
+        "quantity": 40,
+        "unit_price": 22.50,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 5,
+        "sku": "CONN-USB",
+        "description": "USB Type-B connector, female (each)",
+        "quantity": 200,
+        "unit_price": 3.75,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 6,
+        "sku": "LED-RED",
+        "description": "LED red 5mm, 20mA (pack of 100)",
+        "quantity": 10,
+        "unit_price": 35.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 7,
+        "sku": "IC-555",
+        "description": "Timer IC NE555 (each)",
+        "quantity": 100,
+        "unit_price": 8.90,
+        "line_total": 890.00
+      },
+      {
+        "line_no": 8,
+        "sku": "PCB-PROTO",
+        "description": "Prototyping PCB board, 10x15cm (each)",
+        "quantity": 25,
+        "unit_price": 14.00,
+        "line_total": 350.00
+      }
+    ],
+    "subtotal": 5575.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 1003.50
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 278.75
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 91.99
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 423.70
+      }
+    ],
+    "total": 7372.94,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from São Paulo Componentes Ltda. NF-e format implied; multiple taxes (ICMS 18%, IPI 5%, PIS 1.65%, COFINS 7.6%). Boleto bancário payment slip referenced in footer (not captured in schema). Extractor should capture 8 line items and 4 tax lines."
+  }
+]
+```

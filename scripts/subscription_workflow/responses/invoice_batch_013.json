@@ -1,0 +1,286 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260128_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-00123",
+    "invoice_date": "2026-01-28",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 17, MIDC Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z5, PAN: AABCM1234C",
+      "buyer_name": "TechBuy Inc.",
+      "buyer_address": "123 Corporate Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@techbuy.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HSN 8471.30",
+        "description": "Electronic Circuit Board - Model MC-1000",
+        "quantity": 50,
+        "unit_price": 1250.00,
+        "line_total": 62500.00
+      }
+    ],
+    "subtotal": 62500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 11250.00
+      }
+    ],
+    "total": 73750.00,
+    "error_injected": "GST_PERCENTAGE_MISROUTED",
+    "ground_truth_note": "GST error: IGST (18%) used instead of CGST (9%) + SGST (9%) for domestic transaction. Should be two separate tax lines at 9% each."
+  },
+  {
+    "invoice_id": "P005_INV_20260108_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-00456",
+    "invoice_date": "2026-01-08",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 1500, Jardim Paulista, São Paulo, SP, 01410-000, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90, IE: 123.456.789.110",
+      "buyer_name": "TechBuy Inc.",
+      "buyer_address": "123 Corporate Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@techbuy.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "PAR-001",
+        "description": "Parafuso de aço inox M8 x 20mm",
+        "quantity": 200,
+        "unit_price": 1.50,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 2,
+        "sku": "POR-002",
+        "description": "Porca sextavada M8",
+        "quantity": 200,
+        "unit_price": 0.80,
+        "line_total": 160.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ARR-003",
+        "description": "Arruela de pressão M8",
+        "quantity": 400,
+        "unit_price": 0.30,
+        "line_total": 120.00
+      }
+    ],
+    "subtotal": 580.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 104.40
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 29.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 9.57
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 44.08
+      }
+    ],
+    "total": 767.05,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with Brazilian tax structure (ICMS, IPI, PIS, COFINS) and boleto bancário reference number 12345678901. Extractor should recognize NF-e format."
+  },
+  {
+    "invoice_id": "P001_INV_20260306_003",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-00789",
+    "invoice_date": "2026-03-06",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Way, Suite 200, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "TechBuy Inc.",
+      "buyer_address": "123 Corporate Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@techbuy.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "RES-100K",
+        "description": "Resistor 100kΩ 1/4W 1%",
+        "quantity": 500,
+        "unit_price": 0.05,
+        "line_total": 25.00
+      },
+      {
+        "line_no": 2,
+        "sku": "CAP-10uF",
+        "description": "Capacitor 10µF 50V Aluminum Electrolytic",
+        "quantity": 200,
+        "unit_price": 0.15,
+        "line_total": 30.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MCU-ATMEGA328",
+        "description": "Microcontroller ATmega328P DIP-28",
+        "quantity": 50,
+        "unit_price": 2.50,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 4,
+        "sku": "LED-RED",
+        "description": "LED Red 5mm 20mA",
+        "quantity": 1000,
+        "unit_price": 0.03,
+        "line_total": 30.00
+      },
+      {
+        "line_no": 5,
+        "sku": "CONN-USB",
+        "description": "USB Type-B Connector Female",
+        "quantity": 100,
+        "unit_price": 0.45,
+        "line_total": 45.00
+      },
+      {
+        "line_no": 6,
+        "sku": "TRANS-2N2222",
+        "description": "Transistor NPN 2N2222A TO-92",
+        "quantity": 300,
+        "unit_price": 0.10,
+        "line_total": 30.00
+      },
+      {
+        "line_no": 7,
+        "sku": "DIODE-1N4007",
+        "description": "Diode 1N4007 1000V 1A",
+        "quantity": 250,
+        "unit_price": 0.08,
+        "line_total": 20.00
+      },
+      {
+        "line_no": 8,
+        "sku": "PCB-CUSTOM",
+        "description": "Custom PCB Board 4-layer 100x100mm",
+        "quantity": 10,
+        "unit_price": 25.00,
+        "line_total": 250.00
+      }
+    ],
+    "subtotal": 555.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 40.24
+      }
+    ],
+    "total": 595.24,
+    "error_injected": "MULTI_PAGE_LINE_ITEMS",
+    "ground_truth_note": "Invoice spans multiple pages; line items continue from page 1 to page 2. Extractor must consolidate all line items correctly."
+  },
+  {
+    "invoice_id": "P002_INV_20260419_004",
+    "persona_id": "P002",
+    "po_reference": "See delivery note DN-2026-04-12345",
+    "invoice_date": "2026-04-19",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "45 Industrial Blvd, Suite 3, Buffalo, NY 14203, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "TechBuy Inc.",
+      "buyer_address": "123 Corporate Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@techbuy.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "WH-STOR-01",
+        "description": "Warehouse storage service - January 2026",
+        "quantity": 1,
+        "unit_price": 2500.25,
+        "line_total": 2500.25
+      },
+      {
+        "line_no": 2,
+        "sku": "FRT-HDL-01",
+        "description": "Freight handling fee",
+        "quantity": 1,
+        "unit_price": 1200.25,
+        "line_total": 1200.25
+      }
+    ],
+    "subtotal": 3700.50,
+    "tax": [],
+    "total": 3701.00,
+    "error_injected": "MISSING_PO_REFERENCE",
+    "ground_truth_note": "PO reference not provided on invoice; extractor should infer from delivery note number DN-2026-04-12345. Total is rounded up to nearest dollar."
+  },
+  {
+    "invoice_id": "P001_INV_20260328_005",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-00555",
+    "invoice_date": "2026-03-28",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Way, Suite 200, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "TechBuy Inc.",
+      "buyer_address": "123 Corporate Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, john.smith@techbuy.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "CPU-A5000",
+        "description": "Microprocessor chip Model A-5000",
+        "quantity": 100,
+        "unit_price": 45.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FAN-80MM",
+        "description": "Cooling fan assembly 80mm",
+        "quantity": 50,
+        "unit_price": 12.50,
+        "line_total": 625.00
+      }
+    ],
+    "subtotal": 5125.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 371.56
+      }
+    ],
+    "total": 5496.56,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with standard US tax, rounded to 2 decimals."
+  }
+]
+```

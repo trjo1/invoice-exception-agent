@@ -1,0 +1,896 @@
+# Mock policy library for the RAG layer.
+#
+# These are hand-authored stand-ins for what a real buyer's policy library would
+# contain (process policies, approval matrices, tax / jurisdiction rules, fraud
+# indicators, etc.). The retrieval architecture is real (sentence-transformer
+# embeddings + cosine similarity + optional cross-encoder rerank); only the
+# content is mock. When this agent ships into a real engagement, replace this
+# file with the buyer's actual policy corpus.
+#
+# Schema:
+#   id    -- POL-NNN, stable identifier
+#   title -- short human-readable name
+#   text  -- the policy body (this is what gets embedded for retrieval)
+#   tags  -- list of tags used for filtering / faceted retrieval (optional)
+
+policies:
+
+  # 3-way match tolerances ---------------------------------------------------
+
+  - id: POL-001
+    title: "3-way match — price variance tolerance"
+    text: |
+      Invoice unit prices must match PO unit prices within ±2% of the PO unit
+      price. Variances above 2% but below 5% require Tier 2 buyer approval
+      with rationale. Variances of 5% or more must be escalated to the buyer
+      and require a supplier credit memo before the invoice can be paid.
+      Quantity must match the goods-receipt quantity exactly.
+    tags: [three_way_match, price_variance, tolerance, auto_pass]
+
+  - id: POL-002
+    title: "3-way match — quantity variance"
+    text: |
+      Invoice quantities must match goods-receipt quantities. Over-deliveries
+      (invoice > GR) are not auto-resolvable; the supplier must issue a credit
+      memo for the excess and re-bill. Under-deliveries (invoice < GR) suggest
+      the receipt may be in error; verify with warehouse before paying. Any
+      mismatch above 5 units or 5% of PO quantity must be escalated to the
+      buyer for confirmation.
+    tags: [three_way_match, quantity_variance, over_delivery]
+
+  - id: POL-003
+    title: "Clean 3-way match — auto-pass criteria"
+    text: |
+      An invoice auto-passes (Tier 1) only when ALL of the following hold:
+      the PO reference matches an active PO; quantities match the goods
+      receipt; unit prices match within ±2%; the vendor is in the active
+      master file; the tax line matches the buyer's jurisdiction rule for the
+      PO total; payment terms match the PO. Any one criterion failing routes
+      to Tier 2 for human review.
+    tags: [auto_pass, three_way_match, tier_1]
+
+  # Missing PO and goods receipt --------------------------------------------
+
+  - id: POL-004
+    title: "Missing PO reference protocol"
+    text: |
+      Invoices arriving without a valid PO reference must be held in the AP
+      queue and the supplier contacted to provide the PO. Do not auto-create
+      a retroactive PO; that's the buyer's call. Common causes: typo in the
+      PO number (e.g. transposed digits), invoice for services where the buyer
+      didn't issue a PO upfront (maverick spend), or invoice from a vendor not
+      in master. Route to vendor onboarding if the vendor is also unknown.
+    tags: [missing_po, supplier_correction, maverick_spend]
+
+  - id: POL-005
+    title: "Retroactive PO process"
+    text: |
+      When goods or services have been received without a PO in place, AP
+      escalates to the buyer to either create a retroactive PO or reject the
+      invoice. Retroactive PO requests above $5K require manager approval;
+      above $25K require VP Finance. AP does not approve retroactive POs on
+      its own authority.
+    tags: [missing_po, retroactive_po, escalation, approval_matrix]
+
+  - id: POL-006
+    title: "Missing goods receipt"
+    text: |
+      Invoice received before the goods receipt is recorded does not by itself
+      indicate an exception; some suppliers invoice on dispatch rather than
+      delivery. Hold the invoice in the AP queue and recheck after 5 business
+      days. If still no receipt is recorded, contact the receiving warehouse
+      and the supplier in parallel. Do not pay before the receipt is
+      confirmed.
+    tags: [missing_goods_receipt, hold_invoice]
+
+  # Approval matrix ---------------------------------------------------------
+
+  - id: POL-007
+    title: "Spend approval matrix"
+    text: |
+      PO authorization thresholds: under $5K — buyer self-approves; $5K to
+      $25K — manager approval required; $25K to $100K — VP Finance approval
+      required; above $100K — CFO + procurement committee. Invoices that
+      reveal a higher actual spend than the PO authorized (e.g., FX swing,
+      tax variance) must be re-routed to the higher-tier approver before
+      payment.
+    tags: [approval_matrix, vp_finance, spend_threshold]
+
+  - id: POL-008
+    title: "Approver chain — incomplete approvals"
+    text: |
+      An invoice where the PO is authorized but the approver chain has gaps
+      (e.g., direct manager approved but the VP Finance sign-off above the
+      $25K threshold is missing) must NOT be paid. Route to the next approver
+      in the chain and notify the buyer. Do not bypass approvers, even when
+      the supplier is escalating for payment.
+    tags: [missing_approval, approver_chain, vp_finance]
+
+  # Duplicate and fraud -----------------------------------------------------
+
+  - id: POL-009
+    title: "Duplicate invoice detection"
+    text: |
+      Invoices are duplicates when ANY of the following hold: same supplier
+      invoice number on the same PO; same supplier invoice number on a
+      different PO within 30 days; substantially identical invoice (same
+      vendor, total, date, line items) regardless of invoice number. Treat
+      any flagged duplicate as a halt-pay event pending Tier 3 review.
+    tags: [duplicate, fraud_signal, halt_pay]
+
+  - id: POL-010
+    title: "Invoice on already-paid PO"
+    text: |
+      If an invoice references a PO whose total has already been fully paid,
+      treat as a potential duplicate or fraud. Do not pay. Notify the AP fraud
+      team and the buyer. Common legitimate cause: supplier billing for
+      additional units delivered after the original PO closed — in which
+      case a new PO is required first.
+    tags: [duplicate, fraud_signal, already_paid]
+
+  - id: POL-011
+    title: "Fraud indicators"
+    text: |
+      Treat the following patterns as fraud signals: multiple invoices on the
+      same PO within a short window (split-invoice pattern); supplier bank
+      details changing within 30 days of invoicing; invoice amount just under
+      an approval threshold; vendor that recently changed name or tax ID; new
+      supplier with no purchase history submitting a high-value invoice
+      against an old PO. Any of these → halt pay, escalate to fraud team.
+    tags: [fraud_signal, escalation, halt_pay]
+
+  - id: POL-012
+    title: "Split-invoice fraud pattern"
+    text: |
+      A supplier breaking a single large amount into multiple smaller invoices
+      to slip under approval thresholds is a high-risk pattern. Heuristic:
+      three or more invoices on the same PO within 14 days whose cumulative
+      total approaches or exceeds the next approval-tier threshold (e.g.,
+      cumulative $24K with $25K threshold) — escalate to Tier 3 fraud review
+      regardless of whether each individual invoice is in order.
+    tags: [fraud_signal, split_invoice, escalation]
+
+  # Vendor master -----------------------------------------------------------
+
+  - id: POL-013
+    title: "Vendor master onboarding"
+    text: |
+      Invoices from vendors not in the active master file cannot be paid until
+      the vendor is onboarded. Onboarding requires: W-9 / W-8 / equivalent
+      tax form on file; bank details verified via independent channel
+      (not the invoice email); credit check above buyer's threshold; sanctions
+      screen passed. Route the invoice to the vendor master team; do not
+      pay even on supplier escalation.
+    tags: [vendor_master_gap, vendor_onboarding, kyc]
+
+  - id: POL-014
+    title: "Tax ID validation"
+    text: |
+      Vendor tax IDs must be format-valid for the vendor's stated
+      jurisdiction: US EIN (NN-NNNNNNN), EU VAT (country code + digits),
+      India GSTIN (15 chars: state + PAN + entity + Z + check digit),
+      Brazil CNPJ (XX.XXX.XXX/XXXX-XX). Format-invalid tax IDs require
+      supplier correction before invoice can pay.
+    tags: [vendor_master_gap, tax_id_validation]
+
+  # Cross-currency / FX -----------------------------------------------------
+
+  - id: POL-015
+    title: "Cross-currency invoicing policy"
+    text: |
+      Invoices in a currency different from the PO currency are allowed when
+      the supplier contract permits multi-currency. The FX rate used must
+      match the contractual rate (locked) or the spot rate on invoice date
+      ±0.5%. FX variance above ±2% of PO total requires treasury review
+      before payment.
+    tags: [cross_currency_mismatch, fx_variance, treasury_review]
+
+  - id: POL-016
+    title: "FX variance threshold"
+    text: |
+      Calculate FX variance as: (invoice total in PO currency − PO total) /
+      PO total. Variance ≤ 0.5% — auto-pass. Variance 0.5%–2% — flag and
+      route to buyer for noting. Variance >2% — escalate to treasury for FX
+      review; possibly the supplier needs to re-bill at correct rate.
+    tags: [cross_currency_mismatch, fx_variance]
+
+  # Tax jurisdiction rules --------------------------------------------------
+
+  - id: POL-017
+    title: "US sales tax rules"
+    text: |
+      US sales tax is collected by the seller when the seller has nexus in
+      the buyer's state. Out-of-state shipments where the seller has no nexus
+      should NOT include sales tax — use-tax obligation falls on the buyer.
+      In-state shipments must include the correct state + local rate.
+      Missing tax on an in-state shipment from a known-nexus vendor is a
+      tax_field_mismatch.
+    tags: [tax_field_mismatch, us_sales_tax, jurisdiction]
+
+  - id: POL-018
+    title: "EU VAT and intra-EU reverse charge"
+    text: |
+      For intra-EU B2B supplies where both parties are VAT-registered, the
+      reverse-charge mechanism applies: the invoice states the VAT rate but
+      the amount is zero (the buyer self-accounts for the VAT in its own
+      return). Invoice must state both VAT IDs and the reverse-charge
+      annotation. A missing VAT ID, missing rate, or non-zero VAT amount on
+      a reverse-charge invoice is a tax_field_mismatch.
+    tags: [tax_field_mismatch, eu_vat, reverse_charge, intra_eu]
+
+  - id: POL-019
+    title: "India GST — IGST vs CGST/SGST routing"
+    text: |
+      Indian GST splits by inter-state vs intra-state: inter-state supplies
+      attract IGST (single rate); intra-state supplies attract CGST + SGST
+      (half each, splitting the same effective rate). Invoices that bundle
+      IGST onto an intra-state supply (or split CGST/SGST onto an inter-state
+      supply) are misrouted. Require HSN code (6 or 8 digits) on each line
+      item.
+    tags: [tax_field_mismatch, india_gst, hsn_code]
+
+  - id: POL-020
+    title: "Brazil tax — NF-e and multi-tax types"
+    text: |
+      Brazilian invoices (NF-e) bundle multiple tax types: ICMS (state),
+      IPI (federal industrial), PIS, COFINS (federal social contributions).
+      A complete NF-e invoice has all four lines plus a boleto bancário
+      payment slip reference. Missing any of ICMS / IPI / PIS / COFINS where
+      applicable is a tax_field_mismatch.
+    tags: [tax_field_mismatch, brazil_nfe, multi_tax]
+
+  - id: POL-021
+    title: "Tax rate sanity check"
+    text: |
+      Cross-check: stated tax rate × taxable amount = stated tax amount,
+      within rounding. A mismatch between rate × amount and the line total
+      is either a calculation error on the invoice or extraction misread.
+      Reject and request supplier correction.
+    tags: [tax_field_mismatch, sanity_check]
+
+  # Payment terms ----------------------------------------------------------
+
+  - id: POL-022
+    title: "Standard payment terms"
+    text: |
+      Standard buyer payment terms are NET-30. Suppliers may bill at NET-15,
+      NET-45, NET-60, or with early-payment-discount terms (e.g.
+      2/10-NET-30 = 2% discount if paid within 10 days, else net 30).
+      Invoice payment terms must match the PO; if the supplier bills at
+      different terms than the PO authorized, the agent rejects and asks the
+      supplier to re-bill at PO terms.
+    tags: [payment_term_mismatch, payment_terms]
+
+  - id: POL-023
+    title: "Early-payment discount"
+    text: |
+      When a supplier offers early-payment discount (e.g. 2/10-NET-30), AP
+      should compare the implied annualized rate to the buyer's cost of
+      capital. 2/10-NET-30 ≈ 36% annualized, which usually exceeds cost of
+      capital and is worth taking. Auto-take when the buyer has cash; flag
+      to treasury otherwise.
+    tags: [payment_terms, early_payment_discount]
+
+  # Supplier comms ---------------------------------------------------------
+
+  - id: POL-024
+    title: "Supplier delay notification protocol"
+    text: |
+      When a supplier proactively notifies of a delivery delay against an
+      open PO, log the notification, update expected receipt date in SAP,
+      and notify the buyer's procurement liaison. No invoice action required
+      until the actual delivery occurs. If the delay exceeds 30 days from
+      original ETA, escalate to procurement for alternative-sourcing review.
+    tags: [supplier_delay, other, notification]
+
+  - id: POL-025
+    title: "When to draft a supplier email"
+    text: |
+      The agent drafts a supplier-facing communication (never auto-sends) in
+      these cases: 3-way match price variance → credit memo request;
+      missing PO reference → ask supplier to provide PO; missing tax line
+      → request supplier correction; supplier bank-details change → request
+      supplier confirmation via verified channel. All supplier emails go to
+      Tier 2 buyer approval before sending.
+    tags: [drafting, supplier_comms, tier_2]
+
+  # ==========================================================================
+  # JURISDICTIONAL DEPTH — added in Phase 4 for production-shape coverage
+  # ==========================================================================
+
+  # US sales tax depth -------------------------------------------------------
+
+  - id: POL-026
+    title: "US sales tax — destination-based states (CA, NY, IL)"
+    text: |
+      Destination-based states (most US states, including CA, NY, IL, FL, MA)
+      compute sales tax based on the buyer's ship-to address, not the seller's
+      origin. The combined state + local rate at the destination applies.
+      Sellers must collect at the destination rate when they have nexus there.
+      Buyer's purchasing system should validate: invoice tax rate matches the
+      ship-to jurisdiction's published rate within ±0.5 percentage points
+      (allowing for local-rate variation).
+    tags: [tax_field_mismatch, us_sales_tax, destination_based, ca, ny, il]
+
+  - id: POL-027
+    title: "US sales tax — origin-based states (TX, AZ, PA, VA)"
+    text: |
+      A handful of US states are origin-based for sales tax: the seller charges
+      the rate at the seller's own location (origin), not the buyer's
+      destination. Texas, Arizona, Pennsylvania, and Virginia follow this rule
+      for in-state sales. Out-of-state sales from origin-based states still
+      use destination rules. Validation: for an in-state transaction in TX/AZ/
+      PA/VA, the invoice tax rate should match the seller's home jurisdiction,
+      not the buyer's.
+    tags: [tax_field_mismatch, us_sales_tax, origin_based, tx, az]
+
+  - id: POL-028
+    title: "US sales tax — services exemption (NY, CA partial)"
+    text: |
+      Most US states exempt professional services from sales tax (legal,
+      accounting, consulting). NY exempts most services but charges on
+      tangible-personal-property elements. CA exempts services unless they
+      result in a tangible product. Auditor's question for any services
+      invoice: was sales tax charged? If yes, was it correct (services portion
+      vs goods portion)? Mis-charged sales tax on pure services is a
+      tax_field_mismatch.
+    tags: [tax_field_mismatch, us_sales_tax, services_exemption]
+
+  - id: POL-029
+    title: "US sales tax — SaaS and digital goods"
+    text: |
+      US states have inconsistent rules on SaaS / digital-goods taxation.
+      Taxable in TX, NY, PA, WA. Exempt in CA, NV, FL, VA. Mixed in others.
+      For SaaS invoices, the agent should not assume tax is required;
+      validate against the buyer's ship-to-state rule. A SaaS invoice with
+      tax charged from a state where SaaS is exempt is over-collection;
+      missing tax from a state where it's taxable is under-collection.
+    tags: [tax_field_mismatch, us_sales_tax, saas, digital_goods]
+
+  - id: POL-030
+    title: "US sales tax — marketplace facilitator rules"
+    text: |
+      Since 2018 (Wayfair), marketplace facilitators (Amazon, eBay,
+      online platforms) collect and remit sales tax on behalf of sellers in
+      most states. Invoices from marketplace-facilitator sellers should NOT
+      include sales tax as a separate line for those states — the platform
+      already handled it. Double-charged sales tax on a marketplace-facilitated
+      invoice is a recoverable overcharge.
+    tags: [tax_field_mismatch, us_sales_tax, marketplace_facilitator]
+
+  - id: POL-031
+    title: "Use-tax obligation for buyers"
+    text: |
+      When a seller has no nexus in the buyer's state and doesn't charge
+      sales tax, the buyer owes use tax at the same rate. The invoice
+      legitimately omits sales tax; the AP system flags the line for
+      use-tax accrual. Missing-tax-from-out-of-state-vendor is NOT a
+      tax_field_mismatch — it triggers a use-tax workflow instead. The agent
+      should detect "out-of-state vendor + no nexus + no tax line" and route
+      to use-tax accrual rather than to supplier correction.
+    tags: [tax_field_mismatch, use_tax, nexus]
+
+  # EU VAT depth -------------------------------------------------------------
+
+  - id: POL-032
+    title: "EU VAT rates by country (snapshot)"
+    text: |
+      Standard VAT rates as of 2025 (subject to change): Germany 19%,
+      France 20%, Italy 22%, Netherlands 21%, Ireland 23%, Spain 21%,
+      Belgium 21%, Poland 23%, Sweden 25%, Denmark 25%, Hungary 27%
+      (EU's highest). Most member states publish reduced rates (5-13%) for
+      food, books, pharma, and certain services. Invoice VAT rate mismatch
+      to the buyer-country's published rate is a tax_field_mismatch unless
+      a reduced-rate category applies and is annotated.
+    tags: [tax_field_mismatch, eu_vat, jurisdiction]
+
+  - id: POL-033
+    title: "EU VAT — intra-EU reverse-charge details"
+    text: |
+      Intra-EU B2B reverse-charge requires four elements on the invoice:
+      (1) supplier's VAT ID with country prefix (e.g. DE123456789);
+      (2) buyer's VAT ID with country prefix; (3) explicit "reverse charge"
+      annotation in the local language ("Steuerschuldnerschaft des
+      Leistungsempfängers" in DE, "autoliquidation" in FR); (4) VAT amount
+      zero with rate stated. Missing any of these = tax_field_mismatch;
+      supplier must reissue. The buyer self-accounts for the VAT in its own
+      filing.
+    tags: [tax_field_mismatch, eu_vat, reverse_charge, intra_eu]
+
+  - id: POL-034
+    title: "EU VAT — B2C cross-border (OSS / IOSS)"
+    text: |
+      For B2C cross-border supplies within the EU, the seller charges VAT at
+      the buyer's-country rate (destination principle) and remits via the
+      One-Stop-Shop (OSS) scheme (Import OSS / IOSS for goods from outside
+      EU under €150). A B2C invoice from a French seller to an Italian
+      consumer should carry Italian VAT (22%), not French (20%). B2B
+      transactions still use reverse-charge. Mis-applied origin-vs-
+      destination rate on B2C is a tax_field_mismatch.
+    tags: [tax_field_mismatch, eu_vat, b2c, oss, ioss]
+
+  - id: POL-035
+    title: "EU VAT — triangulation"
+    text: |
+      In a three-party EU transaction (A in Member State 1 sells to B in
+      Member State 2, who resells to C in Member State 3, goods ship direct
+      from A to C), the simplified triangulation rule allows B to skip
+      VAT registration in MS-3. Invoice from A to B carries supplier's VAT
+      ID + buyer-B's VAT ID + "triangulation" annotation. Invoice from B
+      to C carries reverse-charge + triangulation annotation. Missing
+      annotations break the simplification and force MS-3 registration for B.
+    tags: [tax_field_mismatch, eu_vat, triangulation]
+
+  - id: POL-036
+    title: "EU VAT — distance-selling threshold"
+    text: |
+      Pre-2021 each Member State had its own distance-selling threshold;
+      now unified at €10,000 across all MS-to-MS B2C sales for a calendar
+      year. Below threshold: seller charges seller's-country VAT and remits
+      domestically. Above threshold: seller charges destination-country VAT
+      via OSS. Invoices straddling the threshold mid-year need split
+      reporting. Errors here typically manifest as wrong-rate VAT.
+    tags: [tax_field_mismatch, eu_vat, distance_selling, oss]
+
+  - id: POL-037
+    title: "EU VAT — services place-of-supply rules"
+    text: |
+      For B2B services, place-of-supply is the buyer's location (general
+      rule, with exceptions for real-estate, transport, restaurants, and
+      certain digital services). For B2C services, place-of-supply is the
+      seller's location (with carve-outs). Invoice VAT should align to the
+      place-of-supply rule for the service type. Mis-application is a
+      tax_field_mismatch; in practice the most common error is treating a
+      B2B cross-border service as origin-based.
+    tags: [tax_field_mismatch, eu_vat, place_of_supply, services]
+
+  # India GST depth ----------------------------------------------------------
+
+  - id: POL-038
+    title: "India GST — intra-state CGST + SGST splits"
+    text: |
+      Intra-state supplies in India (supplier and buyer in same state)
+      attract CGST (Central GST, paid to Union) + SGST (State GST, paid to
+      state). Together they equal the total GST rate. Example: 18% effective
+      rate splits as 9% CGST + 9% SGST. Invoice with only CGST or only SGST
+      on an intra-state supply is malformed. Invoice with IGST instead of
+      CGST+SGST on an intra-state supply is mis-routed and a
+      tax_field_mismatch.
+    tags: [tax_field_mismatch, india_gst, cgst_sgst, intra_state]
+
+  - id: POL-039
+    title: "India GST — inter-state IGST"
+    text: |
+      Inter-state supplies in India attract IGST (Integrated GST), a single
+      rate paid to the Union and apportioned later. Inter-state means the
+      supplier's place of supply and the buyer's are in different states.
+      Invoice with CGST+SGST on an inter-state supply is mis-routed — IGST
+      is the correct treatment. The agent should determine inter- vs intra-
+      state by comparing the supplier's state code (first 2 digits of GSTIN)
+      with the buyer's.
+    tags: [tax_field_mismatch, india_gst, igst, inter_state]
+
+  - id: POL-040
+    title: "India GST — HSN code requirements"
+    text: |
+      All GST-registered invoices must carry HSN (Harmonised System of
+      Nomenclature) codes on each line. Turnover under ₹5Cr: 4-digit HSN
+      sufficient. Turnover ₹5Cr+: 6-digit HSN required. Goods and services
+      have separate code ranges (services use SAC codes 99xxxx). Missing
+      HSN codes on a line item is a compliance defect (tax_field_mismatch);
+      malformed HSN (with/without separators) is an extraction-quality
+      concern, not a classification signal.
+    tags: [tax_field_mismatch, india_gst, hsn_code]
+
+  - id: POL-041
+    title: "India GST — e-invoicing threshold"
+    text: |
+      Suppliers with annual aggregate turnover above ₹5Cr must generate
+      e-invoices via the IRP (Invoice Registration Portal) and embed the
+      IRN (Invoice Reference Number) + QR code on the printed invoice.
+      Missing IRN/QR on an above-threshold supplier's invoice means the
+      invoice is technically not GST-compliant; ITC (input tax credit) may
+      be denied. AP should flag and request the supplier reissue with a
+      valid IRN.
+    tags: [tax_field_mismatch, india_gst, einvoicing, irn]
+
+  - id: POL-042
+    title: "India GST — Input Tax Credit (ITC) eligibility"
+    text: |
+      Buyers can claim ITC on GST paid only if: supplier has filed the
+      invoice in their GSTR-1 return; invoice has valid IRN where required;
+      buyer holds the original invoice. Missing IRN or supplier's GSTR-1
+      mismatch breaks ITC eligibility — meaning the GST paid is unrecoverable
+      cost. The agent should not auto-pass an above-threshold invoice
+      lacking an IRN even if the rest is in order.
+    tags: [tax_field_mismatch, india_gst, itc, compliance]
+
+  # Brazil tax depth ---------------------------------------------------------
+
+  - id: POL-043
+    title: "Brazil NF-e — ICMS state-by-state"
+    text: |
+      ICMS is the state-level VAT in Brazil; rates vary by state and supply
+      type. Common rates: São Paulo 18%, Rio de Janeiro 20%, Minas Gerais
+      18%, Bahia 20.5%. Inter-state supplies have specific rates (7% or 12%
+      depending on direction). NF-e invoices must state the supplier's state
+      and the ICMS rate applied; rate mismatch to published state rate is a
+      tax_field_mismatch.
+    tags: [tax_field_mismatch, brazil_icms, state_rates]
+
+  - id: POL-044
+    title: "Brazil NF-e — IPI categories by NCM code"
+    text: |
+      IPI is the federal industrial product tax. Rates vary by NCM
+      (Mercosur Common Nomenclature) classification, from 0% (essentials,
+      most services) to 30%+ (alcohol, tobacco, luxury). Industrial
+      products usually carry IPI; pure services do not. Invoice carrying
+      IPI on a service line is malformed; missing IPI on an industrial
+      product is a tax_field_mismatch.
+    tags: [tax_field_mismatch, brazil_ipi, ncm_code]
+
+  - id: POL-045
+    title: "Brazil — PIS / COFINS regimes (cumulative vs non-cumulative)"
+    text: |
+      PIS (Social Integration Program) and COFINS (Social Security Financing)
+      are federal social contributions. Two regimes: cumulative
+      (PIS 0.65% / COFINS 3%, no credits — common for service businesses
+      under presumed-profit) vs non-cumulative (PIS 1.65% / COFINS 7.6%,
+      with input credits — common under real-profit). Invoice rates should
+      match the supplier's tax regime; mismatched regime indicates
+      mis-issuance.
+    tags: [tax_field_mismatch, brazil_pis_cofins, regime]
+
+  - id: POL-046
+    title: "Brazil MEI vs Lucro Real tax treatment"
+    text: |
+      MEI (Micro-Empreendedor Individual) is a simplified single-tax regime
+      for micro-suppliers with revenue under ₿81K/year. MEI suppliers issue
+      simplified NF-e with a single consolidated tax line, NOT the full
+      ICMS/IPI/PIS/COFINS breakdown. Treating an MEI invoice as if it were
+      Lucro Real (full breakdown required) generates false tax_field_mismatch
+      flags. Detection: supplier's CNPJ regime code (first 2 chars after
+      slash) indicates MEI.
+    tags: [tax_field_mismatch, brazil_mei, lucro_real, regime]
+
+  - id: POL-047
+    title: "Brazil — SPED reporting impact"
+    text: |
+      All NF-e invoices automatically feed Brazil's SPED (Public Digital
+      Bookkeeping System) reporting. Inaccurate tax breakdown on the invoice
+      propagates into the buyer's SPED return and creates compliance
+      exposure (penalties from Receita Federal). AP cannot fix tax
+      mis-coding after the fact — the supplier must reissue with corrected
+      NF-e. Always route NF-e tax_field_mismatch to supplier correction;
+      never auto-resolve.
+    tags: [tax_field_mismatch, brazil_sped, compliance]
+
+  # Approval matrix granularity ---------------------------------------------
+
+  - id: POL-048
+    title: "Approval matrix — by department"
+    text: |
+      Spend thresholds vary by department: IT and Engineering (higher
+      tolerance, faster cycles): under $10K self-approve, $10-50K manager,
+      $50-250K VP, $250K+ CIO. Marketing: under $5K self, $5-50K manager,
+      $50-200K VP, $200K+ CMO. Procurement (capex): under $2K self, $2-25K
+      manager, $25-100K VP Finance, $100K+ CFO. Use the buyer department
+      embedded in the PO record to apply the right matrix; AP cannot
+      assume the universal matrix.
+    tags: [approval_matrix, departments, spend_threshold]
+
+  - id: POL-049
+    title: "Approval matrix — capex vs opex"
+    text: |
+      Capital expenditure (capex — fixed assets, equipment, infrastructure)
+      requires stricter approval than operational expenditure. Capex over
+      $25K typically requires VP + Finance dual sign-off; opex over $25K
+      requires only VP. Capex also triggers asset-register entry and
+      depreciation setup — AP should route to fixed-assets team in parallel
+      with payment. Mis-classifying capex as opex bypasses these controls
+      and is a compliance risk.
+    tags: [approval_matrix, capex, opex, fixed_assets]
+
+  - id: POL-050
+    title: "Approval matrix — strategic MSA vendors"
+    text: |
+      Vendors under a strategic MSA (Master Services Agreement) typically
+      have pre-negotiated price lists, terms, and pre-approved spend ceilings
+      per category. Invoices within the MSA ceiling and against the
+      pre-negotiated price list auto-pass without per-invoice approver chain.
+      Out-of-MSA invoices from MSA vendors revert to the standard approval
+      matrix. The agent should flag "invoice in MSA but price differs from
+      MSA list" as a price-variance event needing review.
+    tags: [approval_matrix, msa, strategic_vendor]
+
+  - id: POL-051
+    title: "Approval matrix — quarter-end / year-end freeze"
+    text: |
+      In the last 5 business days of each quarter and the last 10 business
+      days of the fiscal year, all invoices over $50K require additional
+      Finance review regardless of standard tier. The freeze ensures
+      revenue / spend recognition stays within the right period. The agent
+      flags affected invoices and adds Finance as an additional approver
+      in the chain; does not bypass normal approvers.
+    tags: [approval_matrix, quarter_end, year_end, finance_review]
+
+  - id: POL-052
+    title: "Emergency-spend authority"
+    text: |
+      Designated emergency-spend approvers (typically the GM, CFO, or
+      pre-named delegates) can authorize spend above their normal threshold
+      for genuine emergencies (production outage, safety, supply
+      disruption). Emergency approvals must be: pre-flagged on the PO with
+      the emergency rationale; capped at 2× the normal threshold for the
+      approver; reviewed by Finance within 5 days post-approval. The agent
+      should detect emergency POs and apply relaxed routing while logging
+      for post-hoc audit.
+    tags: [approval_matrix, emergency, finance_review]
+
+  - id: POL-053
+    title: "Approval matrix — recurring services"
+    text: |
+      Recurring service contracts (utilities, SaaS subscriptions, lease
+      payments) under a master contract have pre-authorized monthly /
+      quarterly payments up to the contract ceiling. AP should auto-approve
+      each periodic invoice if: invoice amount ≤ contract monthly cap;
+      invoice date is within the contract period; service line matches the
+      contract. Out-of-contract amounts revert to standard approval.
+    tags: [approval_matrix, recurring_services, contract, auto_pass]
+
+  # Vendor segmentation ------------------------------------------------------
+
+  - id: POL-054
+    title: "Vendor classification — strategic vs tactical"
+    text: |
+      Strategic vendors (named, < 50 in most enterprises) have multi-year
+      contracts, dedicated account managers, and tighter SLAs. Tactical
+      vendors (spot buys, swappable) have transactional relationships.
+      Strategic vendors get faster payment terms (NET-30 vs NET-45 standard),
+      priority dispute handling, and pre-approved spend ceilings.
+      Vendor tier should be on the vendor master record and drives routing
+      decisions throughout the workflow.
+    tags: [vendor_master_gap, vendor_tier, strategic, tactical]
+
+  - id: POL-055
+    title: "Vendor classification — MSA-bound vs spot"
+    text: |
+      MSA-bound vendors operate under a Master Services Agreement with
+      pre-negotiated terms (price lists, payment terms, service levels).
+      Spot vendors have one-off POs with no overarching contract. MSA
+      vendors' invoices that conform to the MSA can flow at Tier 1; spot
+      vendors' invoices always need Tier 2 minimum because the buyer hasn't
+      pre-committed.
+    tags: [vendor_master_gap, msa, spot_buy, contract]
+
+  - id: POL-056
+    title: "Contractor vs supplier — US 1099 implications"
+    text: |
+      In the US, the buyer's tax classification of the supplier matters:
+      a "contractor" (W-9 individual or single-member LLC) triggers
+      1099-NEC reporting for the buyer on payments ≥$600/year. A
+      "corporation" supplier does not. Mis-classifying a contractor as a
+      corporation in vendor master leads to 1099 reporting gaps and IRS
+      penalties. The agent should verify vendor's tax-classification field
+      and flag mismatches with tax-ID format (EIN vs SSN).
+    tags: [vendor_master_gap, contractor, "1099", irs]
+
+  - id: POL-057
+    title: "Foreign vendor handling"
+    text: |
+      Foreign vendors (different country than buyer) require additional
+      validation: tax treaty applicability (withholding tax); FX hedging
+      treatment; sanctions screening (OFAC for US buyers, EU consolidated
+      list for EU buyers); beneficial ownership for amounts above the
+      buyer's threshold. Vendor master record must carry the country code
+      and sanctions-check status. Foreign vendors with unverified
+      beneficial-ownership trigger a hold-pay event.
+    tags: [vendor_master_gap, foreign_vendor, sanctions, withholding]
+
+  - id: POL-058
+    title: "Small / disadvantaged business preferences"
+    text: |
+      Many buyers (especially US gov contractors) have small-business or
+      disadvantaged-business spend targets (e.g. 23% federal goal). Vendor
+      master records carry an SBE/MBE/WBE/VOSB classification when
+      applicable. Invoices from preferred-category vendors flow normally
+      but are tracked separately for reporting. The agent does not change
+      decisioning based on this, only logs the classification for reporting.
+    tags: [vendor_master_gap, sbe, mbe, supplier_diversity]
+
+  # Industry-specific --------------------------------------------------------
+
+  - id: POL-059
+    title: "Pharma — GxP chain-of-custody requirements"
+    text: |
+      In pharmaceutical supply chains, invoices for GxP-relevant materials
+      (APIs, excipients, consumables touching product) must reference a
+      certified chain-of-custody document (CoA, CoC) for each lot. Missing
+      lot references or CoC documents on a GxP invoice halts payment and
+      routes to QA. Non-GxP categories (office supplies, IT) flow normally.
+      The agent identifies GxP relevance by SKU category in the vendor
+      master + PO category code.
+    tags: [other, pharma, gxp, chain_of_custody, quality]
+
+  - id: POL-060
+    title: "Defense — ITAR / EAR sensitive items"
+    text: |
+      US defense contractors handling ITAR (International Traffic in Arms)
+      or EAR (Export Administration Regulations) sensitive items must
+      verify: supplier is on the approved-vendor list with appropriate
+      clearances; goods are within authorized export licenses; end-user
+      certificate where applicable. Missing license info or non-cleared
+      supplier on a controlled invoice halts payment and routes to compliance.
+    tags: [other, defense, itar, ear, compliance]
+
+  - id: POL-061
+    title: "Financial services — SOX controls on AP"
+    text: |
+      SOX-regulated entities (SEC registrants) must maintain documented
+      controls on AP: segregation of duties (initiator ≠ approver ≠ payer);
+      change-detection on vendor master (especially bank details); period-
+      close cutoff (invoices dated after period-end can't post in that
+      period). The agent's audit log must capture timestamps, actors, and
+      state transitions sufficient for external auditors to recreate.
+    tags: [fraud_signal, sox, segregation_of_duties, audit_trail]
+
+  - id: POL-062
+    title: "Healthcare — HIPAA vendor categories"
+    text: |
+      Healthcare entities (covered entities + business associates under
+      HIPAA) must validate that any vendor with PHI access has a signed
+      BAA (Business Associate Agreement). Invoices from vendors with
+      PHI-touching services (IT, billing, data analytics) but no BAA on
+      file are blocked until the BAA is executed. The agent looks for the
+      "phi_access" flag on the vendor master record.
+    tags: [vendor_master_gap, healthcare, hipaa, baa]
+
+  # Fraud depth --------------------------------------------------------------
+
+  - id: POL-063
+    title: "Fraud heuristic — round-dollar amounts"
+    text: |
+      Fabricated invoices often have suspiciously round totals (multiples
+      of $100, $1000) without corresponding line-item arithmetic that
+      naturally rounds. Heuristic: if invoice total is a multiple of $100
+      AND line items don't naturally produce that total (no rounding
+      adjustment line, no quantity × price = clean number), elevate the
+      fraud-signal score. Not dispositive alone; weighted with other
+      indicators.
+    tags: [fraud_signal, heuristic, round_dollar]
+
+  - id: POL-064
+    title: "Fraud heuristic — just-under-threshold splitting"
+    text: |
+      Multiple invoices from the same supplier just below an approval
+      threshold (e.g., three invoices of $24,500 against a $25K threshold)
+      within a short window strongly suggests split-invoice fraud designed
+      to avoid the next approver. The agent should aggregate same-supplier
+      invoices over a rolling 14-day window and flag when the cumulative
+      exceeds 2× the lowest split threshold even though each individual is
+      under.
+    tags: [fraud_signal, split_invoice, threshold_evasion]
+
+  - id: POL-065
+    title: "Fraud heuristic — bank-detail changes"
+    text: |
+      A vendor's bank account changing within 30 days of an invoice arrival
+      is the highest-signal fraud pattern (business-email compromise / wire
+      fraud). The agent should: hold-pay any invoice from a vendor with
+      bank-detail changes inside the window; require out-of-band verification
+      (phone call to a number from the original contract, not the email);
+      escalate to the AP fraud team. Approve only after written verification.
+    tags: [fraud_signal, bank_detail_change, bec, wire_fraud]
+
+  - id: POL-066
+    title: "Fraud heuristic — weekend / after-hours submissions"
+    text: |
+      Invoices submitted at unusual times (weekends, between 10 PM and 6 AM
+      buyer time) score slightly higher on the fraud-signal scale,
+      especially when paired with other indicators. Not dispositive — many
+      international suppliers legitimately submit outside buyer business
+      hours. Use as a weight, not a trigger.
+    tags: [fraud_signal, heuristic, timing]
+
+  - id: POL-067
+    title: "Fraud heuristic — new-vendor high-value combo"
+    text: |
+      A new vendor (onboarded < 90 days) submitting a high-value invoice
+      (> $25K) as their first or second invoice is statistically much more
+      likely to be fraudulent than an established-vendor invoice. The agent
+      should require enhanced verification: invoice routing through
+      vendor-onboarding team for additional KYC; out-of-band confirmation
+      with the buyer's purchasing contact; sanctions re-screen.
+    tags: [fraud_signal, new_vendor, high_value]
+
+  # 3-way match nuance -------------------------------------------------------
+
+  - id: POL-068
+    title: "3-way match — tolerance by spend tier"
+    text: |
+      Price-variance tolerance scales with PO value: under $1K PO ±5%
+      (low-value, tighter management cost than recovery); $1-10K ±3%;
+      $10-100K ±2%; over $100K ±1%. Larger POs warrant tighter scrutiny.
+      Quantity tolerance is uniform at 0 (any quantity variance flagged)
+      but the severity threshold for escalation rises with PO total.
+    tags: [three_way_match, price_variance, tolerance, spend_tier]
+
+  - id: POL-069
+    title: "3-way match — services vs goods"
+    text: |
+      Goods 3-way match uses PO + goods receipt + invoice. Services often
+      lack a physical goods receipt; instead, services use service-entry-
+      sheets (SES) or completed-work confirmations. The agent treats the
+      SES as the GR-equivalent for services 3-way match. Missing SES on a
+      services invoice = missing_goods_receipt with the same handling.
+    tags: [three_way_match, services, ses, missing_goods_receipt]
+
+  - id: POL-070
+    title: "Reverse 3-way match for services"
+    text: |
+      For low-value recurring services (utilities, subscriptions) the buyer
+      may not issue an SES per cycle. Reverse 3-way match: invoice +
+      contract terms + payment history. Each invoice is auto-validated
+      against the contract ceiling and prior-cycle pattern; large deviations
+      from the running average trigger review. This works only for
+      pre-approved recurring categories on the vendor master.
+    tags: [three_way_match, services, reverse_match, recurring]
+
+  # Cross-currency depth -----------------------------------------------------
+
+  - id: POL-071
+    title: "Cross-currency — contractual FX rates"
+    text: |
+      Supplier MSAs commonly lock an FX rate for the contract period
+      ("fixed-rate clause" or "FX collar"). Invoices in supplier-currency
+      must convert to buyer-currency at the contractual rate, not the
+      spot rate. If the invoice uses spot when contract says fixed, the
+      delta is a variance the buyer can recover. The agent reads the FX
+      clause from the PO record and computes expected vs actual.
+    tags: [cross_currency_mismatch, fx_clause, msa]
+
+  - id: POL-072
+    title: "Cross-currency — hedge accounting impact"
+    text: |
+      Buyers running FX hedge programs lock in an internal rate for
+      converted invoices (the hedge rate). AP applies the hedge rate, not
+      the spot, when posting. Discrepancies between supplier-charged-rate
+      and internal-hedge-rate produce FX gain/loss accounting entries.
+      The agent reports FX deltas to treasury for hedge effectiveness
+      tracking; does not modify the payment amount.
+    tags: [cross_currency_mismatch, hedge_accounting, treasury]
+
+  - id: POL-073
+    title: "Cross-currency — FX gain/loss thresholds"
+    text: |
+      Material FX deltas (typically > 2% of PO value or > $5K absolute,
+      whichever lower) require treasury sign-off before payment proceeds.
+      Sub-threshold deltas auto-route through hedge accounting. The agent
+      computes the delta and applies the threshold from the buyer's FX
+      policy on the PO record.
+    tags: [cross_currency_mismatch, fx_variance, treasury_review]
+
+  # Duplicate edge cases -----------------------------------------------------
+
+  - id: POL-074
+    title: "Duplicate — legitimate re-invoicing (corrected invoice)"
+    text: |
+      A supplier issuing a corrected invoice (same supplier_invoice_number
+      but with amended fields) is legitimate, not duplicate, when: the
+      original invoice has not been paid; the correction is supplier-
+      acknowledged via email or formal credit-memo + re-invoice cycle;
+      the correction is annotated on the invoice. The agent looks for the
+      "corrected/revised" annotation and matches against original; pays only
+      one of the pair.
+    tags: [duplicate, legitimate_reissue, correction]
+
+  - id: POL-075
+    title: "Duplicate — tax-correction reissues"
+    text: |
+      Tax-only corrections (e.g., supplier reissues an invoice with the
+      correct tax line, original was wrong) generate a same-invoice-number
+      pair with same amounts except for tax. The agent should detect the
+      pair, void the original (or net it against the new one), and pay
+      the corrected version. Distinct from straight duplicates because the
+      amounts diverge in a specific predictable way.
+    tags: [duplicate, tax_correction, legitimate_reissue]

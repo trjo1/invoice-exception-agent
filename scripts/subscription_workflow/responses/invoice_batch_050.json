@@ -1,0 +1,318 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260420_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-20",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 12\n60327 Frankfurt am Main\nGermany\nVAT: DE123456789\nSEPA: IBAN DE89 3704 0044 0532 0130 00\nBIC COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech GmbH",
+      "buyer_address": "Musterstraße 1\n10115 Berlin\nGermany",
+      "buyer_po_contact": "Anna Schmidt, a.schmidt@globaltech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-101",
+        "description": "Schrauben M10 (Screws M10)",
+        "quantity": 100,
+        "unit_price": 0.45,
+        "line_total": 45.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-102",
+        "description": "Muttern M10 (Nuts M10)",
+        "quantity": 200,
+        "unit_price": 0.20,
+        "line_total": 40.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-103",
+        "description": "Unterlegscheiben M10 (Washers M10)",
+        "quantity": 500,
+        "unit_price": 0.05,
+        "line_total": 25.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-104",
+        "description": "Dichtungsringe (Sealing Rings)",
+        "quantity": 50,
+        "unit_price": 1.20,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-105",
+        "description": "Hydraulikschlauch 1m (Hydraulic Hose 1m)",
+        "quantity": 10,
+        "unit_price": 15.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FI-106",
+        "description": "Kugellager (Ball Bearing)",
+        "quantity": 20,
+        "unit_price": 8.75,
+        "line_total": 175.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FI-107",
+        "description": "Förderband 5m (Conveyor Belt 5m)",
+        "quantity": 2,
+        "unit_price": 120.00,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FI-108",
+        "description": "Schmieröl (Lubricating Oil) 5L",
+        "quantity": 4,
+        "unit_price": 22.50,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 825.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 156.75
+      }
+    ],
+    "total": 981.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extract all fields as presented. Note SEPA bank details in header. VAT rate 19% applied. Bilingual labels (German primary, English secondary)."
+  },
+  {
+    "invoice_id": "P004_INV_20260322_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-22",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCS1234E1Z5, PAN: AABCS1234E",
+      "buyer_name": "GlobalTech India Pvt Ltd",
+      "buyer_address": "456 MG Road, Bangalore 560001, India",
+      "buyer_po_contact": "Raj Patel, raj.patel@globaltech.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-201",
+        "description": "HSN 7318 - Hex Bolts M12",
+        "quantity": 500,
+        "unit_price": 3.50,
+        "line_total": 1750.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-202",
+        "description": "HSN 7318 - Nuts M12",
+        "quantity": 1000,
+        "unit_price": 1.20,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-203",
+        "description": "HSN 7326 - Washers M12",
+        "quantity": 2000,
+        "unit_price": 0.30,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-204",
+        "description": "HSN 4016 - Rubber Gaskets",
+        "quantity": 100,
+        "unit_price": 15.00,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-205",
+        "description": "HSN 3926 - Plastic Clips",
+        "quantity": 3000,
+        "unit_price": 0.10,
+        "line_total": 300.00
+      }
+    ],
+    "subtotal": 5350.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 963.00
+      }
+    ],
+    "total": 6313.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Extract HSN codes from descriptions. Note PAN and GSTIN in header. IGST 18% applied. Cross-currency to USD is common but not reflected in invoice."
+  },
+  {
+    "invoice_id": "P005_INV_20260131_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-11111",
+    "invoice_date": "2026-01-31",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "GlobalTech Brasil Ltda.",
+      "buyer_address": "Rua Augusta, 500, São Paulo, SP 01304-001, Brazil",
+      "buyer_po_contact": "Carlos Silva, c.silva@globaltech.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-301",
+        "description": "NCM 7318.15.00 - Parafusos M8",
+        "quantity": 200,
+        "unit_price": 0.85,
+        "line_total": 170.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-302",
+        "description": "NCM 7318.16.00 - Porcas M8",
+        "quantity": 400,
+        "unit_price": 0.40,
+        "line_total": 160.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-303",
+        "description": "NCM 3926.90.90 - Arruelas de Plástico",
+        "quantity": 1000,
+        "unit_price": 0.12,
+        "line_total": 120.00
+      }
+    ],
+    "subtotal": 450.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 81.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 22.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 7.43
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 34.20
+      }
+    ],
+    "total": 595.13,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Invoice contains four tax types (ICMS, IPI, PIS, COFINS) which may confuse extractors. The extractor should identify all tax lines and correctly sum them. NF-e shape combined invoice and tax receipt."
+  },
+  {
+    "invoice_id": "P002_INV_20260225_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-54321",
+    "invoice_date": "2026-02-25",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Main St, Anytown, USA 12345",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "GlobalTech Inc.",
+      "buyer_address": "456 Oak Ave, Bigcity, USA 67890",
+      "buyer_po_contact": "John Doe, j.doe@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Freight Services - LTL shipment",
+        "quantity": 1,
+        "unit_price": 450.50,
+        "line_total": 450.50
+      }
+    ],
+    "subtotal": 450.50,
+    "tax": [],
+    "total": 451.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Note that totals are rounded up to nearest dollar (ceiling). Hand-written notes may be present on scanned image but not in JSON. Inconsistent header placement may affect extraction."
+  },
+  {
+    "invoice_id": "P001_INV_20260330_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-30",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "BuyCo International",
+      "buyer_address": "1 Global Plaza, London, UK",
+      "buyer_po_contact": "Alice Wang, a.wang@buyco.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-401",
+        "description": "Capacitor 10µF 50V",
+        "quantity": 1000,
+        "unit_price": 0.25,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-402",
+        "description": "Resistor 1kΩ 1/4W",
+        "quantity": 5000,
+        "unit_price": 0.01,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-403",
+        "description": "Connector USB-C",
+        "quantity": 200,
+        "unit_price": 0.75,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 450.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 39.38
+      }
+    ],
+    "total": 489.38,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Tax itemized separately by jurisdiction (California). Totals rounded to 2 decimals. Multi-currency invoicing may occur but not in this instance."
+  }
+]
+```

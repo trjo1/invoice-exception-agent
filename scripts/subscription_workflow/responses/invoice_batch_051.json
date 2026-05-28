@@ -1,0 +1,279 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260207_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-13245",
+    "invoice_date": "2026-02-07",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Blvd, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Drive, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Alice Johnson, alice.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Server Processor Unit Xeon 8-Core",
+        "quantity": 5,
+        "unit_price": 250.00,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "description": "Solid State Drive 1TB NVMe",
+        "quantity": 10,
+        "unit_price": 120.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "description": "Network Switch 24-Port Gigabit",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      }
+    ],
+    "subtotal": 3350.00,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08,
+        "amount": 268.00
+      }
+    ],
+    "total": 3618.00,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference should be PO-2026-02-12345 but was entered as PO-2026-02-13245 (digits 4 and 5 transposed). Invoice is otherwise clean. Tax line itemized by jurisdiction (US-NY). All totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260201_002",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-02-01",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 25, 60327 Frankfurt am Main, Germany\nBank: Deutsche Bank, IBAN: DE89 3704 0044 0532 0130 00, BIC: DEUTDEBB",
+      "vendor_tax_id": "DE 123456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Drive, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Alice Johnson, alice.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-101",
+        "description": "Industrieroboter Arm (Industrial Robot Arm)",
+        "quantity": 2,
+        "unit_price": 15000.00,
+        "line_total": 30000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-202",
+        "description": "Sensor Modul Temperatur (Temperature Sensor Module)",
+        "quantity": 20,
+        "unit_price": 45.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-303",
+        "description": "Hydraulikpumpe (Hydraulic Pump)",
+        "quantity": 1,
+        "unit_price": 8500.00,
+        "line_total": 8500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-404",
+        "description": "Steuerungseinheit (Control Unit)",
+        "quantity": 3,
+        "unit_price": 3200.00,
+        "line_total": 9600.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-505",
+        "description": "Förderband (Conveyor Belt)",
+        "quantity": 5,
+        "unit_price": 1200.00,
+        "line_total": 6000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-606",
+        "description": "Schaltschrank (Electrical Cabinet)",
+        "quantity": 2,
+        "unit_price": 2500.00,
+        "line_total": 5000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-707",
+        "description": "Kabelbündel (Cable Bundle)",
+        "quantity": 100,
+        "unit_price": 3.50,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-808",
+        "description": "Wartungskit (Maintenance Kit)",
+        "quantity": 10,
+        "unit_price": 150.00,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 61850.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 61850.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. DE VAT (19%) itemized but amount is 0.00 due to reverse-charge export to non-EU buyer. Bilingual labels used. SEPA bank details included in vendor address."
+  },
+  {
+    "invoice_id": "P004_INV_20260412_003",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-12",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai 400093, India\nPAN: AAAAA1234B",
+      "vendor_tax_id": "GSTIN 27AAACB1234C1Z5",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Drive, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Alice Johnson, alice.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Cotton Fabric 100% Organic (HSN 5208)",
+        "quantity": 500,
+        "unit_price": 150.00,
+        "line_total": 75000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Silk Thread (HSN 5007)",
+        "quantity": 200,
+        "unit_price": 250.00,
+        "line_total": 50000.00
+      }
+    ],
+    "subtotal": 125000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 0.00
+      }
+    ],
+    "total": 125000.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. GST itemized (IGST 0% for export). HSN codes included in descriptions. PAN and GSTIN present in header. Cross-currency to USD common but not applied here."
+  },
+  {
+    "invoice_id": "P002_INV_20260321_004",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-21",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "150 Maple Avenue, Suite 100, Burlington, VT 05401, USA",
+      "vendor_tax_id": "EIN 98-7654321",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Drive, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Alice Johnson, alice.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-101",
+        "description": "Freight Service - LTL Shipping",
+        "quantity": 1,
+        "unit_price": 4500.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-202",
+        "description": "Warehouse Storage Fee (Monthly)",
+        "quantity": 1,
+        "unit_price": 1250.75,
+        "line_total": 1250.75
+      }
+    ],
+    "subtotal": 5750.75,
+    "tax": [],
+    "total": 5751.00,
+    "error_injected": "MISSING_TAX_LINE",
+    "ground_truth_note": "Tax line absent for in-state shipment (error injected). Total rounded up to nearest dollar per persona quirk. Handwritten note 'Approved by John' present on scanned invoice but not extracted."
+  },
+  {
+    "invoice_id": "P004_INV_20260119_005",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-13579",
+    "invoice_date": "2026-01-19",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai 400093, India\nPAN: AAAAA1234B",
+      "vendor_tax_id": "GSTIN 27AAACB1234C1Z5",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Drive, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Alice Johnson, alice.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-003",
+        "description": "Stainless Steel Utensils Set (HSN 7323)",
+        "quantity": 100,
+        "unit_price": 800.00,
+        "line_total": 80000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-004",
+        "description": "Brass Decorative Items (HSN 7418)",
+        "quantity": 50,
+        "unit_price": 1200.00,
+        "line_total": 60000.00
+      }
+    ],
+    "subtotal": 140000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 0.00
+      }
+    ],
+    "total": 140000.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. GST itemized (IGST 0% for export). HSN codes included in descriptions. PAN and GSTIN present in header. Cross-currency to USD common but not applied here."
+  }
+]
+```

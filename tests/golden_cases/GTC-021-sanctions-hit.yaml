@@ -1,0 +1,125 @@
+# Golden test case GTC-021
+# Scenario: Vendor was on file and active; sanctions check fired AFTER onboarding flagged them.
+# Expected: halt_require_supervisor → AP fraud / sanctions team. Do not pay.
+
+id: GTC-021
+title: Vendor previously onboarded — sanctions hit fires after the fact
+exception_category: fraud_signal
+difficulty: hard
+created: 2026-05-13
+notes: |
+  Compliance anchor. Sanctions screening lists (OFAC SDN, EU consolidated,
+  UN, UK HMT) refresh continuously. A vendor that was clean at onboarding
+  can later get added — and any pending or new invoice from that vendor
+  must NOT be paid until the case is reviewed. Classified as fraud_signal
+  per the routing taxonomy (it's the closest existing enum match for
+  "compliance halt"); recommendation is halt_require_supervisor with
+  routing to ap_fraud_team — they coordinate with compliance.
+
+input:
+  events:
+    - source: SAP
+      event_type: vendor_master_change
+      timestamp: 2026-05-08T12:00:00Z
+      payload:
+        vendor_id: P002
+        change_type: sanctions_check_failed
+        sanctions_list_hit: OFAC_SDN
+        screening_source: refinitiv_world_check
+        flagged_on: 2026-05-08
+        sanctions_check_passed: false   # previously true
+
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-15T10:00:00Z
+      payload:
+        po_id: PO-2026-04-16601
+        vendor_id: P002
+        line_items:
+          - sku: SVC-CONS-Q3
+            description: Strategic advisory services Q3
+            quantity: 1
+            unit_price_usd: 22000.00
+            line_total_usd: 22000.00
+        currency: USD
+        terms: NET-30
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-12T11:30:00Z
+      payload:
+        from: billing@consultpartners.example.com
+        invoice_attachment: P002_INV_2026-05-12_015.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P002_INV_2026-05-12_015.pdf
+      ground_truth_fields:
+        invoice_number: CP-2026-05-Q3
+        po_reference: PO-2026-04-16601
+        vendor_id: P002
+        line_items:
+          - sku: SVC-CONS-Q3
+            quantity: 1
+            unit_price_usd: 22000.00
+            line_total_usd: 22000.00
+        total_usd: 22000.00
+        currency: USD
+        terms: NET-30
+      cross_case_signals:
+        vendor_sanctions_check_passed: false
+        sanctions_list_hit: OFAC_SDN
+        days_since_screening_failure: 4
+
+expected:
+  classification:
+    class_label: fraud_signal
+    min_confidence: 0.90
+    must_contain_evidence:
+      - sanctions_check_failed
+      - OFAC_SDN_hit
+      - cannot_pay_sanctioned_vendor
+
+  recommendation:
+    action: halt_require_supervisor
+    rationale_must_mention:
+      - sanctions list
+      - OFAC
+      - compliance review
+      - cannot pay
+    counterfactual_should_exist: false  # never an alternative — sanctions is binary
+
+  hitl:
+    tier: 3
+    routed_to: ap_fraud_team
+    must_include_in_payload:
+      - sanctions_flag
+      - the_screening_source
+      - vendor_history
+
+  drafting:
+    must_produce_draft: true
+    draft_type: internal_note
+    draft_recipient: ap_fraud_team
+    draft_content_must_mention:
+      - sanctions hit
+      - OFAC
+      - vendor blocked
+      - compliance team coordination
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_halt_pay_run: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.40
+
+pass_criteria:
+  - classification.class_label == fraud_signal
+  - recommendation.action == halt_require_supervisor
+  - hitl.tier == 3
+  - hitl.routed_to == ap_fraud_team
+  - drafting.draft_produced == true
+  - execution.pay_run_halted == true

@@ -1,0 +1,108 @@
+# Golden test case GTC-020
+# Scenario: Emergency PO created Monday, goods received same day, invoice arrives Tuesday.
+# Expected: classify as `none` despite the rapid timeline — emergency POs are legitimate.
+
+id: GTC-020
+title: Emergency PO with same-day goods receipt + next-day invoice
+exception_category: none
+difficulty: hard
+created: 2026-05-13
+notes: |
+  Time-window stress test. A normal split-invoice fraud check looks at
+  multiple invoices on a PO inside ~14 days. An emergency PO compresses
+  PO-create → GR → invoice into 24-48 hours, which can superficially
+  trigger temporal heuristics. The agent must check the `is_emergency`
+  flag on the PO and NOT flag fraud just because the timeline is fast.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-05-12T09:30:00Z
+      payload:
+        po_id: PO-2026-05-15500
+        vendor_id: P001
+        is_emergency: true
+        emergency_authorization: SUPPLY_CHAIN_DIRECTOR_APPROVED
+        line_items:
+          - sku: SKU-EMRG-1
+            description: Emergency replacement compressor
+            quantity: 1
+            unit_price_usd: 8500.00
+            line_total_usd: 8500.00
+        currency: USD
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-12T16:45:00Z   # same day
+      payload:
+        po_id: PO-2026-05-15500
+        gr_id: GR-2026-05-09204
+        receipt_mode: same_day_courier
+        line_items:
+          - sku: SKU-EMRG-1
+            quantity_received: 1
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-13T11:00:00Z   # next day
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-05-13_014.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-05-13_014.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-05-13-014
+        po_reference: PO-2026-05-15500
+        vendor_id: P001
+        line_items:
+          - sku: SKU-EMRG-1
+            quantity: 1
+            unit_price_usd: 8500.00
+            line_total_usd: 8500.00
+        total_usd: 8500.00
+        currency: USD
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: none
+    min_confidence: 0.75
+    must_contain_evidence:
+      - emergency_po_flag
+      - prices_and_quantities_match
+      - same_day_gr_legitimate
+
+  recommendation:
+    action: approve_pending_review
+    rationale_must_mention:
+      - emergency PO
+      - same-day delivery
+      - matches PO
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - the_emergency_flag
+      - the_authorization
+
+  drafting:
+    must_produce_draft: false
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true  # emergency POs always audit-logged
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.30
+
+pass_criteria:
+  - classification.class_label == none
+  - recommendation.action == approve_pending_review
+  - hitl.tier == 2

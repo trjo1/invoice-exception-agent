@@ -1,0 +1,341 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260321_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-00123",
+    "invoice_date": "2026-03-21",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCU1234D1Z5, PAN: AABCU1234D",
+      "buyer_name": "Delhi Distributors Pvt. Ltd.",
+      "buyer_address": "456 Connaught Place, New Delhi, Delhi 110001, India",
+      "buyer_po_contact": "Ravi Sharma, ravi.sharma@delhidistributors.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Industrial bearings, HSN 8482",
+        "quantity": 10,
+        "unit_price": 5000,
+        "line_total": 50000
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Steel rods, HSN 7214",
+        "quantity": 50,
+        "unit_price": 1200,
+        "line_total": 60000
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "Hydraulic pump, HSN 8413",
+        "quantity": 5,
+        "unit_price": 25000,
+        "line_total": 125000
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "Rubber seals, HSN 4016",
+        "quantity": 100,
+        "unit_price": 300,
+        "line_total": 30000
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "Lubricant oil, HSN 2710",
+        "quantity": 20,
+        "unit_price": 800,
+        "line_total": 16000
+      }
+    ],
+    "subtotal": 281000,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 28080
+      },
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 11250
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 11250
+      }
+    ],
+    "total": 331580,
+    "error_injected": "GST_MISROUTE",
+    "ground_truth_note": "Invoice has 5 line items. Line 3 (Hydraulic pump) incorrectly shows CGST+SGST (9% each) instead of IGST 18% because buyer is in Delhi (inter-state). The tax amounts for CGST and SGST should be zero, and IGST should be 22500 for that line. Extractor should flag the misrouted GST."
+  },
+  {
+    "invoice_id": "P004_INV_20260127_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-00456",
+    "invoice_date": "2026-01-27",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCU1234D1Z5, PAN: AABCU1234D",
+      "buyer_name": "Mumbai Retailers Pvt. Ltd.",
+      "buyer_address": "789 Linking Road, Bandra West, Mumbai, Maharashtra 400050, India",
+      "buyer_po_contact": "Priya Patel, priya.patel@mumbairetailers.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-006",
+        "description": "Copper wire, HSN 7408",
+        "quantity": 100,
+        "unit_price": 150,
+        "line_total": 15000
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-007",
+        "description": "Aluminium sheets, HSN 7606",
+        "quantity": 20,
+        "unit_price": 2000,
+        "line_total": 40000
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-008",
+        "description": "PVC pipes, HSN 3917",
+        "quantity": 50,
+        "unit_price": 600,
+        "line_total": 30000
+      }
+    ],
+    "subtotal": 85000,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 7650
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 7650
+      }
+    ],
+    "total": 100300,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with 3 line items. All GST correctly applied as CGST+SGST (intra-state). No errors."
+  },
+  {
+    "invoice_id": "P005_INV_20260226_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-00789",
+    "invoice_date": "26/02/2026",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Brasília Comércio Ltda.",
+      "buyer_address": "Setor Comercial Norte, Brasília, DF 70040-010, Brazil",
+      "buyer_po_contact": "Maria Silva, maria.silva@brasiliacomercio.br",
+      "boleto_reference": "Boleto código 1234567890"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Parafusos de aço inox M8 (Stainless steel screws M8)",
+        "quantity": 200,
+        "unit_price": 2.5,
+        "line_total": 500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Mancais de rolamento (Bearing housings)",
+        "quantity": 10,
+        "unit_price": 150.0,
+        "line_total": 1500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Filtros de óleo (Oil filters)",
+        "quantity": 25,
+        "unit_price": 80.0,
+        "line_total": 2000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "Correias dentadas (Timing belts)",
+        "quantity": 15,
+        "unit_price": 120.0,
+        "line_total": 1800.0
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "Vedações de borracha (Rubber gaskets)",
+        "quantity": 50,
+        "unit_price": 10.0,
+        "line_total": 500.0
+      }
+    ],
+    "subtotal": 6300.0,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 1134.0
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 315.0
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 103.95
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 478.8
+      }
+    ],
+    "total": 8331.75,
+    "error_injected": "DATE_FORMAT_DDMMYYYY",
+    "ground_truth_note": "Invoice date is provided as '26/02/2026' (dd/mm/yyyy) instead of ISO format '2026-02-26'. The correct date is 26 February 2026. Extractor must parse the date correctly. Also includes multiple Brazilian tax types (ICMS, IPI, PIS, COFINS) and a Boleto reference."
+  },
+  {
+    "invoice_id": "P001_INV_20260401_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-12435",
+    "invoice_date": "2026-04-01",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1 World Trade Center, New York, NY 10007, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-001",
+        "description": "Server motherboard X9DRi-F",
+        "quantity": 5,
+        "unit_price": 1200.0,
+        "line_total": 6000.0
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-002",
+        "description": "64GB DDR4 RAM module",
+        "quantity": 20,
+        "unit_price": 250.0,
+        "line_total": 5000.0
+      }
+    ],
+    "subtotal": 11000.0,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08875,
+        "amount": 976.25
+      }
+    ],
+    "total": 11976.25,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference PO-2026-04-12435 has a transposed digit (should be PO-2026-04-12345). Extractor should detect the typo. Invoice is in USD with NY sales tax. Rounding to 2 decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260312_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-10112",
+    "invoice_date": "2026-03-12",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Procurement GmbH",
+      "buyer_address": "Münchner Straße 20, 80331 München, Germany",
+      "buyer_po_contact": "Hans Müller, hans.mueller@acmeglobal.de",
+      "vendor_bank": "IBAN: DE89 3704 0044 0532 0130 00, BIC: COBADEFFXXX"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Industrielager (Industrial bearings)",
+        "quantity": 100,
+        "unit_price": 25.0,
+        "line_total": 2500.0
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Hydraulikzylinder (Hydraulic cylinders)",
+        "quantity": 10,
+        "unit_price": 350.0,
+        "line_total": 3500.0
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Dichtungen (Gaskets)",
+        "quantity": 200,
+        "unit_price": 5.0,
+        "line_total": 1000.0
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-004",
+        "description": "Elektromotoren (Electric motors)",
+        "quantity": 5,
+        "unit_price": 800.0,
+        "line_total": 4000.0
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-005",
+        "description": "Schrauben (Screws)",
+        "quantity": 500,
+        "unit_price": 0.5,
+        "line_total": 250.0
+      }
+    ],
+    "subtotal": 11250.0,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 2137.5
+      }
+    ],
+    "total": 13387.5,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. All fields correct. German VAT 19% applied. Bilingual descriptions. SEPA bank details provided."
+  }
+]
+```

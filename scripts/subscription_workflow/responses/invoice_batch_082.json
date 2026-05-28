@@ -1,0 +1,30 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260103_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-00123",
+    "invoice_date": "2026-01-03",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua dos Componentes, 500, São Paulo, SP, 01234-567",
+      "vendor_tax_id": "98.765.432/0001-10",
+      "buyer_name": "Accurate Parts Ltda.",
+      "buyer_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100",
+      "buyer_po_contact": "João Silva, joao.silva@accurateparts.com.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "PAR-M8",
+        "description": "Parafuso M8 x 30mm",
+        "quantity": 100,
+        "unit_price": 1.50,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 2,
+        "sku": "POR-SEX",
+        "description": "Porca sextavada M

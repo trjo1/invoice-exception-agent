@@ -1,0 +1,328 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260204_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-00123",
+    "invoice_date": "2026-02-04",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Oak Street\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "EIN: 36-1234567",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "456 Corporate Blvd\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MB-001",
+        "description": "Cardboard Boxes (pack of 50)",
+        "quantity": 10,
+        "unit_price": 15.50,
+        "line_total": 155.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MB-002",
+        "description": "Packing Tape (roll)",
+        "quantity": 20,
+        "unit_price": 3.25,
+        "line_total": 65.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MB-003",
+        "description": "Bubble Wrap (roll)",
+        "quantity": 5,
+        "unit_price": 12.00,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MB-004",
+        "description": "Shipping Labels (100 pack)",
+        "quantity": 3,
+        "unit_price": 8.75,
+        "line_total": 26.25
+      },
+      {
+        "line_no": 5,
+        "sku": "MB-005",
+        "description": "Pallet Jack Rental (daily)",
+        "quantity": 2,
+        "unit_price": 45.00,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 396.25,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.08,
+        "amount": 31.70
+      }
+    ],
+    "total": 428,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Total rounded to nearest dollar (428). Hand-written notes and inconsistent header placement present in scanned image. Extractor should capture all 5 line items and 8% IL tax correctly."
+  },
+  {
+    "invoice_id": "P004_INV_20260327_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-00456",
+    "invoice_date": "2026-03-27",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area\nMumbai, Maharashtra 400001\nIndia",
+      "vendor_tax_id": "PAN: AABCM1234C, GSTIN: 27AABCM1234C1Z5",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "456 Corporate Blvd\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MM-001",
+        "description": "Steel Rods 12mm (HSN 7214)",
+        "quantity": 100,
+        "unit_price": 450.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MM-002",
+        "description": "Cement Bags 50kg (HSN 2523)",
+        "quantity": 50,
+        "unit_price": 350.00,
+        "line_total": 17500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MM-003",
+        "description": "Bricks (HSN 6901)",
+        "quantity": 2000,
+        "unit_price": 8.00,
+        "line_total": 16000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MM-004",
+        "description": "Sand (ton) (HSN 2505)",
+        "quantity": 10,
+        "unit_price": 1200.00,
+        "line_total": 12000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MM-005",
+        "description": "Gravel (ton) (HSN 2517)",
+        "quantity": 5,
+        "unit_price": 1500.00,
+        "line_total": 7500.00
+      }
+    ],
+    "subtotal": 98000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 8820.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 8820.00
+      }
+    ],
+    "total": 115640.00,
+    "error_injected": "GST_PERCENTAGE_MISROUTED",
+    "ground_truth_note": "Deliberate error: interstate transaction should have IGST (18%) but invoice shows CGST (9%) and SGST (9%) instead. Extractor should flag tax type mismatch. HSN codes per line; PAN and GSTIN included in header. Cross-currency (USD) equivalent may be referenced elsewhere."
+  },
+  {
+    "invoice_id": "P002_INV_20260428_003",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-00789",
+    "invoice_date": "2026-04-28",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Oak Street\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "EIN: 36-1234567",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "456 Corporate Blvd\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MB-006",
+        "description": "Forklift Rental (daily)",
+        "quantity": 3,
+        "unit_price": 200.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MB-007",
+        "description": "Warehouse Cleaning Service (per hour)",
+        "quantity": 8,
+        "unit_price": 45.00,
+        "line_total": 360.00
+      }
+    ],
+    "subtotal": 960.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.08,
+        "amount": 76.80
+      }
+    ],
+    "total": 1037,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB with 2 line items. Total rounded to nearest dollar (1037). Hand-written notes and inconsistent header placement present in scanned image. Extractor should capture both line items and 8% IL tax."
+  },
+  {
+    "invoice_id": "P005_INV_20260427_004",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-01234",
+    "invoice_date": "2026-04-27",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP 01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "456 Corporate Blvd\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-001",
+        "description": "Parafusos M8 x 30mm (caixa)",
+        "quantity": 50,
+        "unit_price": 12.50,
+        "line_total": 625.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-002",
+        "description": "Porcas M8 (caixa)",
+        "quantity": 50,
+        "unit_price": 8.75,
+        "line_total": 437.50
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-003",
+        "description": "Arruelas M8 (caixa)",
+        "quantity": 50,
+        "unit_price": 5.00,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SP-004",
+        "description": "Chave Inglesa 12\"",
+        "quantity": 10,
+        "unit_price": 35.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SP-005",
+        "description": "Fita Isolante (rolo)",
+        "quantity": 20,
+        "unit_price": 4.50,
+        "line_total": 90.00
+      }
+    ],
+    "subtotal": 1752.50,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 315.45
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 87.63
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 28.92
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 133.19
+      }
+    ],
+    "total": 2317.69,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice from São Paulo Componentes Ltda. Includes multiple Brazilian taxes (ICMS, IPI, PIS, COFINS). Boleto bancário payment slip referenced in document. Extractor should capture all 5 line items and all tax lines correctly."
+  },
+  {
+    "invoice_id": "P005_INV_20260104_005",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-05678",
+    "invoice_date": "2026-01-04",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP 01310-100\nBrazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "456 Corporate Blvd\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-006",
+        "description": "Serviço de Manutenção Elétrica (hora)",
+        "quantity": 10,
+        "unit_price": 150.00,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 1500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 270.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 75.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 24.75
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 114.00
+      }
+    ],
+    "total": 1983.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean single-line invoice from São Paulo Componentes Ltda. NF-e format with multiple taxes (ICMS, IPI, PIS, COFINS) and boleto bancário reference. Extractor should capture the single line item and all tax amounts."
+  }
+]
+```

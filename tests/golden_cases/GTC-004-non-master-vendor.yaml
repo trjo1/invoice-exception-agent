@@ -1,0 +1,96 @@
+# Golden test case GTC-004
+# Scenario: Invoice from a vendor not in the master file.
+# Expected: Route to vendor master team. Draft onboarding request.
+#          Hold AP posting until master record exists.
+
+id: GTC-004
+title: Invoice from non-master (unknown) vendor
+exception_category: vendor_master_gap
+difficulty: medium
+created: 2026-05-10
+notes: |
+  Vendor onboarding anchor. Common at scale; new suppliers regularly emerge
+  before central data team adds them. Agent must recognize unknown vendor,
+  route to the right team, draft the onboarding request — without halting
+  the broader process.
+
+input:
+  events:
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-02T14:20:00Z
+      payload:
+        from: invoices@newsupplier.example.com   # not in vendor master
+        invoice_attachment: UNKNOWN_INV_2026-05-02_001.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/UNKNOWN_INV_2026-05-02_001.pdf
+      ground_truth_fields:
+        invoice_number: NS-2026-05-02-001
+        po_reference: null   # no PO reference either
+        vendor_name_on_invoice: "Newco Supplies LLC"
+        vendor_tax_id: "EIN 87-1234567"
+        vendor_address: "120 Industrial Way, Chicago IL 60601"
+        line_items:
+          - sku: ""
+            description: "Misc office supplies - Q2 restock"
+            quantity: 1
+            unit_price_usd: 1247.50
+            line_total_usd: 1247.50
+        total_usd: 1247.50
+        currency: USD
+        terms: NET-30
+      master_data_check:
+        vendor_in_master: false
+
+expected:
+  classification:
+    class_label: vendor_master_gap
+    min_confidence: 0.85
+    must_contain_evidence:
+      - vendor_not_in_master
+      - vendor_name_extracted_from_invoice
+      - vendor_tax_id_extracted
+
+  recommendation:
+    action: request_po_amendment   # broader sense: route to onboarding + PO creation flow
+    rationale_must_mention:
+      - vendor not in master
+      - onboarding required
+      - cannot post until vendor record created
+    counterfactual_should_exist: false
+
+  hitl:
+    tier: 2
+    routed_to: vendor_master_team
+    must_include_in_payload:
+      - extracted_vendor_fields
+      - draft_onboarding_request
+
+  drafting:
+    must_produce_draft: true
+    draft_type: vendor_onboarding_request
+    draft_recipient: vendor_master_team
+    draft_content_must_mention:
+      - Newco Supplies LLC
+      - EIN 87-1234567
+      - 120 Industrial Way
+      - vendor record creation needed
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_hold_pending_master_record: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.50
+    time_to_recommendation_p95_seconds_max: 60
+
+pass_criteria:
+  - classification.class_label == vendor_master_gap
+  - hitl.tier == 2
+  - hitl.routed_to == vendor_master_team
+  - drafting.draft_produced == true
+  - execution.invoice_posted == false
+  - execution.held_pending_master_record == true

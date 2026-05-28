@@ -1,0 +1,343 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260115_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-15",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Innovation Drive, Silicon Valley, CA 94025, USA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "TechCorp International",
+      "buyer_address": "456 Business Ave, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@techcorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-001",
+        "description": "Microcontroller ATmega328P",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-002",
+        "description": "Resistor Kit 1kΩ (100 pcs)",
+        "quantity": 50,
+        "unit_price": 0.75,
+        "line_total": 37.50
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-003",
+        "description": "Capacitor 100µF (50 pcs)",
+        "quantity": 20,
+        "unit_price": 1.20,
+        "line_total": 24.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-004",
+        "description": "LED Module RGB",
+        "quantity": 200,
+        "unit_price": 0.45,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-005",
+        "description": "Connector Header 2x20",
+        "quantity": 80,
+        "unit_price": 0.60,
+        "line_total": 48.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-006",
+        "description": "PCB Prototype Board",
+        "quantity": 30,
+        "unit_price": 5.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-007",
+        "description": "Power Supply 5V 2A",
+        "quantity": 15,
+        "unit_price": 12.00,
+        "line_total": 180.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-008",
+        "description": "Temperature Sensor DS18B20",
+        "quantity": 25,
+        "unit_price": 3.20,
+        "line_total": 80.00
+      }
+    ],
+    "subtotal": 859.50,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08875,
+        "amount": 76.28
+      }
+    ],
+    "total": 935.78,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. All fields correct. Tax itemized by jurisdiction (NY sales tax at 8.875%). Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260424_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-67890",
+    "invoice_date": "2026-04-24",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "789 Maple Street, Portland, OR 97201, USA",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "GreenSupply Co.",
+      "buyer_address": "123 Oak Lane, Chicago, IL 60601, USA",
+      "buyer_po_contact": "Alice Johnson, alice@greensupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Freight services - Portland to Chicago",
+        "quantity": 1,
+        "unit_price": 1500.75,
+        "line_total": 1500.75
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Warehousing - 30 days",
+        "quantity": 1,
+        "unit_price": 3200.40,
+        "line_total": 3200.40
+      }
+    ],
+    "subtotal": 4702,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0825,
+        "amount": 388
+      }
+    ],
+    "total": 5090,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Scanned PDF with handwritten notes. Subtotal and total rounded up to nearest dollar. Line totals have decimals."
+  },
+  {
+    "invoice_id": "P004_INV_20260221_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-54321",
+    "invoice_date": "2026-02-21",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "101 Industrial Estate, Mumbai, Maharashtra 400001, India",
+      "vendor_tax_id": "GSTIN: 27AAAAA1234A1Z5, PAN: AAAAA1234A",
+      "buyer_name": "IndiaTech Solutions",
+      "buyer_address": "202 Tech Park, Bangalore, Karnataka 560001, India",
+      "buyer_po_contact": "Raj Patel, raj@indiatech.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Steel rods HSN 7214",
+        "quantity": 100,
+        "unit_price": 450.00,
+        "line_total": 45000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Aluminum sheets HSN 7606",
+        "quantity": 50,
+        "unit_price": 1200.00,
+        "line_total": 60000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "Copper wire HSN 7408",
+        "quantity": 200,
+        "unit_price": 85.00,
+        "line_total": 17000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "PVC pipes HSN 3917",
+        "quantity": 30,
+        "unit_price": 250.00,
+        "line_total": 7500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "Fasteners HSN 7318",
+        "quantity": 500,
+        "unit_price": 15.00,
+        "line_total": 7500.00
+      }
+    ],
+    "subtotal": 137000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 22140.00
+      },
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 1350.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 1350.00
+      }
+    ],
+    "total": 161840.00,
+    "error_injected": "GST_MISROUTE",
+    "ground_truth_note": "Invoice for inter-state supply (Mumbai to Bangalore) but one line item (fasteners) is incorrectly recorded with CGST+SGST (₹1350 each) instead of IGST (₹2700). The total tax amount is correct (₹24840), but the classification is wrong. IGST should have been used for all lines."
+  },
+  {
+    "invoice_id": "P001_INV_20260327_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-27",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Innovation Drive, Silicon Valley, CA 94025, USA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "TechCorp International",
+      "buyer_address": "456 Business Ave, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@techcorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-009",
+        "description": "Server Rack 42U",
+        "quantity": 2,
+        "unit_price": 1200.00,
+        "line_total": 2400.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-010",
+        "description": "Cable Management Tray",
+        "quantity": 5,
+        "unit_price": 85.00,
+        "line_total": 425.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-011",
+        "description": "Patch Panel Cat6 48-port",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 3275.00,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08875,
+        "amount": 290.66
+      }
+    ],
+    "total": 3565.66,
+    "error_injected": "MULTI_PAGE",
+    "ground_truth_note": "Multi-page invoice: line items 1-2 appear on page 1, line item 3 on page 2. The extractor must combine pages to capture all line items. No other errors."
+  },
+  {
+    "invoice_id": "P003_INV_20260329_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-45678",
+    "invoice_date": "2026-03-29",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 10, 60327 Frankfurt, Germany\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "EuroTech GmbH",
+      "buyer_address": "Hauptstraße 50, 10115 Berlin, Germany",
+      "buyer_po_contact": "Hans Müller, hans@eurotech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Hydraulikpumpe / Hydraulic pump",
+        "quantity": 3,
+        "unit_price": 450.00,
+        "line_total": 1350.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Dichtungssatz / Seal kit",
+        "quantity": 10,
+        "unit_price": 85.00,
+        "line_total": 850.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Zylinder / Cylinder",
+        "quantity": 2,
+        "unit_price": 320.00,
+        "line_total": 640.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-004",
+        "description": "Filterelement / Filter element",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-005",
+        "description": "Steuerblock / Control block",
+        "quantity": 1,
+        "unit_price": 980.00,
+        "line_total": 980.00
+      }
+    ],
+    "subtotal": 4420.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 839.80
+      }
+    ],
+    "total": 5259.80,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. German VAT 19% itemized. Bilingual descriptions (German/English). SEPA bank details included in vendor address. No errors."
+  }
+]
+```

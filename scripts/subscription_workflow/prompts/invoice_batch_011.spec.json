@@ -1,0 +1,96 @@
+{
+  "batch_no": 11,
+  "n_invoices": 5,
+  "specs": [
+    {
+      "spec_index": 50,
+      "persona_id": "P003",
+      "persona_name": "Frankfurt Industriebedarf GmbH",
+      "persona_region": "EU-DE",
+      "persona_language": "de",
+      "persona_currency": "EUR",
+      "persona_layout_style": "structured_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "DE VAT (19%) itemized; reverse-charge logic on intra-EU",
+        "Bilingual labels (German primary, English secondary)",
+        "SEPA bank details on every invoice"
+      ],
+      "invoice_date_hint": "2026-03-01",
+      "line_item_count_hint": 1,
+      "error_injected": null
+    },
+    {
+      "spec_index": 51,
+      "persona_id": "P001",
+      "persona_name": "Global Tech Components Inc.",
+      "persona_region": "US",
+      "persona_language": "en",
+      "persona_currency": "USD",
+      "persona_layout_style": "modern_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "Multi-currency invoicing when shipping abroad",
+        "Tax line itemized separately by jurisdiction",
+        "Round totals to 2 decimals"
+      ],
+      "invoice_date_hint": "2026-04-13",
+      "line_item_count_hint": 1,
+      "error_injected": "Multi-page invoices where line-items continue across pages"
+    },
+    {
+      "spec_index": 52,
+      "persona_id": "P002",
+      "persona_name": "Maple Logistics SMB",
+      "persona_region": "US",
+      "persona_language": "en",
+      "persona_currency": "USD",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-45",
+      "persona_quirks": [
+        "Hand-written notes occasionally on scanned invoices",
+        "Inconsistent header placement",
+        "Round totals up to nearest dollar"
+      ],
+      "invoice_date_hint": "2026-01-18",
+      "line_item_count_hint": 5,
+      "error_injected": "Tax line sometimes absent for in-state shipments"
+    },
+    {
+      "spec_index": 53,
+      "persona_id": "P002",
+      "persona_name": "Maple Logistics SMB",
+      "persona_region": "US",
+      "persona_language": "en",
+      "persona_currency": "USD",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-45",
+      "persona_quirks": [
+        "Hand-written notes occasionally on scanned invoices",
+        "Inconsistent header placement",
+        "Round totals up to nearest dollar"
+      ],
+      "invoice_date_hint": "2026-04-22",
+      "line_item_count_hint": 1,
+      "error_injected": "Missing PO reference (must be inferred from delivery note)"
+    },
+    {
+      "spec_index": 54,
+      "persona_id": "P004",
+      "persona_name": "Mumbai Materials Co.",
+      "persona_region": "APAC-IN",
+      "persona_language": "en",
+      "persona_currency": "INR",
+      "persona_layout_style": "legacy_pdf",
+      "persona_payment_terms": "NET-60",
+      "persona_quirks": [
+        "GST itemized; HSN codes per line",
+        "PAN + GSTIN in header",
+        "Cross-currency to USD common"
+      ],
+      "invoice_date_hint": "2026-04-20",
+      "line_item_count_hint": 8,
+      "error_injected": null
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260228_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-28",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "TechBuy India Pvt. Ltd.",
+      "buyer_address": "456 Tech Park, Whitefield, Bangalore 560066, India",
+      "buyer_po_contact": "Ravi Sharma, ravi.sharma@techbuy.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HSN-847130",
+        "description": "Industrial sensors",
+        "quantity": 10,
+        "unit_price": 1500.00,
+        "line_total": 15000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "HSN-854231",
+        "description": "Microcontroller boards",
+        "quantity": 5,
+        "unit_price": 2500.00,
+        "line_total": 12500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "HSN-853710",
+        "description": "Control panels",
+        "quantity": 2,
+        "unit_price": 8000.00,
+        "line_total": 16000.00
+      }
+    ],
+    "subtotal": 43500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 3915.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 3915.00
+      }
+    ],
+    "total": 51330.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. with GST itemized (CGST+SGST at 9% each), HSN codes in SKU, PAN and GSTIN in header. Extract all fields correctly."
+  },
+  {
+    "invoice_id": "P001_INV_20260301_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-01",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Drive, Suite 200, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Corp US",
+      "buyer_address": "500 Industrial Blvd, Los Angeles, CA 90001, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Server motherboard",
+        "quantity": 3,
+        "unit_price": 450.00,
+        "line_total": 1350.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "description": "Network switch 48-port",
+        "quantity": 2,
+        "unit_price": 1200.00,
+        "line_total": 2400.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "description": "Power supply unit",
+        "quantity": 10,
+        "unit_price": 85.00,
+        "line_total": 850.00
+      }
+    ],
+    "subtotal": 4600.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 402.50
+      }
+    ],
+    "total": 5002.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. with tax line itemized by jurisdiction (US-CA 8.75%). Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P005_INV_20260501_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-05-98765",
+    "invoice_date": "01/05/2026",
+    "currency": "BRL",
+    "payment_terms": "NET-30, Boleto Bancário",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "AutoPeças Argentina S.A.",
+      "buyer_address": "Av. Corrientes 1234, Buenos Aires, Argentina",
+      "buyer_po_contact": "Carlos Gomez, c.gomez@autopecas.ar"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Motor de passo (Stepper motor)",
+        "quantity": 20,
+        "unit_price": 45.50,
+        "line_total": 910.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Sensor de temperatura",
+        "quantity": 50,
+        "unit_price": 12.30,
+        "line_total": 615.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Atuador linear",
+        "quantity": 5,
+        "unit_price": 180.00,
+        "line_total": 900.00
+      }
+    ],
+    "subtotal": 2425.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 436.50
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 121.25
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 40.01
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 184.30
+      }
+    ],
+    "total": 3207.06,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "Invoice date is in dd/mm/yyyy format ('01/05/2026') instead of ISO 8601. Should be 2026-05-01. Also includes multiple Brazilian tax types (ICMS, IPI, PIS, COFINS) and Boleto Bancário payment reference."
+  },
+  {
+    "invoice_id": "P005_INV_20260330_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-45678",
+    "invoice_date": "30/03/2026",
+    "currency": "BRL",
+    "payment_terms": "NET-30, Boleto Bancário",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Distribuidora Rio Ltda.",
+      "buyer_address": "Rua da Assembleia, 500, Rio de Janeiro, RJ 20011-000, Brazil",
+      "buyer_po_contact": "Maria Silva, m.silva@distribuidorario.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-004",
+        "description": "Fonte chaveada 24V",
+        "quantity": 10,
+        "unit_price": 95.00,
+        "line_total": 950.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-005",
+        "description": "Cabo USB 2m",
+        "quantity": 100,
+        "unit_price": 3.50,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-006",
+        "description": "Display LCD 16x2",
+        "quantity": 25,
+        "unit_price": 22.00,
+        "line_total": 550.00
+      }
+    ],
+    "subtotal": 1850.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 333.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 92.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 30.53
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 140.60
+      }
+    ],
+    "total": 2446.63,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "Invoice date is in dd/mm/yyyy format ('30/03/2026') instead of ISO 8601. Should be 2026-03-30. Includes multiple Brazilian tax types and Boleto Bancário."
+  },
+  {
+    "invoice_id": "P004_INV_20260126_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-11111",
+    "invoice_date": "2026-01-26",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "BuildRight Constructions Pvt. Ltd.",
+      "buyer_address": "789 Construction Hub, Dwarka, New Delhi 110075, India",
+      "buyer_po_contact": "Anjali Verma, anjali.v@buildright.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HSN-847130",
+        "description": "Temperature sensor module",
+        "quantity": 25,
+        "unit_price": 320.00,
+        "line_total": 8000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "HSN-854231",
+        "description": "Microcontroller PIC16F",
+        "quantity": 100,
+        "unit_price": 45.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 3,
+        "sku": "HSN-853710",
+        "description": "Relay module 4-channel",
+        "quantity": 30,
+        "unit_price": 180.00,
+        "line_total": 5400.00
+      },
+      {
+        "line_no": 4,
+        "sku": "HSN-850440",
+        "description": "Power adapter 12V",
+        "quantity": 50,
+        "unit_price": 65.00,
+        "line_total": 3250.00
+      },
+      {
+        "line_no": 5,
+        "sku": "HSN-902910",
+        "description": "Digital multimeter",
+        "quantity": 5,
+        "unit_price": 1200.00,
+        "line_total": 6000.00
+      }
+    ],
+    "subtotal": 27150.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 2443.50
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 2443.50
+      }
+    ],
+    "total": 32037.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. with 5 line items, GST itemized (CGST+SGST), HSN codes in SKU, PAN and GSTIN in header."
+  }
+]
+```

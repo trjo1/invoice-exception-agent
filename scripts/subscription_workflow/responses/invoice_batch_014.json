@@ -1,0 +1,361 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260316_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-16",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "45 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "Acme Global Procurement Ltd.",
+      "buyer_address": "1000 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Ravi Sharma (ravi.sharma@acmeglobal.com)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Steel rods, grade 304, 6mm diameter",
+        "quantity": 500,
+        "unit_price": 45.00,
+        "line_total": 22500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Copper wire, 2.5 sq mm, insulated",
+        "quantity": 200,
+        "unit_price": 120.50,
+        "line_total": 24100.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "Aluminum sheets, 2mm thick, 4x8 ft",
+        "quantity": 100,
+        "unit_price": 850.00,
+        "line_total": 85000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "Brass fittings, 1/2 inch, pack of 10",
+        "quantity": 300,
+        "unit_price": 65.00,
+        "line_total": 19500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "PVC pipes, 4 inch diameter, 6m length",
+        "quantity": 150,
+        "unit_price": 180.00,
+        "line_total": 27000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-006",
+        "description": "Stainless steel nuts, M10, pack of 100",
+        "quantity": 400,
+        "unit_price": 35.00,
+        "line_total": 14000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-007",
+        "description": "Rubber gaskets, 6 inch diameter",
+        "quantity": 250,
+        "unit_price": 22.00,
+        "line_total": 5500.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-008",
+        "description": "Industrial lubricant, 5L can",
+        "quantity": 50,
+        "unit_price": 450.00,
+        "line_total": 22500.00
+      }
+    ],
+    "subtotal": 220100.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-MH",
+        "rate": 0.09,
+        "amount": 19809.00
+      },
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 39618.00
+      }
+    ],
+    "total": 279527.00,
+    "error_injected": "HSN code formatting inconsistent (with/without dashes)",
+    "ground_truth_note": "Invoice contains HSN codes per line: line 1 uses format '7228.30', line 2 uses '7408.11', line 3 uses '76061200' (no dash), line 4 uses '7412.20', line 5 uses '3917.23', line 6 uses '7318.15', line 7 uses '4016.93', line 8 uses '3403.99'. The extractor should catch the inconsistent dash usage in line 3."
+  },
+  {
+    "invoice_id": "P001_INV_20260223_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-23",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1500 Silicon Valley Blvd, Suite 200, San Jose, CA 95110, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Global Procurement Ltd.",
+      "buyer_address": "1000 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "John Miller (john.miller@acmeglobal.com)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Microcontroller unit, ARM Cortex-M4",
+        "quantity": 1000,
+        "unit_price": 12.50,
+        "line_total": 12500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "description": "Capacitor, 100uF, 16V, SMD",
+        "quantity": 5000,
+        "unit_price": 0.15,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1003",
+        "description": "Resistor, 10kOhm, 1%, 0805",
+        "quantity": 10000,
+        "unit_price": 0.02,
+        "line_total": 200.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-1004",
+        "description": "LED, green, 5mm, through-hole",
+        "quantity": 2000,
+        "unit_price": 0.10,
+        "line_total": 200.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-1005",
+        "description": "Connector, USB Type-C, female, SMD",
+        "quantity": 500,
+        "unit_price": 0.55,
+        "line_total": 275.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-1006",
+        "description": "PCB, 2-layer, 100x80mm, FR4",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-1007",
+        "description": "Battery holder, CR2032, SMD",
+        "quantity": 300,
+        "unit_price": 0.30,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-1008",
+        "description": "Temperature sensor, DS18B20, TO-92",
+        "quantity": 200,
+        "unit_price": 1.20,
+        "line_total": 240.00
+      }
+    ],
+    "subtotal": 14505.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 1269.19
+      }
+    ],
+    "total": 15774.19,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with standard US tax. All line totals rounded to 2 decimals. Subtotal and total are correct."
+  },
+  {
+    "invoice_id": "P005_INV_20260430_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-30",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, Bela Vista, São Paulo, SP 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90, IE: 123.456.789.111",
+      "buyer_name": "Acme Global Procurement Ltd.",
+      "buyer_address": "1000 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Carlos Silva (carlos.silva@acmeglobal.com)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Motor elétrico, 5 CV, trifásico",
+        "quantity": 10,
+        "unit_price": 2500.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Bomba hidráulica, 20 L/min",
+        "quantity": 5,
+        "unit_price": 1800.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Válvula solenoide, 24V DC",
+        "quantity": 20,
+        "unit_price": 350.00,
+        "line_total": 7000.00
+      }
+    ],
+    "subtotal": 41000.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 7380.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 2050.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 676.50
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 3116.00
+      }
+    ],
+    "total": 54222.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean Brazilian NF-e style invoice with ICMS, IPI, PIS, and COFINS taxes. Includes reference to boleto bancário payment slip. All values in BRL."
+  },
+  {
+    "invoice_id": "P002_INV_20260210_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-98765",
+    "invoice_date": "2026-02-10",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street, Suite 100, Springfield, IL 62701, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Acme Global Procurement Ltd.",
+      "buyer_address": "1000 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Emily Johnson (emily.johnson@acmeglobal.com)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Logistics consulting services, monthly retainer",
+        "quantity": 1,
+        "unit_price": 5000.00,
+        "line_total": 5000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Freight management fee, international shipment",
+        "quantity": 1,
+        "unit_price": 2500.00,
+        "line_total": 2500.00
+      }
+    ],
+    "subtotal": 7500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 468.75
+      }
+    ],
+    "total": 7969.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with handwritten note 'Approved - E.J.' in margin. Totals rounded up to nearest dollar. Header placement slightly shifted to left."
+  },
+  {
+    "invoice_id": "P003_INV_20260327_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-45678",
+    "invoice_date": "2026-03-27",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 42, 60327 Frankfurt am Main, Deutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Procurement Ltd.",
+      "buyer_address": "1000 Innovation Drive, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Hans Müller (hans.mueller@acmeglobal.com)"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Hydraulikzylinder / Hydraulic cylinder, 100mm bore",
+        "quantity": 5,
+        "unit_price": 850.00,
+        "line_total": 4250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Dichtungssatz / Seal kit, for cylinder series HZ-100",
+        "quantity": 10,
+        "unit_price": 120.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Steuerventil / Control valve, 4/3-way, 24V DC",
+        "quantity": 3,
+        "unit_price": 650.00,
+        "line_total": 1950.00
+      }
+    ],
+    "subtotal": 7400.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 1406.00
+      }
+    ],
+    "total": 8806.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with German VAT at 19%. Bilingual descriptions (German primary, English secondary). SEPA bank details provided: IBAN DE12 5001 0517 1234 5678 90, BIC/SWIFT INGDDEFFXXX. Reverse-charge logic may apply for intra-EU transactions."
+  }
+]
+```

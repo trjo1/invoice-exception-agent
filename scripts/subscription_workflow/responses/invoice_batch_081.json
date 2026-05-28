@@ -1,0 +1,316 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260131_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-31",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot No. 42, MIDC Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "PAN: AABCM1234C, GSTIN: 27AABCM1234C1Z5",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Sarah Johnson, sarah.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "HSN 8471 - Laptop Motherboard",
+        "quantity": 10,
+        "unit_price": 2500.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "HSN 8473 - RAM Module 16GB",
+        "quantity": 20,
+        "unit_price": 1200.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "HSN 8504 - Power Supply Unit",
+        "quantity": 5,
+        "unit_price": 3500.00,
+        "line_total": 17500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-004",
+        "description": "HSN 8523 - SSD 1TB",
+        "quantity": 15,
+        "unit_price": 4500.00,
+        "line_total": 67500.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-005",
+        "description": "HSN 8542 - Network Interface Card",
+        "quantity": 8,
+        "unit_price": 1800.00,
+        "line_total": 14400.00
+      }
+    ],
+    "subtotal": 148400.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 13356.00
+      },
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.09,
+        "amount": 13356.00
+      }
+    ],
+    "total": 175112.00,
+    "error_injected": "GST_PERCENTAGE_MISROUTED",
+    "ground_truth_note": "GST itemized with HSN codes. Error injected: IGST line has rate 0.09 (should be 0.18 for inter-state or SGST for intra-state) and SGST is missing. Extractor should detect misrouted GST percentage and missing SGST."
+  },
+  {
+    "invoice_id": "P001_INV_20260104_002",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-01-04",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1500 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Sarah Johnson, sarah.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-100",
+        "description": "Microcontroller Unit (MCU) - ATSAMD21",
+        "quantity": 500,
+        "unit_price": 3.50,
+        "line_total": 1750.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-200",
+        "description": "Temperature Sensor - TMP36",
+        "quantity": 1000,
+        "unit_price": 1.20,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-300",
+        "description": "Connector Kit - 10-pin",
+        "quantity": 200,
+        "unit_price": 5.75,
+        "line_total": 1150.00
+      }
+    ],
+    "subtotal": 4100.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 358.75
+      }
+    ],
+    "total": 4458.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. with tax line itemized for California. Totals rounded to two decimals."
+  },
+  {
+    "invoice_id": "P001_INV_20260325_003",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-24680",
+    "invoice_date": "2026-03-25",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1500 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Sarah Johnson, sarah.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-400",
+        "description": "Display Module OLED 128x64",
+        "quantity": 300,
+        "unit_price": 8.25,
+        "line_total": 2475.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-500",
+        "description": "Wireless Module ESP8266",
+        "quantity": 600,
+        "unit_price": 4.10,
+        "line_total": 2460.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-600",
+        "description": "Power Management IC - LM2596",
+        "quantity": 400,
+        "unit_price": 2.30,
+        "line_total": 920.00
+      }
+    ],
+    "subtotal": 5855.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 512.31
+      }
+    ],
+    "total": 6367.31,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. with tax line itemized for California. Totals rounded to two decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260428_004",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-13579",
+    "invoice_date": "2026-04-28",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "742 Evergreen Terrace, Springfield, IL 62701, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Sarah Johnson, sarah.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Freight service - standard ground",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Pallet wrapping - per pallet",
+        "quantity": 4,
+        "unit_price": 25.00,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-003",
+        "description": "Customs documentation fee",
+        "quantity": 1,
+        "unit_price": 75.00,
+        "line_total": 75.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-004",
+        "description": "Warehouse storage (per day)",
+        "quantity": 3,
+        "unit_price": 50.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-005",
+        "description": "Fuel surcharge (10%)",
+        "quantity": 1,
+        "unit_price": 77.50,
+        "line_total": 77.50
+      }
+    ],
+    "subtotal": 852.50,
+    "tax": [],
+    "total": 853.00,
+    "error_injected": "MISSING_TAX_LINE",
+    "ground_truth_note": "Invoice from Maple Logistics SMB. Hand-written note: 'Please expedite.' Header placement inconsistent. Error: tax line absent for in-state shipment. Total rounded up to nearest dollar."
+  },
+  {
+    "invoice_id": "P002_INV_20260302_005",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-97531",
+    "invoice_date": "2026-03-02",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "742 Evergreen Terrace, Springfield, IL 62701, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Acme Global Procurement Inc.",
+      "buyer_address": "123 Corporate Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "Sarah Johnson, sarah.johnson@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-010",
+        "description": "LTL Freight - regional",
+        "quantity": 1,
+        "unit_price": 320.00,
+        "line_total": 320.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-011",
+        "description": "Liftgate service",
+        "quantity": 1,
+        "unit_price": 60.00,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-012",
+        "description": "Inside delivery fee",
+        "quantity": 1,
+        "unit_price": 40.00,
+        "line_total": 40.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-013",
+        "description": "Packaging materials",
+        "quantity": 10,
+        "unit_price": 12.50,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-014",
+        "description": "Insurance (value-based)",
+        "quantity": 1,
+        "unit_price": 35.00,
+        "line_total": 35.00
+      }
+    ],
+    "subtotal": 580.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 36.25
+      }
+    ],
+    "total": 617.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Hand-written note: 'Thanks for the business.' Total rounded up to nearest dollar."
+  }
+]
+```

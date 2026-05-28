@@ -1,0 +1,157 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260414_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-00123",
+    "invoice_date": "2026-04-14",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nSão Paulo, SP\nBrazil",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "Comercial Eletrônica S.A.",
+      "buyer_address": "Rua Augusta, 500\nSão Paulo, SP\nBrazil",
+      "buyer_po_contact": "João Silva, joao.silva@comercial.com.br"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "SP-R10K", "description": "Resistor 10kΩ", "quantity": 100, "unit_price": 0.50, "line_total": 50.00 },
+      { "line_no": 2, "sku": "SP-C100", "description": "Capacitor 100µF", "quantity": 50, "unit_price": 1.20, "line_total": 60.00 },
+      { "line_no": 3, "sku": "SP-T547", "description": "Transistor BC547", "quantity": 200, "unit_price": 0.35, "line_total": 70.00 },
+      { "line_no": 4, "sku": "SP-LEDR", "description": "LED Red", "quantity": 500, "unit_price": 0.10, "line_total": 50.00 },
+      { "line_no": 5, "sku": "SP-CUSB", "description": "Connector USB", "quantity": 100, "unit_price": 2.50, "line_total": 250.00 },
+      { "line_no": 6, "sku": "SP-PCB", "description": "PCB Board", "quantity": 10, "unit_price": 15.00, "line_total": 150.00 },
+      { "line_no": 7, "sku": "SP-SLM35", "description": "Sensor LM35", "quantity": 25, "unit_price": 8.00, "line_total": 200.00 },
+      { "line_no": 8, "sku": "SP-R5V", "description": "Relay 5V", "quantity": 30, "unit_price": 4.00, "line_total": 120.00 }
+    ],
+    "subtotal": 950.00,
+    "tax": [
+      { "jurisdiction": "BR-ICMS", "rate": 0.18, "amount": 171.00 },
+      { "jurisdiction": "BR-IPI", "rate": 0.10, "amount": 95.00 },
+      { "jurisdiction": "BR-PIS", "rate": 0.0165, "amount": 15.68 },
+      { "jurisdiction": "BR-COFINS", "rate": 0.076, "amount": 72.20 }
+    ],
+    "total": 1303.88,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. NF-e format combining invoice and tax receipt. Multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) are included. Payment via Boleto bancário (code 237-2 1234567890-1)."
+  },
+  {
+    "invoice_id": "P001_INV_20260312_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-00456",
+    "invoice_date": "2026-03-12",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Tech Drive\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Procurement Inc.",
+      "buyer_address": "456 Maple Street\nToronto, ON M5V 2T6\nCanada",
+      "buyer_po_contact": "Jane Doe, jane.doe@acmeprocurement.ca"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "GTC-1001", "description": "Microcontroller ATmega328P", "quantity": 100, "unit_price": 2.50, "line_total": 250.00 },
+      { "line_no": 2, "sku": "GTC-1002", "description": "Sensor Module", "quantity": 50, "unit_price": 5.00, "line_total": 250.00 },
+      { "line_no": 3, "sku": "GTC-1003", "description": "PCB Board", "quantity": 25, "unit_price": 12.00, "line_total": 300.00 }
+    ],
+    "subtotal": 800.00,
+    "tax": [
+      { "jurisdiction": "US-CA", "rate": 0.0825, "amount": 66.00 }
+    ],
+    "total": 866.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency capability (buyer in Canada, invoice in USD). Tax line itemized for California jurisdiction. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P001_INV_20260118_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-00789",
+    "invoice_date": "2026-01-18",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Tech Drive\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Procurement Inc.",
+      "buyer_address": "10 Downing Street\nLondon, SW1A 2AA\nUK",
+      "buyer_po_contact": "John Smith, john.smith@acmeprocurement.co.uk"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "GTC-2001", "description": "LED Display Module", "quantity": 20, "unit_price": 15.00, "line_total": 300.00 },
+      { "line_no": 2, "sku": "GTC-2002", "description": "Power Supply", "quantity": 10, "unit_price": 25.00, "line_total": 250.00 },
+      { "line_no": 3, "sku": "GTC-2003", "description": "Connector Kit", "quantity": 50, "unit_price": 3.00, "line_total": 150.00 }
+    ],
+    "subtotal": 700.00,
+    "tax": [
+      { "jurisdiction": "US-CA", "rate": 0.0825, "amount": 57.75 }
+    ],
+    "total": 757.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency invoicing (buyer in UK, invoice in USD). Tax line for California jurisdiction. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P001_INV_20260406_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-00234",
+    "invoice_date": "2026-04-06",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "123 Tech Drive\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Procurement Inc.",
+      "buyer_address": "123 George Street\nSydney, NSW 2000\nAustralia",
+      "buyer_po_contact": "Emily Brown, emily.brown@acmeprocurement.com.au"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "GTC-3001", "description": "Resistor Pack", "quantity": 100, "unit_price": 1.00, "line_total": 100.00 },
+      { "line_no": 2, "sku": "GTC-3002", "description": "Capacitor Pack", "quantity": 50, "unit_price": 2.00, "line_total": 100.00 },
+      { "line_no": 3, "sku": "GTC-3003", "description": "Transistor Pack", "quantity": 200, "unit_price": 0.50, "line_total": 100.00 },
+      { "line_no": 4, "sku": "GTC-3004", "description": "LED Assorted", "quantity": 500, "unit_price": 0.20, "line_total": 100.00 },
+      { "line_no": 5, "sku": "GTC-3005", "description": "Connector Set", "quantity": 100, "unit_price": 3.00, "line_total": 300.00 },
+      { "line_no": 6, "sku": "GTC-3006", "description": "PCB Prototype", "quantity": 10, "unit_price": 20.00, "line_total": 200.00 },
+      { "line_no": 7, "sku": "GTC-3007", "description": "Sensor Bundle", "quantity": 25, "unit_price": 10.00, "line_total": 250.00 },
+      { "line_no": 8, "sku": "GTC-3008", "description": "Relay Module", "quantity": 30, "unit_price": 5.00, "line_total": 150.00 }
+    ],
+    "subtotal": 1300.00,
+    "tax": [
+      { "jurisdiction": "US-CA", "rate": 0.0825, "amount": 107.25 }
+    ],
+    "total": 1407.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency invoicing (buyer in Australia, invoice in USD). Tax line for California. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260402_001",
+    "persona_id": "P002",
+    "po_reference": "",
+    "invoice_date": "2026-04-02",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "55 Industrial Blvd\nBuffalo, NY 14201\nUSA",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "QuickShip Inc.",
+      "buyer_address": "200 Commerce Way\nDetroit, MI 48201\nUSA",
+      "buyer_po_contact": "Robert Wilson, robert.wilson@quickship.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "MAP-001", "description": "Freight Service", "quantity": 1, "unit_price": 500.00, "line_total": 500.00 },
+      { "line_no": 2, "sku": "MAP-002", "description": "Warehousing", "quantity": 1, "unit_price": 350.00, "line_total": 350.00 },
+      { "line_no": 3, "sku": "MAP-003", "description": "Handling", "quantity": 1, "unit_price": 150.00, "line_total": 150.00 }
+    ],
+    "subtotal": 1000.00,
+    "tax": [
+      { "jurisdiction": "US-NY", "rate": 0.08875, "amount": 88.75 }
+    ],
+    "total": 1089.00,
+    "error_injected": "Missing PO reference (must be inferred from delivery note)",
+    "ground_truth_note": "Deliberately missing PO reference. The invoice does not contain a purchase order number; the extractor must infer it from an accompanying delivery note. Hand-written note appears on invoice: 'Please reference delivery note DN-2026-04-001'. Inconsistent header placement observed. Totals rounded up to nearest dollar."
+  }
+]
+```

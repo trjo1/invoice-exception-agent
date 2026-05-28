@@ -1,0 +1,110 @@
+# Golden test case GTC-009
+# Scenario: Supplier email reports goods delivery will be delayed; PO is open.
+# Expected: Update PO ETA; notify buyer; draft acknowledgement.
+#          (Drafting + Coordination, not just an exception classification.)
+
+id: GTC-009
+title: Supplier delivery delay notification on open PO
+exception_category: other   # not strictly an invoice exception
+difficulty: medium
+created: 2026-05-10
+notes: |
+  Tests the Coordination archetype across both inbound (parse supplier email)
+  and write-back (update SAP PO ETA). Tests that the agent recognizes a
+  non-invoice event still inside the P2P process. Drafts an acknowledgement
+  back to the supplier and an internal note to the buyer.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-03-20T10:00:00Z
+      payload:
+        po_id: PO-2026-03-00777
+        vendor_id: P004   # Mumbai Materials
+        line_items:
+          - sku: SKU-F445
+            description: Raw aluminium ingot, grade 6061
+            quantity: 5000
+            unit_price_inr: 220.00
+            line_total_inr: 1100000.00
+        currency: INR
+        terms: NET-60
+        expected_delivery_date: 2026-04-15
+
+    - source: Email
+      event_type: supplier_email_received
+      timestamp: 2026-04-08T11:30:00Z
+      payload:
+        from: logistics@mumbaimaterials.example.in
+        subject: "Delivery delay - PO-2026-03-00777"
+        body_attachment: P004_EMAIL_2026-04-08_001.eml
+
+  documents:
+    - type: email_thread
+      ref: test_corpus/synthetic/emails/P004_EMAIL_2026-04-08_001.eml
+      ground_truth_extraction:
+        sender: logistics@mumbaimaterials.example.in
+        intent: delivery_delay_notification
+        referenced_po: PO-2026-03-00777
+        original_delivery_date: 2026-04-15
+        new_delivery_date: 2026-04-29
+        delay_reason: "Port congestion at JNPT, ETA pushed 14 days"
+        delay_days: 14
+
+expected:
+  classification:
+    class_label: other
+    intent_sub_label: delivery_delay_notification
+    min_confidence: 0.85
+    must_contain_evidence:
+      - email_subject_mentions_delay
+      - new_eta_extracted
+      - referenced_po_known
+
+  recommendation:
+    action: auto_resolve   # update ETA + notify buyer — bounded action
+    rationale_must_mention:
+      - 14-day delay
+      - new ETA 2026-04-29
+      - update PO header
+      - notify buyer
+    counterfactual_should_exist: false
+
+  hitl:
+    tier: 2   # buyer should see this; not auto-action because customer-impact
+    routed_to: buyer
+
+  drafting:
+    must_produce_drafts: 2
+    drafts:
+      - type: supplier_acknowledgement
+        recipient: logistics@mumbaimaterials.example.in
+        content_must_mention:
+          - acknowledgement of delay
+          - revised ETA 2026-04-29
+          - request confirmation
+      - type: internal_buyer_note
+        recipient: buyer
+        content_must_mention:
+          - PO-2026-03-00777
+          - delayed 14 days
+          - new ETA 2026-04-29
+          - impact on downstream production
+
+  execution:
+    must_update_po_eta_after_approval: true
+    must_not_cancel_po: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.50
+
+pass_criteria:
+  - classification.intent_sub_label == delivery_delay_notification
+  - recommendation.action == auto_resolve
+  - hitl.tier == 2
+  - drafting.drafts_produced >= 2
+  - execution.po_eta_updated == true
+  - execution.po_cancelled == false

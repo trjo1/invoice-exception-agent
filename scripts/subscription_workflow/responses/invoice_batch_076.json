@@ -1,0 +1,349 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260331_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-31",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 42\n60327 Frankfurt am Main\nDeutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "AutoParts AG",
+      "buyer_address": "Musterstraße 100\n10115 Berlin\nDeutschland",
+      "buyer_po_contact": "Klaus Schmidt / klaus.schmidt@autoparts.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-2024-001",
+        "description": "Hydraulikzylinder / Hydraulic Cylinder – 50mm Hub",
+        "quantity": 10,
+        "unit_price": 145.00,
+        "line_total": 1450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-2024-002",
+        "description": "Dichtungssatz / Seal Kit – Typ A",
+        "quantity": 25,
+        "unit_price": 32.50,
+        "line_total": 812.50
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-2024-003",
+        "description": "Kugellager / Ball Bearing – 6205-2RS",
+        "quantity": 50,
+        "unit_price": 8.90,
+        "line_total": 445.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-2024-004",
+        "description": "Edelstahlschrauben / Stainless Steel Bolts M8x20",
+        "quantity": 200,
+        "unit_price": 0.45,
+        "line_total": 90.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-2024-005",
+        "description": "Ölfilter / Oil Filter – HF-123",
+        "quantity": 8,
+        "unit_price": 67.30,
+        "line_total": 538.40
+      }
+    ],
+    "subtotal": 3335.90,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 633.82
+      }
+    ],
+    "total": 3969.72,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. VAT 19% applied. SEPA bank details: IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX. Bilingual headers (German/English)."
+  },
+  {
+    "invoice_id": "P002_INV_20260501_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-05-67890",
+    "invoice_date": "2026-05-01",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "742 Evergreen Terrace\nSpringfield, IL 62704\nUSA",
+      "vendor_tax_id": "36-1234567",
+      "buyer_name": "Midwest Manufacturing Co.",
+      "buyer_address": "1200 Industrial Blvd\nDetroit, MI 48201\nUSA",
+      "buyer_po_contact": "Jane Doe / jane.doe@midwestmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FR-001",
+        "description": "Freight service – LTL shipment from Chicago to Detroit (palletized)",
+        "quantity": 1,
+        "unit_price": 850.00,
+        "line_total": 850.00
+      }
+    ],
+    "subtotal": 850.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 53.13
+      }
+    ],
+    "total": 904.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean scanned invoice. Handwritten note 'Thanks!' in margin. Total rounded up to nearest dollar (903.13 -> 904). IL sales tax 6.25%."
+  },
+  {
+    "invoice_id": "P003_INV_20260324_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-24",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 42\n60327 Frankfurt am Main\nDeutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "AutoParts AG",
+      "buyer_address": "Musterstraße 100\n10115 Berlin\nDeutschland",
+      "buyer_po_contact": "Klaus Schmidt / klaus.schmidt@autoparts.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-2024-006",
+        "description": "Pneumatikzylinder / Pneumatic Cylinder – ISO 15552",
+        "quantity": 5,
+        "unit_price": 210.00,
+        "line_total": 1050.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-2024-007",
+        "description": "Steuerventil / Control Valve – 5/2-Wege",
+        "quantity": 3,
+        "unit_price": 480.00,
+        "line_total": 1440.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-2024-008",
+        "description": "Schlauchleitung / Hose Assembly – DN10, 2m",
+        "quantity": 12,
+        "unit_price": 18.75,
+        "line_total": 225.00
+      }
+    ],
+    "subtotal": 2715.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 515.85
+      }
+    ],
+    "total": 3230.85,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. VAT 19% applied. SEPA bank details: IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX."
+  },
+  {
+    "invoice_id": "P002_INV_20260417_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-24680",
+    "invoice_date": "2026-04-17",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "742 Evergreen Terrace\nSpringfield, IL 62704\nUSA",
+      "vendor_tax_id": "36-1234567",
+      "buyer_name": "Midwest Manufacturing Co.",
+      "buyer_address": "1200 Industrial Blvd\nDetroit, MI 48201\nUSA",
+      "buyer_po_contact": "Jane Doe / jane.doe@midwestmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-WH-001",
+        "description": "Warehouse storage – pallet racking (monthly)",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WH-002",
+        "description": "Inventory management service – per SKU",
+        "quantity": 50,
+        "unit_price": 2.50,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-WH-003",
+        "description": "Order picking – per line item",
+        "quantity": 200,
+        "unit_price": 0.75,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-WH-004",
+        "description": "Packaging materials – corrugated boxes",
+        "quantity": 100,
+        "unit_price": 1.20,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-WH-005",
+        "description": "Shipping label printing – per label",
+        "quantity": 150,
+        "unit_price": 0.30,
+        "line_total": 45.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-WH-006",
+        "description": "Pallet wrapping – per pallet",
+        "quantity": 40,
+        "unit_price": 4.00,
+        "line_total": 160.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-WH-007",
+        "description": "Customs documentation – per shipment",
+        "quantity": 5,
+        "unit_price": 25.00,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-WH-008",
+        "description": "Hazardous material handling surcharge",
+        "quantity": 2,
+        "unit_price": 50.00,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 2025.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 126.56
+      }
+    ],
+    "total": 2152.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean scanned invoice. Handwritten note 'Please expedite' near total. Total rounded up to nearest dollar (2151.56 -> 2152). IL sales tax 6.25%."
+  },
+  {
+    "invoice_id": "P001_INV_20260224_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-13579",
+    "invoice_date": "2026-02-24",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1 Innovation Way\nSan Jose, CA 95112\nUSA",
+      "vendor_tax_id": "94-1234567",
+      "buyer_name": "TechCorp International",
+      "buyer_address": "2000 Park Avenue\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "Alice Wang / alice.wang@techcorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-001",
+        "description": "Mainboard – X7-2000 series",
+        "quantity": 10,
+        "unit_price": 450.00,
+        "line_total": 4500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-CPU-002",
+        "description": "Processor – Quantum Core Q5",
+        "quantity": 10,
+        "unit_price": 320.00,
+        "line_total": 3200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-RAM-003",
+        "description": "Memory module – DDR5 32GB",
+        "quantity": 20,
+        "unit_price": 85.00,
+        "line_total": 1700.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-SSD-004",
+        "description": "Solid state drive – 1TB NVMe",
+        "quantity": 15,
+        "unit_price": 120.00,
+        "line_total": 1800.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-PSU-005",
+        "description": "Power supply – 750W Gold",
+        "quantity": 10,
+        "unit_price": 95.00,
+        "line_total": 950.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-CBL-006",
+        "description": "Cable kit – SATA & power",
+        "quantity": 30,
+        "unit_price": 12.50,
+        "line_total": 375.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-FAN-007",
+        "description": "Cooling fan – 120mm PWM",
+        "quantity": 25,
+        "unit_price": 18.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-THM-008",
+        "description": "Thermal paste – Arctic MX-6 (10g)",
+        "quantity": 5,
+        "unit_price": 8.50,
+        "line_total": 42.50
+      }
+    ],
+    "subtotal": 13017.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 943.77
+      }
+    ],
+    "total": 13961.27,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. US-CA sales tax 7.25% applied. All totals rounded to 2 decimals. Multi-currency capable but this is USD."
+  }
+]
+```

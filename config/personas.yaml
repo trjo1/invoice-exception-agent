@@ -1,0 +1,124 @@
+# =============================================================================
+# Supplier persona definitions
+# =============================================================================
+# 20-25 personas used to seed synthetic invoice + email generation.
+# Each persona drives variation in document layout, language, payment terms,
+# typical errors, and supplier-side behavior.
+#
+# Starting set of 5 — expand to 20-25 in week 2 of the corpus build.
+
+personas:
+
+  - id: P001
+    name: Global Tech Components Inc.
+    type: enterprise
+    region: US
+    industry: electronics_components
+    layout_style: modern_pdf
+    language: en
+    payment_terms_default: NET-30
+    currency: USD
+    quirks:
+      - Multi-currency invoicing when shipping abroad
+      - Tax line itemized separately by jurisdiction
+      - Round totals to 2 decimals
+    typical_error_modes:
+      - Occasional PO reference typo (one digit transposed)
+      - Multi-page invoices where line-items continue across pages
+
+  - id: P002
+    name: Maple Logistics SMB
+    type: smb
+    region: US
+    industry: logistics
+    layout_style: scanned_pdf
+    language: en
+    payment_terms_default: NET-45
+    currency: USD
+    quirks:
+      - Hand-written notes occasionally on scanned invoices
+      - Inconsistent header placement
+      - Round totals up to nearest dollar
+    typical_error_modes:
+      - Missing PO reference (must be inferred from delivery note)
+      - Tax line sometimes absent for in-state shipments
+
+  - id: P003
+    name: Frankfurt Industriebedarf GmbH
+    type: enterprise
+    region: EU-DE
+    industry: industrial_supplies
+    layout_style: structured_pdf
+    language: de
+    payment_terms_default: NET-30
+    currency: EUR
+    quirks:
+      - DE VAT (19%) itemized; reverse-charge logic on intra-EU
+      - Bilingual labels (German primary, English secondary)
+      - SEPA bank details on every invoice
+    typical_error_modes:
+      - VAT field missing on intra-EU shipments to non-DE buyers
+      - Cross-currency edge when buyer is in USD
+
+  - id: P004
+    name: Mumbai Materials Co.
+    type: enterprise
+    region: APAC-IN
+    industry: raw_materials
+    layout_style: legacy_pdf
+    language: en
+    payment_terms_default: NET-60
+    currency: INR
+    quirks:
+      - GST itemized; HSN codes per line
+      - PAN + GSTIN in header
+      - Cross-currency to USD common
+    typical_error_modes:
+      - HSN code formatting inconsistent (with/without dashes)
+      - GST percentage occasionally misrouted between IGST and CGST/SGST
+
+  - id: P005
+    name: São Paulo Componentes Ltda.
+    type: smb
+    region: LATAM-BR
+    industry: electronics_components
+    layout_style: scanned_pdf
+    language: pt
+    payment_terms_default: NET-30
+    currency: BRL
+    quirks:
+      - NF-e (Brazil tax document) shape — invoice + tax receipt combined
+      - Multiple tax types (ICMS, IPI, PIS, COFINS)
+      - Boleto bancário payment slip referenced
+    typical_error_modes:
+      - Multiple tax types confuse extraction
+      - Date format dd/mm/yyyy vs ISO
+
+# -----------------------------------------------------------------------------
+# Schema notes for the generator
+# -----------------------------------------------------------------------------
+
+schema:
+  layout_styles:
+    - modern_pdf       # clean structured PDF, consistent layout
+    - structured_pdf   # heavy table-based, machine-readable
+    - scanned_pdf      # image-based, OCR-required
+    - legacy_pdf       # text-based but inconsistent layout
+    - edi_837          # rare, defer to phase 2
+
+  languages_supported:
+    - en
+    - de
+    - fr
+    - es
+    - pt
+
+  payment_terms_options:
+    - DUE-ON-RECEIPT
+    - NET-15
+    - NET-30
+    - NET-45
+    - NET-60
+    - 2/10-NET-30      # early-payment discount
+
+  error_injection_rate: 0.35    # ~35% of generated docs include at least one error

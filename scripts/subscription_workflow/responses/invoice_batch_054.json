@@ -1,0 +1,277 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260328_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-28",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1425 Industrial Blvd, Suite 200, Portland, OR 97201, USA",
+      "vendor_tax_id": "EIN 45-6789123",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Enterprise Way, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Sarah Lee, s.lee@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-FREIGHT-001",
+        "description": "LTL freight shipping, Portland to San Jose, pallet 48x40x36",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-INSUR-002",
+        "description": "Cargo insurance, declared value $10,000",
+        "quantity": 1,
+        "unit_price": 75.00,
+        "line_total": 75.00
+      }
+    ],
+    "subtotal": 525.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0,
+        "amount": 0
+      }
+    ],
+    "total": 525.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Handwritten note 'Thanks for business!' appears in margin, but not extracted. Total rounded to nearest dollar, subtotal and total match."
+  },
+  {
+    "invoice_id": "P001_INV_20260324_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-24",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "200 Innovation Drive, Austin, TX 78701, USA",
+      "vendor_tax_id": "EIN 12-3456789",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Enterprise Way, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Tom Chen, t.chen@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-SEMI-4521",
+        "description": "Semiconductor chip, model XC-4521, 100 units",
+        "quantity": 100,
+        "unit_price": 12.50,
+        "line_total": 1250.00
+      }
+    ],
+    "subtotal": 1250.00,
+    "tax": [
+      {
+        "jurisdiction": "US-TX",
+        "rate": 0.0825,
+        "amount": 103.13
+      }
+    ],
+    "total": 1353.13,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Single line item, tax itemized separately for Texas jurisdiction. Totals to 2 decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260105_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-05",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Enterprise Way, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Maria Schmidt, m.schmidt@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-STAHL-100",
+        "description": "Edelstahlplatte 2m x 1m / Stainless steel plate 2m x 1m",
+        "quantity": 5,
+        "unit_price": 320.00,
+        "line_total": 1600.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-SCHRAUB-200",
+        "description": "Schrauben M10 x 50mm, 100 Stk / Screws M10 x 50mm, 100 pcs",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-DICHT-300",
+        "description": "Dichtungsring DN50 / Gasket ring DN50",
+        "quantity": 20,
+        "unit_price": 12.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-ROHR-400",
+        "description": "Stahlrohr 3m, Ø 50mm / Steel pipe 3m, Ø 50mm",
+        "quantity": 8,
+        "unit_price": 78.00,
+        "line_total": 624.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-WINKEL-500",
+        "description": "Winkelverbinder 90° / Angle bracket 90°",
+        "quantity": 30,
+        "unit_price": 4.50,
+        "line_total": 135.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-KABEL-600",
+        "description": "Kabelkanal 2m / Cable duct 2m",
+        "quantity": 15,
+        "unit_price": 22.00,
+        "line_total": 330.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-SCHL-700",
+        "description": "Schlauch 1m, Ø 20mm / Hose 1m, Ø 20mm",
+        "quantity": 12,
+        "unit_price": 8.00,
+        "line_total": 96.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-LAGER-800",
+        "description": "Kugellager 6205 / Ball bearing 6205",
+        "quantity": 25,
+        "unit_price": 15.00,
+        "line_total": 375.00
+      }
+    ],
+    "subtotal": 3860.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 733.40
+      }
+    ],
+    "total": 4593.40,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. German VAT 19% itemized, reverse-charge not applicable as buyer is US. Bilingual descriptions. SEPA bank details included in header (not extracted)."
+  },
+  {
+    "invoice_id": "P003_INV_20260112_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-98765",
+    "invoice_date": "2026-01-12",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Enterprise Way, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Klaus Weber, k.weber@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-MOTOR-900",
+        "description": "Elektromotor 5 kW / Electric motor 5 kW",
+        "quantity": 2,
+        "unit_price": 850.00,
+        "line_total": 1700.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-PUMPE-1000",
+        "description": "Hydraulikpumpe 20 L/min / Hydraulic pump 20 L/min",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-FILTER-1100",
+        "description": "Ölfilter / Oil filter",
+        "quantity": 4,
+        "unit_price": 35.00,
+        "line_total": 140.00
+      }
+    ],
+    "subtotal": 3040.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 577.60
+      }
+    ],
+    "total": 3617.60,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Three line items with bilingual descriptions. German VAT 19% applied. SEPA bank details present."
+  },
+  {
+    "invoice_id": "P003_INV_20260123_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-24680",
+    "invoice_date": "2026-01-23",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corp",
+      "buyer_address": "1 Enterprise Way, San Jose, CA 95134, USA",
+      "buyer_po_contact": "Anna Müller, a.mueller@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-REGLER-1200",
+        "description": "Temperaturregler / Temperature controller",
+        "quantity": 3,
+        "unit_price": 210.00,
+        "line_total": 630.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-SENSOR-1300",
+        "description": "Drucksensor / Pressure sensor",
+        "quantity": 5,
+        "unit_price": 95.00,
+        "line_total": 475.00
+      }
+    ],
+    "subtotal": 1105.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 209.95
+      }
+    ],
+    "total": 1314.95,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Two line items, bilingual descriptions. German VAT 19% itemized. SEPA bank details included."
+  }
+]
+```

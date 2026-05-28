@@ -1,0 +1,359 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260411_001",
+    "persona_id": "P002",
+    "po_reference": "DN-2026-04-12345",
+    "invoice_date": "2026-04-11",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nBurlington, VT 05401\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "LogiBuy LLC",
+      "buyer_address": "456 Commerce Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@logibuy.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-001",
+        "description": "Standard shipping service - palletized freight",
+        "quantity": 2,
+        "unit_price": 150.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-002",
+        "description": "Warehouse storage per pallet per day",
+        "quantity": 50,
+        "unit_price": 2.50,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-003",
+        "description": "Fuel surcharge (variable)",
+        "quantity": 1,
+        "unit_price": 45.75,
+        "line_total": 45.75
+      },
+      {
+        "line_no": 4,
+        "sku": "ML-004",
+        "description": "LTL freight - regional",
+        "quantity": 3,
+        "unit_price": 220.00,
+        "line_total": 660.00
+      },
+      {
+        "line_no": 5,
+        "sku": "ML-005",
+        "description": "Hazardous material handling fee",
+        "quantity": 1,
+        "unit_price": 95.00,
+        "line_total": 95.00
+      },
+      {
+        "line_no": 6,
+        "sku": "ML-006",
+        "description": "Proof of delivery (POD) copy",
+        "quantity": 1,
+        "unit_price": 5.00,
+        "line_total": 5.00
+      },
+      {
+        "line_no": 7,
+        "sku": "ML-007",
+        "description": "Customs brokerage service",
+        "quantity": 1,
+        "unit_price": 175.00,
+        "line_total": 175.00
+      },
+      {
+        "line_no": 8,
+        "sku": "ML-008",
+        "description": "Weekend delivery surcharge",
+        "quantity": 1,
+        "unit_price": 60.00,
+        "line_total": 60.00
+      }
+    ],
+    "subtotal": 1466,
+    "tax": [
+      {
+        "jurisdiction": "US-VT",
+        "rate": 0.06,
+        "amount": 87.96
+      }
+    ],
+    "total": 1554,
+    "error_injected": "MISSING_PO_REFERENCE",
+    "ground_truth_note": "Invoice has no PO reference; a delivery note number DN-2026-04-12345 is provided instead. The extractor should infer the PO from the delivery note. Hand-written notes and inconsistent header placement are present on the scanned PDF. Totals are rounded up to the nearest dollar (subtotal 1465.75 rounded to 1466, tax 87.945 rounded to 87.96, total 1553.695 rounded to 1554)."
+  },
+  {
+    "invoice_id": "P001_INV_20260117_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-12354",
+    "invoice_date": "2026-01-17",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Drive\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "TechCorp International",
+      "buyer_address": "200 Innovation Way\nAustin, TX 78701\nUSA",
+      "buyer_po_contact": "Jane Doe, jane.doe@techcorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "ARM Cortex-M4 microcontroller unit",
+        "quantity": 500,
+        "unit_price": 3.45,
+        "line_total": 1725.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "description": "10kΩ resistor pack (100 pcs)",
+        "quantity": 20,
+        "unit_price": 2.10,
+        "line_total": 42.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "description": "USB-C connector (receptacle)",
+        "quantity": 1000,
+        "unit_price": 0.85,
+        "line_total": 850.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-4004",
+        "description": "PCB prototype - 4-layer",
+        "quantity": 10,
+        "unit_price": 125.00,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-5005",
+        "description": "Lithium-ion battery 18650",
+        "quantity": 200,
+        "unit_price": 4.50,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-6006",
+        "description": "Temperature sensor - digital",
+        "quantity": 300,
+        "unit_price": 1.20,
+        "line_total": 360.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-7007",
+        "description": "LED indicator - RGB",
+        "quantity": 500,
+        "unit_price": 0.60,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-8008",
+        "description": "Shipping and handling fee",
+        "quantity": 1,
+        "unit_price": 75.00,
+        "line_total": 75.00
+      }
+    ],
+    "subtotal": 5502.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 453.92
+      },
+      {
+        "jurisdiction": "US-TX",
+        "rate": 0.0625,
+        "amount": 343.88
+      }
+    ],
+    "total": 6299.80,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference has a typo: last two digits transposed (should be PO-2026-01-12345). Tax is itemized by jurisdiction (US-CA 8.25% and US-TX 6.25%). Totals are rounded to 2 decimal places."
+  },
+  {
+    "invoice_id": "P003_INV_20260115_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-67890",
+    "invoice_date": "2026-01-15",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 100\n60327 Frankfurt am Main\nGermany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "AutoParts GmbH",
+      "buyer_address": "Musterstraße 50\n10115 Berlin\nGermany",
+      "buyer_po_contact": "Hans Müller, hans.mueller@autoparts.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-001",
+        "description": "Industriemaschine (Industrial Machine) - Modell 3000",
+        "quantity": 1,
+        "unit_price": 5000.00,
+        "line_total": 5000.00
+      }
+    ],
+    "subtotal": 5000.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 950.00
+      }
+    ],
+    "total": 5950.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with standard DE VAT (19%). Bilingual labels (German primary, English secondary). SEPA bank details are present on the invoice (not reflected in JSON). Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260317_001",
+    "persona_id": "P002",
+    "po_reference": "DN-2026-03-54321",
+    "invoice_date": "2026-03-17",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nBurlington, VT 05401\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "LogiBuy LLC",
+      "buyer_address": "456 Commerce Blvd\nChicago, IL 60601\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@logibuy.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-010",
+        "description": "Expedited freight - next day air",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-011",
+        "description": "Pallet wrapping service",
+        "quantity": 5,
+        "unit_price": 15.00,
+        "line_total": 75.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ML-012",
+        "description": "Document retrieval fee",
+        "quantity": 1,
+        "unit_price": 25.00,
+        "line_total": 25.00
+      }
+    ],
+    "subtotal": 550,
+    "tax": [
+      {
+        "jurisdiction": "US-VT",
+        "rate": 0.06,
+        "amount": 33.00
+      }
+    ],
+    "total": 583,
+    "error_injected": "MISSING_PO_REFERENCE",
+    "ground_truth_note": "Invoice has no PO reference; a delivery note number DN-2026-03-54321 is provided instead. The extractor should infer the PO from the delivery note. Hand-written notes and inconsistent header placement are present on the scanned PDF. Totals are rounded up to the nearest dollar (subtotal 550.00 rounded to 550, tax 33.00, total 583.00 rounded to 583)."
+  },
+  {
+    "invoice_id": "P001_INV_20260117_002",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-67809",
+    "invoice_date": "2026-01-17",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Tech Park Drive\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "TechCorp International",
+      "buyer_address": "200 Innovation Way\nAustin, TX 78701\nUSA",
+      "buyer_po_contact": "Jane Doe, jane.doe@techcorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-9009",
+        "description": "FPGA development board",
+        "quantity": 5,
+        "unit_price": 450.00,
+        "line_total": 2250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1010",
+        "description": "Memory module 8GB DDR4",
+        "quantity": 10,
+        "unit_price": 65.00,
+        "line_total": 650.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1111",
+        "description": "Power supply unit 12V 5A",
+        "quantity": 20,
+        "unit_price": 22.50,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-1212",
+        "description": "Cable assembly USB-C to HDMI",
+        "quantity": 100,
+        "unit_price": 8.00,
+        "line_total": 800.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-1313",
+        "description": "Shipping and handling",
+        "quantity": 1,
+        "unit_price": 50.00,
+        "line_total": 50.00
+      }
+    ],
+    "subtotal": 4200.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 346.50
+      },
+      {
+        "jurisdiction": "US-TX",
+        "rate": 0.0625,
+        "amount": 262.50
+      }
+    ],
+    "total": 4809.00,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference has a typo: last two digits transposed (should be PO-2026-01-67890). Tax is itemized by jurisdiction (US-CA 8.25% and US-TX 6.25%). Totals are rounded to 2 decimal places."
+  }
+]
+```

@@ -1,0 +1,284 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260420_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-20",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Maple Avenue, Suite 200\nPortland, OR 97201",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "123 Corporate Drive\nNew York, NY 10001",
+      "buyer_po_contact": "Jane Smith, jane.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FRT-001",
+        "description": "Freight charge - LTL shipment",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-002",
+        "description": "Warehousing storage - 30 days",
+        "quantity": 1,
+        "unit_price": 320.00,
+        "line_total": 320.00
+      },
+      {
+        "line_no": 3,
+        "sku": "PKG-003",
+        "description": "Packaging materials",
+        "quantity": 5,
+        "unit_price": 12.50,
+        "line_total": 62.50
+      }
+    ],
+    "subtotal": 832.5,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08,
+        "amount": 66.6
+      }
+    ],
+    "total": 900,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Hand-written note 'Received' visible on scanned image. Header placement inconsistent - vendor address appears after buyer info. Total rounded up to nearest dollar as per supplier policy."
+  },
+  {
+    "invoice_id": "P005_INV_20260426_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-67890",
+    "invoice_date": "2026-04-26",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 1234\nSão Paulo, SP 01001-000\nBrazil",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "123 Corporate Drive\nNew York, NY 10001",
+      "buyer_po_contact": "Jane Smith, jane.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "CAP-1000",
+        "description": "Capacitor eletrolítico 1000µF 25V",
+        "quantity": 500,
+        "unit_price": 0.85,
+        "line_total": 425.00
+      }
+    ],
+    "subtotal": 425.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 76.50
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 21.25
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 7.01
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 32.30
+      }
+    ],
+    "total": 562.06,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice with multiple Brazilian taxes (ICMS, IPI, PIS, COFINS). Boleto bancário payment slip referenced in header. All fields correct."
+  },
+  {
+    "invoice_id": "P001_INV_20260417_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-54321",
+    "invoice_date": "2026-04-17",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "789 Technology Park\nSan Jose, CA 95110",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "123 Corporate Drive\nNew York, NY 10001",
+      "buyer_po_contact": "Jane Smith, jane.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MCU-328P",
+        "description": "Microcontroller ATmega328P",
+        "quantity": 100,
+        "unit_price": 2.35,
+        "line_total": 235.00
+      },
+      {
+        "line_no": 2,
+        "sku": "RES-10K",
+        "description": "Resistor 10kOhm 1/4W",
+        "quantity": 1000,
+        "unit_price": 0.02,
+        "line_total": 20.00
+      },
+      {
+        "line_no": 3,
+        "sku": "LED-RED",
+        "description": "Red LED 5mm",
+        "quantity": 500,
+        "unit_price": 0.08,
+        "line_total": 40.00
+      }
+    ],
+    "subtotal": 295.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.08,
+        "amount": 23.60
+      }
+    ],
+    "total": 318.60,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Multi-currency capability noted in header (foreign currency option). Tax line itemized for CA jurisdiction only. Total rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P001_INV_20260323_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-98756",
+    "invoice_date": "2026-03-23",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "789 Technology Park\nSan Jose, CA 95110",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "123 Corporate Drive\nNew York, NY 10001",
+      "buyer_po_contact": "Jane Smith, jane.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "IC-555",
+        "description": "Timer IC NE555P",
+        "quantity": 50,
+        "unit_price": 0.45,
+        "line_total": 22.50
+      },
+      {
+        "line_no": 2,
+        "sku": "TRANS-2N2222",
+        "description": "NPN Transistor 2N2222",
+        "quantity": 200,
+        "unit_price": 0.12,
+        "line_total": 24.00
+      },
+      {
+        "line_no": 3,
+        "sku": "CAP-100",
+        "description": "Ceramic Capacitor 100pF",
+        "quantity": 1000,
+        "unit_price": 0.01,
+        "line_total": 10.00
+      }
+    ],
+    "subtotal": 56.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.08,
+        "amount": 4.52
+      }
+    ],
+    "total": 61.02,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "Deliberate PO reference typo: correct PO is PO-2026-03-98765, but invoice shows PO-2026-03-98756 (last two digits transposed). Extractor should flag mismatch. All other fields correct."
+  },
+  {
+    "invoice_id": "P002_INV_20260312_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-11111",
+    "invoice_date": "2026-03-12",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Maple Avenue, Suite 200\nPortland, OR 97201",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "123 Corporate Drive\nNew York, NY 10001",
+      "buyer_po_contact": "Jane Smith, jane.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FRT-002",
+        "description": "Freight charge - FTL shipment",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 2,
+        "sku": "WH-003",
+        "description": "Warehousing storage - 60 days",
+        "quantity": 1,
+        "unit_price": 640.00,
+        "line_total": 640.00
+      },
+      {
+        "line_no": 3,
+        "sku": "PKG-004",
+        "description": "Specialized packaging",
+        "quantity": 10,
+        "unit_price": 15.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 4,
+        "sku": "LAB-001",
+        "description": "Labor - loading/unloading",
+        "quantity": 4,
+        "unit_price": 45.00,
+        "line_total": 180.00
+      },
+      {
+        "line_no": 5,
+        "sku": "INS-001",
+        "description": "Insurance - cargo value",
+        "quantity": 1,
+        "unit_price": 75.00,
+        "line_total": 75.00
+      }
+    ],
+    "subtotal": 2245.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.00,
+        "amount": 0.00
+      }
+    ],
+    "total": 2245,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with 5 line items. Hand-written note 'Please expedite' on scan. Header layout inconsistent - vendor name appears at bottom. Total already integer, no rounding needed."
+  }
+]
+```

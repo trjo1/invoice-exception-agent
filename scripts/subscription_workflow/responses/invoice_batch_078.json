@@ -1,0 +1,383 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260423_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-23",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1200 Innovation Drive\nSan Jose, CA 95134\nUnited States",
+      "vendor_tax_id": "EIN 94-1234567",
+      "buyer_name": "NovaTech Solutions LLC",
+      "buyer_address": "500 Commerce Blvd\nDallas, TX 75201\nUnited States",
+      "buyer_po_contact": "Alice Johnson, alice.johnson@novatech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MCU-001",
+        "description": "Microcontroller ATmega328P (100-pack)",
+        "quantity": 5,
+        "unit_price": 45.25,
+        "line_total": 226.25
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-RES-104",
+        "description": "Resistor Kit 10k Ohm (500-pack)",
+        "quantity": 2,
+        "unit_price": 12.80,
+        "line_total": 25.60
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-CAP-220",
+        "description": "Capacitor 220µF 25V (50-pack)",
+        "quantity": 10,
+        "unit_price": 8.75,
+        "line_total": 87.50
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-LED-5050",
+        "description": "RGB LED Module 5050 (10-pack)",
+        "quantity": 3,
+        "unit_price": 15.40,
+        "line_total": 46.20
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-SEN-TMP",
+        "description": "Temperature Sensor DS18B20 (10-pack)",
+        "quantity": 4,
+        "unit_price": 22.10,
+        "line_total": 88.40
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-BRD-PRO",
+        "description": "Prototyping Board 7x9cm (25-pack)",
+        "quantity": 2,
+        "unit_price": 18.50,
+        "line_total": 37.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-WIR-22",
+        "description": "Hook-up Wire 22AWG (100ft)",
+        "quantity": 1,
+        "unit_price": 32.00,
+        "line_total": 32.00
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-PSU-5V",
+        "description": "Power Supply 5V 2A (10-pack)",
+        "quantity": 3,
+        "unit_price": 28.60,
+        "line_total": 85.80
+      }
+    ],
+    "subtotal": 628.75,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 45.58
+      },
+      {
+        "jurisdiction": "US-TX",
+        "rate": 0.0625,
+        "amount": 39.30
+      }
+    ],
+    "total": 713.63,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. All line items sum correctly. Tax is itemized per jurisdiction (CA and TX). Totals rounded to 2 decimals. No errors injected."
+  },
+  {
+    "invoice_id": "P002_INV_20260120_002",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-20",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "42 Industrial Way\nPortland, OR 97201\nUnited States",
+      "vendor_tax_id": "EIN 20-9876543",
+      "buyer_name": "NovaTech Solutions LLC",
+      "buyer_address": "500 Commerce Blvd\nDallas, TX 75201\nUnited States",
+      "buyer_po_contact": "Bob Smith, bob.smith@novatech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FREIGHT-001",
+        "description": "LTL Freight Service - Dallas to Portland (pallet 48x40x48)",
+        "quantity": 1,
+        "unit_price": 345.00,
+        "line_total": 345.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WARE-001",
+        "description": "Warehousing Storage (per pallet per month) - 1 pallet",
+        "quantity": 1,
+        "unit_price": 120.00,
+        "line_total": 120.00
+      }
+    ],
+    "subtotal": 465.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.0,
+        "amount": 0.00
+      }
+    ],
+    "total": 465.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean scanned invoice from Maple Logistics SMB. Header placement is slightly inconsistent (vendor address appears below vendor name on some scans). A handwritten note 'Please expedite' appears at the bottom. Totals are rounded up to the nearest dollar (subtotal and total are integers). No errors injected."
+  },
+  {
+    "invoice_id": "P002_INV_20260409_003",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-98765",
+    "invoice_date": "2026-04-09",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "42 Industrial Way\nPortland, OR 97201\nUnited States",
+      "vendor_tax_id": "EIN 20-9876543",
+      "buyer_name": "NovaTech Solutions LLC",
+      "buyer_address": "500 Commerce Blvd\nDallas, TX 75201\nUnited States",
+      "buyer_po_contact": "Carol Davis, carol.davis@novatech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FREIGHT-002",
+        "description": "FTL Freight Service - Portland to Seattle (full truckload)",
+        "quantity": 1,
+        "unit_price": 890.00,
+        "line_total": 890.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WARE-002",
+        "description": "Warehousing Storage (per pallet per month) - 3 pallets",
+        "quantity": 3,
+        "unit_price": 115.00,
+        "line_total": 345.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-PACK-001",
+        "description": "Custom Packaging Service (per unit) - 50 units",
+        "quantity": 50,
+        "unit_price": 4.50,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-LABEL-001",
+        "description": "Barcode Label Printing (per 100) - 200 labels",
+        "quantity": 2,
+        "unit_price": 35.00,
+        "line_total": 70.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-DIST-001",
+        "description": "Distribution Fee (per order) - 5 orders",
+        "quantity": 5,
+        "unit_price": 25.00,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-RET-001",
+        "description": "Return Processing Fee (per item) - 10 items",
+        "quantity": 10,
+        "unit_price": 8.00,
+        "line_total": 80.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-INS-001",
+        "description": "Cargo Insurance (per shipment) - 1 shipment",
+        "quantity": 1,
+        "unit_price": 60.00,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-ADMIN-001",
+        "description": "Administrative Fee (monthly)",
+        "quantity": 1,
+        "unit_price": 150.00,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 1945.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.0,
+        "amount": 0.00
+      },
+      {
+        "jurisdiction": "US-WA",
+        "rate": 0.065,
+        "amount": 126.43
+      }
+    ],
+    "total": 2071.43,
+    "error_injected": null,
+    "ground_truth_note": "Clean scanned invoice from Maple Logistics SMB with 8 line items. There is a handwritten note 'Thanks!' near the total. Header is misaligned slightly. Totals are rounded to the nearest dollar (subtotal and total are integers). Tax applied to Washington portion. No errors injected."
+  },
+  {
+    "invoice_id": "P002_INV_20260106_004",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-11223",
+    "invoice_date": "2026-01-06",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "42 Industrial Way\nPortland, OR 97201\nUnited States",
+      "vendor_tax_id": "EIN 20-9876543",
+      "buyer_name": "NovaTech Solutions LLC",
+      "buyer_address": "500 Commerce Blvd\nDallas, TX 75201\nUnited States",
+      "buyer_po_contact": "Diana Lee, diana.lee@novatech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FREIGHT-003",
+        "description": "LTL Freight Service - Dallas to Portland (2 pallets)",
+        "quantity": 1,
+        "unit_price": 520.00,
+        "line_total": 520.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WARE-003",
+        "description": "Warehousing Storage (per pallet per month) - 2 pallets",
+        "quantity": 2,
+        "unit_price": 110.00,
+        "line_total": 220.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-PACK-002",
+        "description": "Custom Packaging Service (per unit) - 20 units",
+        "quantity": 20,
+        "unit_price": 5.00,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-LABEL-002",
+        "description": "Barcode Label Printing (per 100) - 100 labels",
+        "quantity": 1,
+        "unit_price": 35.00,
+        "line_total": 35.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-ADMIN-002",
+        "description": "Administrative Fee (monthly)",
+        "quantity": 1,
+        "unit_price": 150.00,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 1025.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.0,
+        "amount": 0.00
+      }
+    ],
+    "total": 1025.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean scanned invoice from Maple Logistics SMB with 5 line items. Handwritten note 'Paid' appears in the margin. Header placement is inconsistent (vendor name is shifted right). Totals are rounded up to the nearest dollar. No errors injected."
+  },
+  {
+    "invoice_id": "P003_INV_20260131_005",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-01-33445",
+    "invoice_date": "2026-01-31",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 15\n60327 Frankfurt am Main\nDeutschland",
+      "vendor_tax_id": "DE 123456789",
+      "buyer_name": "NovaTech Solutions GmbH",
+      "buyer_address": "Musterstraße 10\n10115 Berlin\nDeutschland",
+      "buyer_po_contact": "Erika Mustermann, e.mustermann@novatech.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-SCH-001",
+        "description": "Schrauben M8x30 (100 Stück) / Screws M8x30 (100 pcs)",
+        "quantity": 5,
+        "unit_price": 12.50,
+        "line_total": 62.50
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-MUT-002",
+        "description": "Muttern M8 (50 Stück) / Nuts M8 (50 pcs)",
+        "quantity": 10,
+        "unit_price": 5.80,
+        "line_total": 58.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-DIC-003",
+        "description": "Dichtungsringe DN20 (25 Stück) / Sealing Rings DN20 (25 pcs)",
+        "quantity": 4,
+        "unit_price": 9.20,
+        "line_total": 36.80
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-KAB-004",
+        "description": "Kabelschuh 6mm² (100 Stück) / Cable Lug 6mm² (100 pcs)",
+        "quantity": 2,
+        "unit_price": 18.40,
+        "line_total": 36.80
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-WER-005",
+        "description": "Werkzeugset (1 Satz) / Tool Set (1 set)",
+        "quantity": 1,
+        "unit_price": 145.00,
+        "line_total": 145.00
+      }
+    ],
+    "subtotal": 339.10,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 64.43
+      }
+    ],
+    "total": 403.53,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. Bilingual descriptions (German primary, English secondary). VAT 19% itemized. SEPA bank details (IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX) are present on the invoice but not captured in the structured fields. Totals rounded to 2 decimals. No errors injected."
+  }
+]
+```

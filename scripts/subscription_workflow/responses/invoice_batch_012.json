@@ -1,0 +1,325 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260112_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-12346",
+    "invoice_date": "2026-01-12",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 94-1234567",
+      "buyer_name": "NexGen Electronics Ltd.",
+      "buyer_address": "2000 Commerce Blvd, Austin, TX 78701, USA",
+      "buyer_po_contact": "Jane Smith, jane.smith@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-1001",
+        "description": "Microcontroller Board, ARM Cortex-M4",
+        "quantity": 500,
+        "unit_price": 12.50,
+        "line_total": 6250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-CN-2003",
+        "description": "Connector Set, 50-pin, industrial grade",
+        "quantity": 200,
+        "unit_price": 8.75,
+        "line_total": 1750.00
+      }
+    ],
+    "subtotal": 8000.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.08,
+        "amount": 640.00
+      }
+    ],
+    "total": 8640.00,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "The correct PO reference is PO-2026-01-12345, but a typo was introduced: PO-2026-01-12346 (last digit transposed). Extractor should flag this mismatch."
+  },
+  {
+    "invoice_id": "P002_INV_20260303_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-00012",
+    "invoice_date": "2026-03-03",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "45 Maple Street, Springfield, IL 62701, USA",
+      "vendor_tax_id": "EIN 36-7890123",
+      "buyer_name": "NexGen Electronics Ltd.",
+      "buyer_address": "2000 Commerce Blvd, Austin, TX 78701, USA",
+      "buyer_po_contact": "Jane Smith, jane.smith@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-SHP-001",
+        "description": "Freight shipping service, standard ground",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ML-PAC-002",
+        "description": "Packaging materials, bulk order",
+        "quantity": 50,
+        "unit_price": 12.00,
+        "line_total": 600.00
+      }
+    ],
+    "subtotal": 1050.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.07,
+        "amount": 73.50
+      }
+    ],
+    "total": 1124.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics. Total rounded up to nearest dollar (1123.50 → 1124). Extractor should capture all fields accurately."
+  },
+  {
+    "invoice_id": "P004_INV_20260122_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-01-00987",
+    "invoice_date": "2026-01-22",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Unit 12B, Industrial Estate, Andheri East, Mumbai 400093, India",
+      "vendor_tax_id": "GSTIN 27AABCM1234P1Z5, PAN AABCM1234P",
+      "buyer_name": "NexGen Electronics Ltd.",
+      "buyer_address": "2000 Commerce Blvd, Austin, TX 78701, USA",
+      "buyer_po_contact": "Jane Smith, jane.smith@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-RS-101",
+        "description": "Resistor pack, 10k ohm, SMD, HSN 853321",
+        "quantity": 1000,
+        "unit_price": 5.50,
+        "line_total": 5500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-CP-202",
+        "description": "Capacitor, 100uF, electrolytic, HSN 853222",
+        "quantity": 500,
+        "unit_price": 8.20,
+        "line_total": 4100.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-DI-303",
+        "description": "Diode, 1N4007, HSN 854110",
+        "quantity": 2000,
+        "unit_price": 1.75,
+        "line_total": 3500.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-TR-404",
+        "description": "Transistor, BC547, HSN 854129",
+        "quantity": 1500,
+        "unit_price": 3.30,
+        "line_total": 4950.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-IC-505",
+        "description": "IC, 555 timer, HSN 854231",
+        "quantity": 300,
+        "unit_price": 12.00,
+        "line_total": 3600.00
+      }
+    ],
+    "subtotal": 21650.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 3897.00
+      }
+    ],
+    "total": 25547.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. GST at 18% IGST, HSN codes per line. PAN and GSTIN in header. Extractor should capture all line items and tax correctly."
+  },
+  {
+    "invoice_id": "P001_INV_20260203_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-00234",
+    "invoice_date": "2026-02-03",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN 94-1234567",
+      "buyer_name": "NexGen Electronics Ltd.",
+      "buyer_address": "2000 Commerce Blvd, Austin, TX 78701, USA",
+      "buyer_po_contact": "Jane Smith, jane.smith@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-PS-3001",
+        "description": "Power supply unit, 12V 5A, industrial",
+        "quantity": 50,
+        "unit_price": 45.00,
+        "line_total": 2250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-SE-4002",
+        "description": "Sensor module, temperature/humidity",
+        "quantity": 100,
+        "unit_price": 18.50,
+        "line_total": 1850.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-CB-5003",
+        "description": "Cable assembly, USB-C, 1m length",
+        "quantity": 300,
+        "unit_price": 3.25,
+        "line_total": 975.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-EN-6004",
+        "description": "Enclosure, aluminum, 200x150x50mm",
+        "quantity": 80,
+        "unit_price": 22.00,
+        "line_total": 1760.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-LC-7005",
+        "description": "LCD display, 16x2 character, backlit",
+        "quantity": 60,
+        "unit_price": 14.75,
+        "line_total": 885.00
+      }
+    ],
+    "subtotal": 7720.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.08,
+        "amount": 617.60
+      }
+    ],
+    "total": 8337.60,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. Tax itemized at 8% for California jurisdiction. All totals rounded to 2 decimals. Extractor should capture all line items and tax correctly."
+  },
+  {
+    "invoice_id": "P003_INV_20260404_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-00567",
+    "invoice_date": "2026-04-04",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestrasse 15, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE 123456789",
+      "buyer_name": "NexGen Electronics Ltd.",
+      "buyer_address": "2000 Commerce Blvd, Austin, TX 78701, USA",
+      "buyer_po_contact": "Jane Smith, jane.smith@nexgen.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FI-MOT-101",
+        "description": "Elektromotor, 0.5 kW / Electric motor, 0.5 kW",
+        "quantity": 20,
+        "unit_price": 85.00,
+        "line_total": 1700.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FI-GEAR-202",
+        "description": "Getriebe, Übersetzung 5:1 / Gearbox, ratio 5:1",
+        "quantity": 10,
+        "unit_price": 230.00,
+        "line_total": 2300.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FI-SEN-303",
+        "description": "Drucksensor, 0-10 bar / Pressure sensor, 0-10 bar",
+        "quantity": 30,
+        "unit_price": 62.50,
+        "line_total": 1875.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FI-VAL-404",
+        "description": "Magnetventil, 24V DC / Solenoid valve, 24V DC",
+        "quantity": 15,
+        "unit_price": 98.00,
+        "line_total": 1470.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FI-PUM-505",
+        "description": "Hydraulikpumpe, 10 L/min / Hydraulic pump, 10 L/min",
+        "quantity": 5,
+        "unit_price": 450.00,
+        "line_total": 2250.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FI-BEA-606",
+        "description": "Kugellager, 6205-2RS / Ball bearing, 6205-2RS",
+        "quantity": 100,
+        "unit_price": 4.20,
+        "line_total": 420.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FI-SEA-707",
+        "description": "Dichtungssatz, Silikon / Seal kit, silicone",
+        "quantity": 25,
+        "unit_price": 12.80,
+        "line_total": 320.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FI-CON-808",
+        "description": "Steuerungseinheit, PLC / Control unit, PLC",
+        "quantity": 3,
+        "unit_price": 1200.00,
+        "line_total": 3600.00
+      }
+    ],
+    "subtotal": 13935.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 2647.65
+      }
+    ],
+    "total": 16582.65,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. German VAT at 19% applied. Bilingual descriptions (German primary, English secondary). SEPA bank details: IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX. Extractor should capture all line items and tax correctly."
+  }
+]
+```

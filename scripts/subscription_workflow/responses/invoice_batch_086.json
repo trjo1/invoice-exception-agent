@@ -1,0 +1,281 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260105_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-12345",
+    "invoice_date": "2026-01-05",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "123 Innovation Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "PARAF-001",
+        "description": "Parafuso de aço inox M8 x 30mm",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "ARUV-002",
+        "description": "Arruela de pressão M8",
+        "quantity": 200,
+        "unit_price": 0.75,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 400.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 72.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 40.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 6.60
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 30.40
+      }
+    ],
+    "total": 549.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice for Brazilian components. Includes ICMS, IPI, PIS, COFINS taxes. Boleto bancário reference: 1234567890. NF-e key: 35200612345678901234567890123456789012345678."
+  },
+  {
+    "invoice_id": "P003_INV_20260410_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-23456",
+    "invoice_date": "2026-04-10",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 50, 60327 Frankfurt am Main, Deutschland\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "123 Innovation Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SCHR-001",
+        "description": "Schraube M10 x 50mm (Screw M10x50mm)",
+        "quantity": 500,
+        "unit_price": 0.45,
+        "line_total": 225.00
+      }
+    ],
+    "subtotal": 225.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 42.75
+      }
+    ],
+    "total": 267.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice for German hardware. VAT 19% applied. Bilingual labels (German/English). SEPA bank details included in vendor address."
+  },
+  {
+    "invoice_id": "P003_INV_20260225_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-34567",
+    "invoice_date": "2026-02-25",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 50, 60327 Frankfurt am Main, Deutschland\nIBAN: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "123 Innovation Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MUTT-001",
+        "description": "Mutter M10 (Nut M10)",
+        "quantity": 200,
+        "unit_price": 0.20,
+        "line_total": 40.00
+      },
+      {
+        "line_no": 2,
+        "sku": "UNTER-001",
+        "description": "Unterlegscheibe M10 (Washer M10)",
+        "quantity": 300,
+        "unit_price": 0.10,
+        "line_total": 30.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SCHR-002",
+        "description": "Schraube M12 x 60mm (Screw M12x60mm)",
+        "quantity": 100,
+        "unit_price": 0.80,
+        "line_total": 80.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MUTT-002",
+        "description": "Mutter M12 (Nut M12)",
+        "quantity": 100,
+        "unit_price": 0.30,
+        "line_total": 30.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FED-001",
+        "description": "Federring M10 (Spring washer M10)",
+        "quantity": 500,
+        "unit_price": 0.05,
+        "line_total": 25.00
+      }
+    ],
+    "subtotal": 205.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT-EXPORT",
+        "rate": 0,
+        "amount": 0
+      }
+    ],
+    "total": 205.00,
+    "error_injected": "Cross-currency edge when buyer is in USD",
+    "ground_truth_note": "Invoice is in EUR but buyer operates in USD. No exchange rate provided. PO reference implies USD amount. As export to US, VAT correctly shown as 0%. The cross-currency mismatch is the deliberate error."
+  },
+  {
+    "invoice_id": "P004_INV_20260219_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-45678",
+    "invoice_date": "2026-02-19",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCC1234A1Z5, PAN: AABCC1234A",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "123 Innovation Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "BOLT-001",
+        "description": "Hex Bolt M16 x 100mm (HSN 7318)",
+        "quantity": 150,
+        "unit_price": 45.00,
+        "line_total": 6750.00
+      },
+      {
+        "line_no": 2,
+        "sku": "NUT-001",
+        "description": "Hex Nut M16 (HSN 7318)",
+        "quantity": 150,
+        "unit_price": 15.00,
+        "line_total": 2250.00
+      },
+      {
+        "line_no": 3,
+        "sku": "WASH-001",
+        "description": "Flat Washer M16 (HSN 7318)",
+        "quantity": 300,
+        "unit_price": 5.00,
+        "line_total": 1500.00
+      }
+    ],
+    "subtotal": 10500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-MH-CGST",
+        "rate": 0.09,
+        "amount": 945.00
+      },
+      {
+        "jurisdiction": "IN-MH-SGST",
+        "rate": 0.09,
+        "amount": 945.00
+      }
+    ],
+    "total": 12390.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice for Indian materials. GST itemized with CGST and SGST. HSN codes per line. PAN and GSTIN in header."
+  },
+  {
+    "invoice_id": "P002_INV_20260305_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-56789",
+    "invoice_date": "2026-03-05",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Warehouse Ave, Buffalo, NY 14201, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "GlobalTech Industries",
+      "buyer_address": "123 Innovation Drive, San Francisco, CA 94105, USA",
+      "buyer_po_contact": "John Smith, j.smith@globaltech.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "PLT-001",
+        "description": "Wooden Pallet 48x40",
+        "quantity": 50,
+        "unit_price": 12.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 2,
+        "sku": "BOX-002",
+        "description": "Corrugated Box 24x18x12",
+        "quantity": 200,
+        "unit_price": 1.50,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 3,
+        "sku": "TAPE-001",
+        "description": "Packing Tape 2\"x100yd",
+        "quantity": 100,
+        "unit_price": 2.00,
+        "line_total": 200.00
+      }
+    ],
+    "subtotal": 1100.00,
+    "tax": [
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08,
+        "amount": 88.00
+      }
+    ],
+    "total": 1188.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice for logistics supplies. Hand-written note on scanned copy: 'Please expedite shipping'. Inconsistent header placement (vendor address appears after line items). Total rounded up to nearest dollar."
+  }
+]
+```

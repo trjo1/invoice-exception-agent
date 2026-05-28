@@ -1,0 +1,96 @@
+{
+  "batch_no": 30,
+  "n_invoices": 5,
+  "specs": [
+    {
+      "spec_index": 145,
+      "persona_id": "P004",
+      "persona_name": "Mumbai Materials Co.",
+      "persona_region": "APAC-IN",
+      "persona_language": "en",
+      "persona_currency": "INR",
+      "persona_layout_style": "legacy_pdf",
+      "persona_payment_terms": "NET-60",
+      "persona_quirks": [
+        "GST itemized; HSN codes per line",
+        "PAN + GSTIN in header",
+        "Cross-currency to USD common"
+      ],
+      "invoice_date_hint": "2026-01-24",
+      "line_item_count_hint": 1,
+      "error_injected": "GST percentage occasionally misrouted between IGST and CGST/SGST"
+    },
+    {
+      "spec_index": 146,
+      "persona_id": "P003",
+      "persona_name": "Frankfurt Industriebedarf GmbH",
+      "persona_region": "EU-DE",
+      "persona_language": "de",
+      "persona_currency": "EUR",
+      "persona_layout_style": "structured_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "DE VAT (19%) itemized; reverse-charge logic on intra-EU",
+        "Bilingual labels (German primary, English secondary)",
+        "SEPA bank details on every invoice"
+      ],
+      "invoice_date_hint": "2026-01-28",
+      "line_item_count_hint": 5,
+      "error_injected": null
+    },
+    {
+      "spec_index": 147,
+      "persona_id": "P003",
+      "persona_name": "Frankfurt Industriebedarf GmbH",
+      "persona_region": "EU-DE",
+      "persona_language": "de",
+      "persona_currency": "EUR",
+      "persona_layout_style": "structured_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "DE VAT (19%) itemized; reverse-charge logic on intra-EU",
+        "Bilingual labels (German primary, English secondary)",
+        "SEPA bank details on every invoice"
+      ],
+      "invoice_date_hint": "2026-02-05",
+      "line_item_count_hint": 5,
+      "error_injected": "Cross-currency edge when buyer is in USD"
+    },
+    {
+      "spec_index": 148,
+      "persona_id": "P003",
+      "persona_name": "Frankfurt Industriebedarf GmbH",
+      "persona_region": "EU-DE",
+      "persona_language": "de",
+      "persona_currency": "EUR",
+      "persona_layout_style": "structured_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "DE VAT (19%) itemized; reverse-charge logic on intra-EU",
+        "Bilingual labels (German primary, English secondary)",
+        "SEPA bank details on every invoice"
+      ],
+      "invoice_date_hint": "2026-03-02",
+      "line_item_count_hint": 1,
+      "error_injected": null
+    },
+    {
+      "spec_index": 149,
+      "persona_id": "P005",
+      "persona_name": "S\u00e3o Paulo Componentes Ltda.",
+      "persona_region": "LATAM-BR",
+      "persona_language": "pt",
+      "persona_currency": "BRL",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "NF-e (Brazil tax document) shape \u2014 invoice + tax receipt combined",
+        "Multiple tax types (ICMS, IPI, PIS, COFINS)",
+        "Boleto banc\u00e1rio payment slip referenced"
+      ],
+      "invoice_date_hint": "2026-01-29",
+      "line_item_count_hint": 1,
+      "error_injected": "Date format dd/mm/yyyy vs ISO"
+    }
+  ]
+}

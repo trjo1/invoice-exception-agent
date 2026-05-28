@@ -1,0 +1,418 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260426_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-26",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "PAN: AABCM1234N, GSTIN: 27AABCM1234N1Z5",
+      "buyer_name": "Acme Global Corp",
+      "buyer_address": "1 Liberty Street, New York, NY 10005, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-8471-001",
+        "description": "Motherboard PCB Assembly (HSN 8471)",
+        "quantity": 10,
+        "unit_price": 2500.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-8534-002",
+        "description": "Power Supply Unit 500W (HSN 8534)",
+        "quantity": 5,
+        "unit_price": 1800.00,
+        "line_total": 9000.00
+      }
+    ],
+    "subtotal": 34000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 3060.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 3060.00
+      }
+    ],
+    "total": 40120.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. All fields accurate. Invoice is in INR; cross-currency to USD is common but not shown. GST itemized with HSN codes per line."
+  },
+  {
+    "invoice_id": "P005_INV_20260221_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-21",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua dos Pinheiros, 1500, Pinheiros, São Paulo, SP 05422-001, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Global Corp",
+      "buyer_address": "1 Liberty Street, New York, NY 10005, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Parafuso M8 x 30mm (Aço Inoxidável)",
+        "quantity": 100,
+        "unit_price": 1.50,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Porca Sextavada M8",
+        "quantity": 100,
+        "unit_price": 0.80,
+        "line_total": 80.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Arruela Lisa M8",
+        "quantity": 200,
+        "unit_price": 0.30,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "Mola de Compressão 20mm",
+        "quantity": 50,
+        "unit_price": 2.20,
+        "line_total": 110.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "Rolamento 6205-2RS",
+        "quantity": 20,
+        "unit_price": 15.00,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-006",
+        "description": "Engrenagem Reta Módulo 2, 20 dentes",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-007",
+        "description": "Válvula Solenoide 12V",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-008",
+        "description": "Sensor de Proximidade Indutivo",
+        "quantity": 15,
+        "unit_price": 35.00,
+        "line_total": 525.00
+      }
+    ],
+    "subtotal": 2275.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 409.50
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 113.75
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 37.54
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 172.90
+      }
+    ],
+    "total": 3008.69,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. NF-e format with multiple taxes (ICMS, IPI, PIS, COFINS). Boleto bancário payment slip referenced in document. All values in BRL."
+  },
+  {
+    "invoice_id": "P001_INV_20260225_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-13245",
+    "invoice_date": "2026-02-25",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "4500 Innovation Drive, Suite 200, Austin, TX 78701, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Global Corp",
+      "buyer_address": "1 Liberty Street, New York, NY 10005, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Capacitor Cerâmico 100nF 50V",
+        "quantity": 500,
+        "unit_price": 0.12,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "description": "Resistor 10kΩ 1/4W",
+        "quantity": 1000,
+        "unit_price": 0.02,
+        "line_total": 20.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1003",
+        "description": "Conector USB-C Receptáculo",
+        "quantity": 200,
+        "unit_price": 0.85,
+        "line_total": 170.00
+      },
+      {
+        "line_no": 4,
+        "sku": "GTC-1004",
+        "description": "Microcontrolador ATMega328P",
+        "quantity": 100,
+        "unit_price": 3.50,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 5,
+        "sku": "GTC-1005",
+        "description": "Sensor de Temperatura DS18B20",
+        "quantity": 50,
+        "unit_price": 4.20,
+        "line_total": 210.00
+      },
+      {
+        "line_no": 6,
+        "sku": "GTC-1006",
+        "description": "Módulo Relé 2 Canais 5V",
+        "quantity": 30,
+        "unit_price": 6.00,
+        "line_total": 180.00
+      },
+      {
+        "line_no": 7,
+        "sku": "GTC-1007",
+        "description": "Display OLED 128x64 I2C",
+        "quantity": 25,
+        "unit_price": 9.50,
+        "line_total": 237.50
+      },
+      {
+        "line_no": 8,
+        "sku": "GTC-1008",
+        "description": "Fonte Chaveada 12V 2A",
+        "quantity": 20,
+        "unit_price": 11.25,
+        "line_total": 225.00
+      }
+    ],
+    "subtotal": 1452.50,
+    "tax": [
+      {
+        "jurisdiction": "US-NY-State",
+        "rate": 0.04,
+        "amount": 58.10
+      },
+      {
+        "jurisdiction": "US-NYC-City",
+        "rate": 0.045,
+        "amount": 65.36
+      }
+    ],
+    "total": 1575.96,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "Deliberate error: PO reference has a digit transposition. The correct PO should be PO-2026-02-12345, but the invoice shows PO-2026-02-13245 (digits 3 and 4 swapped). All other fields are accurate."
+  },
+  {
+    "invoice_id": "P005_INV_20260301_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-01",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua dos Pinheiros, 1500, Pinheiros, São Paulo, SP 05422-001, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Global Corp",
+      "buyer_address": "1 Liberty Street, New York, NY 10005, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-009",
+        "description": "Atuador Linear 12V 100mm",
+        "quantity": 10,
+        "unit_price": 89.00,
+        "line_total": 890.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-010",
+        "description": "Bomba d'Água 12V 5L/min",
+        "quantity": 5,
+        "unit_price": 145.00,
+        "line_total": 725.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-011",
+        "description": "Válvula de Retenção 1/2\"",
+        "quantity": 20,
+        "unit_price": 12.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-012",
+        "description": "Mangueira Silicone 8mm x 1m",
+        "quantity": 30,
+        "unit_price": 6.80,
+        "line_total": 204.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-013",
+        "description": "Conector Rápido 1/4\"",
+        "quantity": 50,
+        "unit_price": 3.20,
+        "line_total": 160.00
+      }
+    ],
+    "subtotal": 2229.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 401.22
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 111.45
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 36.78
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 169.40
+      }
+    ],
+    "total": 2947.85,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. NF-e format with multiple taxes. Boleto bancário referenced. All values in BRL."
+  },
+  {
+    "invoice_id": "P004_INV_20260307_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-07",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Area, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "PAN: AABCM1234N, GSTIN: 27AABCM1234N1Z5",
+      "buyer_name": "Acme Global Corp",
+      "buyer_address": "1 Liberty Street, New York, NY 10005, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-8541-001",
+        "description": "Transformador 12V 2A (HSN 8541)",
+        "quantity": 20,
+        "unit_price": 450.00,
+        "line_total": 9000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-8542-002",
+        "description": "Diodo Retificador 1N4007 (HSN 8542)",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-8536-003",
+        "description": "Transistor BC547 (HSN 8536)",
+        "quantity": 200,
+        "unit_price": 1.20,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-8537-004",
+        "description": "Indutor 100µH (HSN 8537)",
+        "quantity": 50,
+        "unit_price": 8.00,
+        "line_total": 400.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-8538-005",
+        "description": "Relé 5V 10A (HSN 8538)",
+        "quantity": 30,
+        "unit_price": 35.00,
+        "line_total": 1050.00
+      }
+    ],
+    "subtotal": 10940.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 984.60
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 984.60
+      }
+    ],
+    "total": 12909.20,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. GST itemized with HSN codes per line. Invoice in INR; cross-currency to USD common."
+  }
+]
+```

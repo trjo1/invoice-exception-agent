@@ -1,0 +1,436 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260408_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-08",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "TechConnect Global Solutions",
+      "buyer_address": "456 Corporate Park, Powai, Mumbai 400076, India",
+      "buyer_po_contact": "Ravi Sharma, ravi.sharma@techconnect.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-HSN-7301",
+        "description": "Structural steel beams (ISMB 200) - HSN 7301",
+        "quantity": 25,
+        "unit_price": 4500.00,
+        "line_total": 112500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-HSN-7318",
+        "description": "Hex bolts M16 - HSN 7318",
+        "quantity": 500,
+        "unit_price": 15.50,
+        "line_total": 7750.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-HSN-6806",
+        "description": "Fiberglass insulation rolls - HSN 6806",
+        "quantity": 100,
+        "unit_price": 320.00,
+        "line_total": 32000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-HSN-3917",
+        "description": "PVC pipes 4 inch - HSN 3917",
+        "quantity": 200,
+        "unit_price": 85.00,
+        "line_total": 17000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-HSN-8536",
+        "description": "Electrical switches modular - HSN 8536",
+        "quantity": 300,
+        "unit_price": 42.00,
+        "line_total": 12600.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-HSN-2710",
+        "description": "Hydraulic oil 20L - HSN 2710",
+        "quantity": 40,
+        "unit_price": 1200.00,
+        "line_total": 48000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-HSN-8481",
+        "description": "Gate valves 2 inch - HSN 8481",
+        "quantity": 15,
+        "unit_price": 2500.00,
+        "line_total": 37500.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-HSN-7326",
+        "description": "Steel wire ropes 10mm - HSN 7326",
+        "quantity": 500,
+        "unit_price": 65.00,
+        "line_total": 32500.00
+      }
+    ],
+    "subtotal": 299850.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 26986.50
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 26986.50
+      }
+    ],
+    "total": 353823.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. GST is split into CGST and SGST at 9% each. HSN codes are included per line. PAN and GSTIN are present in header. Invoice amounts are in INR; cross-currency to USD is common for this supplier but not shown here."
+  },
+  {
+    "invoice_id": "P004_INV_20260423_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-67890",
+    "invoice_date": "2026-04-23",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234C1Z1, PAN: AABCM1234C",
+      "buyer_name": "TechConnect Global Solutions",
+      "buyer_address": "456 Corporate Park, Powai, Mumbai 400076, India",
+      "buyer_po_contact": "Ravi Sharma, ravi.sharma@techconnect.in"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-HSN-7308",
+        "description": "Steel channels ISMC 150 - HSN 7308",
+        "quantity": 30,
+        "unit_price": 3800.00,
+        "line_total": 114000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-HSN-7312",
+        "description": "Tension control bolts M20 - HSN 7312",
+        "quantity": 400,
+        "unit_price": 22.00,
+        "line_total": 8800.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-HSN-6807",
+        "description": "Rockwool insulation boards - HSN 6807",
+        "quantity": 80,
+        "unit_price": 450.00,
+        "line_total": 36000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MMC-HSN-3918",
+        "description": "CPVC pipes 2 inch - HSN 3918",
+        "quantity": 150,
+        "unit_price": 120.00,
+        "line_total": 18000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MMC-HSN-8537",
+        "description": "Distribution boards 12-way - HSN 8537",
+        "quantity": 20,
+        "unit_price": 3500.00,
+        "line_total": 70000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MMC-HSN-2713",
+        "description": "Grease lithium based 5kg - HSN 2713",
+        "quantity": 60,
+        "unit_price": 850.00,
+        "line_total": 51000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MMC-HSN-8482",
+        "description": "Ball bearings 6205 - HSN 8482",
+        "quantity": 100,
+        "unit_price": 180.00,
+        "line_total": 18000.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MMC-HSN-7325",
+        "description": "Steel grating panels - HSN 7325",
+        "quantity": 50,
+        "unit_price": 2200.00,
+        "line_total": 110000.00
+      }
+    ],
+    "subtotal": 425800.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 38322.00
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 38322.00
+      }
+    ],
+    "total": 502444.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. Similar structure to invoice 1. All line items have HSN codes. GST is correctly computed."
+  },
+  {
+    "invoice_id": "P005_INV_20260120_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-20",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Indústrias, 1500, Jardim São Paulo, São Paulo, SP 01153-000, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90, IE: 123.456.789.110",
+      "buyer_name": "TechConnect Global Solutions",
+      "buyer_address": "Avenida Paulista, 1000, Bela Vista, São Paulo, SP 01310-100, Brasil",
+      "buyer_po_contact": "Ana Costa, ana.costa@techconnect.br"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-EL-001",
+        "description": "Motor elétrico 5CV trifásico",
+        "quantity": 10,
+        "unit_price": 1250.00,
+        "line_total": 12500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-PN-002",
+        "description": "Painel de controle automático",
+        "quantity": 5,
+        "unit_price": 4800.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-CB-003",
+        "description": "Cabos elétricos 10mm² (rolo 100m)",
+        "quantity": 20,
+        "unit_price": 320.00,
+        "line_total": 6400.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-SE-004",
+        "description": "Sensores de proximidade indutivos",
+        "quantity": 50,
+        "unit_price": 85.00,
+        "line_total": 4250.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-TR-005",
+        "description": "Transformador 500VA monofásico",
+        "quantity": 3,
+        "unit_price": 2100.00,
+        "line_total": 6300.00
+      }
+    ],
+    "subtotal": 53450.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 9621.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 5345.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 881.93
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 4062.20
+      }
+    ],
+    "total": 73360.13,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "Invoice date is displayed as 20/01/2026 on the scanned PDF (dd/mm/yyyy), but the ISO date in the JSON is correct (2026-01-20). The extractor must parse the Brazilian date format correctly. NF-e structure includes ICMS, IPI, PIS, COFINS taxes. Boleto bancário reference number: 34191.23456 67890.123456 78901.234567 1 12345678901234."
+  },
+  {
+    "invoice_id": "P001_INV_20260322_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-98765",
+    "invoice_date": "2026-03-22",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "200 Innovation Drive, Suite 400, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 95-1234567",
+      "buyer_name": "TechConnect Global Solutions",
+      "buyer_address": "1 Tech Plaza, New York, NY 10001, USA",
+      "buyer_po_contact": "John Miller, john.miller@techconnect.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-MB-001",
+        "description": "Industrial motherboard IPC-610",
+        "quantity": 15,
+        "unit_price": 425.00,
+        "line_total": 6375.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-PS-002",
+        "description": "Power supply unit 24V 10A",
+        "quantity": 30,
+        "unit_price": 89.50,
+        "line_total": 2685.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-CB-003",
+        "description": "Shielded Ethernet cable CAT6 10m",
+        "quantity": 100,
+        "unit_price": 12.00,
+        "line_total": 1200.00
+      }
+    ],
+    "subtotal": 10260.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 846.45
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.08875,
+        "amount": 910.58
+      }
+    ],
+    "total": 12017.03,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components. Multi-currency capability noted: this invoice is in USD but the supplier often invoices in other currencies for international shipments. Taxes are itemized by US jurisdiction (CA and NY). All amounts rounded to two decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260215_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-02-24680",
+    "invoice_date": "2026-02-15",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 55, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE 123456789 (VAT ID)",
+      "buyer_name": "TechConnect Global Solutions",
+      "buyer_address": "Hauptstraße 100, 10115 Berlin, Germany",
+      "buyer_po_contact": "Klaus Müller, klaus.mueller@techconnect.de",
+      "vendor_bank_details": "IBAN: DE89 3704 0044 0532 0130 00, BIC: COBADEFFXXX"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-AL-001",
+        "description": "Aluminium profile 40x40 (Aluminiumprofil 40x40)",
+        "quantity": 200,
+        "unit_price": 8.50,
+        "line_total": 1700.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-SC-002",
+        "description": "Steel cable 6mm (Stahlseil 6mm)",
+        "quantity": 500,
+        "unit_price": 1.20,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-BE-003",
+        "description": "Ball bearing 6204 (Kugellager 6204)",
+        "quantity": 100,
+        "unit_price": 4.75,
+        "line_total": 475.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-GE-004",
+        "description": "Gear motor 0.5kW (Getriebemotor 0,5kW)",
+        "quantity": 10,
+        "unit_price": 345.00,
+        "line_total": 3450.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-PU-005",
+        "description": "Pump impeller (Pumpenlaufrad)",
+        "quantity": 25,
+        "unit_price": 62.00,
+        "line_total": 1550.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-SE-006",
+        "description": "Seal kit for valve (Dichtungssatz für Ventil)",
+        "quantity": 50,
+        "unit_price": 28.00,
+        "line_total": 1400.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-HY-007",
+        "description": "Hydraulic hose DN10 (Hydraulikschlauch DN10)",
+        "quantity": 80,
+        "unit_price": 18.30,
+        "line_total": 1464.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-CO-008",
+        "description": "Control cable 5x1.5mm² (Steuerleitung 5x1,5mm²)",
+        "quantity": 300,
+        "unit_price": 4.10,
+        "line_total": 1230.00
+      }
+    ],
+    "subtotal": 11869.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 11869.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf. German VAT at 19% is shown but with reverse charge (amount 0) because the buyer is also in the EU. Bilingual descriptions (German primary, English secondary). SEPA bank details (IBAN and BIC) are provided in header."
+  }
+]
+```

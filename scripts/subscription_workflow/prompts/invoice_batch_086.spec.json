@@ -1,0 +1,96 @@
+{
+  "batch_no": 86,
+  "n_invoices": 5,
+  "specs": [
+    {
+      "spec_index": 425,
+      "persona_id": "P005",
+      "persona_name": "S\u00e3o Paulo Componentes Ltda.",
+      "persona_region": "LATAM-BR",
+      "persona_language": "pt",
+      "persona_currency": "BRL",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "NF-e (Brazil tax document) shape \u2014 invoice + tax receipt combined",
+        "Multiple tax types (ICMS, IPI, PIS, COFINS)",
+        "Boleto banc\u00e1rio payment slip referenced"
+      ],
+      "invoice_date_hint": "2026-01-05",
+      "line_item_count_hint": 2,
+      "error_injected": null
+    },
+    {
+      "spec_index": 426,
+      "persona_id": "P003",
+      "persona_name": "Frankfurt Industriebedarf GmbH",
+      "persona_region": "EU-DE",
+      "persona_language": "de",
+      "persona_currency": "EUR",
+      "persona_layout_style": "structured_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "DE VAT (19%) itemized; reverse-charge logic on intra-EU",
+        "Bilingual labels (German primary, English secondary)",
+        "SEPA bank details on every invoice"
+      ],
+      "invoice_date_hint": "2026-04-10",
+      "line_item_count_hint": 1,
+      "error_injected": null
+    },
+    {
+      "spec_index": 427,
+      "persona_id": "P003",
+      "persona_name": "Frankfurt Industriebedarf GmbH",
+      "persona_region": "EU-DE",
+      "persona_language": "de",
+      "persona_currency": "EUR",
+      "persona_layout_style": "structured_pdf",
+      "persona_payment_terms": "NET-30",
+      "persona_quirks": [
+        "DE VAT (19%) itemized; reverse-charge logic on intra-EU",
+        "Bilingual labels (German primary, English secondary)",
+        "SEPA bank details on every invoice"
+      ],
+      "invoice_date_hint": "2026-02-25",
+      "line_item_count_hint": 5,
+      "error_injected": "Cross-currency edge when buyer is in USD"
+    },
+    {
+      "spec_index": 428,
+      "persona_id": "P004",
+      "persona_name": "Mumbai Materials Co.",
+      "persona_region": "APAC-IN",
+      "persona_language": "en",
+      "persona_currency": "INR",
+      "persona_layout_style": "legacy_pdf",
+      "persona_payment_terms": "NET-60",
+      "persona_quirks": [
+        "GST itemized; HSN codes per line",
+        "PAN + GSTIN in header",
+        "Cross-currency to USD common"
+      ],
+      "invoice_date_hint": "2026-02-19",
+      "line_item_count_hint": 3,
+      "error_injected": null
+    },
+    {
+      "spec_index": 429,
+      "persona_id": "P002",
+      "persona_name": "Maple Logistics SMB",
+      "persona_region": "US",
+      "persona_language": "en",
+      "persona_currency": "USD",
+      "persona_layout_style": "scanned_pdf",
+      "persona_payment_terms": "NET-45",
+      "persona_quirks": [
+        "Hand-written notes occasionally on scanned invoices",
+        "Inconsistent header placement",
+        "Round totals up to nearest dollar"
+      ],
+      "invoice_date_hint": "2026-03-05",
+      "line_item_count_hint": 3,
+      "error_injected": null
+    }
+  ]
+}

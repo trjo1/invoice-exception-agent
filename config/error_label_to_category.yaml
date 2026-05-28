@@ -1,0 +1,32 @@
+# Maps persona `typical_error_modes` strings (from config/personas.yaml) to the
+# 13 exception categories used by the classifier. Drives the corpus-eval
+# ground truth in scripts/eval_classifier.py.
+#
+# Strings here MUST match the persona error-mode strings verbatim. The
+# ingester's `error_injected` field is canonicalized from the spec sidecar
+# (see scripts/ingest_subscription_responses.py), so we can rely on these
+# exact strings appearing on disk.
+
+mapping:
+  # Clean invoices (no error_injected → category "none")
+  null: none
+
+  # P001 — Global Tech Components (US/USD)
+  "Occasional PO reference typo (one digit transposed)": missing_po
+  "Multi-page invoices where line-items continue across pages": other
+
+  # P002 — Maple Logistics (US/USD, SMB)
+  "Missing PO reference (must be inferred from delivery note)": missing_po
+  "Tax line sometimes absent for in-state shipments": tax_field_mismatch
+
+  # P003 — Frankfurt Industriebedarf (DE/EUR)
+  "VAT field missing on intra-EU shipments to non-DE buyers": tax_field_mismatch
+  "Cross-currency edge when buyer is in USD": cross_currency_mismatch
+
+  # P004 — Mumbai Materials (IN/INR)
+  "HSN code formatting inconsistent (with/without dashes)": other
+  "GST percentage occasionally misrouted between IGST and CGST/SGST": tax_field_mismatch
+
+  # P005 — São Paulo Componentes (BR/BRL)
+  "Multiple tax types confuse extraction": tax_field_mismatch
+  "Date format dd/mm/yyyy vs ISO": other

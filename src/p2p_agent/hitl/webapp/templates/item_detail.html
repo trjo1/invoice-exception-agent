@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %}Case {{ item.case_id }}{% endblock %}
+{% block content %}
+
+<p style="margin-bottom:8px"><a href="/queue">← back to queue</a></p>
+
+<h2>{{ item.case_id }}</h2>
+<p class="meta" style="color:var(--muted)">
+  <span class="chip status-{{ item.status }}">{{ item.status }}</span>
+  <span class="chip t{{ item.tier }}">Tier {{ item.tier }}</span>
+  <span class="chip">routed to {{ item.routed_to }}</span>
+  · enqueued {{ item.created_at.strftime('%Y-%m-%d %H:%M UTC') if item.created_at else '' }}
+  {% if item.resolved_at %}· resolved {{ item.resolved_at.strftime('%Y-%m-%d %H:%M UTC') }} by {{ item.resolved_by }}{% endif %}
+</p>
+
+<div class="card">
+  <h3>Classification</h3>
+  <div class="meta">{{ classification.class_label }} · confidence {{ "%.2f"|format(classification.confidence or 0) }}</div>
+  <p style="margin:6px 0">{{ classification.rationale }}</p>
+  {% if classification.evidence %}
+  <div>
+    {% for e in classification.evidence %}<span class="chip">{{ e }}</span>{% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3>Recommendation</h3>
+  <div class="meta">{{ recommendation.action }} · confidence {{ "%.2f"|format(recommendation.confidence or 0) }}</div>
+  <p style="margin:6px 0">{{ recommendation.rationale }}</p>
+  {% if recommendation.counterfactual %}
+  <p style="margin:6px 0; color:var(--muted)"><em>Counterfactual:</em> {{ recommendation.counterfactual }}</p>
+  {% endif %}
+  {% if recommendation.cited_policy_ids %}
+  <div class="meta">Cited policies:
+    {% for p in recommendation.cited_policy_ids %}<span class="chip">{{ p }}</span>{% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<div class="card">
+  <h3>Routing decision</h3>
+  <p style="margin:0">Tier {{ item.tier }} → <strong>{{ item.routed_to }}</strong></p>
+  <p style="margin:6px 0; color:var(--muted)">{{ item.routing_reason }}</p>
+</div>
+
+{% if draft %}
+<div class="card">
+  <h3>Draft communication ({{ draft.draft_type }})</h3>
+  <div class="meta">To: {{ draft.recipient }}{% if draft.cc %} · cc: {{ draft.cc | join(', ') }}{% endif %}</div>
+  <p style="margin:8px 0"><strong>Subject:</strong> {{ draft.subject }}</p>
+  <pre style="white-space:pre-wrap">{{ draft.body }}</pre>
+  {% if draft.references %}
+  <div class="meta">References: {{ draft.references | join(', ') }}</div>
+  {% endif %}
+</div>
+{% endif %}
+
+{% if edited_draft %}
+<div class="card" style="border-color:var(--green)">
+  <h3 style="color:var(--green)">Reviewer-edited draft (used on approve-with-edit)</h3>
+  <p style="margin:8px 0"><strong>Subject:</strong> {{ edited_draft.subject }}</p>
+  <p style="margin:4px 0"><strong>To:</strong> {{ edited_draft.recipient }}</p>
+  <pre style="white-space:pre-wrap">{{ edited_draft.body }}</pre>
+</div>
+{% endif %}
+
+{% if item.status == 'pending' %}
+<div class="card" style="background:var(--soft)">
+  <h3>Reviewer actions</h3>
+
+  <form class="action-form" method="post" action="/item/{{ item.id }}/approve">
+    <input type="hidden" name="note" value="approved via demo UI">
+    <button type="submit" style="background:var(--green);border-color:var(--green)">Approve</button>
+  </form>
+
+  <form class="action-form" method="post" action="/item/{{ item.id }}/reject">
+    <input type="hidden" name="note" value="rejected via demo UI">
+    <button type="submit" class="danger">Reject</button>
+  </form>
+
+  {% if draft %}
+  <details style="margin-top:16px">
+    <summary>Edit draft and approve</summary>
+    <form method="post" action="/item/{{ item.id }}/approve-with-edit" style="margin-top:10px">
+      <p><label>Recipient<br>
+        <input type="text" name="edited_recipient" value="{{ draft.recipient }}"></label></p>
+      <p><label>Subject<br>
+        <input type="text" name="edited_subject" value="{{ draft.subject }}"></label></p>
+      <p><label>Body<br>
+        <textarea name="edited_body">{{ draft.body }}</textarea></label></p>
+      <p><label>Note (optional)<br>
+        <input type="text" name="note" placeholder="why you edited"></label></p>
+      <button type="submit" style="background:var(--green);border-color:var(--green)">Save edit &amp; approve</button>
+    </form>
+  </details>
+  {% endif %}
+
+  <p style="font-size:12px;color:var(--muted);margin-top:14px">
+    Demo build: approve/reject is recorded in the audit log but does not yet write back to SAP / Ariba / ServiceNow.
+    The action executor (next node) consumes resolved items.
+  </p>
+</div>
+{% endif %}
+
+{% if execution_result %}
+<div class="card" style="border-left: 4px solid {% if execution_status == 'simulated_success' %}var(--green){% else %}var(--red){% endif %};">
+  <h3>Action execution (simulated)</h3>
+  <p class="meta" style="color:var(--muted)">
+    {{ executed_at.strftime('%Y-%m-%d %H:%M:%S UTC') if executed_at else '' }}
+    · status <span class="chip status-{% if execution_status == 'simulated_success' %}approved{% else %}rejected{% endif %}">{{ execution_status }}</span>
+    · {{ execution_result.steps|length }} step(s)
+  </p>
+  {% if execution_result.note %}
+  <p style="margin:8px 0">{{ execution_result.note }}</p>
+  {% endif %}
+  <ol style="margin-top:10px; padding-left:20px;">
+    {% for step in execution_result.steps %}
+    <li style="margin-bottom:10px;">
+      <strong>{{ step.system }} · {{ step.verb }}</strong> →
+      <code>{{ step.target }}</code>
+      {% if step.payload_summary %}
+      <pre style="margin-top:4px; font-size:11px;">{{ step.payload_summary | pretty_json }}</pre>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  <p style="font-size:12px;color:var(--muted);margin-top:10px;">
+    Demo build: these calls are simulated. The real action executor will fire once SAP / Ariba / ServiceNow credentials land — same interface, real endpoints.
+  </p>
+</div>
+{% endif %}
+
+{% if audit_entries %}
+<div class="card">
+  <h3>Audit log</h3>
+  <table>
+    <thead><tr><th>When</th><th>Actor</th><th>Transition</th><th>Note</th></tr></thead>
+    <tbody>
+      {% for e in audit_entries %}
+      <tr>
+        <td>{{ e.at.strftime('%Y-%m-%d %H:%M:%S UTC') }}</td>
+        <td>{{ e.actor }}</td>
+        <td>{{ e.from_status }} → {{ e.to_status }}</td>
+        <td>{{ e.note }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+<details>
+  <summary>Raw payload (JSON)</summary>
+  <pre>{{ item.payload_json | pretty_json }}</pre>
+</details>
+
+{% endblock %}

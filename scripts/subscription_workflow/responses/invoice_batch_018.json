@@ -1,0 +1,287 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260501_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-05-12345",
+    "invoice_date": "2026-05-01",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua dos Componentes, 1000\nSão Paulo, SP\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "123 Main St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "COMP-001",
+        "description": "Parafuso M8 x 20mm",
+        "quantity": 500,
+        "unit_price": 0.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "COMP-002",
+        "description": "Porca M8",
+        "quantity": 500,
+        "unit_price": 0.30,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 400.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 72.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 40.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 6.60
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 30.40
+      }
+    ],
+    "total": 549.00,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Invoice includes four distinct Brazilian taxes (ICMS, IPI, PIS, COFINS) on the same line items, potentially confusing extraction logic. The extractor should correctly identify each tax jurisdiction and amount. A Boleto bancário payment slip is referenced in the document."
+  },
+  {
+    "invoice_id": "P005_INV_20260316_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-16",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua dos Componentes, 1000\nSão Paulo, SP\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "123 Main St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "COMP-003",
+        "description": "Arruela lisa M8",
+        "quantity": 1000,
+        "unit_price": 0.10,
+        "line_total": 100.00
+      },
+      {
+        "line_no": 2,
+        "sku": "COMP-004",
+        "description": "Cabo de aço 3mm",
+        "quantity": 200,
+        "unit_price": 1.20,
+        "line_total": 240.00
+      },
+      {
+        "line_no": 3,
+        "sku": "COMP-005",
+        "description": "Conector elétrico",
+        "quantity": 150,
+        "unit_price": 2.50,
+        "line_total": 375.00
+      },
+      {
+        "line_no": 4,
+        "sku": "COMP-006",
+        "description": "Resistor 10k ohms",
+        "quantity": 500,
+        "unit_price": 0.05,
+        "line_total": 25.00
+      },
+      {
+        "line_no": 5,
+        "sku": "COMP-007",
+        "description": "Capacitor 100µF",
+        "quantity": 300,
+        "unit_price": 0.15,
+        "line_total": 45.00
+      },
+      {
+        "line_no": 6,
+        "sku": "COMP-008",
+        "description": "Transistor BC547",
+        "quantity": 200,
+        "unit_price": 0.35,
+        "line_total": 70.00
+      },
+      {
+        "line_no": 7,
+        "sku": "COMP-009",
+        "description": "Diodo 1N4007",
+        "quantity": 400,
+        "unit_price": 0.08,
+        "line_total": 32.00
+      },
+      {
+        "line_no": 8,
+        "sku": "COMP-010",
+        "description": "LED vermelho 5mm",
+        "quantity": 500,
+        "unit_price": 0.12,
+        "line_total": 60.00
+      }
+    ],
+    "subtotal": 947.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 170.46
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 94.70
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 15.63
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 71.97
+      }
+    ],
+    "total": 1299.76,
+    "error_injected": "Date format dd/mm/yyyy vs ISO",
+    "ground_truth_note": "The invoice date appears as 16/03/2026 in the scanned document (dd/mm/yyyy), which may be misinterpreted as March 16 or March 3 depending on locale. The correct date is 2026-03-16."
+  },
+  {
+    "invoice_id": "P002_INV_20260106_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-06",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "456 Oak Ave\nPortland, OR 97201\nUSA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "123 Main St\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@globalproc.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "LOG-001",
+        "description": "Freight service - LTL shipment",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 2,
+        "sku": "LOG-002",
+        "description": "Warehousing fee - monthly",
+        "quantity": 1,
+        "unit_price": 800.00,
+        "line_total": 800.00
+      },
+      {
+        "line_no": 3,
+        "sku": "LOG-003",
+        "description": "Packaging materials",
+        "quantity": 10,
+        "unit_price": 15.075,
+        "line_total": 150.75
+      }
+    ],
+    "subtotal": 2150.75,
+    "tax": [],
+    "total": 2151.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Note that totals are rounded up to nearest dollar: subtotal 2150.75, total 2151. Hand-written notes may appear on scanned document and header placement may be inconsistent."
+  },
+  {
+    "invoice_id": "P003_INV_20260412_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-98765",
+    "invoice_date": "2026-04-12",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 42\n60327 Frankfurt am Main\nGermany\nSEPA: DE89 3704 0044 0532 0130 00",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "Musterstr. 10\n10115 Berlin\nGermany",
+      "buyer_po_contact": "Hans Müller, hans.mueller@globalproc.de"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "IND-001",
+        "description": "Hydraulikzylinder (hydraulic cylinder)",
+        "quantity": 2,
+        "unit_price": 1500.00,
+        "line_total": 3000.00
+      }
+    ],
+    "subtotal": 3000.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 570.00
+      }
+    ],
+    "total": 3570.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with standard German VAT at 19%. SEPA bank details provided in vendor address. Bilingual labels (German/English)."
+  },
+  {
+    "invoice_id": "P003_INV_20260327_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-45678",
+    "invoice_date": "2026-03-27",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestr. 42\n60327 Frankfurt am Main\nGermany\nSEPA: DE89 3704 0044 0532 0130 00",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "Rue de la Paix 5\n75002 Paris\nFrance",
+      "buyer_po_contact": "Jean Dupont, jean.dupont@globalproc.fr"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "IND-002",
+        "description": "Pneumatikzylinder (pneumatic cylinder)",
+        "quantity": 1,
+        "unit_price": 3000.00,
+        "line_total": 3000.00
+      }
+    ],
+    "subtotal": 3000.00,
+    "tax": [],
+    "total": 3000.00,
+    "error_injected": "VAT field missing on intra-EU shipments to non-DE buyers",
+    "ground_truth_note": "Intra-EU shipment to non-German buyer (France); VAT is reverse-charged and thus not included in invoice. The extractor should not expect a VAT line. SEPA bank details provided."
+  }
+]
+```

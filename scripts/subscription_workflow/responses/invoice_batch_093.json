@@ -1,0 +1,156 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260410_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-10",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple Street\nChicago, IL 60601\nUSA",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "Acme Corp International",
+      "buyer_address": "1 Corporate Drive\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith | john.smith@acmecorp.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "FRT-001", "description": "Freight service - Chicago to New York", "quantity": 1, "unit_price": 1250.00, "line_total": 1250.00 },
+      { "line_no": 2, "sku": "WH-002", "description": "Warehousing - pallet storage (30 days)", "quantity": 30, "unit_price": 15.00, "line_total": 450.00 },
+      { "line_no": 3, "sku": "PKG-003", "description": "Custom packaging - large crates", "quantity": 5, "unit_price": 80.00, "line_total": 400.00 },
+      { "line_no": 4, "sku": "LBL-004", "description": "Labeling service - per pallet", "quantity": 10, "unit_price": 12.50, "line_total": 125.00 },
+      { "line_no": 5, "sku": "INS-005", "description": "Cargo insurance - ad valorem", "quantity": 1, "unit_price": 320.00, "line_total": 320.00 },
+      { "line_no": 6, "sku": "DOC-006", "description": "Documentation fee - export paperwork", "quantity": 1, "unit_price": 75.00, "line_total": 75.00 },
+      { "line_no": 7, "sku": "TRK-007", "description": "Local drayage - Chicago warehouse", "quantity": 2, "unit_price": 200.00, "line_total": 400.00 },
+      { "line_no": 8, "sku": "ADM-008", "description": "Administrative handling fee", "quantity": 1, "unit_price": 50.00, "line_total": 50.00 }
+    ],
+    "subtotal": 3070.00,
+    "tax": [
+      { "jurisdiction": "US-IL", "rate": 0.08, "amount": 246.00 }
+    ],
+    "total": 3316.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB. Note hand-written annotation 'Received Apr 12' in margin. Subtotal and total rounded up to nearest dollar. Header placement inconsistent (vendor address appears twice). Extractor should capture all line items and tax correctly."
+  },
+  {
+    "invoice_id": "P005_INV_20260225_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-25",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\n01310-100 São Paulo, SP\nBrazil",
+      "vendor_tax_id": "CNPJ 12.345.678/0001-90",
+      "buyer_name": "Acme Corp International",
+      "buyer_address": "1 Corporate Drive\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith | john.smith@acmecorp.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "RES-100", "description": "Resistor 10kΩ 1/4W (lote 1000)", "quantity": 1000, "unit_price": 0.15, "line_total": 150.00 },
+      { "line_no": 2, "sku": "CAP-220", "description": "Capacitor 220µF 25V (lote 500)", "quantity": 500, "unit_price": 0.45, "line_total": 225.00 },
+      { "line_no": 3, "sku": "DIO-4148", "description": "Diodo 1N4148 (lote 2000)", "quantity": 2000, "unit_price": 0.08, "line_total": 160.00 },
+      { "line_no": 4, "sku": "TRA-2N2222", "description": "Transistor 2N2222 (lote 1000)", "quantity": 1000, "unit_price": 0.35, "line_total": 350.00 },
+      { "line_no": 5, "sku": "LED-RED", "description": "LED vermelho 5mm (lote 5000)", "quantity": 5000, "unit_price": 0.02, "line_total": 100.00 },
+      { "line_no": 6, "sku": "CON-DB9", "description": "Conector DB9 fêmea (lote 200)", "quantity": 200, "unit_price": 0.90, "line_total": 180.00 },
+      { "line_no": 7, "sku": "PCB-100", "description": "Placa de circuito impresso 10x10cm (lote 50)", "quantity": 50, "unit_price": 12.00, "line_total": 600.00 },
+      { "line_no": 8, "sku": "FIO-22", "description": "Fio AWG22 (metro, lote 100m)", "quantity": 100, "unit_price": 0.60, "line_total": 60.00 }
+    ],
+    "subtotal": 1825.00,
+    "tax": [
+      { "jurisdiction": "BR-SP-ICMS", "rate": 0.18, "amount": 328.50 },
+      { "jurisdiction": "BR-IPI", "rate": 0.05, "amount": 91.25 },
+      { "jurisdiction": "BR-PIS", "rate": 0.0165, "amount": 30.11 },
+      { "jurisdiction": "BR-COFINS", "rate": 0.076, "amount": 138.70 }
+    ],
+    "total": 2413.56,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Invoice from São Paulo Componentes Ltda. with four Brazilian tax types (ICMS, IPI, PIS, COFINS). The extractor should capture all four tax lines and their amounts. Deliberate error: the tax breakdown is complex and may cause extraction confusion. Boleto Bancário reference: 1234567890 included in footer."
+  },
+  {
+    "invoice_id": "P001_INV_20260308_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-08",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "500 Innovation Boulevard\nSan Jose, CA 95134\nUSA",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "Acme Corp International",
+      "buyer_address": "1 Corporate Drive\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith | john.smith@acmecorp.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "MCH-001", "description": "Microchip ATSAMD21G18 (qty 500)", "quantity": 500, "unit_price": 3.45, "line_total": 1725.00 },
+      { "line_no": 2, "sku": "SNS-002", "description": "Temperature sensor TMP36 (qty 1000)", "quantity": 1000, "unit_price": 1.20, "line_total": 1200.00 }
+    ],
+    "subtotal": 2925.00,
+    "tax": [
+      { "jurisdiction": "US-CA", "rate": 0.0825, "amount": 241.31 },
+      { "jurisdiction": "US-NY", "rate": 0.04, "amount": 117.00 }
+    ],
+    "total": 3283.31,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. Multi-currency note: invoice in USD but buyer may pay in EUR via conversion. Tax itemized by jurisdiction (CA and NY). All amounts rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260430_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-98765",
+    "invoice_date": "2026-04-30",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 10\n60327 Frankfurt am Main\nGermany\nSEPA: DE89 3704 0044 0532 0130 00",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corp International",
+      "buyer_address": "1 Corporate Drive\nNew York, NY 10001\nUSA",
+      "buyer_po_contact": "John Smith | john.smith@acmecorp.com"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "LAG-200", "description": "Kugellager 6205 (Ball bearing 6205) - 50 Stk", "quantity": 50, "unit_price": 12.50, "line_total": 625.00 },
+      { "line_no": 2, "sku": "ZAH-300", "description": "Zahnrad Modul 3 (Gear module 3) - 20 Stk", "quantity": 20, "unit_price": 28.00, "line_total": 560.00 }
+    ],
+    "subtotal": 1185.00,
+    "tax": [
+      { "jurisdiction": "EU-DE-VAT", "rate": 0.19, "amount": 225.15 }
+    ],
+    "total": 1410.15,
+    "error_injected": "Cross-currency edge when buyer is in USD",
+    "ground_truth_note": "Invoice from Frankfurt Industriebedarf GmbH in EUR, but buyer Acme Corp International is based in USD. No exchange rate provided. The extractor should flag the currency mismatch. VAT at 19% is correctly applied (non-EU buyer)."
+  },
+  {
+    "invoice_id": "P003_INV_20260308_002",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-11111",
+    "invoice_date": "2026-03-08",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 10\n60327 Frankfurt am Main\nGermany\nSEPA: DE89 3704 0044 0532 0130 00",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corp International",
+      "buyer_address": "Musterstraße 1\n60329 Frankfurt am Main\nGermany",
+      "buyer_po_contact": "Hans Müller | hans.mueller@acmecorp.de"
+    },
+    "line_items": [
+      { "line_no": 1, "sku": "SCH-400", "description": "Schrauben M8x30 (Screws M8x30) - 200 Stk", "quantity": 200, "unit_price": 0.45, "line_total": 90.00 },
+      { "line_no": 2, "sku": "MUT-500", "description": "Muttern M8 (Nuts M8) - 200 Stk", "quantity": 200, "unit_price": 0.20, "line_total": 40.00 },
+      { "line_no": 3, "sku": "FED-600", "description": "Federn D=20mm (Springs D=20mm) - 100 Stk", "quantity": 100, "unit_price": 1.10, "line_total": 110.00 }
+    ],
+    "subtotal": 240.00,
+    "tax": [
+      { "jurisdiction": "EU-DE-VAT", "rate": 0.19, "amount": 45.60 }
+    ],
+    "total": 285.60,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. VAT 19% applied (German buyer). Bilingual descriptions (German/English). SEPA bank details included in vendor address. All amounts correct."
+  }
+]
+```

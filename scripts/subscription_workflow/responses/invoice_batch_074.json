@@ -1,0 +1,300 @@
+```json
+[
+  {
+    "invoice_id": "P003_INV_20260306_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-00123",
+    "invoice_date": "2026-03-06",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45, 60327 Frankfurt am Main, Deutschland\nSEPA: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Supply Chain Solutions Inc.",
+      "buyer_address": "123 Corporate Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, j.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "IND-101",
+        "description": "Hydraulikzylinder HC-250 / Hydraulic Cylinder HC-250",
+        "quantity": 5,
+        "unit_price": 120.50,
+        "line_total": 602.50
+      },
+      {
+        "line_no": 2,
+        "sku": "IND-202",
+        "description": "Dichtungssatz DS-12 / Seal Kit SK-12",
+        "quantity": 10,
+        "unit_price": 45.30,
+        "line_total": 453.00
+      }
+    ],
+    "subtotal": 1055.50,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 200.55
+      }
+    ],
+    "total": 1256.05,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. Includes 19% German VAT, bilingual descriptions, and SEPA bank details. Extractor should confirm all fields accurate."
+  },
+  {
+    "invoice_id": "P001_INV_20260414_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-00567",
+    "invoice_date": "2026-04-14",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "4500 Innovation Way, Suite 200, San Jose, CA 95110, USA",
+      "vendor_tax_id": "95-1234567",
+      "buyer_name": "Global Supply Chain Solutions Inc.",
+      "buyer_address": "123 Corporate Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, j.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Server Motherboard X9DRH-7F",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "description": "Power Supply Unit 850W Gold",
+        "quantity": 5,
+        "unit_price": 120.50,
+        "line_total": 602.50
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-3003",
+        "description": "Network Switch 48-Port Gigabit",
+        "quantity": 1,
+        "unit_price": 1250.00,
+        "line_total": 1250.00
+      }
+    ],
+    "subtotal": 2752.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 240.84
+      }
+    ],
+    "total": 2993.34,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Global Tech Components Inc. with 3 line items, California sales tax itemized, totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P001_INV_20260123_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-00999",
+    "invoice_date": "2026-01-23",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "4500 Innovation Way, Suite 200, San Jose, CA 95110, USA",
+      "vendor_tax_id": "95-1234567",
+      "buyer_name": "Global Supply Chain Solutions Inc.",
+      "buyer_address": "123 Corporate Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, j.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-4004",
+        "description": "Enterprise SSD 2TB NVMe",
+        "quantity": 10,
+        "unit_price": 350.00,
+        "line_total": 3500.00
+      }
+    ],
+    "subtotal": 3500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 306.25
+      }
+    ],
+    "total": 3806.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean single-line invoice from Global Tech Components Inc. with California sales tax."
+  },
+  {
+    "invoice_id": "P002_INV_20260226_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-00444",
+    "invoice_date": "2026-02-26",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "1500 Industrial Blvd, Detroit, MI 48201, USA",
+      "vendor_tax_id": "38-7654321",
+      "buyer_name": "Global Supply Chain Solutions Inc.",
+      "buyer_address": "123 Corporate Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, j.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FRT-001",
+        "description": "Freight - LTL shipment 12345",
+        "quantity": 1,
+        "unit_price": 450.00,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 2,
+        "sku": "STO-002",
+        "description": "Warehouse storage - pallet 1",
+        "quantity": 30,
+        "unit_price": 5.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 3,
+        "sku": "HDL-003",
+        "description": "Handling fee - inbound",
+        "quantity": 2,
+        "unit_price": 75.00,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 4,
+        "sku": "PKG-004",
+        "description": "Packaging materials",
+        "quantity": 1,
+        "unit_price": 85.00,
+        "line_total": 85.00
+      },
+      {
+        "line_no": 5,
+        "sku": "DOC-005",
+        "description": "Documentation fee",
+        "quantity": 1,
+        "unit_price": 25.00,
+        "line_total": 25.00
+      },
+      {
+        "line_no": 6,
+        "sku": "INS-006",
+        "description": "Insurance - cargo value",
+        "quantity": 1,
+        "unit_price": 120.00,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 7,
+        "sku": "TRK-007",
+        "description": "Tracking & monitoring service",
+        "quantity": 1,
+        "unit_price": 40.00,
+        "line_total": 40.00
+      },
+      {
+        "line_no": 8,
+        "sku": "ADM-008",
+        "description": "Administrative fee",
+        "quantity": 1,
+        "unit_price": 30.00,
+        "line_total": 30.00
+      }
+    ],
+    "subtotal": 1050.00,
+    "tax": [
+      {
+        "jurisdiction": "US-MI",
+        "rate": 0.06,
+        "amount": 63.00
+      }
+    ],
+    "total": 1113.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Maple Logistics SMB with 8 line items for logistics services. Michigan sales tax applied. Total rounded up to nearest dollar (already integer)."
+  },
+  {
+    "invoice_id": "P005_INV_20260216_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-00777",
+    "invoice_date": "2026-02-16",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, 01310-100 São Paulo, SP, Brasil\nCNPJ: 12.345.678/0001-90\nBoleto: Banco do Brasil, Agência 1234-5, Conta 67890-1",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "Global Supply Chain Solutions Inc.",
+      "buyer_address": "123 Corporate Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, j.smith@globalsupply.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Parafuso M8 x 30mm (Bolts M8 x 30mm)",
+        "quantity": 500,
+        "unit_price": 0.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Porca M8 (Nut M8)",
+        "quantity": 500,
+        "unit_price": 0.30,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Arruela M8 (Washer M8)",
+        "quantity": 1000,
+        "unit_price": 0.10,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 90.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 25.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 8.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 38.00
+      }
+    ],
+    "total": 661.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean Brazilian NF-e style invoice from São Paulo Componentes Ltda. with three line items and four tax types (ICMS, IPI, PIS, COFINS). Boleto bancário reference included in vendor address."
+  }
+]
+```

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{% block title %}HITL Queue{% endblock %} — P2P Agent</title>
+<style>
+  :root {
+    --navy: #1F3A68;
+    --red:  #C0392B;
+    --green:#1A6D3F;
+    --soft: #E8EEF5;
+    --text: #1a1a1a;
+    --muted:#5c6370;
+    --line: #d8dee9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    margin: 0;
+    background: #fff;
+  }
+  header.brand {
+    background: var(--navy);
+    color: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header.brand h1 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+  header.brand nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 18px;
+    opacity: 0.85;
+    font-size: 13px;
+  }
+  header.brand nav a:hover { opacity: 1; text-decoration: underline; }
+
+  main { padding: 24px; max-width: 1200px; margin: 0 auto; }
+  h2 { color: var(--navy); margin-top: 0; font-weight: 600; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--soft); color: var(--navy); font-weight: 600; }
+  tr:hover td { background: #fafbfc; }
+  a { color: var(--navy); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    background: var(--soft);
+    color: var(--navy);
+    border: 1px solid #d4dbe8;
+    margin-right: 4px;
+    font-weight: 500;
+  }
+  .chip.t1 { background:#eef9f0; color:var(--green); border-color:#c4e6cd; }
+  .chip.t2 { background:#fff7e6; color:#9a6c00; border-color:#f3e1a8; }
+  .chip.t3 { background:#fde8e6; color:var(--red); border-color:#f3c2bd; }
+  .chip.status-pending  { background:#fff7e6; color:#9a6c00; border-color:#f3e1a8; }
+  .chip.status-approved { background:#eef9f0; color:var(--green); border-color:#c4e6cd; }
+  .chip.status-rejected { background:#fde8e6; color:var(--red); border-color:#f3c2bd; }
+  .chip.status-edited_approved { background:#e8eef5; color:var(--navy); border-color:#c4d3e6; }
+
+  .filterbar { margin: 8px 0 16px; font-size: 13px; color: var(--muted); }
+  .filterbar a { margin-right: 12px; }
+  .filterbar a.active { color: var(--navy); font-weight: 600; }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 16px;
+    margin: 12px 0;
+    background: #fff;
+  }
+  .card h3 { margin: 0 0 8px; color: var(--navy); font-size: 14px; }
+  .card .meta { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  pre {
+    background: #f6f8fa;
+    border: 1px solid var(--line);
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  form.action-form { display: inline-block; margin-right: 8px; }
+  button, input[type=submit] {
+    font: inherit;
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 4px;
+    border: 1px solid var(--navy);
+    background: var(--navy);
+    color: #fff;
+    font-weight: 500;
+  }
+  button.secondary, input.secondary {
+    background: #fff; color: var(--navy);
+  }
+  button.danger { background: var(--red); border-color: var(--red); }
+  button:hover { opacity: 0.9; }
+
+  textarea, input[type=text] {
+    font: inherit;
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  textarea { font-family: ui-monospace, "SF Mono", Menlo, monospace; min-height: 140px; }
+
+  .summary-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+  .summary-tile {
+    flex: 1; min-width: 160px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .summary-tile .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .summary-tile .value { font-size: 22px; font-weight: 600; color: var(--navy); margin-top: 4px; }
+
+  details { margin: 10px 0; }
+  summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+
+  footer { margin: 32px auto 16px; max-width: 1200px; padding: 0 24px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<header class="brand">
+  <h1>P2P Agent · Demo Console</h1>
+  <nav>
+    <a href="/demo">Run an invoice</a>
+    <a href="/demo/runs">Past runs</a>
+    <a href="/queue">Approval queue</a>
+    <a href="/stage9">Stage 9 metrics</a>
+    <a href="/docs">API docs</a>
+  </nav>
+</header>
+<main>
+  {% block content %}{% endblock %}
+</main>
+<footer>TruVs P2P Agent · demo build · routing tier ≥ 2 cases auto-enqueue from the pipeline.</footer>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Stats{% endblock %}
+{% block content %}
+<h2>Queue stats</h2>
+
+<div class="summary-row">
+  <div class="summary-tile">
+    <div class="label">Total items</div>
+    <div class="value">{{ stats.total }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Pending</div>
+    <div class="value">{{ stats.by_status.get('pending', 0) }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Approved</div>
+    <div class="value">{{ stats.by_status.get('approved', 0) }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Edited &amp; approved</div>
+    <div class="value">{{ stats.by_status.get('edited_approved', 0) }}</div>
+  </div>
+  <div class="summary-tile">
+    <div class="label">Rejected</div>
+    <div class="value">{{ stats.by_status.get('rejected', 0) }}</div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>By tier</h3>
+  <table>
+    <thead><tr><th>Tier</th><th>Count</th></tr></thead>
+    <tbody>
+      {% for tier, count in stats.by_tier.items() %}
+      <tr><td><span class="chip t{{ tier }}">T{{ tier }}</span></td><td>{{ count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>By routed-to</h3>
+  <table>
+    <thead><tr><th>Routed to</th><th>Count</th></tr></thead>
+    <tbody>
+      {% for routed_to, count in stats.by_routed_to.items() %}
+      <tr><td><span class="chip">{{ routed_to }}</span></td><td>{{ count }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,329 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260112_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-00001",
+    "invoice_date": "2026-01-12",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "742 Evergreen Terrace\nSpringfield, IL 62701\nUSA",
+      "vendor_tax_id": "EIN 36-1234567",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1000 Innovation Drive\nPalo Alto, CA 94304\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "ML-FREIGHT-001",
+        "description": "Freight service – LTL shipment, 2 pallets, Springfield to Palo Alto",
+        "quantity": 1,
+        "unit_price": 4850.00,
+        "line_total": 4850.00
+      }
+    ],
+    "subtotal": 4850.00,
+    "tax": [
+      {
+        "jurisdiction": "US-IL",
+        "rate": 0.0625,
+        "amount": 303.13
+      }
+    ],
+    "total": 5153.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Round total up to nearest dollar (subtotal 4850.00 + tax 303.13 = 5153.13 → rounded to 5153.00). Handwritten note 'Thanks!' appears in scanned image."
+  },
+  {
+    "invoice_id": "P003_INV_20260402_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-04-00002",
+    "invoice_date": "2026-04-02",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 45\n60327 Frankfurt am Main\nGermany\nSEPA: DE89 3704 0044 0532 0130 00\nBIC: COBADEFFXXX",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1000 Innovation Drive\nPalo Alto, CA 94304\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-09234",
+        "description": "Hydraulikzylinder / Hydraulic Cylinder, Typ HZ-200",
+        "quantity": 10,
+        "unit_price": 145.50,
+        "line_total": 1455.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-18765",
+        "description": "Dichtungssatz / Seal Kit, SK-45",
+        "quantity": 25,
+        "unit_price": 22.30,
+        "line_total": 557.50
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-54321",
+        "description": "Steuerventil / Control Valve, CV-12",
+        "quantity": 5,
+        "unit_price": 378.00,
+        "line_total": 1890.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-67890",
+        "description": "Druckfeder / Compression Spring, FS-5",
+        "quantity": 100,
+        "unit_price": 2.45,
+        "line_total": 245.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-11122",
+        "description": "Ölfilter / Oil Filter, OF-100",
+        "quantity": 20,
+        "unit_price": 18.90,
+        "line_total": 378.00
+      }
+    ],
+    "subtotal": 4525.50,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 859.85
+      }
+    ],
+    "total": 5385.35,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. German VAT 19% itemized. Bilingual labels. SEPA bank details in vendor address."
+  },
+  {
+    "invoice_id": "P005_INV_20260222_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-00003",
+    "invoice_date": "2026-02-22",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista, São Paulo – SP\n01310-100\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-99",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1000 Innovation Drive\nPalo Alto, CA 94304\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Parafuso sextavado M8 x 30mm – aço inox",
+        "quantity": 500,
+        "unit_price": 0.85,
+        "line_total": 425.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-002",
+        "description": "Porca sextavada M8 – aço inox",
+        "quantity": 500,
+        "unit_price": 0.45,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-003",
+        "description": "Arruela lisa M8 – aço inox",
+        "quantity": 1000,
+        "unit_price": 0.20,
+        "line_total": 200.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-004",
+        "description": "Mola de compressão – diâmetro 15mm, comprimento 50mm",
+        "quantity": 200,
+        "unit_price": 1.50,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-005",
+        "description": "Rolamento rígido de esferas 6205-2RS",
+        "quantity": 50,
+        "unit_price": 12.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-006",
+        "description": "Retentor de óleo – 25x40x7",
+        "quantity": 100,
+        "unit_price": 3.20,
+        "line_total": 320.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-007",
+        "description": "Anel elástico externo – eixo 20mm",
+        "quantity": 300,
+        "unit_price": 0.60,
+        "line_total": 180.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-008",
+        "description": "Guia linear – perfil de alumínio 500mm",
+        "quantity": 10,
+        "unit_price": 45.00,
+        "line_total": 450.00
+      }
+    ],
+    "subtotal": 2700.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 486.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 270.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 44.55
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 205.20
+      }
+    ],
+    "total": 3705.75,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. NF-e format with combined tax receipt. Multiple Brazilian taxes (ICMS, IPI, PIS, COFINS) itemized. Boleto bancário reference number 12345678901 appears in footer."
+  },
+  {
+    "invoice_id": "P001_INV_20260324_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-00004",
+    "invoice_date": "2026-03-24",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "1500 Silicon Valley Blvd\nSan Jose, CA 95110\nUSA",
+      "vendor_tax_id": "EIN 98-7654321",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1000 Innovation Drive\nPalo Alto, CA 94304\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Microcontroller ATmega328P – TQFP-32 (page 1 of 2)",
+        "quantity": 250,
+        "unit_price": 3.45,
+        "line_total": 862.50
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "description": "Capacitor eletrolítico 100µF 16V – radial (page 1 of 2)",
+        "quantity": 500,
+        "unit_price": 0.12,
+        "line_total": 60.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-1003",
+        "description": "Resistor 1kΩ 1/4W – 5% carbon film (page 2 of 2)",
+        "quantity": 1000,
+        "unit_price": 0.02,
+        "line_total": 20.00
+      }
+    ],
+    "subtotal": 942.50,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 82.47
+      }
+    ],
+    "total": 1024.97,
+    "error_injected": "Multi-page invoices where line-items continue across pages",
+    "ground_truth_note": "Deliberate multi-page layout: line items 1 and 2 appear on page 1, line 3 on page 2. Extractor must combine all pages. Tax line itemized separately by jurisdiction (California). Rounding to 2 decimals preserved."
+  },
+  {
+    "invoice_id": "P004_INV_20260308_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-00005",
+    "invoice_date": "2026-03-08",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "Plot 42, MIDC Industrial Area\nAndheri East, Mumbai – 400093\nIndia",
+      "vendor_tax_id": "GSTIN: 27AABCM1234H1Z1\nPAN: AABCM1234H",
+      "buyer_name": "Acme Global Procurement",
+      "buyer_address": "1000 Innovation Drive\nPalo Alto, CA 94304\nUSA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MMC-001",
+        "description": "Mild steel round bar – 20mm dia x 6m (HSN 7214)",
+        "quantity": 50,
+        "unit_price": 850.00,
+        "line_total": 42500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MMC-002",
+        "description": "Aluminum sheet 2mm thick – 4x8 ft (HSN 7606)",
+        "quantity": 20,
+        "unit_price": 3200.00,
+        "line_total": 64000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MMC-003",
+        "description": "Stainless steel pipe – 1 inch sch40 (HSN 7306)",
+        "quantity": 30,
+        "unit_price": 2100.00,
+        "line_total": 63000.00
+      }
+    ],
+    "subtotal": 169500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-MH-CGST",
+        "rate": 0.09,
+        "amount": 15255.00
+      },
+      {
+        "jurisdiction": "IN-MH-SGST",
+        "rate": 0.09,
+        "amount": 15255.00
+      }
+    ],
+    "total": 200010.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. GST itemized as CGST+SGST (9% each). HSN codes per line. PAN and GSTIN in header. Cross-currency note: equivalent to approx USD 2,400 at prevailing rate."
+  }
+]
+```

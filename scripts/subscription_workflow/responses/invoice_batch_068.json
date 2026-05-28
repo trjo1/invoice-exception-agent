@@ -1,0 +1,293 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260115_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2025-12-12345",
+    "invoice_date": "15/01/2026",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista, São Paulo - SP, 01310-100\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Parafuso de aço inoxidável M8 x 30mm (caixa com 100)",
+        "quantity": 10,
+        "unit_price": 15.50,
+        "line_total": 155.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-045",
+        "description": "Porca sextavada M8 (caixa com 200)",
+        "quantity": 5,
+        "unit_price": 22.30,
+        "line_total": 111.50
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-102",
+        "description": "Arruela de pressão M8 (caixa com 500)",
+        "quantity": 2,
+        "unit_price": 35.00,
+        "line_total": 70.00
+      }
+    ],
+    "subtotal": 336.50,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 60.57
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 16.83
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 5.55
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 25.57
+      }
+    ],
+    "total": 445.02,
+    "error_injected": "DATE_FORMAT_DDMMYYYY",
+    "ground_truth_note": "Invoice date is presented as '15/01/2026' (dd/mm/yyyy) instead of ISO format. The extractor should detect the format mismatch and convert correctly. All other fields are clean. Boleto bancário payment slip referenced in auxiliary documents."
+  },
+  {
+    "invoice_id": "P005_INV_20260327_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-03-27",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000\nBela Vista, São Paulo - SP, 01310-100\nBrasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-200",
+        "description": "Mola helicoidal de compressão - aço carbono (pacote 50)",
+        "quantity": 8,
+        "unit_price": 12.75,
+        "line_total": 102.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-312",
+        "description": "Rolamento de esferas 6205-2RS",
+        "quantity": 15,
+        "unit_price": 45.20,
+        "line_total": 678.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-418",
+        "description": "Anel elástico interno para eixo 30mm (caixa 100)",
+        "quantity": 3,
+        "unit_price": 28.90,
+        "line_total": 86.70
+      }
+    ],
+    "subtotal": 866.70,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 156.01
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 43.34
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 14.30
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 65.87
+      }
+    ],
+    "total": 1146.22,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with correct ISO date. NF-e format with multiple taxes (ICMS, IPI, PIS, COFINS) itemized. Boleto bancário reference included in payment instructions."
+  },
+  {
+    "invoice_id": "P001_INV_20260101_003",
+    "persona_id": "P001",
+    "po_reference": "PO-2025-11-11121",
+    "invoice_date": "2026-01-01",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "4500 Innovation Drive\nSan Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "High-precision resistor array, 10kΩ, SMD (reel of 1000)",
+        "quantity": 5,
+        "unit_price": 12.40,
+        "line_total": 62.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "description": "Ceramic capacitor 100nF, 50V, X7R (reel of 2000)",
+        "quantity": 3,
+        "unit_price": 8.75,
+        "line_total": 26.25
+      }
+    ],
+    "subtotal": 88.25,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 7.72
+      }
+    ],
+    "total": 95.97,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference 'PO-2025-11-11121' has a digit transposition (should be '11111'). The extractor should flag the mismatch with the actual purchase order. All other fields correct; tax itemized by jurisdiction (CA sales tax 8.75%). Rounding to two decimals."
+  },
+  {
+    "invoice_id": "P003_INV_20260409_004",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-22222",
+    "invoice_date": "2026-04-09",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 55\n60327 Frankfurt am Main\nDeutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-4701",
+        "description": "Hydraulikzylinder / Hydraulic cylinder, 50mm Kolbenstange / piston rod",
+        "quantity": 2,
+        "unit_price": 245.00,
+        "line_total": 490.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-4702",
+        "description": "Dichtungssatz / Seal kit für Zylinder / for cylinder 50mm",
+        "quantity": 4,
+        "unit_price": 38.50,
+        "line_total": 154.00
+      }
+    ],
+    "subtotal": 644.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 122.36
+      }
+    ],
+    "total": 766.36,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with correct ISO date. German VAT (19%) itemized. Descriptions bilingual (German primary, English secondary). SEPA bank details (IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX) are present on the invoice."
+  },
+  {
+    "invoice_id": "P003_INV_20260101_005",
+    "persona_id": "P003",
+    "po_reference": "PO-2025-10-33333",
+    "invoice_date": "2026-01-01",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 55\n60327 Frankfurt am Main\nDeutschland",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Global Procurement Inc.",
+      "buyer_address": "123 Main St, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@globalprocurement.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-5101",
+        "description": "Elektromotor / Electric motor, 3kW, 400V, Drehstrom / three-phase",
+        "quantity": 1,
+        "unit_price": 890.00,
+        "line_total": 890.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-5102",
+        "description": "Frequenzumrichter / Frequency inverter, 4kW",
+        "quantity": 1,
+        "unit_price": 420.00,
+        "line_total": 420.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-5103",
+        "description": "Kabelverschraubung / Cable gland M20x1,5 (Pack 10)",
+        "quantity": 5,
+        "unit_price": 6.80,
+        "line_total": 34.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-5104",
+        "description": "Sicherungshalter / Fuse holder, 32A, DIN",
+        "quantity": 3,
+        "unit_price": 12.50,
+        "line_total": 37.50
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-5105",
+        "description": "Schütz / Contactor, 24V DC, 4-polig / 4-pole",
+        "quantity": 2,
+        "unit_price": 48.00,
+        "line_total": 96.00
+      }
+    ],
+    "subtotal": 1477.50,
+    "tax": [],
+    "total": 1477.50,
+    "error_injected": "MISSING_TAX_LINE",
+    "ground_truth_note": "Intra-EU shipment to non-DE buyer (USA) – VAT should be reverse-charged, but the VAT line is completely missing (empty tax array). The extractor should detect that no VAT is applied and flag the missing tax line. SEPA bank details (IBAN DE89 3704 0044 0532 0130 00, BIC COBADEFFXXX) are present."
+  }
+]
+```

@@ -1,0 +1,118 @@
+# Golden test case GTC-019
+# Scenario: Q3 retainer invoice arrives on a quarterly services PO; Q1 + Q2 priors exist.
+# Expected: classify as `none` — NOT a duplicate. Auto-pass at Tier 2 with sanity check.
+
+id: GTC-019
+title: Recurring services — Q3 retainer is legitimate, not a duplicate
+exception_category: none
+difficulty: hard
+created: 2026-05-13
+notes: |
+  Anti-false-positive anchor for recurring services. A quarterly retainer PO
+  produces 4 invoices/year for the same amount from the same supplier — that
+  looks superficially like a split-invoice fraud pattern or a duplicate. The
+  smart-signal filter must NOT fire DUPLICATE or SPLIT WATCH here because (a)
+  totals are identical only across quarters by design, not within a tight
+  time window, and (b) cumulative is well under PO total per quarter.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-01-02T09:00:00Z
+      payload:
+        po_id: PO-2026-01-00200
+        vendor_id: P002
+        contract_type: recurring
+        line_items:
+          - sku: SVC-RETAINER
+            description: Quarterly advisory retainer (4 invoices/year)
+            quantity: 4
+            unit_price_usd: 25000.00
+            line_total_usd: 100000.00
+        currency: USD
+        terms: NET-30
+        status: open
+
+    # Q1 invoice — already paid
+    - source: SAP
+      event_type: prior_invoice_paid
+      timestamp: 2026-02-15T00:00:00Z
+      payload:
+        po_id: PO-2026-01-00200
+        supplier_invoice_number: ADV-2026-Q1
+        total_usd: 25000.00
+        status: paid
+
+    # Q2 invoice — already paid
+    - source: SAP
+      event_type: prior_invoice_paid
+      timestamp: 2026-05-15T00:00:00Z
+      payload:
+        po_id: PO-2026-01-00200
+        supplier_invoice_number: ADV-2026-Q2
+        total_usd: 25000.00
+        status: paid
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-08-13T10:00:00Z
+      payload:
+        from: billing@advisorypartners.example.com
+        invoice_attachment: P002_INV_2026-08-13_013.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P002_INV_2026-08-13_013.pdf
+      ground_truth_fields:
+        invoice_number: ADV-2026-Q3      # different supplier_invoice_number from Q1/Q2
+        po_reference: PO-2026-01-00200
+        vendor_id: P002
+        line_items:
+          - sku: SVC-RETAINER
+            quantity: 1                  # one quarter's worth
+            unit_price_usd: 25000.00
+            line_total_usd: 25000.00
+        total_usd: 25000.00              # matches Q1 + Q2 — by design, not a duplicate
+        currency: USD
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: none
+    min_confidence: 0.75
+    must_contain_evidence:
+      - recurring_pattern_expected
+      - cumulative_below_po_total
+      - different_supplier_invoice_number
+
+  recommendation:
+    action: approve_pending_review
+    rationale_must_mention:
+      - quarterly retainer
+      - Q3 of 4
+      - not a duplicate
+      - cumulative
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 2
+    routed_to: buyer
+    must_include_in_payload:
+      - the_recurring_pattern
+      - the_prior_paid_invoices
+
+  drafting:
+    must_produce_draft: false  # routine retainer — no draft needed
+
+  execution:
+    must_not_post_invoice_before_approval: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.30
+
+pass_criteria:
+  - classification.class_label == none
+  - recommendation.action == approve_pending_review
+  - hitl.tier == 2

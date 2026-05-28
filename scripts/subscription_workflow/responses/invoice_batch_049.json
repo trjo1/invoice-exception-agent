@@ -1,0 +1,290 @@
+```json
+[
+  {
+    "invoice_id": "P005_INV_20260422_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-04-12345",
+    "invoice_date": "2026-04-22",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement Corp.",
+      "buyer_address": "123 Industrial Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com",
+      "nf_e_number": "NF-e 3520061234567890123456789012345678901234567890",
+      "boleto_reference": "Boleto bancário: 00190.00009 01234.567890 12345.678901 1 23456789012345"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-101",
+        "description": "Resistor 10kΩ lote 1000",
+        "quantity": 1000,
+        "unit_price": 2.50,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-202",
+        "description": "Capacitor 100µF 50V",
+        "quantity": 500,
+        "unit_price": 3.20,
+        "line_total": 1600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-303",
+        "description": "Transistor BC548",
+        "quantity": 2000,
+        "unit_price": 1.10,
+        "line_total": 2200.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-404",
+        "description": "Diodo 1N4007",
+        "quantity": 3000,
+        "unit_price": 0.80,
+        "line_total": 2400.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-505",
+        "description": "Conector RJ45 macho",
+        "quantity": 1500,
+        "unit_price": 4.20,
+        "line_total": 6300.00
+      }
+    ],
+    "subtotal": 15000.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 2700.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 750.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 247.50
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 1140.00
+      }
+    ],
+    "total": 19800.00,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Error injected: multiple tax types with inconsistent total. The sum of tax amounts (4837.50) plus subtotal (15000) is 19837.50, but total is 19800.00, causing a mismatch. Extractor should detect the discrepancy and flag the tax lines for review."
+  },
+  {
+    "invoice_id": "P001_INV_20260228_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-67890",
+    "invoice_date": "2026-02-28",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "450 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Acme Global Procurement Corp.",
+      "buyer_address": "123 Industrial Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-001",
+        "description": "Industrial Sensor Module",
+        "quantity": 100,
+        "unit_price": 25.50,
+        "line_total": 2550.00
+      }
+    ],
+    "subtotal": 2550.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA-State",
+        "rate": 0.0725,
+        "amount": 184.88
+      },
+      {
+        "jurisdiction": "US-CA-County",
+        "rate": 0.01,
+        "amount": 25.50
+      }
+    ],
+    "total": 2760.38,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with one line item and two tax jurisdictions (state and county). All calculations correct and rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P002_INV_20260325_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-45678",
+    "invoice_date": "2026-03-25",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "789 Logistics Lane, Suite 200, Los Angeles, CA 90001, USA",
+      "vendor_tax_id": "EIN: 12-3456789",
+      "buyer_name": "Acme Global Procurement Corp.",
+      "buyer_address": "123 Industrial Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com",
+      "handwritten_note": "Please deliver to dock 7."
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-001",
+        "description": "Logistics Consulting Services",
+        "quantity": 40,
+        "unit_price": 75.33,
+        "line_total": 3013.20
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-002",
+        "description": "Warehouse Safety Audit",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      }
+    ],
+    "subtotal": 4213.20,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.08,
+        "amount": 337.06
+      }
+    ],
+    "total": 4551.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with handwritten note. Total rounded up to nearest dollar (4551 from 4550.26). Header placement is standard."
+  },
+  {
+    "invoice_id": "P001_INV_20260203_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-98765",
+    "invoice_date": "2026-02-03",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "450 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Acme Global Procurement Corp.",
+      "buyer_address": "123 Industrial Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-100",
+        "description": "High Precision Thermocouple",
+        "quantity": 200,
+        "unit_price": 12.50,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-200",
+        "description": "Pressure Transducer",
+        "quantity": 50,
+        "unit_price": 85.00,
+        "line_total": 4250.00
+      },
+      {
+        "line_no": 3,
+        "sku": "GTC-300",
+        "description": "Data Logger Module",
+        "quantity": 10,
+        "unit_price": 320.00,
+        "line_total": 3200.00
+      }
+    ],
+    "subtotal": 9950.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0725,
+        "amount": 721.38
+      },
+      {
+        "jurisdiction": "US-NY",
+        "rate": 0.04,
+        "amount": 398.00
+      }
+    ],
+    "total": 11069.38,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with three line items and two tax jurisdictions (CA and NY). All calculations correct and rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P005_INV_20260325_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-54321",
+    "invoice_date": "2026-03-25",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP, 01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Global Procurement Corp.",
+      "buyer_address": "123 Industrial Blvd, Suite 400, New York, NY 10001, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmeglobal.com",
+      "nf_e_number": "NF-e 3520061234567890123456789012345678901234567890",
+      "boleto_reference": "Boleto bancário: 00190.00009 01234.567890 12345.678901 1 23456789012345"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-001",
+        "description": "Motor Elétrico 5HP",
+        "quantity": 10,
+        "unit_price": 850.00,
+        "line_total": 8500.00
+      }
+    ],
+    "subtotal": 8500.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-SP-ICMS",
+        "rate": 0.18,
+        "amount": 1530.00
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 425.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 140.25
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 646.00
+      }
+    ],
+    "total": 11241.25,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice with one line item and four Brazilian tax types (ICMS, IPI, PIS, COFINS). NF-e and boleto reference included."
+  }
+]
+```

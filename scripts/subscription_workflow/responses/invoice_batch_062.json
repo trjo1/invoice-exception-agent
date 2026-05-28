@@ -1,0 +1,341 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260226_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-26",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "42 Industrial Estate, Andheri East, Mumbai, Maharashtra 400093, India",
+      "vendor_tax_id": "GSTIN: 27AABCM1234A1Z5, PAN: AABCM1234A",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "1000 Innovation Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "John Smith, john.smith@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "HSN7318",
+        "description": "High-tensile steel bolts, Grade 8.8, M12x50mm (HSN 7318)",
+        "quantity": 500,
+        "unit_price": 15.50,
+        "line_total": 7750.00
+      }
+    ],
+    "subtotal": 7750.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0,
+        "amount": 0.00
+      }
+    ],
+    "total": 7750.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Mumbai Materials Co. Export to US, no GST applied. HSN code 7318 in description. PAN and GSTIN included in header."
+  },
+  {
+    "invoice_id": "P001_INV_20260109_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-12354",
+    "invoice_date": "2026-01-09",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "500 Tech Park Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "1000 Innovation Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "Jane Doe, jane.doe@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Microcontroller IC, ARM Cortex-M4",
+        "quantity": 100,
+        "unit_price": 12.50,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-2002",
+        "description": "Capacitor Kit, 100pcs assorted",
+        "quantity": 10,
+        "unit_price": 25.00,
+        "line_total": 250.00
+      }
+    ],
+    "subtotal": 1500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0825,
+        "amount": 123.75
+      }
+    ],
+    "total": 1623.75,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "Invoice from Global Tech Components Inc. PO reference contains a typo: correct PO-2026-01-12345, but shown as PO-2026-01-12354 (digits 4 and 5 transposed). Extractor should flag the mismatch."
+  },
+  {
+    "invoice_id": "P003_INV_20260316_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-12345",
+    "invoice_date": "2026-03-16",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 42, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "1000 Innovation Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "Hans Müller, hans.mueller@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-001",
+        "description": "Kugellager 6205 (Ball bearing 6205)",
+        "quantity": 50,
+        "unit_price": 12.30,
+        "line_total": 615.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-002",
+        "description": "Zahnrad Modul 2, 20 Zähne (Gear module 2, 20 teeth)",
+        "quantity": 20,
+        "unit_price": 35.00,
+        "line_total": 700.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-003",
+        "description": "Wellendichtring 30x40x7 (Shaft seal 30x40x7)",
+        "quantity": 100,
+        "unit_price": 4.50,
+        "line_total": 450.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-004",
+        "description": "Hydraulikzylinder 50x200mm (Hydraulic cylinder 50x200mm)",
+        "quantity": 5,
+        "unit_price": 120.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-005",
+        "description": "Edelstahlschraube M10x30 (Stainless steel screw M10x30)",
+        "quantity": 200,
+        "unit_price": 0.85,
+        "line_total": 170.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-006",
+        "description": "Förderband 5m x 500mm (Conveyor belt 5m x 500mm)",
+        "quantity": 2,
+        "unit_price": 250.00,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-007",
+        "description": "Druckluftventil 3/2 Wege (Pneumatic valve 3/2 way)",
+        "quantity": 15,
+        "unit_price": 45.00,
+        "line_total": 675.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-008",
+        "description": "Elektromotor 0,75 kW (Electric motor 0.75 kW)",
+        "quantity": 3,
+        "unit_price": 320.00,
+        "line_total": 960.00
+      }
+    ],
+    "subtotal": 4670.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 4670.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. Export to US, reverse charge VAT (0% charged). Bilingual descriptions (German primary, English secondary). SEPA bank details not included in schema."
+  },
+  {
+    "invoice_id": "P003_INV_20260318_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-12346",
+    "invoice_date": "2026-03-18",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 42, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "1000 Innovation Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "Hans Müller, hans.mueller@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-009",
+        "description": "Gleitlager Bronze (Bronze plain bearing)",
+        "quantity": 80,
+        "unit_price": 8.20,
+        "line_total": 656.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-010",
+        "description": "Getriebe Untersetzung 3:1 (Gear reduction 3:1)",
+        "quantity": 4,
+        "unit_price": 150.00,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-011",
+        "description": "O-Ring Satz 100 Stück (O-ring set 100 pcs)",
+        "quantity": 10,
+        "unit_price": 12.50,
+        "line_total": 125.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-012",
+        "description": "Hydraulikpumpe 50 l/min (Hydraulic pump 50 l/min)",
+        "quantity": 2,
+        "unit_price": 450.00,
+        "line_total": 900.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-013",
+        "description": "Federstahl Draht 2mm (Spring steel wire 2mm)",
+        "quantity": 500,
+        "unit_price": 1.20,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 6,
+        "sku": "FIB-014",
+        "description": "Kupplung elastisch (Elastic coupling)",
+        "quantity": 10,
+        "unit_price": 65.00,
+        "line_total": 650.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FIB-015",
+        "description": "Druckminderer 0-10 bar (Pressure regulator 0-10 bar)",
+        "quantity": 6,
+        "unit_price": 85.00,
+        "line_total": 510.00
+      },
+      {
+        "line_no": 8,
+        "sku": "FIB-016",
+        "description": "Schaltschrank 600x400mm (Control cabinet 600x400mm)",
+        "quantity": 3,
+        "unit_price": 200.00,
+        "line_total": 600.00
+      }
+    ],
+    "subtotal": 4641.00,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 4641.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. Export to US, reverse charge VAT (0% charged). Bilingual descriptions (German primary, English secondary). SEPA bank details not included in schema."
+  },
+  {
+    "invoice_id": "P003_INV_20260319_001",
+    "persona_id": "P003",
+    "po_reference": "PO-2026-03-12347",
+    "invoice_date": "2026-03-19",
+    "currency": "EUR",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Frankfurt Industriebedarf GmbH",
+      "vendor_address": "Industriestraße 42, 60327 Frankfurt am Main, Germany",
+      "vendor_tax_id": "DE123456789",
+      "buyer_name": "Acme Corporation",
+      "buyer_address": "1000 Innovation Drive, Wilmington, DE 19801, USA",
+      "buyer_po_contact": "Hans Müller, hans.mueller@acmecorp.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FIB-017",
+        "description": "Dichtungssatz für Zylinder (Seal kit for cylinder)",
+        "quantity": 30,
+        "unit_price": 18.00,
+        "line_total": 540.00
+      },
+      {
+        "line_no": 2,
+        "sku": "FIB-018",
+        "description": "Riemenscheibe 100mm (Pulley 100mm)",
+        "quantity": 25,
+        "unit_price": 14.50,
+        "line_total": 362.50
+      },
+      {
+        "line_no": 3,
+        "sku": "FIB-019",
+        "description": "Lagergehäuse SNL 510 (Bearing housing SNL 510)",
+        "quantity": 10,
+        "unit_price": 55.00,
+        "line_total": 550.00
+      },
+      {
+        "line_no": 4,
+        "sku": "FIB-020",
+        "description": "Druckfeder 50x10mm (Compression spring 50x10mm)",
+        "quantity": 200,
+        "unit_price": 0.75,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 5,
+        "sku": "FIB-021",
+        "description": "Ölfilter (Oil filter)",
+        "quantity": 40,
+        "unit_price": 8.00,
+        "line_total": 320.00
+      }
+    ],
+    "subtotal": 1922.50,
+    "tax": [
+      {
+        "jurisdiction": "EU-DE-VAT",
+        "rate": 0.19,
+        "amount": 0.00
+      }
+    ],
+    "total": 1922.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice from Frankfurt Industriebedarf GmbH. Export to US, reverse charge VAT (0% charged). Bilingual descriptions (German primary, English secondary). SEPA bank details not included in schema."
+  }
+]
+```

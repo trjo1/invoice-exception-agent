@@ -1,0 +1,126 @@
+# Golden test case GTC-003
+# Scenario: Invoice references a PO that's already been fully paid (duplicate).
+# Expected: HALT. Flag fraud signal. Escalate to AP supervisor. Do NOT post.
+
+id: GTC-003
+title: Invoice references an already-paid PO (duplicate)
+exception_category: duplicate_invoice
+difficulty: high
+created: 2026-05-10
+notes: |
+  Fraud / duplicate-payment anchor. Critical case — agent must NEVER post
+  this invoice. Real-world impact: a missed catch here is a direct cash
+  loss to the buyer.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-03-10T08:00:00Z
+      payload:
+        po_id: PO-2026-03-00078
+        vendor_id: P002
+        line_items:
+          - sku: SKU-C334
+            description: Pallet handling charge
+            quantity: 1
+            unit_price_usd: 850.00
+            line_total_usd: 850.00
+        currency: USD
+        terms: NET-30
+
+    - source: SAP
+      event_type: invoice_posted
+      timestamp: 2026-03-22T13:42:00Z
+      payload:
+        po_id: PO-2026-03-00078
+        invoice_id: INV-2026-03-22-MAPLE-001
+        amount_usd: 850.00
+        status: PAID
+
+    - source: SAP
+      event_type: payment_executed
+      timestamp: 2026-04-21T09:00:00Z
+      payload:
+        po_id: PO-2026-03-00078
+        invoice_id: INV-2026-03-22-MAPLE-001
+        amount_usd: 850.00
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-04-25T11:30:00Z
+      payload:
+        from: billing@maplelogistics.example.com
+        invoice_attachment: P002_INV_2026-04-25_001.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P002_INV_2026-04-25_001.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-04-25-MAPLE-001
+        po_reference: PO-2026-03-00078   # SAME PO as already-paid invoice
+        vendor_id: P002
+        line_items:
+          - sku: SKU-C334
+            quantity: 1
+            unit_price_usd: 850.00
+            line_total_usd: 850.00
+        total_usd: 850.00
+        currency: USD
+        terms: NET-30
+
+expected:
+  classification:
+    class_label: duplicate_invoice
+    min_confidence: 0.85
+    must_contain_evidence:
+      - po_already_invoiced
+      - po_status_paid
+      - prior_invoice_INV-2026-03-22-MAPLE-001
+
+  recommendation:
+    action: halt_require_supervisor
+    rationale_must_mention:
+      - already paid
+      - duplicate
+      - fraud risk
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 3
+    routed_to: ap_supervisor
+    must_include_in_payload:
+      - the_recommendation
+      - prior_payment_audit_trail
+      - all_referenced_documents
+      - fraud_flag_signal
+
+  drafting:
+    must_produce_draft: true
+    draft_type: internal_escalation_note
+    draft_recipient: ap_supervisor + fraud_team
+    draft_content_must_mention:
+      - PO-2026-03-00078
+      - already paid
+      - $850.00 prior payment
+      - do not post
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_create_audit_record: true
+    must_flag_fraud_signal: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.50
+    time_to_recommendation_p95_seconds_max: 60
+
+pass_criteria:
+  - classification.class_label == duplicate_invoice
+  - classification.confidence >= 0.85
+  - recommendation.action == halt_require_supervisor
+  - hitl.tier == 3
+  - drafting.draft_produced == true
+  - execution.invoice_posted == false
+  - execution.fraud_signal_flagged == true
+  - stage9.cost_per_case_usd <= 0.50

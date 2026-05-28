@@ -1,0 +1,347 @@
+```json
+[
+  {
+    "invoice_id": "P001_INV_20260201_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-02-12345",
+    "invoice_date": "2026-02-01",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "US-EIN: 12-3456789",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "123 Industrial Blvd, Detroit, MI 48201, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-1001",
+        "description": "Microcontroller Unit MCU-32",
+        "quantity": 500,
+        "unit_price": 12.50,
+        "line_total": 6250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-1002",
+        "description": "Resistor Kit 10K",
+        "quantity": 1000,
+        "unit_price": 0.15,
+        "line_total": 150.00
+      }
+    ],
+    "subtotal": 6400.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 560.00
+      },
+      {
+        "jurisdiction": "US-TX",
+        "rate": 0.0825,
+        "amount": 528.00
+      }
+    ],
+    "total": 7488.00,
+    "error_injected": "MULTI_PAGE_LINE_ITEMS",
+    "ground_truth_note": "Invoice spans two pages; line items 1 and 2 appear on separate pages. Extractor must combine line items across pages to compute subtotal correctly."
+  },
+  {
+    "invoice_id": "P002_INV_20260328_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-03-67890",
+    "invoice_date": "2026-03-28",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "45 Maple Street, Portland, OR 97201, USA",
+      "vendor_tax_id": "US-EIN: 98-7654321",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "123 Industrial Blvd, Detroit, MI 48201, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MLS-FRT-001",
+        "description": "Freight - LTL shipment",
+        "quantity": 1,
+        "unit_price": 2500.00,
+        "line_total": 2500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "MLS-WH-001",
+        "description": "Warehousing - per pallet",
+        "quantity": 10,
+        "unit_price": 75.00,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 3,
+        "sku": "MLS-PK-001",
+        "description": "Packing service",
+        "quantity": 5,
+        "unit_price": 50.00,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 4,
+        "sku": "MLS-CB-001",
+        "description": "Customs brokerage",
+        "quantity": 1,
+        "unit_price": 400.00,
+        "line_total": 400.00
+      },
+      {
+        "line_no": 5,
+        "sku": "MLS-INS-001",
+        "description": "Insurance - cargo",
+        "quantity": 1,
+        "unit_price": 120.00,
+        "line_total": 120.00
+      },
+      {
+        "line_no": 6,
+        "sku": "MLS-FSC-001",
+        "description": "Fuel surcharge",
+        "quantity": 1,
+        "unit_price": 200.00,
+        "line_total": 200.00
+      },
+      {
+        "line_no": 7,
+        "sku": "MLS-DOC-001",
+        "description": "Documentation fee",
+        "quantity": 1,
+        "unit_price": 50.00,
+        "line_total": 50.00
+      },
+      {
+        "line_no": 8,
+        "sku": "MLS-HDL-001",
+        "description": "Handling fee",
+        "quantity": 1,
+        "unit_price": 100.00,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 4370.00,
+    "tax": [
+      {
+        "jurisdiction": "US-OR",
+        "rate": 0.0,
+        "amount": 0.00
+      }
+    ],
+    "total": 4370.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Hand-written note 'Thanks!' appears in margin. Header placement slightly offset. Extractor should ignore hand-writing and extract all fields accurately."
+  },
+  {
+    "invoice_id": "P001_INV_20260105_002",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-01-54321",
+    "invoice_date": "2026-01-05",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "US-EIN: 12-3456789",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "123 Industrial Blvd, Detroit, MI 48201, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-2001",
+        "description": "High-Performance FPGA",
+        "quantity": 10,
+        "unit_price": 1500.00,
+        "line_total": 15000.00
+      }
+    ],
+    "subtotal": 15000.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 1312.50
+      },
+      {
+        "jurisdiction": "US-TX",
+        "rate": 0.0825,
+        "amount": 1237.50
+      }
+    ],
+    "total": 17550.00,
+    "error_injected": null,
+    "ground_truth_note": "Single line item invoice. No errors; extract all fields as shown."
+  },
+  {
+    "invoice_id": "P001_INV_20260313_003",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-13245",
+    "invoice_date": "2026-03-13",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "100 Innovation Drive, San Jose, CA 95134, USA",
+      "vendor_tax_id": "US-EIN: 12-3456789",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "123 Industrial Blvd, Detroit, MI 48201, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-3001",
+        "description": "Memory Module 16GB",
+        "quantity": 100,
+        "unit_price": 85.00,
+        "line_total": 8500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-3002",
+        "description": "Solid State Drive 1TB",
+        "quantity": 50,
+        "unit_price": 120.00,
+        "line_total": 6000.00
+      }
+    ],
+    "subtotal": 14500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 1268.75
+      },
+      {
+        "jurisdiction": "US-TX",
+        "rate": 0.0825,
+        "amount": 1196.25
+      }
+    ],
+    "total": 16965.00,
+    "error_injected": "PO_REFERENCE_TYPO",
+    "ground_truth_note": "PO reference has a transposed digit (13245 instead of 12345). Extractor should flag discrepancy with actual PO."
+  },
+  {
+    "invoice_id": "P005_INV_20260227_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-98765",
+    "invoice_date": "2026-02-27",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1000, São Paulo, SP 01310-100, Brazil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90",
+      "buyer_name": "Acme Manufacturing Corp.",
+      "buyer_address": "123 Industrial Blvd, Detroit, MI 48201, USA",
+      "buyer_po_contact": "John Smith, j.smith@acmemanufacturing.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SPC-RES-10K",
+        "description": "Resistor 10k ohm",
+        "quantity": 1000,
+        "unit_price": 0.50,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SPC-CAP-100U",
+        "description": "Capacitor 100uF",
+        "quantity": 500,
+        "unit_price": 1.20,
+        "line_total": 600.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SPC-TRN-BC547",
+        "description": "Transistor BC547",
+        "quantity": 200,
+        "unit_price": 0.80,
+        "line_total": 160.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SPC-LED-RED",
+        "description": "LED Red 5mm",
+        "quantity": 1000,
+        "unit_price": 0.30,
+        "line_total": 300.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SPC-CON-USB",
+        "description": "Connector USB",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 6,
+        "sku": "SPC-PCB-001",
+        "description": "PCB Board",
+        "quantity": 50,
+        "unit_price": 15.00,
+        "line_total": 750.00
+      },
+      {
+        "line_no": 7,
+        "sku": "SPC-SLD-WIRE",
+        "description": "Soldering Wire",
+        "quantity": 20,
+        "unit_price": 10.00,
+        "line_total": 200.00
+      },
+      {
+        "line_no": 8,
+        "sku": "SPC-HST-001",
+        "description": "Heat Shrink Tubing",
+        "quantity": 100,
+        "unit_price": 1.00,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 2860.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 514.80
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 143.00
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 47.19
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 217.36
+      }
+    ],
+    "total": 3782.35,
+    "error_injected": null,
+    "ground_truth_note": "Brazilian NF-e style invoice with multiple taxes (ICMS, IPI, PIS, COFINS). Boleto bancário payment slip number 1234567890 is referenced. Extractor should capture all tax lines and note boleto reference."
+  }
+]
+```

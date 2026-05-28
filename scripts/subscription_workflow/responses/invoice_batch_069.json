@@ -1,0 +1,306 @@
+```json
+[
+  {
+    "invoice_id": "P004_INV_20260310_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-00123",
+    "invoice_date": "2026-03-10",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate\nAndheri East, Mumbai 400093\nMaharashtra, India",
+      "vendor_tax_id": "GSTIN: 27AABCU1234D1Z5\nPAN: AABCU1234D",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "200 Innovation Drive\nChicago, IL 60601\nUnited States",
+      "buyer_po_contact": "Rebecca Torres | rebecca.torres@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MUM-ELEC-101",
+        "description": "Industrial circuit breaker panel, 3-phase, 400A",
+        "quantity": 2,
+        "unit_price": 12500.00,
+        "line_total": 25000.00,
+        "hsn_code": "85371000"
+      },
+      {
+        "line_no": 2,
+        "sku": "MUM-CABL-202",
+        "description": "Copper power cable, 50mm², per meter",
+        "quantity": 500,
+        "unit_price": 85.50,
+        "line_total": 42750.00,
+        "hsn_code": "85446090"
+      }
+    ],
+    "subtotal": 67750.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-CGST",
+        "rate": 0.09,
+        "amount": 6097.50
+      },
+      {
+        "jurisdiction": "IN-SGST",
+        "rate": 0.09,
+        "amount": 6097.50
+      },
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 12195.00
+      }
+    ],
+    "total": 92140.00,
+    "error_injected": "GST_PERCENTAGE_MISROUTED",
+    "ground_truth_note": "Line item 1 (HSN 85371000) is an inter-state supply and should have IGST at 18% (amount 4500.00), but CGST+SGST (9% each) was applied instead. Line item 2 (HSN 85446090) is intra-state and should have CGST+SGST, but IGST was applied. The extractor should flag that the tax jurisdictions do not match the implied supply type (inter vs intra)."
+  },
+  {
+    "invoice_id": "P005_INV_20260327_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-00456",
+    "invoice_date": "2026-03-27",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1500\nBela Vista, São Paulo – SP\n01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90\nIE: 123.456.789.100",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "200 Innovation Drive\nChicago, IL 60601\nUnited States",
+      "buyer_po_contact": "Rebecca Torres | rebecca.torres@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-ELEC-301",
+        "description": "Motor drive VFD, 5.5 kW, 380V",
+        "quantity": 3,
+        "unit_price": 2450.00,
+        "line_total": 7350.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-MECH-402",
+        "description": "Linear actuator, 100mm stroke, 24V",
+        "quantity": 10,
+        "unit_price": 320.00,
+        "line_total": 3200.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-CABL-503",
+        "description": "Shielded control cable, 4x1.5mm², per meter",
+        "quantity": 200,
+        "unit_price": 12.90,
+        "line_total": 2580.00
+      }
+    ],
+    "subtotal": 13130.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 2363.40
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 656.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 216.65
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 997.88
+      }
+    ],
+    "total": 17364.43,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e style invoice. All tax types (ICMS, IPI, PIS, COFINS) correctly calculated. Boleto bancário reference number should be present (not shown in JSON but implied in payment details). Extractor should capture all tax jurisdictions and totals."
+  },
+  {
+    "invoice_id": "P001_INV_20260405_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-04-00789",
+    "invoice_date": "2026-04-05",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "500 Tech Park Drive\nSuite 200\nSan Jose, CA 95110\nUnited States",
+      "vendor_tax_id": "EIN: 98-7654321",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "200 Innovation Drive\nChicago, IL 60601\nUnited States",
+      "buyer_po_contact": "Rebecca Torres | rebecca.torres@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-SERV-001",
+        "description": "Annual software license for ERP module – extended support",
+        "quantity": 1,
+        "unit_price": 15000.00,
+        "line_total": 15000.00
+      }
+    ],
+    "subtotal": 15000.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.0875,
+        "amount": 1312.50
+      }
+    ],
+    "total": 16312.50,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Single line item with separate California sales tax. Totals rounded to two decimals. Extractor should note the multi-currency capability is not used here (domestic USD transaction)."
+  },
+  {
+    "invoice_id": "P004_INV_20260421_002",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-04-01234",
+    "invoice_date": "2026-04-21",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "123 Industrial Estate\nAndheri East, Mumbai 400093\nMaharashtra, India",
+      "vendor_tax_id": "GSTIN: 27AABCU1234D1Z5\nPAN: AABCU1234D",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "200 Innovation Drive\nChicago, IL 60601\nUnited States",
+      "buyer_po_contact": "Rebecca Torres | rebecca.torres@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MUM-ELEC-102",
+        "description": "Distribution transformer, 100kVA",
+        "quantity": 1,
+        "unit_price": 85000.00,
+        "line_total": 85000.00,
+        "hsn_code": "85042100"
+      },
+      {
+        "line_no": 2,
+        "sku": "MUM-CABL-203",
+        "description": "Aluminum overhead conductor, ACSR, per km",
+        "quantity": 3,
+        "unit_price": 12000.00,
+        "line_total": 36000.00,
+        "hsn_code": "8544-6090"
+      },
+      {
+        "line_no": 3,
+        "sku": "MUM-INST-301",
+        "description": "Digital multimeter, True RMS, CAT IV",
+        "quantity": 5,
+        "unit_price": 4500.00,
+        "line_total": 22500.00,
+        "hsn_code": "90303100"
+      }
+    ],
+    "subtotal": 143500.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 25830.00
+      }
+    ],
+    "total": 169330.00,
+    "error_injected": "HSN_CODE_FORMATTING_INCONSISTENT",
+    "ground_truth_note": "Line items have HSN codes with inconsistent formatting: line 1 uses '85042100' (no dash), line 2 uses '8544-6090' (with dash), line 3 uses '90303100' (no dash). The extractor should normalize or flag the inconsistency. Tax correctly applied as IGST for inter-state supply."
+  },
+  {
+    "invoice_id": "P005_INV_20260221_002",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-02-01567",
+    "invoice_date": "2026-02-21",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Av. Paulista, 1500\nBela Vista, São Paulo – SP\n01310-100, Brasil",
+      "vendor_tax_id": "CNPJ: 12.345.678/0001-90\nIE: 123.456.789.100",
+      "buyer_name": "Apex Manufacturing Solutions",
+      "buyer_address": "200 Innovation Drive\nChicago, IL 60601\nUnited States",
+      "buyer_po_contact": "Rebecca Torres | rebecca.torres@apexmfg.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "SP-HYD-601",
+        "description": "Hydraulic cylinder, 100mm bore, 500mm stroke",
+        "quantity": 4,
+        "unit_price": 1800.00,
+        "line_total": 7200.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SP-PNEU-702",
+        "description": "Pneumatic solenoid valve, 5/2 way, 24V DC",
+        "quantity": 20,
+        "unit_price": 145.00,
+        "line_total": 2900.00
+      },
+      {
+        "line_no": 3,
+        "sku": "SP-SENS-803",
+        "description": "Temperature sensor, PT100, -50°C to 200°C",
+        "quantity": 15,
+        "unit_price": 95.00,
+        "line_total": 1425.00
+      },
+      {
+        "line_no": 4,
+        "sku": "SP-FAST-904",
+        "description": "Stainless steel bolts M12 x 60mm, pack of 100",
+        "quantity": 10,
+        "unit_price": 62.50,
+        "line_total": 625.00
+      },
+      {
+        "line_no": 5,
+        "sku": "SP-TOOL-105",
+        "description": "Torque wrench set, 1/2\" drive, 20-200 Nm",
+        "quantity": 2,
+        "unit_price": 890.00,
+        "line_total": 1780.00
+      }
+    ],
+    "subtotal": 13930.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 2507.40
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.05,
+        "amount": 696.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 229.85
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 1058.68
+      }
+    ],
+    "total": 18422.43,
+    "error_injected": null,
+    "ground_truth_note": "Clean NF-e invoice with five line items. All Brazilian taxes (ICMS, IPI, PIS, COFINS) correctly applied. Boleto bancário reference should be referenced in payment instructions. Extractor should extract all line item details and tax breakdown."
+  }
+]
+```

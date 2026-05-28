@@ -1,0 +1,345 @@
+```json
+[
+  {
+    "invoice_id": "P002_INV_20260206_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-02-00123",
+    "invoice_date": "2026-02-06",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple St\nSpringfield, IL 62701",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "OmniSource Inc.",
+      "buyer_address": "1000 Corporate Blvd\nNew York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@omnisource.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FREIGHT-STD",
+        "description": "Freight Service - Standard",
+        "quantity": 1,
+        "unit_price": 1500.00,
+        "line_total": 1500.00
+      },
+      {
+        "line_no": 2,
+        "sku": "PKG-MAT",
+        "description": "Packaging Material",
+        "quantity": 100,
+        "unit_price": 2.50,
+        "line_total": 250.00
+      },
+      {
+        "line_no": 3,
+        "sku": "WH-MONTH",
+        "description": "Warehousing - Monthly",
+        "quantity": 1,
+        "unit_price": 3000.00,
+        "line_total": 3000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "LABEL-PRT",
+        "description": "Shipping Label Printing",
+        "quantity": 200,
+        "unit_price": 0.75,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 5,
+        "sku": "CUST-BRK",
+        "description": "Customs Brokerage",
+        "quantity": 1,
+        "unit_price": 1200.00,
+        "line_total": 1200.00
+      },
+      {
+        "line_no": 6,
+        "sku": "INSURANCE",
+        "description": "Insurance",
+        "quantity": 1,
+        "unit_price": 500.00,
+        "line_total": 500.00
+      },
+      {
+        "line_no": 7,
+        "sku": "FUEL-SUR",
+        "description": "Fuel Surcharge",
+        "quantity": 1,
+        "unit_price": 350.00,
+        "line_total": 350.00
+      },
+      {
+        "line_no": 8,
+        "sku": "DOC-FEE",
+        "description": "Documentation Fee",
+        "quantity": 1,
+        "unit_price": 100.00,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 7050.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.08,
+        "amount": 564.00
+      }
+    ],
+    "total": 7614.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Hand-written note 'Received' appears on scanned image; header placement is slightly offset. Total rounded up to nearest dollar."
+  },
+  {
+    "invoice_id": "P005_INV_20260328_001",
+    "persona_id": "P005",
+    "po_reference": "PO-2026-03-00124",
+    "invoice_date": "2026-03-28",
+    "currency": "BRL",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "São Paulo Componentes Ltda.",
+      "vendor_address": "Rua das Flores, 500\nSão Paulo, SP 01000-000",
+      "vendor_tax_id": "12.345.678/0001-90",
+      "buyer_name": "OmniSource Inc.",
+      "buyer_address": "1000 Corporate Blvd\nNew York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@omnisource.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "PAR-M8-30",
+        "description": "Parafuso M8x30",
+        "quantity": 500,
+        "unit_price": 0.45,
+        "line_total": 225.00
+      },
+      {
+        "line_no": 2,
+        "sku": "POR-M8",
+        "description": "Porca M8",
+        "quantity": 500,
+        "unit_price": 0.30,
+        "line_total": 150.00
+      },
+      {
+        "line_no": 3,
+        "sku": "ARR-M8",
+        "description": "Arruela M8",
+        "quantity": 500,
+        "unit_price": 0.20,
+        "line_total": 100.00
+      }
+    ],
+    "subtotal": 475.00,
+    "tax": [
+      {
+        "jurisdiction": "BR-ICMS",
+        "rate": 0.18,
+        "amount": 85.50
+      },
+      {
+        "jurisdiction": "BR-IPI",
+        "rate": 0.10,
+        "amount": 47.50
+      },
+      {
+        "jurisdiction": "BR-PIS",
+        "rate": 0.0165,
+        "amount": 7.84
+      },
+      {
+        "jurisdiction": "BR-COFINS",
+        "rate": 0.076,
+        "amount": 36.10
+      }
+    ],
+    "total": 651.94,
+    "error_injected": "Multiple tax types confuse extraction",
+    "ground_truth_note": "Invoice contains ICMS, IPI, PIS, COFINS taxes; extractor may misaggregate or miss some. Boleto bancário payment slip number 123456789 is referenced. NF-e format combined with tax receipt."
+  },
+  {
+    "invoice_id": "P002_INV_20260119_001",
+    "persona_id": "P002",
+    "po_reference": "PO-2026-01-00122",
+    "invoice_date": "2026-01-19",
+    "currency": "USD",
+    "payment_terms": "NET-45",
+    "header_fields": {
+      "vendor_name": "Maple Logistics SMB",
+      "vendor_address": "123 Maple St\nSpringfield, IL 62701",
+      "vendor_tax_id": "12-3456789",
+      "buyer_name": "OmniSource Inc.",
+      "buyer_address": "1000 Corporate Blvd\nNew York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@omnisource.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "FREIGHT-STD",
+        "description": "Freight Service - Standard",
+        "quantity": 1,
+        "unit_price": 2500.00,
+        "line_total": 2500.00
+      }
+    ],
+    "subtotal": 2500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-CA",
+        "rate": 0.08,
+        "amount": 200.00
+      }
+    ],
+    "total": 2700.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Hand-written note 'Paid' appears; header is misaligned. Total rounded up to nearest dollar."
+  },
+  {
+    "invoice_id": "P001_INV_20260320_001",
+    "persona_id": "P001",
+    "po_reference": "PO-2026-03-00125",
+    "invoice_date": "2026-03-20",
+    "currency": "USD",
+    "payment_terms": "NET-30",
+    "header_fields": {
+      "vendor_name": "Global Tech Components Inc.",
+      "vendor_address": "456 Tech Park Drive\nSan Jose, CA 95110",
+      "vendor_tax_id": "98-7654321",
+      "buyer_name": "OmniSource Inc.",
+      "buyer_address": "1000 Corporate Blvd\nNew York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@omnisource.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "GTC-001",
+        "description": "Electronic Component A",
+        "quantity": 100,
+        "unit_price": 12.50,
+        "line_total": 1250.00
+      },
+      {
+        "line_no": 2,
+        "sku": "GTC-002",
+        "description": "Electronic Component B",
+        "quantity": 50,
+        "unit_price": 25.00,
+        "line_total": 1250.00
+      }
+    ],
+    "subtotal": 2500.00,
+    "tax": [
+      {
+        "jurisdiction": "US-NY-STATE",
+        "rate": 0.04,
+        "amount": 100.00
+      },
+      {
+        "jurisdiction": "US-NY-CITY",
+        "rate": 0.04875,
+        "amount": 121.88
+      }
+    ],
+    "total": 2721.88,
+    "error_injected": "Multi-page invoices where line-items continue across pages",
+    "ground_truth_note": "Line items are split across two pages (line 1 on page 1, line 2 on page 2); extractor must combine them. Invoice also includes separate tax lines for state and city. Totals rounded to 2 decimals."
+  },
+  {
+    "invoice_id": "P004_INV_20260322_001",
+    "persona_id": "P004",
+    "po_reference": "PO-2026-03-00126",
+    "invoice_date": "2026-03-22",
+    "currency": "INR",
+    "payment_terms": "NET-60",
+    "header_fields": {
+      "vendor_name": "Mumbai Materials Co.",
+      "vendor_address": "7/8 Industrial Area\nAndheri East, Mumbai 400093",
+      "vendor_tax_id": "GSTIN: 27AABCM1234H1Z5, PAN: AABCM1234H",
+      "buyer_name": "OmniSource Inc.",
+      "buyer_address": "1000 Corporate Blvd\nNew York, NY 10001",
+      "buyer_po_contact": "John Smith, john.smith@omnisource.com"
+    },
+    "line_items": [
+      {
+        "line_no": 1,
+        "sku": "MS-2MM",
+        "description": "Mild Steel Sheet 2mm (HSN 7208)",
+        "quantity": 10,
+        "unit_price": 5000.00,
+        "line_total": 50000.00
+      },
+      {
+        "line_no": 2,
+        "sku": "SS-ROD-12",
+        "description": "Stainless Steel Rod 12mm (HSN 7222)",
+        "quantity": 5,
+        "unit_price": 8000.00,
+        "line_total": 40000.00
+      },
+      {
+        "line_no": 3,
+        "sku": "BR-NUT-M10",
+        "description": "Brass Nuts M10 (HSN 7415)",
+        "quantity": 1000,
+        "unit_price": 15.00,
+        "line_total": 15000.00
+      },
+      {
+        "line_no": 4,
+        "sku": "CU-WIRE-1.5",
+        "description": "Copper Wire 1.5mm (HSN 7408)",
+        "quantity": 200,
+        "unit_price": 120.00,
+        "line_total": 24000.00
+      },
+      {
+        "line_no": 5,
+        "sku": "AL-ANG-50",
+        "description": "Aluminum Angle 50x50 (HSN 7604)",
+        "quantity": 20,
+        "unit_price": 3500.00,
+        "line_total": 70000.00
+      },
+      {
+        "line_no": 6,
+        "sku": "PVC-PIPE-1",
+        "description": "PVC Pipe 1 inch (HSN 3917)",
+        "quantity": 100,
+        "unit_price": 200.00,
+        "line_total": 20000.00
+      },
+      {
+        "line_no": 7,
+        "sku": "RUB-GASKET",
+        "description": "Rubber Gasket (HSN 4016)",
+        "quantity": 500,
+        "unit_price": 50.00,
+        "line_total": 25000.00
+      },
+      {
+        "line_no": 8,
+        "sku": "PAINT-COAT",
+        "description": "Paint Coating (HSN 3208)",
+        "quantity": 10,
+        "unit_price": 1500.00,
+        "line_total": 15000.00
+      }
+    ],
+    "subtotal": 259000.00,
+    "tax": [
+      {
+        "jurisdiction": "IN-IGST",
+        "rate": 0.18,
+        "amount": 46620.00
+      }
+    ],
+    "total": 305620.00,
+    "error_injected": null,
+    "ground_truth_note": "Clean invoice. Each line item includes HSN code in description. Vendor PAN and GSTIN are in header. Equivalent USD amount is approximately $3,700."
+  }
+]
+```

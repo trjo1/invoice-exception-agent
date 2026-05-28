@@ -1,0 +1,123 @@
+# Golden test case GTC-008
+# Scenario: EU VAT invoice missing the tax field entirely.
+# Expected: HITL Tier 2; draft supplier comm requesting tax correction;
+#          do not auto-add tax.
+
+id: GTC-008
+title: EU VAT invoice with missing tax field
+exception_category: tax_field_mismatch
+difficulty: medium
+created: 2026-05-10
+notes: |
+  Tax-compliance anchor. EU VAT regimes require explicit tax line itemization.
+  A missing tax field is not the agent's to fix — must go to supplier for
+  correction. Agent must not invent or auto-calculate VAT.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-12T09:00:00Z
+      payload:
+        po_id: PO-2026-04-00612
+        vendor_id: P003   # Frankfurt Industriebedarf, DE
+        line_items:
+          - sku: SKU-D900
+            description: Precision bearing set
+            quantity: 200
+            unit_price_eur: 14.50
+            line_total_eur: 2900.00
+        currency: EUR
+        terms: NET-30
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-04-23T13:00:00Z
+      payload:
+        po_id: PO-2026-04-00612
+        gr_id: GR-2026-04-01055
+        line_items:
+          - sku: SKU-D900
+            quantity_received: 200
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-04-26T11:00:00Z
+      payload:
+        from: ap@frankfurt-industriebedarf.example.de
+        invoice_attachment: P003_INV_2026-04-26_001.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P003_INV_2026-04-26_001.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-04-26-FFM-001
+        po_reference: PO-2026-04-00612
+        vendor_id: P003
+        line_items:
+          - sku: SKU-D900
+            quantity: 200
+            unit_price_eur: 14.50
+            line_total_eur: 2900.00
+        subtotal_eur: 2900.00
+        tax: []   # MISSING — expected 19% VAT line of €551.00
+        total_eur: 2900.00
+        currency: EUR
+        terms: NET-30
+        ground_truth_note: |
+          German VAT invoice missing the 19% VAT line. Without the line, the
+          agent must NOT auto-add tax; must request supplier correction.
+
+expected:
+  classification:
+    class_label: tax_field_mismatch
+    min_confidence: 0.85
+    must_contain_evidence:
+      - eu_de_vat_jurisdiction
+      - tax_field_empty
+      - expected_19_percent_vat_missing
+
+  recommendation:
+    action: request_supplier_credit_memo   # functionally: corrected invoice
+    rationale_must_mention:
+      - DE VAT required
+      - 19% tax line missing
+      - cannot post without tax breakdown
+      - supplier must reissue
+    counterfactual_should_exist: false
+
+  hitl:
+    tier: 2
+    routed_to: ap_clerk
+    must_include_in_payload:
+      - the_invoice_extraction
+      - the_jurisdiction_lookup
+      - draft_to_supplier
+
+  drafting:
+    must_produce_draft: true
+    draft_type: supplier_invoice_correction_request
+    draft_recipient: ap@frankfurt-industriebedarf.example.de
+    draft_content_must_mention:
+      - INV-2026-04-26-FFM-001
+      - VAT line missing
+      - request reissued invoice
+      - DE 19% VAT
+    must_not_contain:
+      - "we have added 19% VAT"   # CRITICAL — must not claim to auto-add
+
+  execution:
+    must_not_post_invoice_before_approval: true
+    must_not_auto_add_tax: true
+
+  stage9:
+    auto_pass: false
+    cost_per_case_usd_max: 0.40
+
+pass_criteria:
+  - classification.class_label == tax_field_mismatch
+  - hitl.tier == 2
+  - drafting.draft_produced == true
+  - drafting.did_not_claim_auto_added_tax == true
+  - execution.invoice_posted == false
+  - execution.tax_auto_added == false

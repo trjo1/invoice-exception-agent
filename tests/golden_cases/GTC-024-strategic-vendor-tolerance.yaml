@@ -1,0 +1,110 @@
+# Golden test case GTC-024
+# Scenario: Strategic-tier vendor with MSA allowing 5% price tolerance; invoice shows 3% variance.
+# Expected: classify as `none` (within MSA tolerance band) — auto-resolve. Anti-false-positive case.
+
+id: GTC-024
+title: Strategic vendor with MSA tolerance — 3% price variance is acceptable
+exception_category: none
+difficulty: hard
+created: 2026-05-13
+notes: |
+  Vendor-tier-aware tolerance anchor. Standard 3-way-match tolerance is
+  ±2% on unit price. Strategic vendors with MSAs often have explicit
+  tolerance bands (5% is common for raw-materials vendors with commodity
+  exposure). The agent must read the vendor master's `tier` and the MSA's
+  `tolerance_pct` and not flag price variances within band. This is a
+  classic false-positive that erodes trust in the agent — if it cries
+  wolf on every legitimate-but-noisy invoice, AP stops trusting it.
+
+input:
+  events:
+    - source: SAP
+      event_type: po_created
+      timestamp: 2026-04-22T09:00:00Z
+      payload:
+        po_id: PO-2026-04-19920
+        vendor_id: P001
+        vendor_tier: strategic
+        msa_active: true
+        msa_price_tolerance_pct: 5.0
+        line_items:
+          - sku: SKU-RAW-COPPER
+            description: Copper rod stock — commodity priced
+            quantity: 100
+            unit_price_usd: 50.00
+            line_total_usd: 5000.00
+        currency: USD
+        terms: NET-45
+
+    - source: SAP
+      event_type: goods_receipt
+      timestamp: 2026-05-08T13:00:00Z
+      payload:
+        po_id: PO-2026-04-19920
+        gr_id: GR-2026-05-09555
+        line_items:
+          - sku: SKU-RAW-COPPER
+            quantity_received: 100
+
+    - source: Email
+      event_type: invoice_received
+      timestamp: 2026-05-10T10:30:00Z
+      payload:
+        from: ap@globaltech.example.com
+        invoice_attachment: P001_INV_2026-05-10_018.pdf
+
+  documents:
+    - type: invoice_pdf
+      ref: test_corpus/synthetic/invoices/P001_INV_2026-05-10_018.pdf
+      ground_truth_fields:
+        invoice_number: INV-2026-05-10-018
+        po_reference: PO-2026-04-19920
+        vendor_id: P001
+        line_items:
+          - sku: SKU-RAW-COPPER
+            quantity: 100
+            unit_price_usd: 51.50      # 3% above PO — within 5% MSA tolerance
+            line_total_usd: 5150.00
+        total_usd: 5150.00              # $150 above PO total but within tolerance
+        currency: USD
+        terms: NET-45
+
+expected:
+  classification:
+    class_label: none
+    min_confidence: 0.75
+    must_contain_evidence:
+      - strategic_vendor_tier
+      - msa_tolerance_5pct
+      - variance_3pct_within_band
+      - within_msa_tolerance
+
+  recommendation:
+    action: auto_resolve
+    rationale_must_mention:
+      - strategic
+      - MSA
+      - 5% tolerance
+      - 3% variance
+      - within band
+    counterfactual_should_exist: true
+
+  hitl:
+    tier: 1
+    routed_to: none
+
+  drafting:
+    must_produce_draft: false
+
+  execution:
+    must_post_invoice: true
+    must_create_audit_record: true
+
+  stage9:
+    auto_pass: true
+    cost_per_case_usd_max: 0.20
+
+pass_criteria:
+  - classification.class_label == none
+  - recommendation.action == auto_resolve
+  - hitl.tier == 1
