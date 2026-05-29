@@ -116,6 +116,7 @@ Open these in your browser for a richer walkthrough than this README:
 
 | Doc | What it covers | Audience |
 |---|---|---|
+| **[`docs/decision_log.md`](docs/decision_log.md)** | **Five non-obvious PM calls behind this agent — HITL tier count, demo UX, model choice, mock-executor pattern, hint-free browse. For each: tradeoff, choice, what was given up, what would make me reconsider.** | **PM-shaped readers, hiring managers** |
 | `agent_overview.html` | Plain-English scope walkthrough — what the agent does, the 13 exception types, the data it consults, where humans stay in control | Non-technical readers, business stakeholders |
 | `detailed_workflow.html` | Deep technical trace of all 10 steps with real prompts, real data structures, real input/output examples | Engineers, technical interviewers |
 | `status.html` | Engineering build status, full pipeline diagram, per-node detail, software stack | Build-status snapshot |

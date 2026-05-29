@@ -91,6 +91,104 @@ def _sse_event(payload: dict[str, Any]) -> str:
     return f"data: {json.dumps(payload, default=str)}\n\n"
 
 
+def _render_markdown_doc(md_path: Path, *, title: str) -> str:
+    """Render a markdown doc to a standalone HTML page.
+
+    Wraps in the same brand strip / nav strip used by the other public
+    HTML docs (status.html, docs_index.html, etc.) so the experience is
+    consistent across all /docs/* URLs. The rendered article gets
+    article-grade typography (max-width, line-height, etc.) suitable for
+    long-form reading.
+    """
+    import mistune
+
+    md_src = md_path.read_text(encoding="utf-8")
+    body_html = mistune.html(md_src)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{title}</title>
+<style>
+  :root {{
+    --navy: #1F3A68; --red: #C0392B; --green: #1A6D3F;
+    --soft: #E8EEF5; --gray: #555; --purple: #6B46C1;
+  }}
+  * {{ box-sizing: border-box; }}
+  body {{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    margin: 0; padding: 0; background: #FAFBFD; color: #222; line-height: 1.7;
+  }}
+  nav.top {{
+    background: #0F2545; color: #fff; padding: 8px 40px; font-size: 13px;
+    display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+  }}
+  nav.top a {{ color: #fff; text-decoration: none; opacity: 0.85; }}
+  nav.top a.active {{ opacity: 1; font-weight: 600; border-bottom: 2px solid #fff; padding-bottom: 2px; }}
+  nav.top a:hover {{ opacity: 1; }}
+  nav.top .sep {{ opacity: 0.4; }}
+  header.brand {{
+    background: var(--navy); color: #fff;
+    padding: 32px 40px 26px; border-bottom: 4px solid var(--purple);
+  }}
+  header.brand .kicker {{
+    text-transform: uppercase; letter-spacing: 1.5px;
+    font-size: 12px; color: var(--soft); margin-bottom: 6px;
+  }}
+  header.brand h1 {{ margin: 0; font-size: 28px; font-weight: 700; }}
+  main {{
+    padding: 32px 40px 60px; max-width: 820px; margin: 0 auto;
+    font-size: 15.5px;
+  }}
+  main h1, main h2 {{ color: var(--navy); border-bottom: 2px solid var(--navy); padding-bottom: 6px; }}
+  main h1 {{ font-size: 24px; margin-top: 32px; }}
+  main h2 {{ font-size: 19px; margin-top: 28px; }}
+  main h3 {{ color: var(--navy); font-size: 17px; margin-top: 22px; }}
+  main p {{ margin: 12px 0; }}
+  main hr {{ border: 0; border-top: 1px solid #d8dee9; margin: 28px 0; }}
+  main code {{
+    background: #F2F4F8; color: #1a1a1a; padding: 1px 6px; border-radius: 3px;
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 13.5px;
+  }}
+  main strong {{ color: #111; }}
+  main em {{ color: var(--gray); }}
+  main a {{ color: var(--navy); }}
+  main blockquote {{
+    background: var(--soft); border-left: 4px solid var(--navy);
+    padding: 12px 18px; margin: 16px 0; border-radius: 4px;
+  }}
+  footer {{
+    margin: 40px auto 16px; max-width: 820px; padding: 0 40px;
+    color: var(--gray); font-size: 12.5px;
+  }}
+</style>
+</head>
+<body>
+<nav class="top">
+  <a href="/demo">← Back to live demo</a>
+  <span class="sep">·</span>
+  <a href="/docs">All docs</a>
+  <a href="/docs/decision_log" class="active">Decision log</a>
+  <a href="/docs/agent_overview">Overview</a>
+  <a href="/docs/detailed_workflow">Workflow</a>
+  <a href="/docs/status">Engineering status</a>
+</nav>
+<header class="brand">
+  <div class="kicker">Invoice Exception Agent · PM-shaped artifact</div>
+  <h1>{title.split(' — ')[0]}</h1>
+</header>
+<main>
+{body_html}
+</main>
+<footer>
+  <strong>Invoice Exception Agent</strong> · MIT licensed ·
+  <a href="https://github.com/trjo1/invoice-exception-agent">GitHub</a>
+</footer>
+</body>
+</html>
+"""
+
+
 def _serialize_run(run: PipelineRun) -> dict[str, Any]:
     return {
         "id": run.id,
@@ -195,13 +293,21 @@ def create_app(
     )
 
     # ------------------------------ Docs routing ------------------------
-    # Serve the three public HTML docs and the landing page at clean URLs.
-    # The HTML files live in the repo root (not under /templates), so we
-    # use direct FileResponse instead of the Jinja templates layer.
+    # Serve the public HTML docs and the landing page at clean URLs.
+    # HTML files live in the repo root (not under /templates). Markdown
+    # artifacts (e.g. decision_log.md) live under repo/docs and get rendered
+    # to HTML at request time via mistune.
     _DOC_FILES = {
         "status":            _REPO_ROOT / "status.html",
         "agent_overview":    _REPO_ROOT / "agent_overview.html",
         "detailed_workflow": _REPO_ROOT / "detailed_workflow.html",
+    }
+    _MD_DOC_FILES: dict[str, tuple[Path, str]] = {
+        # slug → (path on disk, page <title>)
+        "decision_log": (
+            _REPO_ROOT / "docs" / "decision_log.md",
+            "Decision log — Invoice Exception Agent",
+        ),
     }
     _DOCS_INDEX = _REPO_ROOT / "docs_index.html"
 
@@ -212,6 +318,7 @@ def create_app(
         # Fallback if the landing page hasn't been built yet — minimal nav stub
         return HTMLResponse(
             "<h1>Docs</h1><ul>"
+            "<li><a href='/docs/decision_log'>Decision log (PM-shaped)</a></li>"
             "<li><a href='/docs/status'>Engineering status</a></li>"
             "<li><a href='/docs/agent_overview'>Agent overview (non-technical)</a></li>"
             "<li><a href='/docs/detailed_workflow'>Detailed workflow (technical)</a></li>"
@@ -220,10 +327,17 @@ def create_app(
 
     @app.get("/docs/{doc_name}", include_in_schema=False)
     def docs_page(doc_name: str):  # type: ignore[no-untyped-def]
+        # HTML docs: serve as-is from the repo root.
         path = _DOC_FILES.get(doc_name)
-        if path is None or not path.exists():
-            raise HTTPException(status_code=404, detail=f"Doc not found: {doc_name}")
-        return FileResponse(path, media_type="text/html")
+        if path is not None and path.exists():
+            return FileResponse(path, media_type="text/html")
+        # Markdown docs: render via mistune, wrap in a minimal page chrome
+        # that matches the brand strip + nav of the HTML docs.
+        md_entry = _MD_DOC_FILES.get(doc_name)
+        if md_entry is not None and md_entry[0].exists():
+            md_path, title = md_entry
+            return HTMLResponse(_render_markdown_doc(md_path, title=title))
+        raise HTTPException(status_code=404, detail=f"Doc not found: {doc_name}")
 
     # ------------------------------ Health check ------------------------
     # Lightweight liveness probe for Railway + the portfolio's Vercel

@@ -1,110 +1,169 @@
 # Roadmap — invoice exception agent
 
-**Read `CLAUDE.md` first for the project framing.** This file covers
-where the build currently is and what the next phase looks like.
+**Read `CLAUDE.md` first for the job-hunt frame.** This file covers where
+the build is, what ships next, and what the application phase looks like.
 
 ---
 
 ## Current state (2026-05-28)
 
-The build is at a deliberate pause point. The demo runs end-to-end and is
-publicly accessible. The next phase (learning + evals) is intentionally
-NOT scoped yet — see "Next phase" below.
+The agent substrate is at a deliberate pause point. The current phase is
+**shipping PM-shape artifacts on top of the substrate**, not adding more
+engineering features.
 
-### What's shipped end-to-end
+### What's shipped as substrate
 
 - **10-node async pipeline** — extract → cross-case context → classify →
-  retrieve → decide → route → draft → enqueue. Median ~30-60s per invoice.
+  retrieve → decide → route → draft → enqueue. Median 30-60s per invoice.
 - **HITL approval queue** — SQLite, 3-tier routing (auto-pass / approver /
   supervisor), audit log
 - **Stage 9 measurement dashboard** — cost, latency, classification mix,
   auto-pass rate, per-task and per-model breakdowns
-- **24 golden cases** (`tests/golden/`) — pass/fail end-to-end against real
-  LLMs, covers all 13 ExceptionCategory values
-- **Test corpus** — 490 synthetic invoices + JSON sidecars, 33.9%
-  error-injection rate, 10 canonical error labels (locally generated; only
-  20 ship in the public repo for the demo library)
+- **24 golden cases** — pass/fail end-to-end against real LLMs, all 13
+  ExceptionCategory values covered
+- **Test corpus** — 490 synthetic invoices + JSON sidecars (20 ship in the
+  public repo for the demo library)
 - **Public Railway demo** — https://web-production-45a73.up.railway.app
 - **Vercel portfolio integration** — https://tj-joshi-portfolio.vercel.app
   surfaces the demo via rewrites/redirects
 - **DATA_DIR-based persistence** — single env var configures DB, uploads,
-  and cost-ledger paths; Railway volume mount at `/data` makes everything
-  survive redeploys
-- **Demo UX** — `/demo` has two paths: (1) browse 20 invoices (hint-free
-  picker, no expected-outcome leakage) → preview → select → run, (2) curated
-  scenario dropdown (10 labeled patterns) → one-click run
+  and cost-ledger paths
+- **Demo UX** — `/demo` browse (hint-free picker, 20 invoices) + curated
+  scenario dropdown (10 labeled patterns)
 - **85/85 tests pass**
 
-### What's intentionally deferred (not blockers, just out of scope for now)
+### What's intentionally deferred
 
 - Real action executor backend (gated on SAP S/4HANA Cloud trial creds)
 - Webhook / event-ingestion layer (same blocker)
-- LangGraph wrap of the orchestrator (plain async function is fine for the
-  current footprint; durable state isn't a real need yet)
-- Postgres swap from SQLite (one-env-var change when needed)
-- Real SAP / Ariba / ServiceNow connectors (stubs await creds)
+- LangGraph wrap of the orchestrator
+- Postgres swap from SQLite
+- Real SAP / Ariba / ServiceNow connectors
+
+These are not blockers for the job-hunt. The substrate is sufficient.
 
 ---
 
-## Next phase — Learning + Evals layer
+## Phase 1 — Ship 3 PM-shape artifacts (1-3 weeks, ~22-28 hours)
 
-### Why this is the right direction (portfolio framing)
+Priority is by signal-density per hour invested.
 
-Most candidates applying to agents-shaped roles have shipped a demo. Far
-fewer can show an instrumented agent with real eval discipline and a
-closed feedback loop from operator approvals back into training signal.
-**That's the muscle that separates "AI-curious" from "ready to ship
-agents in production"** — and it's what hiring managers in the agents
-space are screening for.
+### Artifact 1 — Decision log (~4 hours, highest signal-density per hour)
 
-### Themes likely in scope (NOT a committed plan)
+Single markdown page. 5 entries × ~250 words each. For each: the tradeoff,
+the choice made, what was given up, what to reconsider. Universal value
+across all four target companies — this is the "product taste demonstrated"
+criterion from the Anthropic JDs.
 
-These are the threads that look highest-leverage from where I sit. They
-are NOT a roadmap to start executing — they're a menu to scope against
-once the open questions below are answered.
+The 5 entries (each a real PM call from the build):
+- Why 3 HITL routing tiers, not 2 or 5
+- Why no real user-upload UX (browse-only) for the public demo
+- Why open-source models default + daily cost cap (not feature-gating)
+- Why mock executor pattern as a safety boundary (not waiting on real SAP creds)
+- Why hint-free browse vs labeled curated dropdown (the 2026-05-28 UX call)
 
-1. **Close the HITL feedback loop.** Operator approvals/edits sit in
-   SQLite today and go nowhere. Mine them into (a) regression-test
-   additions, (b) few-shot example candidates, (c) fine-tune seeds. This
-   is the closest analogue to how real-world agents improve over time.
-2. **Aggregate eval metrics on top of golden cases.** Pass/fail per case
-   is a thin signal. Add per-class confusion matrix, recommendation-action
-   accuracy, routing-tier accuracy, rationale-quality grading (LLM-as-judge
-   or rubric), and track over time.
-3. **A/B prompt evaluation harness.** Compare two prompt variants on the
-   same held-out set; report cost + quality + latency diff. Without this,
-   every prompt change is vibes-based.
-4. **Drift monitoring layered on Stage 9.** Today Stage 9 is a passive
-   dashboard. Add thresholded alerts — "classification mix shifted 20%
-   week-over-week," "P95 latency doubled," "auto-pass rate dropped."
-5. **Self-consistency / multi-sample for high-stakes routes.** For Tier 3
-   (supervisor) cases, run classify+decide twice with different
-   temperatures and flag disagreements. Cheap safety net.
+Voice model: Scott White (Head of Product, Claude, Anthropic). Concrete,
+first-person, principle-style, no hype.
 
-### Open questions — answer these BEFORE scoping any of the above
+Lives at: `docs/decision_log.md` → linked from `/demo` home + docs landing.
 
-These are TJ's calls, not Claude's. Do not start work on this phase
-until TJ has answered:
+### Artifact 2 — Eval framework writeup + 3-model comparison (~12-16 hours)
 
-1. **Which role shape is the artifact optimizing for?**
-   - AI engineer (lean into code depth, testing infra, ML systems)
-   - Agents-focused technical/product PM (lean into system design,
-     tradeoffs, eval framework as a product surface)
-   - Applied AI / research-adjacent (lean into measurement rigor,
-     comparison studies, writeup quality)
-   The right thread mix differs across these three.
-2. **Breadth or depth?**
-   - Breadth: 5 shallow threads, one short writeup per thread →
-     shows range
-   - Depth: one thread built to publication quality (one really good
-     blog post, one really good demo screen) → shows depth
-   Both are defensible. Pick one before starting; mid-stream changes
-   are expensive.
-3. **What's the real goal?**
-   - "More interview material to point at" (output-driven)
-   - "Actually learn techniques I'm weak on" (skill-driven)
-   These look the same on day 1 and diverge by day 10. Be honest about
-   which one.
+**The Principal-vs-Senior differentiator.** Reframes Stage 9 from
+"dashboard" to "eval system as product spec."
+
+Spec doc covers:
+- 4-5 metrics that matter (classification accuracy, recommendation-action
+  accuracy, routing-tier accuracy, p95 latency, cost-per-run)
+- SLO per metric (defensible, not aspirational)
+- Decision protocol when SLO crossed (rollback / hold / ship-with-monitoring)
+- Rollout plan for a model change (canary → 10% → 100% with metric checks
+  at each gate)
+
+Then RUN: DeepSeek V4-Flash vs Claude Sonnet 4.6 vs GPT-5 on the 24 golden
+cases. Publish numbers including the ones that look bad.
+
+Lives at: `docs/eval_framework.md` + `/stage9/comparison` page on demo.
+
+Highest leverage at:
+- **LangChain** — LangSmith JD: "designing evaluation systems that scale
+  from 10 to 10,000 test cases"
+- **Anthropic** — eval design fluency criterion
+- **Cursor** — Agent Harness JD: "strong metrics and evaluation intuition"
+
+### Artifact 3 — Build-with-Claude-Code essay (~6-8 hours)
+
+~1,500 words on building a non-trivial agent solo by orchestrating Claude
+Code as pair programmer. The single most on-message piece for an
+**Anthropic** application specifically — Cat Wu and Scott White's teams
+would recognize the exact problems.
+
+Concrete examples (each lived through in this build):
+- Where Claude got it right first try (SSE streaming UI; DATA_DIR refactor)
+- Where it got it wrong (the 2026-05-28 framing-drift incident — Claude
+  reverted to TruVs framing despite explicit redirection; overwrote
+  CLAUDE.md without realizing prior content had existed locally; falsely
+  asserted "nothing was lost" based on incomplete git evidence)
+- What that taught about how agentic tools should be built FOR users
+  (verification before assertion; context that survives compaction; framing
+  rules that propagate across sessions)
+
+Lives at: `docs/build_with_claude_code.md` + linked from demo + portfolio.
+
+---
+
+## Phase 2 — Apply (after Phase 1 ships, parallel)
+
+Four target companies, same week, tailored cover notes pointing at
+different artifacts:
+
+| Company | Role | URL | Lead artifact for cover note |
+|---|---|---|---|
+| **Cursor** | PM, Agent Harness | https://cursor.com/careers | Eval framework + decision log |
+| **Anthropic** | PM, Claude Code (Platform) | https://job-boards.greenhouse.io/anthropic | Build-with-Claude-Code essay + decision log |
+| **Harvey** | Staff PM, Agent Platform | https://jobs.ashbyhq.com/harvey/39c40209-798d-47e9-a600-742c876c536b | Decision log (HITL + cross-system orchestration) |
+| **LangChain** | PM, LangSmith | https://jobs.ashbyhq.com/langchain/27af5f96-b287-4bcc-8679-f96686dc7c8d | Eval framework writeup |
+
+Cover-note template (~150 words): "Here is an end-to-end agent I built
+solo via Claude Code [demo URL]. Here are the trade-offs I made [decision
+log URL]. Here is the eval framework I designed on top of it [eval
+framework URL]. Here is what I'd build next at [team]."
+
+**Application gate:** all 3 artifacts shipped, linked, and live on Railway
+before any cover note goes out.
+
+---
+
+## Honest ceiling read
+
+From research run 2026-05-28. Without founder / FAANG-PM / AI-brand
+credentials on the resume:
+
+- Senior PM at Anthropic, OpenAI, Vercel, Cursor: **achievable**
+- Staff PM at Cursor, Harvey, LangChain: **achievable with the agent +
+  3 artifacts as portfolio**
+- Principal PM at Anthropic: **stretch** (likely down-leveled to Staff at offer)
+- Principal PM at OpenAI / Google DeepMind / Meta AI: **unlikely** without
+  one of the missing credentials
+
+The unlock against the credential gap is the working agent + opinionated
+written artifacts, not more credentials. Most PMs cannot ship that combo —
+that's the signal.
+
+---
+
+## Primary-source reading list (for voice + framing calibration)
+
+Read these before writing artifacts. Don't paraphrase or summarize —
+absorb the voice.
+
+1. [Cat Wu — Product Management on the AI Exponential](https://claude.com/blog/product-management-on-the-ai-exponential) — single most important PM-craft read
+2. [Scott White (Head of Product, Claude) on Creator Economy](https://creatoreconomy.so/p/inside-the-best-ai-model-for-coding-claude-scott-white) — the cleanest verbatim articulation of the embedded-PM thesis
+3. [Lenny's Newsletter — How Anthropic's Product Team Moves (Cat Wu)](https://www.lennysnewsletter.com/p/how-anthropics-product-team-moves)
+4. [Lenny's Newsletter — Mike Krieger CPO](https://www.lennysnewsletter.com/p/anthropics-cpo-heres-what-comes-next)
+5. [Cursor — PM Agent Harness JD](https://cursor.com/careers) — read as a spec for self-positioning
+6. [Harvey — Staff PM Agent Platform JD](https://jobs.ashbyhq.com/harvey/39c40209-798d-47e9-a600-742c876c536b)
+7. [LangChain — PM LangSmith JD](https://jobs.ashbyhq.com/langchain/27af5f96-b287-4bcc-8679-f96686dc7c8d)
 
 ---
 
@@ -113,13 +172,14 @@ until TJ has answered:
 The following are NOT directions for this project. If a session drifts
 into recommending any of these, stop and re-read `CLAUDE.md`:
 
-- TruVs go-to-market materials (this is not a TruVs deliverable)
-- Sales/marketing assets, pitch decks, pricing frameworks, partner-
-  reactivation memos, target-account lists
-- The Process-to-Agent Method, 9-stage operating model, $200K floor,
-  4-bundle pricing, or any framework from the parent TruVs CLAUDE.md
-- Stage 9 framed as a "recurring revenue moat" — it's a measurement
-  dashboard, technically interesting, commercially out of scope
+- Adding more features to the agent (substrate is sufficient)
+- Pitch decks / generic "AI PM" blog posts
+- MCP server wrapper, retroactive PRD, platform-vs-vertical reframe —
+  deferred to "if interviewer asks" not "ship first"
+- TruVs go-to-market materials (this is no longer a TruVs deliverable)
+- Sales/marketing assets, pricing frameworks, partner-reactivation memos
 - Internal/customer case studies of this agent
-- Anything aimed at enterprise procurement buyers; the audience is
-  engineering teams hiring for agents work
+- Anything aimed at enterprise procurement buyers
+- Applications to OpenAI / Cognition / Replit / Codeium / Glean — research
+  deprioritized these for this profile; revisit only if Phase 2 returns
+  no Phase-3 interviews

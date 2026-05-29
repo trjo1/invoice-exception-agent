@@ -65,10 +65,17 @@
     box-shadow: 0 4px 12px rgba(31,58,104,0.10);
     text-decoration: none;
   }
-  .doc-card.live   { border-top-color: var(--green); }
-  .doc-card.tech   { border-top-color: var(--navy); }
-  .doc-card.scope  { border-top-color: var(--amber); }
-  .doc-card.status { border-top-color: var(--red); }
+  .doc-card.live      { border-top-color: var(--green); }
+  .doc-card.tech      { border-top-color: var(--navy); }
+  .doc-card.scope     { border-top-color: var(--amber); }
+  .doc-card.status    { border-top-color: var(--red); }
+  .doc-card.decisions { border-top-color: #6B46C1; }  /* PM-shaped artifact — purple to stand out */
+  .doc-card.decisions h3::after {
+    content: " · NEW";
+    color: #6B46C1;
+    font-size: 11px;
+    font-weight: 700;
+  }
   .doc-card h3 {
     margin: 0; color: var(--navy); font-size: 16px;
   }
@@ -139,6 +146,12 @@
       <h3>Live demo</h3>
       <div class="audience">Try it yourself</div>
       <p>Upload an invoice PDF or pick a curated sample. Watch the agent's 10-step pipeline stream live. Review the recommendation in the queue, browse past runs, check the measurement dashboard.</p>
+    </a>
+
+    <a class="doc-card decisions" href="/docs/decision_log">
+      <h3>Decision log</h3>
+      <div class="audience">PM-shaped · ~7 min read</div>
+      <p>Five non-obvious PM calls made building this agent: HITL tier count, browse-only demo UX, open-source models default, mock-executor as safety boundary, hint-free browse vs labeled scenarios. For each: the tradeoff, the call, what was given up, what would make me reconsider.</p>
     </a>
 
     <a class="doc-card scope" href="/docs/agent_overview">
