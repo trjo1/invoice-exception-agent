@@ -2,6 +2,10 @@
 # Agent 1 — P2P Exception Orchestrator — gitignore
 # =============================================================================
 
+# Claude Code personal workspace (settings.local.json, paste-ready messages,
+# session-specific notes) — local-only, not for version control.
+.claude/
+
 # Python
 __pycache__/
 *.py[cod]

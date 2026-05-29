@@ -158,10 +158,10 @@ invoices, which is +500KB in the public repo. Also: the testing surface
 doubled.
 
 **What would make me reconsider.** Traffic data showing one path eats
->95% of runs. Today I have no telemetry on the split — informally both
-look used, but informal observation is not evidence. If real data ever
-shows one path is vestigial, retire it. Two paths is a hypothesis, not
-a commitment.
+more than 95% of runs. Today I have no telemetry on the split —
+informally both look used, but informal observation is not evidence.
+If real data ever shows one path is vestigial, retire it. Two paths is
+a hypothesis, not a commitment.
 
 ---
 

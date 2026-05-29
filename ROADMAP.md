@@ -83,7 +83,16 @@ Spec doc covers:
 Then RUN: DeepSeek V4-Flash vs Claude Sonnet 4.6 vs GPT-5 on the 24 golden
 cases. Publish numbers including the ones that look bad.
 
-Lives at: `docs/eval_framework.md` + `/stage9/comparison` page on demo.
+**Ships as a public page in the docs nav.** When Artifact 2 lands, a new
+`/docs/evals` page joins the docs landing alongside the decision log —
+showing real evaluation results of the agent (per-class accuracy,
+per-model comparison, drift over time when re-runs accumulate). This is
+the "real evals can be seen here" surface a hiring reader gets without
+having to clone the repo. The accompanying `docs/eval_framework.md` spec
+doc lives as a peer artifact at `/docs/eval_framework`.
+
+Lives at: `docs/eval_framework.md` (spec) + `/docs/evals` (live results
+page) + `/stage9/comparison` (technical detail page on the demo app).
 
 Highest leverage at:
 - **LangChain** — LangSmith JD: "designing evaluation systems that scale

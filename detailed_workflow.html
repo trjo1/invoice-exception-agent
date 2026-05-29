@@ -322,9 +322,44 @@
     font-size: 12px;
     color: var(--light-gray);
   }
+
+  /* Persistent demo-app nav — same shape as base.html for cross-page consistency. */
+  header.demo-nav {
+    background: #1F3A68;
+    color: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: none;
+  }
+  header.demo-nav .brand {
+    font-size: 16px; font-weight: 600; letter-spacing: 0.02em;
+  }
+  header.demo-nav nav a {
+    color: #fff; text-decoration: none; margin-left: 18px;
+    opacity: 0.85; font-size: 13px;
+  }
+  header.demo-nav nav a:hover { opacity: 1; text-decoration: underline; }
+  header.demo-nav nav a.active {
+    opacity: 1; font-weight: 600; border-bottom: 2px solid #fff; padding-bottom: 2px;
+  }
 </style>
 </head>
 <body>
+
+<header class="demo-nav">
+  <div class="brand">P2P Exception Orchestrator</div>
+  <nav>
+    <a href="/demo">Run an invoice</a>
+    <a href="/demo/runs">Past runs</a>
+    <a href="/queue">Approval queue</a>
+    <a href="/stage9">Stage 9 metrics</a>
+    <a href="/docs" class="active">Documentation</a>
+  </nav>
+</header>
 
 <header>
   <div class="kicker">Agent 1 · Engineering Walkthrough</div>

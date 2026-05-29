@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Decision log — Invoice Exception Agent</title>
+<style>
+  :root {
+    --navy: #1F3A68;
+    --red:  #C0392B;
+    --green:#1A6D3F;
+    --soft: #E8EEF5;
+    --text: #1a1a1a;
+    --muted:#5c6370;
+    --line: #d8dee9;
+    --purple:#6B46C1;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    margin: 0;
+    background: #FAFBFD;
+  }
+
+  /* ─── Persistent demo-app nav strip (kept in sync with base.html) ─── */
+  header.demo-nav {
+    background: var(--navy);
+    color: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header.demo-nav .brand {
+    font-size: 16px; font-weight: 600; letter-spacing: 0.02em;
+  }
+  header.demo-nav nav a {
+    color: #fff; text-decoration: none; margin-left: 18px;
+    opacity: 0.85; font-size: 13px;
+  }
+  header.demo-nav nav a:hover { opacity: 1; text-decoration: underline; }
+  header.demo-nav nav a.active {
+    opacity: 1; font-weight: 600; border-bottom: 2px solid #fff; padding-bottom: 2px;
+  }
+
+  /* ─── Doc-specific kicker strip ─── */
+  header.doc-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 26px 40px 22px;
+    border-bottom: 4px solid var(--purple);
+  }
+  header.doc-header .kicker {
+    text-transform: uppercase; letter-spacing: 1.5px;
+    font-size: 12px; color: var(--soft); margin-bottom: 6px;
+  }
+  header.doc-header h1 { margin: 0; font-size: 28px; font-weight: 700; }
+
+  /* ─── Article body ─── */
+  main {
+    padding: 32px 40px 60px;
+    max-width: 820px;
+    margin: 0 auto;
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+  main h1, main h2 {
+    color: var(--navy);
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 6px;
+  }
+  main h1 { font-size: 24px; margin-top: 32px; }
+  main h2 { font-size: 19px; margin-top: 28px; }
+  main h3 { color: var(--navy); font-size: 17px; margin-top: 22px; }
+  main p { margin: 12px 0; }
+  main hr { border: 0; border-top: 1px solid var(--line); margin: 28px 0; }
+  main code {
+    background: #F2F4F8; color: #1a1a1a; padding: 1px 6px; border-radius: 3px;
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 13.5px;
+  }
+  main strong { color: #111; }
+  main em { color: var(--muted); }
+  main a { color: var(--navy); }
+  main a:hover { text-decoration: underline; }
+
+  footer {
+    margin: 40px auto 16px;
+    max-width: 820px;
+    padding: 0 40px;
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Persistent demo-app nav — same shape as base.html for cross-page consistency. -->
+<header class="demo-nav">
+  <div class="brand">P2P Exception Orchestrator</div>
+  <nav>
+    <a href="/demo">Run an invoice</a>
+    <a href="/demo/runs">Past runs</a>
+    <a href="/queue">Approval queue</a>
+    <a href="/stage9">Stage 9 metrics</a>
+    <a href="/docs" class="active">Documentation</a>
+  </nav>
+</header>
+
+<header class="doc-header">
+  <div class="kicker">Invoice Exception Agent · PM-shaped artifact</div>
+  <h1>Decision log</h1>
+</header>
+
+<main>
+<p>Five non-obvious PM calls I made building the invoice-exception agent. For
+each: the tradeoff I was actually weighing, the call I made, what I gave up,
+and what would make me reconsider. Written after the fact, but each
+decision is real and the artifacts referenced are in the codebase.</p>
+<p>The point of this doc isn't &quot;here are my features.&quot; It's &quot;here is how I
+think when I'm holding a tradeoff.&quot; A hiring reader can verify each call
+against the running demo at <a href="https://web-production-45a73.up.railway.app">https://web-production-45a73.up.railway.app</a>
+and the source at <a href="https://github.com/trjo1/invoice-exception-agent">https://github.com/trjo1/invoice-exception-agent</a>.</p>
+<hr />
+<h2>1. Three HITL routing tiers, not two or five</h2>
+<p><strong>The tradeoff.</strong> The agent makes consequential calls (credit memos,
+vendor escalations, GL corrections) and a human has to sign off on the
+risky ones. Confidence is a continuous signal — the model gives me 0.0
+to 1.0. Routing is a discrete decision — I have to bucket. How many
+buckets earn their cost?</p>
+<p><strong>The call.</strong> Three: auto-pass, approver review, supervisor escalation.
+Auto-pass for high-confidence + low-stakes (clean invoices under a
+threshold). Approver review for the middle band (tax mismatches,
+recurring-vendor variances within tolerance). Supervisor for low
+confidence OR high stakes (cross-currency mismatches, fraud signals,
+strategic-vendor exceptions).</p>
+<p>Two tiers would have lost the cost/risk distinction between routine
+ambiguity and a case that needs to escalate. Five tiers — which I drafted
+on a Friday — collapsed by Monday because the routing rules were
+producing decisions I couldn't justify with a single sentence to a hypothetical
+ops manager. If I can't explain the rule, the operator won't trust it.</p>
+<p><strong>What I gave up.</strong> False precision. The continuous confidence score
+becomes three buckets. I'm throwing away information that might matter at
+the edges.</p>
+<p><strong>What would make me reconsider.</strong> Real ops data showing that Tier 2
+cases cluster bimodally into &quot;obvious approve&quot; vs &quot;actually contested&quot; —
+that's a fourth tier earning its cost. Right now I have no such evidence,
+so three holds.</p>
+<hr />
+<h2>2. Browse-only public demo, no user file upload</h2>
+<p><strong>The tradeoff.</strong> Standard SaaS demo UX is &quot;upload your own data, see
+what the product does.&quot; That conversion path works because the product is
+data-agnostic. An agent that depends on a closed-world data context
+(vendor master, PO records, GR receipts) doesn't have that luxury — a
+random visitor's PDF won't match any vendor in the synthetic master data,
+so the agent will reliably flag <code>missing_po</code> or <code>vendor_master_gap</code> and
+the demo will look broken.</p>
+<p><strong>The call.</strong> Removed the upload form. Replaced it with a hint-free
+browse page: 20 invoices, click to preview the PDF, click to run. No
+expected-outcome labels in the browse view. A separate curated-scenarios
+dropdown coexists for the &quot;watch this specific behavior land&quot; use case.</p>
+<p><strong>What I gave up.</strong> The &quot;anyone can try with their own data&quot; feeling
+that drives demo conversion in normal SaaS. Also the ability to learn
+from real-world invoice distributions hitting the demo.</p>
+<p><strong>What would make me reconsider.</strong> A real vendor master + PO pipeline
+behind the demo (not synthetic). Then upload becomes safe because OOD
+inputs are now in-distribution. Or: a dedicated &quot;BYO data&quot; flow with a
+matched synthetic vendor master generated on the fly. Both are bigger
+than what the demo needs to do its job right now, which is convince a
+reader the agent works.</p>
+<hr />
+<h2>3. Open-source models default plus daily spend cap, not feature-gating</h2>
+<p><strong>The tradeoff.</strong> A public demo with LLM calls behind it can cost a lot
+if it gets traction. Two ways to bound spend: (a) gate features behind
+sign-up + per-user throttling, (b) pick models cheap enough that the
+unbounded version stays bounded, plus a daily cap as the failsafe.</p>
+<p><strong>The call.</strong> DeepSeek V4-Flash for extraction / classification / drafting,
+DeepSeek R1 for decision reasoning, both via OpenRouter. Per-run cost
+about $0.005. Daily spend cap at the model-client layer; runs after the
+cap show a friendly &quot;back tomorrow&quot; message instead of erroring.</p>
+<p>The friction model matters. Sign-up gates kill demos at the click. The
+conversion I cared about was &quot;recruiter clicks demo → recruiter sees the
+full pipeline land in 60 seconds.&quot; Per-user attribution mattered less
+than that conversion.</p>
+<p><strong>What I gave up.</strong> Analytics on who's using the demo. No funnel, no
+emails collected, no per-user usage caps. If someone burns through the
+daily budget I lose visibility for the rest of the day.</p>
+<p><strong>What would make me reconsider.</strong> A specific employer / sponsor wanting
+demo attribution for hiring purposes. Even then I'd add a Vercel-side
+thin auth layer rather than gate the actual agent — keep the product
+frictionless, push the friction up to the wrapper.</p>
+<hr />
+<h2>4. Mock action executor as the safety boundary, not waiting for real creds</h2>
+<p><strong>The tradeoff.</strong> The last node in the pipeline is the action executor
+— it actually does the thing the agent recommends (file the credit memo,
+send the supplier email, post the GL correction). Real execution needs
+SAP / Ariba / ServiceNow credentials I don't have. Options: (a) wait
+until I get creds, (b) ship a mock pattern that produces a complete
+audit log without real side effects.</p>
+<p><strong>The call.</strong> Mock. The mock executor implements the same
+<code>ActionExecutor</code> abstract base class as the real one will. It receives
+a <code>RecommendedAction</code>, runs a &quot;would have done X&quot; recipe, writes a
+structured audit-log entry, and returns. When real creds arrive, swap
+the implementation — every consumer (tests, golden cases, demo, audit
+log readers) keeps working unchanged.</p>
+<p>The hidden benefit: building the mock first forced me to design the
+action-execution interface clean. If I'd built the SAP-specific version
+first, I'd have leaked SAP semantics into the orchestrator. With the
+mock as the reference implementation, the orchestrator only knows about
+<code>RecommendedAction</code> enums and their effects.</p>
+<p><strong>What I gave up.</strong> Live demo of actual production-system effects. I
+can show &quot;agent decided to request a credit memo&quot; but not &quot;agent sent
+the request to SAP.&quot;</p>
+<p><strong>What would make me reconsider.</strong> Nothing. The mock pattern was the
+right call even with hindsight. The swap to real creds is a 1-day job
+when they arrive.</p>
+<hr />
+<h2>5. Hint-free browse vs labeled curated dropdown (the 2026-05-28 UX call)</h2>
+<p><strong>The tradeoff.</strong> A working agent demo has two distinct selling motions
+that pull the UX in opposite directions. Motion A: confirm an <em>expected</em>
+behavior — the visitor wants to see &quot;the agent catches the cross-currency
+mismatch I primed them to look for.&quot; Motion B: surprise with an
+<em>unexpected</em> finding — the visitor plays the role of an ops user who
+doesn't yet know what's in the invoice, and the agent's first useful
+output is itself the demo.</p>
+<p>Labels help Motion A and ruin Motion B. A label that says &quot;auto-pass
+expected&quot; is great if the visitor was going to verify auto-pass and
+otherwise can't tell. It's terrible if the demo's job is to surprise.</p>
+<p><strong>The call.</strong> Two paths from <code>/demo</code>. (a) A curated scenario dropdown
+with full labels and expected-behavior text — same as it was. (b) A new
+&quot;browse the library&quot; page that lists 20 invoices with just invoice ID +
+vendor name, no chips, no badges, no expected-outcome text. Click to
+preview the PDF, click to select, click to run.</p>
+<p><strong>What I gave up.</strong> Simplicity. One UX is cheaper to maintain than two.
+Adding the second path also expanded the bundled library from 10 to 20
+invoices, which is +500KB in the public repo. Also: the testing surface
+doubled.</p>
+<p><strong>What would make me reconsider.</strong> Traffic data showing one path eats
+more than 95% of runs. Today I have no telemetry on the split —
+informally both look used, but informal observation is not evidence.
+If real data ever shows one path is vestigial, retire it. Two paths is
+a hypothesis, not a commitment.</p>
+<hr />
+<p><em>If you want the full set of architectural decisions (model choice per
+task, data persistence, eval framework, etc.), see <a href="https://github.com/trjo1/invoice-exception-agent/blob/main/AGENTS.md">AGENTS.md</a>
+for the engineering context. This doc is the subset of decisions where
+the call wasn't obvious.</em></p>
+</main>
+
+<footer>
+  <strong>Invoice Exception Agent</strong> · MIT licensed ·
+  <a href="https://github.com/trjo1/invoice-exception-agent">GitHub</a>
+</footer>
+
+</body>
+</html>
